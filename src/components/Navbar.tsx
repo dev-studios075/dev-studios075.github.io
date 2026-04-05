@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 const Navbar = () => {
@@ -49,6 +50,8 @@ const Navbar = () => {
           </a>
           
           <a href="#details" className="nav-link">Request Demo</a>
+          <Link to="/blog" className="nav-link">Blog</Link>
+          <a href="https://app.fleetcodes.com" className="nav-link" target="_blank" rel="noopener noreferrer">Sign In</a>
         </nav>
 
         {/* Mobile menu button - increased touch target */}
@@ -72,6 +75,15 @@ const Navbar = () => {
           document.body.style.overflow = '';
         }}>
             Contact
+          </a>
+          <Link to="/blog" className="text-xl font-medium py-3 px-6 w-full text-center rounded-lg hover:bg-gray-100" onClick={() => {
+          setIsMenuOpen(false);
+          document.body.style.overflow = '';
+        }}>
+            Blog
+          </Link>
+          <a href="https://app.fleetcodes.com" className="text-xl font-medium py-3 px-6 w-full text-center rounded-lg hover:bg-gray-100 text-pulse-500" target="_blank" rel="noopener noreferrer">
+            Sign In
           </a>
         </nav>
       </div>
