@@ -1,8 +1,9 @@
 import { useParams, Link } from "react-router-dom";
+import { ArrowLeft, Calendar } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { getPostBySlug } from "@/lib/blog";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Navbar from "@/components/landing/Navbar";
+import Footer from "@/components/landing/Footer";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -10,12 +11,12 @@ const BlogPost = () => {
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-background text-foreground">
         <Navbar />
-        <main className="pt-24 pb-16 text-center">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Post not found</h1>
-          <Link to="/blog" className="text-pulse-500 hover:underline">
-            &larr; Back to blog
+        <main className="pt-36 pb-16 text-center container-tight">
+          <h1 className="font-display text-3xl font-bold mb-4">Post not found</h1>
+          <Link to="/blog" className="text-primary hover:underline inline-flex items-center gap-2">
+            <ArrowLeft className="w-4 h-4" /> Back to blog
           </Link>
         </main>
         <Footer />
@@ -24,38 +25,50 @@ const BlogPost = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background text-foreground">
       <Navbar />
-      <main className="pt-24 pb-16">
-        <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="pt-36 pb-20 relative">
+        <div className="absolute inset-0 grid-bg pointer-events-none -z-10" />
+        <article className="max-w-3xl mx-auto px-6 lg:px-8">
           <Link
             to="/blog"
-            className="inline-block text-sm text-pulse-500 hover:underline mb-6"
+            className="inline-flex items-center gap-2 text-sm text-primary hover:underline mb-8"
           >
-            &larr; Back to blog
+            <ArrowLeft className="w-4 h-4" /> Back to blog
           </Link>
 
           {post.coverImage && (
-            <img
-              src={post.coverImage}
-              alt={post.title}
-              className="w-full h-48 sm:h-72 object-cover rounded-2xl mb-8"
-            />
+            <div className="rounded-2xl overflow-hidden glass-strong p-2 shadow-elegant glow-border mb-10">
+              <img
+                src={post.coverImage}
+                alt={post.title}
+                className="w-full h-64 sm:h-80 object-cover rounded-xl"
+              />
+            </div>
           )}
 
-          <time className="text-sm text-pulse-500 font-medium">
-            {new Date(post.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </time>
-          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mt-2 mb-2">
+          <div className="flex items-center gap-3 text-xs text-muted-foreground mb-4">
+            <span className="inline-flex items-center gap-1.5">
+              <Calendar className="w-3.5 h-3.5" />
+              {post.date && new Date(post.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </span>
+            {post.author && (
+              <>
+                <span className="w-1 h-1 rounded-full bg-muted-foreground/40" />
+                <span>By {post.author}</span>
+              </>
+            )}
+          </div>
+
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-8 leading-[1.1]">
             {post.title}
           </h1>
-          <p className="text-gray-500 mb-8">By {post.author}</p>
 
-          <div className="prose prose-lg max-w-none prose-headings:font-display prose-headings:text-gray-900 prose-a:text-pulse-500 prose-strong:text-gray-900">
+          <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-display prose-headings:tracking-tight prose-a:text-primary prose-strong:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground">
             <ReactMarkdown>{post.content}</ReactMarkdown>
           </div>
         </article>
