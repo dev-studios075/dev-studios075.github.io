@@ -44,7 +44,7 @@ const Footer = () => {
               <span className="grid place-items-center w-9 h-9 rounded-xl bg-gradient-primary shadow-glow">
                 <Cpu className="w-5 h-5 text-primary-foreground" />
               </span>
-              <span className="text-gradient">ClairTrack</span>
+              <span className="text-gradient">Fleetcodes</span>
             </Link>
             <p className="text-sm text-muted-foreground max-w-sm leading-relaxed mb-6">
               Automation-first TMS for logistics, fleet, and supply-chain enterprises.
@@ -88,7 +88,7 @@ const Footer = () => {
 
         <div className="border-t border-border/60 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} ClairTrack · All rights reserved.
+            © {new Date().getFullYear()} Fleetcodes · All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-xs text-muted-foreground">
             <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
