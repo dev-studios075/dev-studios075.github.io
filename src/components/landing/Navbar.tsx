@@ -39,7 +39,7 @@ const Navbar = () => {
             <span className="relative grid place-items-center w-9 h-9 rounded-xl bg-gradient-primary shadow-glow">
               <Cpu className="w-5 h-5 text-primary-foreground" />
             </span>
-            <span className="text-gradient">ClairTrack</span>
+            <span className="text-gradient">Fleetcodes</span>
             <span className="text-muted-foreground/70 text-xs font-body uppercase tracking-widest hidden sm:inline">
               TMS
             </span>
