@@ -16,10 +16,10 @@ const Compare = () => {
     <section id="compare" className="py-24 lg:py-32 relative">
       <div className="container-tight">
         <div className="max-w-2xl mx-auto text-center mb-16">
-          <p className="text-xs uppercase tracking-[0.2em] text-primary mb-4">Why ClairTrack</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-primary mb-4">Why Fleetcodes</p>
           <h2 className="font-display font-bold text-4xl sm:text-5xl tracking-tight mb-5">
             Traditional SaaS waits for input. <br />
-            <span className="text-gradient">ClairTrack takes action.</span>
+            <span className="text-gradient">Fleetcodes takes action.</span>
           </h2>
         </div>
 
@@ -36,7 +36,7 @@ const Compare = () => {
               <X className="w-4 h-4 text-destructive/70" /> Traditional TMS
             </div>
             <div className="font-display font-semibold text-gradient-primary flex items-center gap-2">
-              <Check className="w-4 h-4 text-primary" /> ClairTrack
+              <Check className="w-4 h-4 text-primary" /> Fleetcodes
             </div>
           </div>
           {rows.map((r, i) => (
