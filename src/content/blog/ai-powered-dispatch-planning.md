@@ -1,9 +1,9 @@
 ---
 title: How AI-Powered Dispatch Planning is Revolutionizing Fleet Operations
 date: 2026-04-01
-author: ClairTrack Team
+author: Fleetcodes Team
 excerpt: Discover how artificial intelligence is transforming dispatch planning — from manual spreadsheets to intelligent, real-time optimization that cuts costs and speeds up deliveries.
-coverImage: /lovable-uploads/bf57c34c-cf3c-4ad8-9621-870883203691.png
+coverImage: /lovable-uploads/blog01.png
 ---
 
 The logistics industry is undergoing a seismic shift. What was once a world of clipboards, phone calls, and gut-feel decisions is rapidly becoming one driven by data, automation, and artificial intelligence.
