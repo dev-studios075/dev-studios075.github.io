@@ -3,7 +3,7 @@ title: Best Fleet Management Software for Optimising Logistics Operations in Ind
 date: 2026-05-09
 author: Fleetcodes Team
 excerpt: Discover the best fleet management software in India for 2026 — from GPS tracking to full logistics automation. Find out what separates the top platforms and why Fleetcodes leads the pack.
-coverImage: /lovable-uploads/bf57c34c-cf3c-4ad8-9621-870883203691.png
+coverImage: /lovable-uploads/blog00.png
 ---
 
 # Best Fleet Management Software for Optimising Logistics Operations in India, 2026
