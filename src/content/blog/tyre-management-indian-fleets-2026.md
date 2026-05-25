@@ -3,7 +3,7 @@ title: "Tyre Management for Indian Fleets: How to Cut Costs and Improve Safety i
 date: 2026-05-25
 author: Fleetcodes Team
 excerpt: "Fleet tyre management India 2026 — how TPMS systems, tyre analytics, tread compliance, and maintenance planning help fleets reduce tyre costs and improve safety."
-coverImage: /lovable-uploads/blog55
+coverImage: /lovable-uploads/blog54
 ---
 
 # Tyre Management for Indian Fleets: How to Cut Costs and Improve Safety in 2026
