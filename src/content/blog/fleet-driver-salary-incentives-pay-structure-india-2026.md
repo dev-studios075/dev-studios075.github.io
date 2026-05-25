@@ -2,9 +2,8 @@
 title: "Fleet Driver Salary, Incentives and Pay Structures in India: What Works in 2026"
 date: 2026-05-25
 author: Fleetcodes Team
-excerpt: "India's logistics industry is facing a structural driver challenge — rising attrition, inconsistent earnings, long operational hours, and growing dissatisfaction with outdated payment systems. In 2026, transport companies are discovering that driver retention is no longer solved through higher salary alone. The fleets succeeding today are redesigning driver compensation around transparency, predictability, incentives, and operational trust."
+excerpt: "Truck driver salary India 2026 — fleet driver pay structures, incentives, settlement automation, driver retention strategies, and salary transparency in Indian logistics."
 coverImage: /lovable-uploads/blog57.png
-metaDescription: "Truck driver salary India 2026 — fleet driver pay structures, incentives, settlement automation, driver retention strategies, and salary transparency in Indian logistics."
 ---
 
 # Fleet Driver Salary, Incentives and Pay Structures in India: What Works in 2026
