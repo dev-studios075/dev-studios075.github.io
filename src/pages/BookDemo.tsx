@@ -163,7 +163,7 @@ const BookDemo = () => {
                 TMS
               </span>
             </Link>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               <Button
                 variant="ghost"
                 size="icon"
@@ -174,9 +174,12 @@ const BookDemo = () => {
               </Button>
               <Link
                 to="/"
-                className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1.5 transition-colors"
+                className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1.5 transition-colors whitespace-nowrap"
               >
-                <ArrowLeft className="w-4 h-4" /> Back to home
+                <ArrowLeft className="w-4 h-4 flex-shrink-0" />
+                <span>
+                  Back<span className="hidden sm:inline"> to home</span>
+                </span>
               </Link>
             </div>
           </nav>
