@@ -37,3 +37,19 @@ export const trackPageView = (path: string, title: string) => {
     page_location: window.location.href,
   });
 };
+
+export const trackEvent = (
+  eventName: string,
+  parameters: Record<string, string | number | boolean | undefined> = {},
+) => {
+  if (!GA_MEASUREMENT_ID || typeof window === "undefined") {
+    return;
+  }
+
+  initializeGoogleAnalytics();
+
+  window.gtag?.("event", eventName, {
+    page_location: window.location.href,
+    ...parameters,
+  });
+};

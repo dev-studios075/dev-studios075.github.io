@@ -1,8 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { trackEvent } from "@/lib/analytics";
 
-const CTA = () => {
+function CallToAction() {
+  const trackBottomCta = (label: string) => {
+    trackEvent("generate_lead", {
+      cta_label: label,
+      cta_location: "bottom_cta",
+    });
+  };
+
   return (
     <section className="py-24 lg:py-32 relative">
       <div className="container-tight">
@@ -25,17 +33,24 @@ const CTA = () => {
               See ClairTrack map your SOPs and run a live operation in a 30-minute walkthrough.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button variant="hero" size="xl" className="group">
+              <Button
+                variant="hero"
+                size="xl"
+                className="group"
+                onClick={() => trackBottomCta("Schedule a Demo")}
+              >
                 Schedule a Demo
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button variant="glass" size="xl">Talk to sales</Button>
+              <Button variant="glass" size="xl" onClick={() => trackBottomCta("Talk to sales")}>
+                Talk to sales
+              </Button>
             </div>
           </div>
         </motion.div>
       </div>
     </section>
   );
-};
+}
 
-export default CTA;
+export default CallToAction;

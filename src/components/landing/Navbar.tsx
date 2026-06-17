@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Cpu, Menu, Moon, Sun, X } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
+import { trackEvent } from "@/lib/analytics";
 
 const links = [
   { label: "Product", href: "/#features", internal: false },
@@ -16,6 +17,13 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+
+  const trackNavEvent = (label: string, location: string) => {
+    trackEvent(label === "Sign in" ? "login_click" : "generate_lead", {
+      cta_label: label,
+      cta_location: location,
+    });
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -77,11 +85,18 @@ const Navbar = () => {
               {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </Button>
             <Button asChild variant="ghost" size="sm">
-              <a href="https://app.fleetcodes.com" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://app.fleetcodes.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackNavEvent("Sign in", "desktop_nav")}
+              >
                 Sign in
               </a>
             </Button>
-            <Button variant="hero" size="sm">Book Demo</Button>
+            <Button variant="hero" size="sm" onClick={() => trackNavEvent("Book Demo", "desktop_nav")}>
+              Book Demo
+            </Button>
           </div>
 
           <div className="md:hidden flex items-center gap-1">
@@ -130,12 +145,24 @@ const Navbar = () => {
               href="https://app.fleetcodes.com"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                trackNavEvent("Sign in", "mobile_nav");
+                setOpen(false);
+              }}
               className="px-4 py-3 text-sm rounded-lg hover:bg-muted/40"
             >
               Sign in
             </a>
-            <Button variant="hero" className="mt-2">Book Demo</Button>
+            <Button
+              variant="hero"
+              className="mt-2"
+              onClick={() => {
+                trackNavEvent("Book Demo", "mobile_nav");
+                setOpen(false);
+              }}
+            >
+              Book Demo
+            </Button>
           </div>
         )}
       </div>
