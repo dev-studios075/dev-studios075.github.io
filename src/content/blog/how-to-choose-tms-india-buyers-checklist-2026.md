@@ -3,7 +3,7 @@ title: "How to Choose the Right TMS for Your Logistics Business: A Buyer's Check
 date: 2026-05-21
 author: Fleetcodes Team
 excerpt: "How to choose the right TMS in India in 2026. A complete buyer's checklist covering features, India-specific compliance, deployment, pricing and what to test before you buy."
-coverImage: /lovable-uploads/blog48.png
+coverImage: /uploads/blog48.png
 ---
 
 # How to Choose the Right TMS for Your Logistics Business: A Buyer's Checklist for India, 2026

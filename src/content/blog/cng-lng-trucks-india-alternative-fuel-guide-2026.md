@@ -3,7 +3,7 @@ title: "CNG and LNG Trucks in India: The Alternative Fuel Guide for Fleet Operat
 date: 2026-05-25
 author: Fleetcodes Team
 excerpt: "CNG trucks India 2026 and LNG trucks India logistics guide — compare fleet costs, fuel savings, infrastructure, and operational challenges for alternative fuel fleet management in India."
-coverImage: /lovable-uploads/blog53.png
+coverImage: /uploads/blog53.png
 ---
 
 # CNG and LNG Trucks in India: The Alternative Fuel Guide for Fleet Operators in 2026

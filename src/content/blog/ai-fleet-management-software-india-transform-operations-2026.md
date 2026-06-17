@@ -3,7 +3,7 @@ title: "How Fleetcodes Uses AI to Transform Fleet Operations in India, 2026"
 date: 2026-05-14
 author: Fleetcodes Team
 excerpt: "AI fleet management software is no longer a future concept — it's the operational edge Indian transporters need today. See how Fleetcodes uses AI to cut costs, optimise routes, and automate dispatch."
-coverImage: /lovable-uploads/blog13.png
+coverImage: /uploads/blog13.png
 ---
 
 # How Fleetcodes Uses AI to Transform Fleet Operations in India, 2026

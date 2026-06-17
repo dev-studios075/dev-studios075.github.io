@@ -3,7 +3,7 @@ title: "Avoid Downtime: 7 Tips for Logistics ERP Integration in 2026"
 date: 2026-05-14
 author: Fleetcodes Team
 excerpt: "Logistics ERP integration done wrong causes the exact downtime it's supposed to prevent. These 7 tips help Indian transporters integrate their ERP smoothly — keeping operations running while the transformation happens."
-coverImage: /lovable-uploads/blog18.png
+coverImage: /uploads/blog18.png
 ---
 
 # Avoid Downtime: 7 Tips for Logistics ERP Integration in 2026

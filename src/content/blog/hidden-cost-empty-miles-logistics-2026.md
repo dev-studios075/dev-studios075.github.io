@@ -3,7 +3,7 @@ title: "The Hidden Cost of Empty Miles in Logistics — And How to Eliminate The
 date: 2026-05-11
 author: Fleetcodes Team
 excerpt: "Empty miles are your fleet's biggest hidden profit leak. Learn how Fleetcodes' fleet management software helps Indian logistics businesses track, reduce, and eliminate deadhead kilometres."
-coverImage: /lovable-uploads/blog2.png
+coverImage: /uploads/blog2.png
 ---
 
 # The Hidden Cost of Empty Miles in Logistics — And How to Eliminate Them in 2026

@@ -3,7 +3,7 @@ title: "Logistics Analytics in India: How Data-Driven Fleet Operators Are Outcom
 date: 2026-05-30
 author: Fleetcodes Team
 excerpt: "Logistics analytics India 2026 — how data-driven Indian fleet operators use fleet management analytics to cut costs, improve margins, and outcompete manual operations with Fleetcodes."
-coverImage: /lovable-uploads/blog73.png
+coverImage: /uploads/blog73.png
 ---
 
 # Logistics Analytics in India: How Data-Driven Fleet Operators Are Outcompeting the Market in 2026

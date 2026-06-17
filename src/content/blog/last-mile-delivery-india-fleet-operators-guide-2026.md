@@ -3,7 +3,7 @@ title: "Last-Mile Delivery in India: What Fleet Operators Must Get Right in 2026
 date: 2026-05-21
 author: Fleetcodes Team
 excerpt: "Last-mile delivery India 2026: operational guide for fleet operators covering costs, route optimisation, digital POD, tier-2 city expansion and fleet technology requirements."
-coverImage: /lovable-uploads/blog43.png
+coverImage: /uploads/blog43.png
 ---
 
 # Last-Mile Delivery in India: What Fleet Operators Must Get Right in 2026

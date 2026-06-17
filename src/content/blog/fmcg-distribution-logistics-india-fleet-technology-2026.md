@@ -3,7 +3,7 @@ title: "FMCG Distribution Logistics in India: How Fleet Technology Is Redefining
 date: 2026-05-24
 author: Fleetcodes Team
 excerpt: "FMCG is India's highest-frequency freight segment — millions of SKUs moving daily from factory to regional depot to distributor to kirana shelf. For fleet operators in this space, the operational requirements are unlike any other freight type: high stop density, strict delivery windows, temperature sensitivity, and the relentless accountability of a sector where stock-outs have immediate revenue consequences."
-coverImage: /lovable-uploads/blog49.png
+coverImage: /uploads/blog49.png
 ---
 
 # FMCG Distribution Logistics in India: How Fleet Technology Is Redefining the Last Touch in 2026

@@ -3,7 +3,7 @@ title: "What Is Load Planning in Logistics? How Fleetcodes Optimises Every Load 
 date: 2026-05-30
 author: Fleetcodes Team
 excerpt:  "Load planning in logistics India 2026 — what it is, why it matters for fleet profitability, and how Fleetcodes optimises load-to-vehicle matching for cost efficiency and GVW compliance."
-coverImage: /lovable-uploads/blog74.png
+coverImage: /uploads/blog74.png
 ---
 
 # What Is Load Planning in Logistics? How Fleetcodes Optimises Every Load for Profit in 2026

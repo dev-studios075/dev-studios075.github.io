@@ -3,7 +3,7 @@ title: "Automating Billing, PODs & Driver Settlements with Fleetcodes in 2026"
 date: 2026-05-11
 author: Fleetcodes Team
 excerpt: "Stop chasing paper PODs and manual settlements. See how Fleetcodes automates the full billing and driver settlement cycle — from digital POD capture to same-day invoice generation."
-coverImage: /lovable-uploads/blog3.png
+coverImage: /uploads/blog3.png
 ---
 
 # Automating Billing, PODs & Driver Settlements with Fleetcodes in 2026

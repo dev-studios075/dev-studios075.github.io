@@ -3,7 +3,7 @@ title: "Real-Time Supply Chain Visibility: Why Indian Logistics Businesses Can N
 date: 2026-05-18
 author: Fleetcodes Team
 excerpt: "Real-time supply chain visibility has moved from a competitive differentiator to a baseline expectation in Indian logistics. Shippers are choosing logistics partners on their ability to provide it. Fleet operators who cannot deliver it are losing business to those who can."
-coverImage: /lovable-uploads/blog30.png
+coverImage: /uploads/blog30.png
 ---
 
 # Real-Time Supply Chain Visibility: Why Indian Logistics Businesses Can No Longer Afford to Operate Blind in 2026

@@ -3,7 +3,7 @@ title: "How to Reduce Logistics Costs by 20%: A Practical Guide for Indian Fleet
 date: 2026-05-18
 author: Fleetcodes Team
 excerpt: "A 20% reduction in logistics costs is not a stretch target for most Indian fleet operators — it is the realistic outcome of fixing seven specific, measurable cost leaks that manual operations allow to run unchecked. Here is how to find them and fix them."
-coverImage: /lovable-uploads/blog27.png
+coverImage: /uploads/blog27.png
 ---
 
 # How to Reduce Logistics Costs by 20%: A Practical Guide for Indian Fleet Owners in 2026
