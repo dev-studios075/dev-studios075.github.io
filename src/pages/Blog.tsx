@@ -3,6 +3,8 @@ import { Calendar, ArrowUpRight } from "lucide-react";
 import { getAllPosts } from "@/lib/blog";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import Seo from "@/components/seo/Seo";
+import { SITE_NAME, absoluteUrl } from "@/lib/site";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
@@ -11,9 +13,35 @@ const fallbackImages = [blog1, blog2, blog3];
 
 const Blog = () => {
   const posts = getAllPosts();
+  const title = `Fleet Management Blog | ${SITE_NAME}`;
+  const description = "Fleet management, AI dispatch, TMS automation, compliance, and logistics operations insights for Indian transporters and shippers.";
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Seo
+        title={title}
+        description={description}
+        path="/blog"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          name: title,
+          description,
+          url: absoluteUrl("/blog"),
+          blogPost: posts.slice(0, 20).map((post) => ({
+            "@type": "BlogPosting",
+            headline: post.title,
+            url: absoluteUrl(`/blog/${post.slug}`),
+            datePublished: post.date,
+            author: post.author
+              ? {
+                  "@type": "Person",
+                  name: post.author,
+                }
+              : undefined,
+          })),
+        }}
+      />
       <Navbar />
       <main className="pt-36 pb-16 relative">
         <div className="absolute inset-0 grid-bg pointer-events-none -z-10" />
