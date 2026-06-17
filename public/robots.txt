@@ -1,4 +1,8 @@
+# *
 User-agent: *
 Allow: /
+Disallow: /private/
 
-Sitemap: https://fleetcodes.com/sitemap.xml
+Host: https://www.fleetcodes.com
+
+Sitemap: https://www.fleetcodes.com/sitemap.xml
