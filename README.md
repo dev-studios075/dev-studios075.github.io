@@ -20,6 +20,22 @@ npm run dev
 
 Dev server runs at `http://localhost:8080`.
 
+## Analytics & SEO
+
+Copy `.env.example` to `.env` and set:
+
+```sh
+VITE_SITE_URL=https://fleetcodes.com
+VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
+`VITE_GA_MEASUREMENT_ID` enables Google Analytics 4 tracking. `VITE_SITE_URL` is used for canonical URLs, Open Graph URLs, `robots.txt`, and `sitemap.xml`.
+
+For GitHub Pages deployments, add these as repository variables in GitHub:
+
+- `VITE_SITE_URL`
+- `VITE_GA_MEASUREMENT_ID`
+
 ## Build
 
 ```sh
