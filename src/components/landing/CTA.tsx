@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { trackEvent } from "@/lib/analytics";
 
 function CallToAction() {
@@ -37,13 +38,17 @@ function CallToAction() {
                 variant="hero"
                 size="xl"
                 className="group"
-                onClick={() => trackBottomCta("Schedule a Demo")}
+                asChild
               >
-                Schedule a Demo
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <Link to="/book-demo" onClick={() => trackBottomCta("Schedule a Demo")}>
+                  Schedule a Demo
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </Button>
-              <Button variant="glass" size="xl" onClick={() => trackBottomCta("Talk to sales")}>
-                Talk to sales
+              <Button variant="glass" size="xl" asChild>
+                <Link to="/book-demo" onClick={() => trackBottomCta("Talk to sales")}>
+                  Talk to sales
+                </Link>
               </Button>
             </div>
           </div>
