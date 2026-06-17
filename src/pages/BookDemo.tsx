@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -56,6 +56,13 @@ const BookDemo = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const {
     register,
@@ -136,38 +143,48 @@ const BookDemo = () => {
       <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none -z-10" />
 
       {/* Simplified Header */}
-      <header className="py-6 border-b border-border/40 bg-background/50 backdrop-blur-md">
-        <div className="container-tight flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2.5 font-display font-semibold text-lg">
-            <span className="relative grid place-items-center w-8 h-8 rounded-lg bg-gradient-primary shadow-glow">
-              <Cpu className="w-4.5 h-4.5 text-primary-foreground" />
-            </span>
-            <span className="text-gradient">Fleetcodes</span>
-            <span className="text-muted-foreground/70 text-xxs font-body uppercase tracking-widest">
-              TMS
-            </span>
-          </Link>
-          <div className="flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-            >
-              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </Button>
-            <Link
-              to="/"
-              className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1.5 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" /> Back to home
+      <header
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+          scrolled ? "py-3" : "py-5"
+        }`}
+      >
+        <div className="container-tight">
+          <nav
+            className={`flex items-center justify-between rounded-2xl px-5 py-3 transition-all duration-300 ${
+              scrolled ? "glass-strong shadow-card" : ""
+            }`}
+          >
+            <Link to="/" className="flex items-center gap-2.5 font-display font-semibold text-lg">
+              <span className="relative grid place-items-center w-9 h-9 rounded-xl bg-gradient-primary shadow-glow">
+                <Cpu className="w-5 h-5 text-primary-foreground" />
+              </span>
+              <span className="text-gradient">Fleetcodes</span>
+              <span className="text-muted-foreground/70 text-xs font-body uppercase tracking-widest hidden sm:inline">
+                TMS
+              </span>
             </Link>
-          </div>
+            <div className="flex items-center gap-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleTheme}
+                aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              >
+                {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </Button>
+              <Link
+                to="/"
+                className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1.5 transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4" /> Back to home
+              </Link>
+            </div>
+          </nav>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow flex items-center py-12 lg:py-20">
+      <main className="flex-grow flex items-center pt-28 pb-12 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-20">
         <div className="container-tight">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
