@@ -433,9 +433,16 @@ const BookDemo = () => {
       </main>
 
       {/* Simplified Footer */}
-      <footer className="py-6 border-t border-border/40 text-center text-xs text-muted-foreground/60 bg-background/30">
-        <div className="container-tight">
-          © {new Date().getFullYear()} {SITE_NAME} TMS. All rights reserved. SOC 2 ready.
+      <footer className="py-8 border-t border-border/40 bg-background/30">
+        <div className="container-tight flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} Fleetcodes · All rights reserved.
+          </p>
+          <div className="flex items-center gap-6 text-xs text-muted-foreground">
+            <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
+            <a href="#" className="hover:text-foreground transition-colors">Terms</a>
+            <a href="#" className="hover:text-foreground transition-colors">Security</a>
+          </div>
         </div>
       </footer>
     </div>
