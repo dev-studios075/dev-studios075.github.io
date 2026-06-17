@@ -1,13 +1,9 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { initializeGoogleAnalytics, trackPageView } from "@/lib/analytics";
+import { trackPageView } from "@/lib/analytics";
 
 const GoogleAnalytics = () => {
   const location = useLocation();
-
-  useEffect(() => {
-    initializeGoogleAnalytics();
-  }, []);
 
   useEffect(() => {
     trackPageView(`${location.pathname}${location.search}`, document.title);

@@ -33,7 +33,6 @@ export const initializeGoogleAnalytics = () => {
   });
 
   window.gtag("js", new Date());
-  window.gtag("config", GA_MEASUREMENT_ID, { send_page_view: false });
   isInitialized = true;
 };
 
@@ -44,7 +43,7 @@ export const trackPageView = (path: string, title: string) => {
 
   initializeGoogleAnalytics();
 
-  window.gtag?.("event", "page_view", {
+  window.gtag?.("config", GA_MEASUREMENT_ID, {
     page_path: path,
     page_title: title,
     page_location: window.location.href,
