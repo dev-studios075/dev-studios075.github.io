@@ -21,6 +21,22 @@
     <meta name="twitter:description" content="AI-powered TMS that learns your SOPs and runs your logistics autonomously. Cut cost, eliminate errors, and scale fleet operations without scaling headcount." />
     <meta name="twitter:image" content="/new-og-image.png" />
     <link rel="icon" href="/favicon.png" type="image/png">
+    <script>
+      (function (id) {
+        if (!id || id === "%" + "VITE_GA_MEASUREMENT_ID" + "%" || !id.startsWith("G-")) return;
+
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+
+        var script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(id);
+        document.head.appendChild(script);
+
+        window.gtag("js", new Date());
+        window.gtag("config", id);
+      })("%VITE_GA_MEASUREMENT_ID%");
+    </script>
   </head>
 
   <body>
