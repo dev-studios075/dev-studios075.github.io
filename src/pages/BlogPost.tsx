@@ -4,6 +4,8 @@ import ReactMarkdown from "react-markdown";
 import { getPostBySlug } from "@/lib/blog";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import Seo from "@/components/seo/Seo";
+import { DEFAULT_IMAGE, SITE_NAME, absoluteUrl } from "@/lib/site";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -12,6 +14,11 @@ const BlogPost = () => {
   if (!post) {
     return (
       <div className="min-h-screen bg-background text-foreground">
+        <Seo
+          title={`Post Not Found | ${SITE_NAME}`}
+          description="The requested Fleetcodes blog article could not be found."
+          noindex
+        />
         <Navbar />
         <main className="pt-36 pb-16 text-center container-tight">
           <h1 className="font-display text-3xl font-bold mb-4">Post not found</h1>
@@ -26,6 +33,40 @@ const BlogPost = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Seo
+        title={`${post.title} | ${SITE_NAME}`}
+        description={post.excerpt}
+        path={`/blog/${post.slug}`}
+        image={post.coverImage || DEFAULT_IMAGE}
+        type="article"
+        publishedTime={post.date}
+        modifiedTime={post.date}
+        author={post.author}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          description: post.excerpt,
+          image: absoluteUrl(post.coverImage || DEFAULT_IMAGE),
+          datePublished: post.date,
+          dateModified: post.date,
+          author: post.author
+            ? {
+                "@type": "Person",
+                name: post.author,
+              }
+            : undefined,
+          publisher: {
+            "@type": "Organization",
+            name: SITE_NAME,
+            logo: {
+              "@type": "ImageObject",
+              url: absoluteUrl("/favicon.png"),
+            },
+          },
+          mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
+        }}
+      />
       <Navbar />
       <main className="pt-36 pb-20 relative">
         <div className="absolute inset-0 grid-bg pointer-events-none -z-10" />
