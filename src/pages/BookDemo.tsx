@@ -155,8 +155,8 @@ const BookDemo = () => {
             }`}
           >
             <Link to="/" className="flex items-center gap-2.5 font-display font-semibold text-lg">
-              <span className="relative grid place-items-center w-9 h-9 rounded-xl bg-gradient-primary shadow-glow">
-                <Cpu className="w-5 h-5 text-primary-foreground" />
+              <span className="relative grid place-items-center w-9 h-9 rounded-xl bg-white border border-border/40 shadow-glow overflow-hidden">
+                <img src="/favicon.png" alt="Fleetcodes Logo" className="w-6 h-6 object-contain" />
               </span>
               <span className="text-gradient">Fleetcodes</span>
               <span className="text-muted-foreground/70 text-xs font-body uppercase tracking-widest hidden sm:inline">
@@ -286,7 +286,7 @@ const BookDemo = () => {
                               <Input
                                 id="name"
                                 type="text"
-                                placeholder="Rahul Kumar"
+                                placeholder="e.g. John Doe"
                                 className={`h-11 ${errors.name ? "border-destructive focus-visible:ring-destructive" : ""}`}
                                 {...register("name")}
                               />
@@ -303,7 +303,7 @@ const BookDemo = () => {
                               <Input
                                 id="company"
                                 type="text"
-                                placeholder="Fleetcodes Logistics"
+                                placeholder="e.g. Acme Transportation"
                                 className={`h-11 ${errors.company ? "border-destructive focus-visible:ring-destructive" : ""}`}
                                 {...register("company")}
                               />
@@ -323,7 +323,7 @@ const BookDemo = () => {
                               <Input
                                 id="email"
                                 type="email"
-                                placeholder="rahul@fleetcodes.com"
+                                placeholder="e.g. john@example.com"
                                 className={`h-11 ${errors.email ? "border-destructive focus-visible:ring-destructive" : ""}`}
                                 {...register("email")}
                               />
@@ -340,7 +340,7 @@ const BookDemo = () => {
                               <Input
                                 id="phone"
                                 type="tel"
-                                placeholder="+91 98765 43210"
+                                placeholder="e.g. +1 (555) 000-0000"
                                 className={`h-11 ${errors.phone ? "border-destructive focus-visible:ring-destructive" : ""}`}
                                 {...register("phone")}
                               />

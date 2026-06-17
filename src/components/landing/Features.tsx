@@ -18,9 +18,9 @@ const features = [
 
 const Features = () => {
   return (
-    <section id="features" className="py-24 lg:py-32 relative">
+    <section id="features" className="py-16 lg:py-24 relative">
       <div className="container-tight">
-        <div className="max-w-2xl mb-16">
+        <div className="max-w-2xl mb-12">
           <p className="text-xs uppercase tracking-[0.2em] text-primary mb-4">Capabilities</p>
           <h2 className="font-display font-bold text-4xl sm:text-5xl tracking-tight mb-5">
             One platform. <span className="text-gradient">Nine autonomous systems.</span>
@@ -39,13 +39,13 @@ const Features = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
-              className="group relative glass rounded-2xl p-6 hover:shadow-glow transition-all duration-500 hover:-translate-y-1"
+              className="group relative glass rounded-2xl p-6 sm:p-7 hover:shadow-elegant transition-all duration-300 hover:-translate-y-1"
             >
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 style={{ background: "radial-gradient(400px circle at var(--x,50%) var(--y,0%), hsl(var(--primary)/0.08), transparent 40%)" }}
               />
               <div className="relative">
-                <div className="inline-flex p-3 rounded-xl bg-gradient-primary/10 border border-primary/20 mb-5 group-hover:scale-110 transition-transform">
+                <div className="inline-flex p-3 rounded-xl bg-primary/10 border border-primary/20 mb-5 group-hover:scale-110 transition-transform">
                   <f.icon className="w-5 h-5 text-primary" />
                 </div>
                 <h3 className="font-display font-semibold text-lg mb-2">{f.title}</h3>

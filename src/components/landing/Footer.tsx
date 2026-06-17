@@ -41,8 +41,8 @@ const Footer = () => {
         <div className="grid lg:grid-cols-5 gap-12 mb-16">
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-2.5 font-display font-semibold text-lg mb-5">
-              <span className="grid place-items-center w-9 h-9 rounded-xl bg-gradient-primary shadow-glow">
-                <Cpu className="w-5 h-5 text-primary-foreground" />
+              <span className="grid place-items-center w-9 h-9 rounded-xl bg-white border border-border/40 shadow-glow overflow-hidden">
+                <img src="/favicon.png" alt="Fleetcodes Logo" className="w-6 h-6 object-contain" />
               </span>
               <span className="text-gradient">Fleetcodes</span>
             </Link>

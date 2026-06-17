@@ -14,7 +14,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative pt-36 pb-20 lg:pt-44 lg:pb-32 overflow-hidden">
+    <section className="relative pt-32 pb-16 lg:pt-36 lg:pb-24 overflow-hidden">
       {/* Background grid */}
       <div className="absolute inset-0 grid-bg pointer-events-none" />
       {/* Glow orbs */}
@@ -87,12 +87,12 @@ const Hero = () => {
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
-          className="mt-20 relative"
+          className="mt-12 lg:mt-16 relative"
         >
           <div className="relative rounded-2xl glass-strong p-2 shadow-elegant glow-border animate-pulse-glow">
             <img
               src={heroDashboard}
-              alt="ClairTrack futuristic AI logistics dashboard with real-time fleet tracking and route optimization"
+              alt="Fleetcodes futuristic AI logistics dashboard with real-time fleet tracking and route optimization"
               width={1600}
               height={1100}
               className="w-full h-auto rounded-xl"
@@ -112,7 +112,7 @@ const Hero = () => {
         </motion.div>
 
         {/* Logo strip */}
-        <div className="mt-20 text-center">
+        <div className="mt-12 lg:mt-16 text-center">
           <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground/70 mb-6">
             Trusted by forward-thinking logistics teams
           </p>

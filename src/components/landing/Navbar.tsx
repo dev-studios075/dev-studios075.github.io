@@ -44,8 +44,8 @@ const Navbar = () => {
           }`}
         >
           <Link to="/" className="flex items-center gap-2.5 font-display font-semibold text-lg">
-            <span className="relative grid place-items-center w-9 h-9 rounded-xl bg-gradient-primary shadow-glow">
-              <Cpu className="w-5 h-5 text-primary-foreground" />
+            <span className="relative grid place-items-center w-9 h-9 rounded-xl bg-white border border-border/40 shadow-glow overflow-hidden">
+              <img src="/favicon.png" alt="Fleetcodes Logo" className="w-6 h-6 object-contain" />
             </span>
             <span className="text-gradient">Fleetcodes</span>
             <span className="text-muted-foreground/70 text-xs font-body uppercase tracking-widest hidden sm:inline">

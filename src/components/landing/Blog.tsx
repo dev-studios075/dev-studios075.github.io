@@ -13,14 +13,14 @@ const Blog = () => {
   const posts = getAllPosts().slice(0, 3);
 
   return (
-    <section id="blog" className="py-24 lg:py-32 relative">
+    <section id="blog" className="py-16 lg:py-24 relative">
       <div className="container-tight">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14"
+          className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10"
         >
           <div className="max-w-2xl">
             <p className="text-xs uppercase tracking-[0.2em] text-primary mb-4">
@@ -47,7 +47,7 @@ const Blog = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="group glass rounded-2xl overflow-hidden hover:shadow-elegant transition-all duration-300 flex flex-col"
+              className="group glass rounded-2xl overflow-hidden hover:shadow-elegant transition-all duration-300 hover:-translate-y-1 flex flex-col"
             >
               <Link to={`/blog/${post.slug}`} className="relative overflow-hidden aspect-[16/10] block">
                 <img

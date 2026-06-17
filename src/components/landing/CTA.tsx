@@ -13,14 +13,14 @@ function CallToAction() {
   };
 
   return (
-    <section className="py-24 lg:py-32 relative">
+    <section className="py-16 lg:py-24 relative">
       <div className="container-tight">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="relative glass-strong rounded-3xl px-8 py-16 lg:py-24 text-center overflow-hidden glow-border"
+          className="relative glass-strong rounded-3xl px-8 py-12 lg:py-20 text-center overflow-hidden glow-border hover:shadow-elegant transition-all duration-300"
         >
           <div className="absolute inset-0 grid-bg opacity-50 pointer-events-none" />
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-primary/15 blur-[120px] pointer-events-none" />
@@ -31,7 +31,7 @@ function CallToAction() {
               <span className="text-gradient-primary">run on autopilot.</span>
             </h2>
             <p className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto">
-              See ClairTrack map your SOPs and run a live operation in a 30-minute walkthrough.
+              See Fleetcodes map your SOPs and run a live operation in a 30-minute walkthrough.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button
