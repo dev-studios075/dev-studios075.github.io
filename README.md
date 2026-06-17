@@ -25,7 +25,7 @@ Dev server runs at `http://localhost:8080`.
 Copy `.env.example` to `.env` and set:
 
 ```sh
-VITE_SITE_URL=https://fleetcodes.com
+VITE_SITE_URL=https://www.fleetcodes.com
 VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 
@@ -42,7 +42,7 @@ For GitHub Pages deployments, add these as repository variables in GitHub:
 npm run build
 ```
 
-Output goes to `dist/`. A `404.html` is automatically created for GitHub Pages SPA support.
+Output goes to `dist/`. Static HTML is generated for `/blog` and each blog article, and a `404.html` is created for GitHub Pages SPA support.
 
 ## Deployment
 

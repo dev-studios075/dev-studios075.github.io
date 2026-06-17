@@ -1,461 +1,927 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+>
   <url>
-    <loc>https://fleetcodes.com/</loc>
+    <loc>https://www.fleetcodes.com/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleetcodes - Automation-First TMS for Logistics</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog</loc>
+    <loc>https://www.fleetcodes.com/blog</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog | Fleetcodes</image:title>
+    </image:image>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/ai-fleet-management-software-india-transform-operations-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/ai-fleet-management-software-india-transform-operations-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/ai-fleet-management-software-india-transform-operations-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/ai-fleet-management-software-india-transform-operations-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog13.png</image:loc>
+      <image:title>How Fleetcodes Uses AI to Transform Fleet Operations in India, 2026</image:title>
+    </image:image>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/ai-powered-dispatch-planning</loc>
+    <loc>https://www.fleetcodes.com/blog/ai-powered-dispatch-planning</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/ai-powered-dispatch-planning" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/ai-powered-dispatch-planning" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog01.png</image:loc>
+      <image:title>How AI-Powered Dispatch Planning is Revolutionizing Fleet Operations</image:title>
+    </image:image>
     <lastmod>2026-04-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/automating-billing-pods-driver-settlements-fleetcodes-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/automating-billing-pods-driver-settlements-fleetcodes-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/automating-billing-pods-driver-settlements-fleetcodes-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/automating-billing-pods-driver-settlements-fleetcodes-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog3.png</image:loc>
+      <image:title>Automating Billing, PODs &amp; Driver Settlements with Fleetcodes in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/avoid-downtime-7-tips-logistics-erp-integration-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/avoid-downtime-7-tips-logistics-erp-integration-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/avoid-downtime-7-tips-logistics-erp-integration-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/avoid-downtime-7-tips-logistics-erp-integration-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog18.png</image:loc>
+      <image:title>Avoid Downtime: 7 Tips for Logistics ERP Integration in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/best-fleet-mgmt</loc>
+    <loc>https://www.fleetcodes.com/blog/best-fleet-mgmt</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/best-fleet-mgmt" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/best-fleet-mgmt" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog00.png</image:loc>
+      <image:title>Best Fleet Management Software for Optimising Logistics Operations in India, 2026</image:title>
+    </image:image>
     <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/bilty-lorry-receipt-digital-india-transporters-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/bilty-lorry-receipt-digital-india-transporters-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/bilty-lorry-receipt-digital-india-transporters-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/bilty-lorry-receipt-digital-india-transporters-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog22.png</image:loc>
+      <image:title>Bilty &amp; Lorry Receipt (LR) Digitisation: Why Indian Transporters Are Going Paperless in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/cargo-insurance-indian-transporters-guide-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/cargo-insurance-indian-transporters-guide-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/cargo-insurance-indian-transporters-guide-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/cargo-insurance-indian-transporters-guide-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog26.png</image:loc>
+      <image:title>Cargo Insurance for Indian Transporters: What&apos;s Covered, What Isn&apos;t, and What You Must Know in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/cng-lng-trucks-india-alternative-fuel-guide-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/cng-lng-trucks-india-alternative-fuel-guide-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/cng-lng-trucks-india-alternative-fuel-guide-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/cng-lng-trucks-india-alternative-fuel-guide-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog53.png</image:loc>
+      <image:title>CNG and LNG Trucks in India: The Alternative Fuel Guide for Fleet Operators in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/cold-chain-logistics-india-fleet-technology-temperature-cargo-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/cold-chain-logistics-india-fleet-technology-temperature-cargo-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/cold-chain-logistics-india-fleet-technology-temperature-cargo-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/cold-chain-logistics-india-fleet-technology-temperature-cargo-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog31.png</image:loc>
+      <image:title>Cold Chain Logistics in India: How Fleet Technology Protects Temperature-Sensitive Cargo in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/construction-logistics-india-fleet-operations-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/construction-logistics-india-fleet-operations-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/construction-logistics-india-fleet-operations-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/construction-logistics-india-fleet-operations-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog66.png</image:loc>
+      <image:title>Construction Logistics in India: How to Manage Project-Site Fleet Operations in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/digital-freight-platforms-india-transporters-guide-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/digital-freight-platforms-india-transporters-guide-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/digital-freight-platforms-india-transporters-guide-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/digital-freight-platforms-india-transporters-guide-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog46.png</image:loc>
+      <image:title>Digital Freight Platforms in India: What Transporters Need to Know in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/driver-retention-indian-logistics-fleet-technology-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/driver-retention-indian-logistics-fleet-technology-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/driver-retention-indian-logistics-fleet-technology-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/driver-retention-indian-logistics-fleet-technology-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog21.png</image:loc>
+      <image:title>Driver Retention in Indian Logistics: How Fleet Technology Reduces Attrition in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/driver-safety-indian-fleets-technology-reduce-accidents-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/driver-safety-indian-fleets-technology-reduce-accidents-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/driver-safety-indian-fleets-technology-reduce-accidents-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/driver-safety-indian-fleets-technology-reduce-accidents-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog61.png</image:loc>
+      <image:title>Driver Safety in Indian Fleets: How Technology Is Reducing Road Accidents and Liability in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/dynamic-route-optimization-vs-static-route-planning-india-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/dynamic-route-optimization-vs-static-route-planning-india-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/dynamic-route-optimization-vs-static-route-planning-india-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/dynamic-route-optimization-vs-static-route-planning-india-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog64.png</image:loc>
+      <image:title>Dynamic Route Optimization vs Static Route Planning: What Indian Fleets Need to Know in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/e-way-bill-2-india-transporter-compliance-guide-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/e-way-bill-2-india-transporter-compliance-guide-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/e-way-bill-2-india-transporter-compliance-guide-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/e-way-bill-2-india-transporter-compliance-guide-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog19.png</image:loc>
+      <image:title>E-Way Bill 2.0: What Every Indian Transporter Must Know to Stay Compliant in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/ev-fleet-management-india-guide-transporters-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/ev-fleet-management-india-guide-transporters-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/ev-fleet-management-india-guide-transporters-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/ev-fleet-management-india-guide-transporters-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog20.png</image:loc>
+      <image:title>How to Manage an EV Fleet in India: A Practical Guide for Transporters in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fleet-data-negotiate-better-contracts-shippers-india-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fleet-data-negotiate-better-contracts-shippers-india-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleet-data-negotiate-better-contracts-shippers-india-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleet-data-negotiate-better-contracts-shippers-india-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog58upd.png</image:loc>
+      <image:title>How to Use Fleet Data to Negotiate Better Contracts with Shippers in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fleet-driver-salary-incentives-pay-structure-india-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fleet-driver-salary-incentives-pay-structure-india-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleet-driver-salary-incentives-pay-structure-india-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleet-driver-salary-incentives-pay-structure-india-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog57.png</image:loc>
+      <image:title>Fleet Driver Salary, Incentives and Pay Structures in India: What Works in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fleet-financing-vehicle-loans-india-transport-business-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fleet-financing-vehicle-loans-india-transport-business-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleet-financing-vehicle-loans-india-transport-business-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleet-financing-vehicle-loans-india-transport-business-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog44.png</image:loc>
+      <image:title>Fleet Financing in India: How to Fund Vehicle Acquisition and Fleet Growth in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fleet-insurance-negotiation-guide-india-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fleet-insurance-negotiation-guide-india-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleet-insurance-negotiation-guide-india-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleet-insurance-negotiation-guide-india-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog56.png</image:loc>
+      <image:title>How to Negotiate a Fleet Insurance Policy That Actually Protects Your Business in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fleet-management-kpis-metrics-indian-fleet-owner-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fleet-management-kpis-metrics-indian-fleet-owner-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleet-management-kpis-metrics-indian-fleet-owner-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleet-management-kpis-metrics-indian-fleet-owner-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog36.png</image:loc>
+      <image:title>Fleet Management KPIs: The 10 Metrics Every Indian Fleet Owner Must Track in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fleet-management-software-indian-transporters-features-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fleet-management-software-indian-transporters-features-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleet-management-software-indian-transporters-features-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleet-management-software-indian-transporters-features-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog15.png</image:loc>
+      <image:title>Fleet Management Software for Indian Transporters: Essential Features Explained, 2026</image:title>
+    </image:image>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fleet-operations-india-peak-seasons-festive-harvest-demand-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fleet-operations-india-peak-seasons-festive-harvest-demand-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleet-operations-india-peak-seasons-festive-harvest-demand-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleet-operations-india-peak-seasons-festive-harvest-demand-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog69.png</image:loc>
+      <image:title>Fleet Operations During India&apos;s Peak Seasons: How to Prepare for Festive and Harvest Demand in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fleet-sop-automation-transport-operations-india-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fleet-sop-automation-transport-operations-india-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleet-sop-automation-transport-operations-india-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleet-sop-automation-transport-operations-india-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog25.png</image:loc>
+      <image:title>How to Build Standard Operating Procedures for Your Fleet — and Automate Them in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fleet-telematics-real-time-vehicle-data-india-profitable-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fleet-telematics-real-time-vehicle-data-india-profitable-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleet-telematics-real-time-vehicle-data-india-profitable-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleet-telematics-real-time-vehicle-data-india-profitable-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog24.png</image:loc>
+      <image:title>Fleet Telematics Explained: How Real-Time Vehicle Data Makes Indian Fleets More Profitable in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fleetcodes-ai-dispatch-automation-fleet-operations-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fleetcodes-ai-dispatch-automation-fleet-operations-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleetcodes-ai-dispatch-automation-fleet-operations-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleetcodes-ai-dispatch-automation-fleet-operations-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog6.png</image:loc>
+      <image:title>How Fleetcodes Uses AI to Automate Dispatch and Transform Fleet Operations in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fleetcodes-consignment-tracking-real-time-dispatch-to-delivery-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fleetcodes-consignment-tracking-real-time-dispatch-to-delivery-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleetcodes-consignment-tracking-real-time-dispatch-to-delivery-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleetcodes-consignment-tracking-real-time-dispatch-to-delivery-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog68.png</image:loc>
+      <image:title>How Fleetcodes Tracks Every Consignment in Real Time — From Dispatch to Delivery</image:title>
+    </image:image>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fleetcodes-fastag-payments-fleet-tracking-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fleetcodes-fastag-payments-fleet-tracking-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleetcodes-fastag-payments-fleet-tracking-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleetcodes-fastag-payments-fleet-tracking-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog10.png</image:loc>
+      <image:title>How Fleetcodes Simplifies FASTag Payments and Fleet Tracking in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fleetcodes-fleet-operators-win-enterprise-shipper-contracts-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fleetcodes-fleet-operators-win-enterprise-shipper-contracts-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleetcodes-fleet-operators-win-enterprise-shipper-contracts-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleetcodes-fleet-operators-win-enterprise-shipper-contracts-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog70.png</image:loc>
+      <image:title>How Fleetcodes Helps Fleet Operators Win Enterprise Shipper Contracts in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fleetcodes-geofencing-fleet-visibility-control-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fleetcodes-geofencing-fleet-visibility-control-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleetcodes-geofencing-fleet-visibility-control-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleetcodes-geofencing-fleet-visibility-control-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog9.png</image:loc>
+      <image:title>How Fleetcodes Geofencing Improves Fleet Visibility and Control in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fleetcodes-live-dashboard-fleet-business-decisions-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fleetcodes-live-dashboard-fleet-business-decisions-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleetcodes-live-dashboard-fleet-business-decisions-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleetcodes-live-dashboard-fleet-business-decisions-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog67.png</image:loc>
+      <image:title>Inside Fleetcodes: How the Live Dashboard Helps Fleet Owners Make Better Business Decisions</image:title>
+    </image:image>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fleetcodes-smart-tms-control-costs-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fleetcodes-smart-tms-control-costs-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleetcodes-smart-tms-control-costs-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleetcodes-smart-tms-control-costs-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog5.png</image:loc>
+      <image:title>Fleetcodes: The Smart Transport Management System Built to Control Your Costs in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fleetcodes-vs-manual-operations-true-cost-fleet-software-india-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fleetcodes-vs-manual-operations-true-cost-fleet-software-india-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleetcodes-vs-manual-operations-true-cost-fleet-software-india-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleetcodes-vs-manual-operations-true-cost-fleet-software-india-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog23.png</image:loc>
+      <image:title>Fleetcodes vs Manual Operations: The True Cost of Not Using Fleet Software in India, 2026</image:title>
+    </image:image>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fmcg-distribution-logistics-india-fleet-technology-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fmcg-distribution-logistics-india-fleet-technology-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fmcg-distribution-logistics-india-fleet-technology-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fmcg-distribution-logistics-india-fleet-technology-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog49.png</image:loc>
+      <image:title>FMCG Distribution Logistics in India: How Fleet Technology Is Redefining the Last Touch in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/freight-rate-negotiation-indian-transporters-guide-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/freight-rate-negotiation-indian-transporters-guide-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/freight-rate-negotiation-indian-transporters-guide-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/freight-rate-negotiation-indian-transporters-guide-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog32.png</image:loc>
+      <image:title>How to Win Freight Rate Negotiations: A Practical Guide for Indian Transporters in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/fuel-bunkers-strategic-advantage-transporters-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/fuel-bunkers-strategic-advantage-transporters-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fuel-bunkers-strategic-advantage-transporters-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fuel-bunkers-strategic-advantage-transporters-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog16.png</image:loc>
+      <image:title>Why Fuel Bunkers Are a Strategic Advantage for Transporters in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/green-logistics-sustainability-india-fleet-operators-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/green-logistics-sustainability-india-fleet-operators-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/green-logistics-sustainability-india-fleet-operators-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/green-logistics-sustainability-india-fleet-operators-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog42.png</image:loc>
+      <image:title>Green Logistics in India: How Fleet Operators Can Build a Sustainable Transport Business in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/hazardous-goods-transport-india-compliance-fleet-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/hazardous-goods-transport-india-compliance-fleet-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/hazardous-goods-transport-india-compliance-fleet-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/hazardous-goods-transport-india-compliance-fleet-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog47.png</image:loc>
+      <image:title>Hazardous Goods Transport in India: Compliance, Safety &amp; Fleet Requirements in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/hidden-cost-empty-miles-logistics-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/hidden-cost-empty-miles-logistics-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/hidden-cost-empty-miles-logistics-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/hidden-cost-empty-miles-logistics-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog2.png</image:loc>
+      <image:title>The Hidden Cost of Empty Miles in Logistics — And How to Eliminate Them in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/hidden-cost-manual-logistics-operations-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/hidden-cost-manual-logistics-operations-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/hidden-cost-manual-logistics-operations-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/hidden-cost-manual-logistics-operations-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/ChatGPT%20Image%20May%2011,%202026,%2002_50_47%20PM.png</image:loc>
+      <image:title>The Hidden Cost of Manual Logistics Operations — And How to Fix It in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/hidden-revenue-leak-logistics-fleet-overcharge-recovery-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/hidden-revenue-leak-logistics-fleet-overcharge-recovery-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/hidden-revenue-leak-logistics-fleet-overcharge-recovery-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/hidden-revenue-leak-logistics-fleet-overcharge-recovery-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog14.png</image:loc>
+      <image:title>The Hidden Revenue Leak in Logistics: Fleet Overcharge Recovery in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/how-fleetcodes-ai-smarter-freight-decisions-beyond-dispatch-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/how-fleetcodes-ai-smarter-freight-decisions-beyond-dispatch-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/how-fleetcodes-ai-smarter-freight-decisions-beyond-dispatch-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/how-fleetcodes-ai-smarter-freight-decisions-beyond-dispatch-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog65.png</image:loc>
+      <image:title>How Fleetcodes Uses AI to Make Smarter Freight Decisions — Beyond Just Dispatch</image:title>
+    </image:image>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/how-to-choose-tms-india-buyers-checklist-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/how-to-choose-tms-india-buyers-checklist-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/how-to-choose-tms-india-buyers-checklist-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/how-to-choose-tms-india-buyers-checklist-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog48.png</image:loc>
+      <image:title>How to Choose the Right TMS for Your Logistics Business: A Buyer&apos;s Checklist for India, 2026</image:title>
+    </image:image>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/how-to-start-transport-business-india-guide-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/how-to-start-transport-business-india-guide-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/how-to-start-transport-business-india-guide-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/how-to-start-transport-business-india-guide-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog40.png</image:loc>
+      <image:title>How to Start a Transport Business in India: A Step-by-Step Guide for 2026</image:title>
+    </image:image>
     <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/india-freight-market-2026-rate-trends-crisil-fleet-operators</loc>
+    <loc>https://www.fleetcodes.com/blog/india-freight-market-2026-rate-trends-crisil-fleet-operators</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/india-freight-market-2026-rate-trends-crisil-fleet-operators" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/india-freight-market-2026-rate-trends-crisil-fleet-operators" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog41.png</image:loc>
+      <image:title>India Freight Market 2026: What Rate Trends, Crisil Data &amp; Market Conditions Mean for Fleet Operators</image:title>
+    </image:image>
     <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/india-national-logistics-policy-2026-fleet-operators-transporters</loc>
+    <loc>https://www.fleetcodes.com/blog/india-national-logistics-policy-2026-fleet-operators-transporters</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/india-national-logistics-policy-2026-fleet-operators-transporters" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/india-national-logistics-policy-2026-fleet-operators-transporters" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog28.png</image:loc>
+      <image:title>India&apos;s National Logistics Policy 2026: What It Means for Fleet Operators and Transporters</image:title>
+    </image:image>
     <lastmod>2026-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/last-mile-delivery-india-fleet-operators-guide-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/last-mile-delivery-india-fleet-operators-guide-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/last-mile-delivery-india-fleet-operators-guide-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/last-mile-delivery-india-fleet-operators-guide-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog43.png</image:loc>
+      <image:title>Last-Mile Delivery in India: What Fleet Operators Must Get Right in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/load-planning-logistics-fleetcodes-optimise-profit-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/load-planning-logistics-fleetcodes-optimise-profit-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/load-planning-logistics-fleetcodes-optimise-profit-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/load-planning-logistics-fleetcodes-optimise-profit-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog74.png</image:loc>
+      <image:title>What Is Load Planning in Logistics? How Fleetcodes Optimises Every Load for Profit in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/logistics-analytics-india-data-driven-fleet-operators-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/logistics-analytics-india-data-driven-fleet-operators-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/logistics-analytics-india-data-driven-fleet-operators-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/logistics-analytics-india-data-driven-fleet-operators-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog73.png</image:loc>
+      <image:title>Logistics Analytics in India: How Data-Driven Fleet Operators Are Outcompeting the Market in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/logistics-cost-benchmarking-indian-fleet-operators-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/logistics-cost-benchmarking-indian-fleet-operators-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/logistics-cost-benchmarking-indian-fleet-operators-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/logistics-cost-benchmarking-indian-fleet-operators-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog62.png</image:loc>
+      <image:title>Logistics Cost Benchmarking: How Indian Fleet Operators Can Measure Performance Against the Market in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/manage-multi-state-fleet-india-compliance-permits-operations-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/manage-multi-state-fleet-india-compliance-permits-operations-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/manage-multi-state-fleet-india-compliance-permits-operations-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/manage-multi-state-fleet-india-compliance-permits-operations-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog72.png</image:loc>
+      <image:title>How to Manage a Multi-State Fleet in India: Compliance, Permits and Operations in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/manual-to-automation-migrating-fleetcodes-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/manual-to-automation-migrating-fleetcodes-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/manual-to-automation-migrating-fleetcodes-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/manual-to-automation-migrating-fleetcodes-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog12.png</image:loc>
+      <image:title>From Manual Processes to Automation: Migrating to Fleetcodes Seamlessly in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/msme-logistics-india-small-transport-business-technology-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/msme-logistics-india-small-transport-business-technology-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/msme-logistics-india-small-transport-business-technology-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/msme-logistics-india-small-transport-business-technology-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog35.png</image:loc>
+      <image:title>MSME Logistics in India: How Small Transport Businesses Can Compete with Large Fleets Using Technology in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/multimodal-logistics-india-fleet-operators-road-rail-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/multimodal-logistics-india-fleet-operators-road-rail-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/multimodal-logistics-india-fleet-operators-road-rail-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/multimodal-logistics-india-fleet-operators-road-rail-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog50.png</image:loc>
+      <image:title>Multimodal Logistics in India: What Road Fleet Operators Must Understand About Rail, Port &amp; Air Integration in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/onboard-new-drivers-faster-fleet-technology-india-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/onboard-new-drivers-faster-fleet-technology-india-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/onboard-new-drivers-faster-fleet-technology-india-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/onboard-new-drivers-faster-fleet-technology-india-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog63.png</image:loc>
+      <image:title>How to Onboard New Drivers Faster and Better with Fleet Technology in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/pharma-logistics-india-gdp-compliance-temperature-management-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/pharma-logistics-india-gdp-compliance-temperature-management-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/pharma-logistics-india-gdp-compliance-temperature-management-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/pharma-logistics-india-gdp-compliance-temperature-management-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog55.png</image:loc>
+      <image:title>Pharma Logistics in India: Fleet Compliance, GDP Standards and Temperature Management in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/predictive-maintenance-fleet-india-ai-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/predictive-maintenance-fleet-india-ai-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/predictive-maintenance-fleet-india-ai-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/predictive-maintenance-fleet-india-ai-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog51.png</image:loc>
+      <image:title>Predictive Maintenance for Indian Fleets: How AI Is Ending the Breakdown Cycle in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/predictive-maintenance-indian-fleets-ai-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/predictive-maintenance-indian-fleets-ai-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/predictive-maintenance-indian-fleets-ai-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/predictive-maintenance-indian-fleets-ai-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog52.png</image:loc>
+      <image:title>Predictive Maintenance for Indian Fleets: How AI Is Ending the Breakdown Cycle in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/ptl-vs-ftl-part-truck-load-logistics-india-guide-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/ptl-vs-ftl-part-truck-load-logistics-india-guide-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/ptl-vs-ftl-part-truck-load-logistics-india-guide-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/ptl-vs-ftl-part-truck-load-logistics-india-guide-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog38.png</image:loc>
+      <image:title>PTL vs FTL: A Complete Guide to Part Truck Load Logistics in India for 2026</image:title>
+    </image:image>
     <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/real-time-supply-chain-visibility-india-logistics-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/real-time-supply-chain-visibility-india-logistics-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/real-time-supply-chain-visibility-india-logistics-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/real-time-supply-chain-visibility-india-logistics-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog30.png</image:loc>
+      <image:title>Real-Time Supply Chain Visibility: Why Indian Logistics Businesses Can No Longer Afford to Operate Blind in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/reduce-logistics-costs-indian-fleet-owners-practical-guide-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/reduce-logistics-costs-indian-fleet-owners-practical-guide-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/reduce-logistics-costs-indian-fleet-owners-practical-guide-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/reduce-logistics-costs-indian-fleet-owners-practical-guide-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog27.png</image:loc>
+      <image:title>How to Reduce Logistics Costs by 20%: A Practical Guide for Indian Fleet Owners in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/reverse-logistics-india-fleet-operators-returns-management-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/reverse-logistics-india-fleet-operators-returns-management-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/reverse-logistics-india-fleet-operators-returns-management-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/reverse-logistics-india-fleet-operators-returns-management-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog34.png</image:loc>
+      <image:title>Reverse Logistics in India: Why Managing Returns Is the Next Frontier for Fleet Operators in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/scale-transport-business-india-without-hiring-dispatchers-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/scale-transport-business-india-without-hiring-dispatchers-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/scale-transport-business-india-without-hiring-dispatchers-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/scale-transport-business-india-without-hiring-dispatchers-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog29.png</image:loc>
+      <image:title>How to Scale a Transport Business in India Without Hiring More Dispatchers in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/top-5-benefits-automating-fleet-operations-fleetcodes-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/top-5-benefits-automating-fleet-operations-fleetcodes-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/top-5-benefits-automating-fleet-operations-fleetcodes-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/top-5-benefits-automating-fleet-operations-fleetcodes-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog17.png</image:loc>
+      <image:title>Top 5 Benefits of Automating Fleet Operations with Fleetcodes in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/trip-sheet-management-india-digital-logistics-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/trip-sheet-management-india-digital-logistics-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/trip-sheet-management-india-digital-logistics-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/trip-sheet-management-india-digital-logistics-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog71.png</image:loc>
+      <image:title>Trip Sheet Management in Indian Logistics: Why Going Digital Saves Time and Money in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/truck-overloading-india-gvw-limits-penalties-compliance-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/truck-overloading-india-gvw-limits-penalties-compliance-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/truck-overloading-india-gvw-limits-penalties-compliance-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/truck-overloading-india-gvw-limits-penalties-compliance-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog37.png</image:loc>
+      <image:title>Truck Overloading in India: GVW Limits, New Penalties &amp; How to Stay Compliant in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/tyre-management-indian-fleets-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/tyre-management-indian-fleets-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/tyre-management-indian-fleets-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/tyre-management-indian-fleets-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog54.png</image:loc>
+      <image:title>Tyre Management for Indian Fleets: How to Cut Costs and Improve Safety in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/vehicle-compliance-documents-indian-fleet-operators-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/vehicle-compliance-documents-indian-fleet-operators-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/vehicle-compliance-documents-indian-fleet-operators-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/vehicle-compliance-documents-indian-fleet-operators-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog39.png</image:loc>
+      <image:title>Vehicle Compliance for Indian Fleet Operators: Every Document Your Trucks Must Carry in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/vehicle-scrapping-policy-india-fleet-operators-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/vehicle-scrapping-policy-india-fleet-operators-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/vehicle-scrapping-policy-india-fleet-operators-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/vehicle-scrapping-policy-india-fleet-operators-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog59.png</image:loc>
+      <image:title>Vehicle Scrapping Policy India: What Fleet Operators Must Know in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/warehouse-fleet-integration-india-logistics-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/warehouse-fleet-integration-india-logistics-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/warehouse-fleet-integration-india-logistics-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/warehouse-fleet-integration-india-logistics-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog45.png</image:loc>
+      <image:title>Warehouse and Fleet Integration: Why Indian Logistics Businesses Need Both Systems Talking in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/what-is-3pl-third-party-logistics-india-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/what-is-3pl-third-party-logistics-india-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/what-is-3pl-third-party-logistics-india-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/what-is-3pl-third-party-logistics-india-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog33.png</image:loc>
+      <image:title>What Is a 3PL? How Third-Party Logistics Works for Growing Indian Businesses in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/what-is-fleet-management-system-india-guide-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/what-is-fleet-management-system-india-guide-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/what-is-fleet-management-system-india-guide-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/what-is-fleet-management-system-india-guide-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog60.png</image:loc>
+      <image:title>What Is a Fleet Management System? A Plain-Language Guide for Indian Business Owners in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/what-is-transport-manifest-guide-transporters-shippers-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/what-is-transport-manifest-guide-transporters-shippers-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/what-is-transport-manifest-guide-transporters-shippers-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/what-is-transport-manifest-guide-transporters-shippers-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog11.png</image:loc>
+      <image:title>What Is a Transport Manifest? A Complete Guide for Transporters and Shippers in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/why-fleets-dont-know-true-profit-per-trip-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/why-fleets-dont-know-true-profit-per-trip-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/why-fleets-dont-know-true-profit-per-trip-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/why-fleets-dont-know-true-profit-per-trip-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog4.png</image:loc>
+      <image:title>Why Most Fleets Still Don&apos;t Know Their True Profit Per Trip in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fleetcodes.com/blog/why-transporters-need-unified-erp-platform-2026</loc>
+    <loc>https://www.fleetcodes.com/blog/why-transporters-need-unified-erp-platform-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/why-transporters-need-unified-erp-platform-2026" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/why-transporters-need-unified-erp-platform-2026" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/lovable-uploads/blog8.png</image:loc>
+      <image:title>Why Modern Transporters Need a Unified ERP Platform in 2026</image:title>
+    </image:image>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

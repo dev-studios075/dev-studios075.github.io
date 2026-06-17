@@ -5,6 +5,7 @@ import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import Seo from "@/components/seo/Seo";
 import { SITE_NAME, absoluteUrl } from "@/lib/site";
+import { trackEvent } from "@/lib/analytics";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
@@ -15,6 +16,14 @@ const Blog = () => {
   const posts = getAllPosts();
   const title = `Fleet Management Blog | ${SITE_NAME}`;
   const description = "Fleet management, AI dispatch, TMS automation, compliance, and logistics operations insights for Indian transporters and shippers.";
+
+  const trackArticleClick = (postTitle: string, postSlug: string) => {
+    trackEvent("select_content", {
+      content_type: "blog_post",
+      item_id: postSlug,
+      item_name: postTitle,
+    });
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -62,7 +71,11 @@ const Blog = () => {
                 key={post.slug}
                 className="group glass rounded-2xl overflow-hidden hover:shadow-elegant transition-all duration-300 flex flex-col"
               >
-                <Link to={`/blog/${post.slug}`} className="relative overflow-hidden aspect-[16/10] block">
+                <Link
+                  to={`/blog/${post.slug}`}
+                  className="relative overflow-hidden aspect-[16/10] block"
+                  onClick={() => trackArticleClick(post.title, post.slug)}
+                >
                   <img
                     src={post.coverImage || fallbackImages[i % fallbackImages.length]}
                     alt={post.title}
@@ -84,7 +97,12 @@ const Blog = () => {
                   </div>
 
                   <h2 className="font-display font-semibold text-xl leading-snug mb-3 group-hover:text-primary transition-colors">
-                    <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+                    <Link
+                      to={`/blog/${post.slug}`}
+                      onClick={() => trackArticleClick(post.title, post.slug)}
+                    >
+                      {post.title}
+                    </Link>
                   </h2>
                   <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">
                     {post.excerpt}
@@ -93,6 +111,7 @@ const Blog = () => {
                   <Link
                     to={`/blog/${post.slug}`}
                     className="inline-flex items-center gap-1.5 text-sm font-medium text-primary group/link"
+                    onClick={() => trackArticleClick(post.title, post.slug)}
                   >
                     Read article
                     <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
