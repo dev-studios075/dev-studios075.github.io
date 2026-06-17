@@ -16,23 +16,11 @@ export const initializeGoogleAnalytics = () => {
     return;
   }
 
-  const existingScript = document.querySelector<HTMLScriptElement>(
-    `script[src*="googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}"]`,
-  );
-
-  if (!existingScript) {
-    const script = document.createElement("script");
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-    document.head.appendChild(script);
-  }
-
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || ((...args: unknown[]) => {
     window.dataLayer?.push(args);
   });
 
-  window.gtag("js", new Date());
   isInitialized = true;
 };
 
