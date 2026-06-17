@@ -10,10 +10,10 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section id="how" className="py-24 lg:py-32 relative">
+    <section id="how" className="py-16 lg:py-24 relative">
       <div className="absolute inset-0 dot-bg opacity-40 pointer-events-none" />
       <div className="container-tight relative">
-        <div className="max-w-2xl mx-auto text-center mb-20">
+        <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-14">
           <p className="text-xs uppercase tracking-[0.2em] text-primary mb-4">How it works</p>
           <h2 className="font-display font-bold text-4xl sm:text-5xl tracking-tight mb-5">
             From SOP to <span className="text-gradient">self-driving operations</span> in four steps.
@@ -34,9 +34,9 @@ const HowItWorks = () => {
                 transition={{ duration: 0.5, delay: i * 0.12 }}
                 className="relative"
               >
-                <div className="relative z-10 mx-auto w-24 h-24 rounded-2xl glass-strong grid place-items-center mb-6 glow-border">
+                <div className="relative z-10 mx-auto w-24 h-24 rounded-2xl glass-strong grid place-items-center mb-6 glow-border hover:-translate-y-1 hover:shadow-elegant transition-all duration-300">
                   <s.icon className="w-9 h-9 text-primary" />
-                  <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-gradient-primary text-primary-foreground text-xs font-display font-bold grid place-items-center shadow-glow">
+                  <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-primary text-primary-foreground text-xs font-display font-bold grid place-items-center shadow-glow">
                     {i + 1}
                   </span>
                 </div>

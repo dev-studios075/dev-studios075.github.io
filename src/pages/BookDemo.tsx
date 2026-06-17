@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -56,6 +56,13 @@ const BookDemo = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const {
     register,
@@ -136,38 +143,51 @@ const BookDemo = () => {
       <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none -z-10" />
 
       {/* Simplified Header */}
-      <header className="py-6 border-b border-border/40 bg-background/50 backdrop-blur-md">
-        <div className="container-tight flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2.5 font-display font-semibold text-lg">
-            <span className="relative grid place-items-center w-8 h-8 rounded-lg bg-gradient-primary shadow-glow">
-              <Cpu className="w-4.5 h-4.5 text-primary-foreground" />
-            </span>
-            <span className="text-gradient">Fleetcodes</span>
-            <span className="text-muted-foreground/70 text-xxs font-body uppercase tracking-widest">
-              TMS
-            </span>
-          </Link>
-          <div className="flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-            >
-              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </Button>
-            <Link
-              to="/"
-              className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1.5 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" /> Back to home
+      <header
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+          scrolled ? "py-3" : "py-5"
+        }`}
+      >
+        <div className="container-tight">
+          <nav
+            className={`flex items-center justify-between rounded-2xl px-5 py-3 transition-all duration-300 ${
+              scrolled ? "glass-strong shadow-card" : ""
+            }`}
+          >
+            <Link to="/" className="flex items-center gap-2.5 font-display font-semibold text-lg">
+              <span className="relative grid place-items-center w-9 h-9 rounded-xl bg-white border border-border/40 shadow-glow overflow-hidden">
+                <img src="/favicon.png" alt="Fleetcodes Logo" className="w-6 h-6 object-contain" />
+              </span>
+              <span className="text-gradient">Fleetcodes</span>
+              <span className="text-muted-foreground/70 text-xs font-body uppercase tracking-widest hidden sm:inline">
+                TMS
+              </span>
             </Link>
-          </div>
+            <div className="flex items-center gap-2 sm:gap-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleTheme}
+                aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              >
+                {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </Button>
+              <Link
+                to="/"
+                className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1.5 transition-colors whitespace-nowrap"
+              >
+                <ArrowLeft className="w-4 h-4 flex-shrink-0" />
+                <span>
+                  Back<span className="hidden sm:inline"> to home</span>
+                </span>
+              </Link>
+            </div>
+          </nav>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow flex items-center py-12 lg:py-20">
+      <main className="flex-grow flex items-center pt-28 pb-12 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-20">
         <div className="container-tight">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
@@ -266,7 +286,7 @@ const BookDemo = () => {
                               <Input
                                 id="name"
                                 type="text"
-                                placeholder="Rahul Kumar"
+                                placeholder="e.g. John Doe"
                                 className={`h-11 ${errors.name ? "border-destructive focus-visible:ring-destructive" : ""}`}
                                 {...register("name")}
                               />
@@ -283,7 +303,7 @@ const BookDemo = () => {
                               <Input
                                 id="company"
                                 type="text"
-                                placeholder="Fleetcodes Logistics"
+                                placeholder="e.g. Acme Transportation"
                                 className={`h-11 ${errors.company ? "border-destructive focus-visible:ring-destructive" : ""}`}
                                 {...register("company")}
                               />
@@ -303,7 +323,7 @@ const BookDemo = () => {
                               <Input
                                 id="email"
                                 type="email"
-                                placeholder="rahul@fleetcodes.com"
+                                placeholder="e.g. john@example.com"
                                 className={`h-11 ${errors.email ? "border-destructive focus-visible:ring-destructive" : ""}`}
                                 {...register("email")}
                               />
@@ -320,7 +340,7 @@ const BookDemo = () => {
                               <Input
                                 id="phone"
                                 type="tel"
-                                placeholder="+91 98765 43210"
+                                placeholder="e.g. +1 (555) 000-0000"
                                 className={`h-11 ${errors.phone ? "border-destructive focus-visible:ring-destructive" : ""}`}
                                 {...register("phone")}
                               />
@@ -433,9 +453,16 @@ const BookDemo = () => {
       </main>
 
       {/* Simplified Footer */}
-      <footer className="py-6 border-t border-border/40 text-center text-xs text-muted-foreground/60 bg-background/30">
-        <div className="container-tight">
-          © {new Date().getFullYear()} {SITE_NAME} TMS. All rights reserved. SOC 2 ready.
+      <footer className="py-8 border-t border-border/40 bg-background/30">
+        <div className="container-tight flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} Fleetcodes · All rights reserved.
+          </p>
+          <div className="flex items-center gap-6 text-xs text-muted-foreground">
+            <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
+            <a href="#" className="hover:text-foreground transition-colors">Terms</a>
+            <a href="#" className="hover:text-foreground transition-colors">Security</a>
+          </div>
         </div>
       </footer>
     </div>

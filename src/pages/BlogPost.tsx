@@ -110,7 +110,9 @@ const BlogPost = () => {
           </h1>
 
           <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-display prose-headings:tracking-tight prose-a:text-primary prose-strong:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground">
-            <ReactMarkdown>{post.content}</ReactMarkdown>
+            <ReactMarkdown>
+              {post.content ? post.content.replace(/^#\s+.*$/m, "").trim() : ""}
+            </ReactMarkdown>
           </div>
         </article>
       </main>

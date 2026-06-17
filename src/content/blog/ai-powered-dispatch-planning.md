@@ -23,7 +23,7 @@ A typical fleet manager handles 50-200 orders per day. Each order has pickup and
 
 ## Enter AI-Powered Planning
 
-AI dispatch planners like ClairTrack's don't just automate — they optimize. Here's how:
+AI dispatch planners like Fleetcodes don't just automate — they optimize. Here's how:
 
 ### 1. Import Orders in Seconds
 
@@ -75,4 +75,4 @@ The question isn't whether to adopt AI dispatch planning. It's how soon you can 
 
 ---
 
-*Ready to see AI-powered dispatch planning in action? [Request a demo](/clairtrack/#details) and our team will show you how ClairTrack can transform your operations in just 20 minutes.*
+*Ready to see AI-powered dispatch planning in action? [Request a demo](/book-demo) and our team will show you how Fleetcodes can transform your operations in just 20 minutes.*

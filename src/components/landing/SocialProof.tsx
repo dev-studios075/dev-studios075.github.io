@@ -21,9 +21,9 @@ const testimonials = [
 
 const SocialProof = () => {
   return (
-    <section className="py-24 lg:py-32 relative">
+    <section className="py-16 lg:py-24 relative">
       <div className="container-tight">
-        <div className="max-w-2xl mx-auto text-center mb-16">
+        <div className="max-w-2xl mx-auto text-center mb-12">
           <p className="text-xs uppercase tracking-[0.2em] text-primary mb-4">Operators talking</p>
           <h2 className="font-display font-bold text-4xl sm:text-5xl tracking-tight">
             Loved by <span className="text-gradient">operations leaders.</span>
@@ -38,7 +38,7 @@ const SocialProof = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="glass rounded-2xl p-7 flex flex-col justify-between gap-6"
+              className="glass rounded-2xl p-6 sm:p-7 flex flex-col justify-between gap-6 hover:shadow-elegant transition-all duration-300 hover:-translate-y-1"
             >
               <Quote className="w-7 h-7 text-primary/60" />
               <blockquote className="text-base leading-relaxed text-foreground/90">"{t.quote}"</blockquote>

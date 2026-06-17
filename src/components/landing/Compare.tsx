@@ -13,9 +13,9 @@ const rows = [
 
 const Compare = () => {
   return (
-    <section id="compare" className="py-24 lg:py-32 relative">
+    <section id="compare" className="py-16 lg:py-24 relative">
       <div className="container-tight">
-        <div className="max-w-2xl mx-auto text-center mb-16">
+        <div className="max-w-2xl mx-auto text-center mb-12">
           <p className="text-xs uppercase tracking-[0.2em] text-primary mb-4">Why Fleetcodes</p>
           <h2 className="font-display font-bold text-4xl sm:text-5xl tracking-tight mb-5">
             Traditional SaaS waits for input. <br />
@@ -28,7 +28,7 @@ const Compare = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="glass-strong rounded-2xl overflow-hidden glow-border"
+          className="glass-strong rounded-2xl overflow-hidden glow-border hover:shadow-elegant transition-all duration-300"
         >
           <div className="grid grid-cols-3 px-6 py-5 border-b border-border/60 text-sm">
             <div className="font-display font-semibold text-muted-foreground">Capability</div>
@@ -42,13 +42,13 @@ const Compare = () => {
           {rows.map((r, i) => (
             <div
               key={r.label}
-              className={`grid grid-cols-3 px-6 py-5 text-sm hover:bg-primary/5 transition-colors ${
+              className={`grid grid-cols-3 px-6 py-5 text-sm hover:bg-table-row-hover transition-colors ${
                 i !== rows.length - 1 ? "border-b border-border/40" : ""
               }`}
             >
               <div className="font-medium">{r.label}</div>
-              <div className="text-muted-foreground">{r.trad}</div>
-              <div className="text-foreground font-medium">{r.us}</div>
+              <div className="text-muted-foreground/80">{r.trad}</div>
+              <div className="text-primary font-semibold">{r.us}</div>
             </div>
           ))}
         </motion.div>

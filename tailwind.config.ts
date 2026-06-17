@@ -12,9 +12,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Sora', 'system-ui', 'sans-serif'],
-        body: ['Inter', 'system-ui', 'sans-serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['var(--fc-font-serif)', 'Source Serif 4', 'Sora', 'serif'],
+        body: ['var(--fc-font-sans)', 'DM Sans', 'Inter', 'sans-serif'],
+        sans: ['var(--fc-font-sans)', 'DM Sans', 'Inter', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
