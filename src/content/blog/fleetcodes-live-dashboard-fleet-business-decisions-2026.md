@@ -3,7 +3,7 @@ title: "Inside Fleetcodes: How the Live Dashboard Helps Fleet Owners Make Better
 date: 2026-05-28
 author: Fleetcodes Team
 excerpt: "Inside the Fleetcodes live dashboard — what fleet owners, operations managers and dispatchers see in real time, and how it replaces monthly reporting with always-on fleet intelligence."
-coverImage: /lovable-uploads/blog67.png 
+coverImage: /uploads/blog67.png 
 ---
 
 # Inside Fleetcodes: How the Live Dashboard Helps Fleet Owners Make Better Business Decisions

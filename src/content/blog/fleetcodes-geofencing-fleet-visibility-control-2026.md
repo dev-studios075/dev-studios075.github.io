@@ -3,7 +3,7 @@ title: "How Fleetcodes Geofencing Improves Fleet Visibility and Control in 2026"
 date: 2026-05-11
 author: Fleetcodes Team
 excerpt: "Fleetcodes geofencing automates arrival alerts, detention billing and route compliance for Indian fleets. Improve visibility and control across every truck in real time."
-coverImage: /lovable-uploads/blog9.png
+coverImage: /uploads/blog9.png
 ---
 
 # How Fleetcodes Geofencing Improves Fleet Visibility and Control in 2026

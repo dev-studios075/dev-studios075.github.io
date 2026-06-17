@@ -3,7 +3,7 @@ title: "Multimodal Logistics in India: What Road Fleet Operators Must Understand
 date: 2026-05-24
 author: Fleetcodes Team
 excerpt: "India's Dedicated Freight Corridors, 16 Multimodal Logistics Parks, and CONCOR's expanding inland container depot network are making multimodal freight a practical reality — not an aspiration. For road fleet operators, the multimodal shift creates both competition on long-haul corridors and opportunity as first-and-last-mile specialists."
-coverImage: /lovable-uploads/blog50.png
+coverImage: /uploads/blog50.png
 ---
 
 # Multimodal Logistics in India: What Road Fleet Operators Must Understand About Rail, Port & Air Integration in 2026

@@ -3,7 +3,7 @@ title: "From Manual Processes to Automation: Migrating to Fleetcodes Seamlessly 
 date: 2026-05-11
 author: Fleetcodes Team
 excerpt: "Worried about disrupting ops during a TMS migration? Fleetcodes transitions your fleet from manual to full automation in 7 days — seamlessly, safely and without downtime."
-coverImage: /lovable-uploads/blog12.png
+coverImage: /uploads/blog12.png
 ---
 
 # From Manual Processes to Automation: Migrating to Fleetcodes Seamlessly in 2026

@@ -3,7 +3,7 @@ title: "Why Modern Transporters Need a Unified ERP Platform in 2026"
 date: 2026-05-11
 author: Fleetcodes Team
 excerpt: "Running your transport business on five disconnected tools? Discover how a unified ERP platform like Fleetcodes connects operations, billing, driver management, and fleet tracking in one place."
-coverImage: /lovable-uploads/blog8.png
+coverImage: /uploads/blog8.png
 ---
 
 # Why Modern Transporters Need a Unified ERP Platform in 2026

@@ -3,7 +3,7 @@ title: "What Is a Transport Manifest? A Complete Guide for Transporters and Ship
 date: 2026-05-11
 author: Fleetcodes Team
 excerpt: "What is a transport manifest? This complete guide covers container manifests, customs rules and how Fleetcodes auto-generates compliant manifest documents for every trip in India."
-coverImage: /lovable-uploads/blog11.png
+coverImage: /uploads/blog11.png
 ---
 
 # What Is a Transport Manifest? A Complete Guide for Transporters and Shippers in 2026

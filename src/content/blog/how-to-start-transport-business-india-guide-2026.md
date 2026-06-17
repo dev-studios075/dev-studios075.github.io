@@ -3,7 +3,7 @@ title: "How to Start a Transport Business in India: A Step-by-Step Guide for 202
 date: 2026-05-20
 author: Fleetcodes Team
 excerpt: "Starting a transport business in India in 2026 means entering one of the country's fastest-growing sectors — with the right registrations, vehicles, compliance structure, and technology foundation. This step-by-step guide covers everything a new transporter needs to get legally operational and commercially competitive from day one."
-coverImage: /lovable-uploads/blog40.png
+coverImage: /uploads/blog40.png
 ---
 
 # How to Start a Transport Business in India: A Step-by-Step Guide for 2026

@@ -3,7 +3,7 @@ title: "Fleet Operations During India's Peak Seasons: How to Prepare for Festive
 date: 2026-05-30
 author: Fleetcodes Team
 excerpt: "How Indian fleet operators can prepare for festive and harvest season freight demand spikes in 2026 — operational planning, driver availability, compliance, and fleet management with Fleetcodes."
-coverImage: /lovable-uploads/blog69.png
+coverImage: /uploads/blog69.png
 ---
 
 # Fleet Operations During India's Peak Seasons: How to Prepare for Festive and Harvest Demand in 2026

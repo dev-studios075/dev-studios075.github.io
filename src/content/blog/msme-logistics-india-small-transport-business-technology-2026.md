@@ -3,7 +3,7 @@ title: "MSME Logistics in India: How Small Transport Businesses Can Compete with
 date: 2026-05-19
 author: Fleetcodes Team
 excerpt: "India's 63 million MSMEs include hundreds of thousands of small transport businesses — most running 5–30 vehicles, most operating manually, and most competing at a significant disadvantage against larger, better-resourced fleets. In 2026, affordable fleet technology is closing that gap faster than most small operators realise."
-coverImage: /lovable-uploads/blog35.png
+coverImage: /uploads/blog35.png
 ---
 
 # MSME Logistics in India: How Small Transport Businesses Can Compete with Large Fleets Using Technology in 2026

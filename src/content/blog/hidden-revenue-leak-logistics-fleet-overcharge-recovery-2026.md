@@ -3,7 +3,7 @@ title: "The Hidden Revenue Leak in Logistics: Fleet Overcharge Recovery in 2026"
 date: 2026-05-14
 author: Fleetcodes Team
 excerpt: "Logistics revenue leakage through billing errors, unaudited carrier invoices and unclaimed surcharges is silently draining your margins. Learn how Fleetcodes helps Indian transporters find and recover it."
-coverImage: /lovable-uploads/blog14.png
+coverImage: /uploads/blog14.png
 ---
 
 # The Hidden Revenue Leak in Logistics: Fleet Overcharge Recovery in 2026

@@ -3,7 +3,7 @@ title: "Top 5 Benefits of Automating Fleet Operations with Fleetcodes in 2026"
 date: 2026-05-14
 author: Fleetcodes Team
 excerpt: "Fleet automation isn't about replacing your team — it's about making every person in your operation more effective. Here are the five most impactful benefits Indian logistics businesses see when they automate with Fleetcodes."
-coverImage: /lovable-uploads/blog17.png
+coverImage: /uploads/blog17.png
 ---
 
 # Top 5 Benefits of Automating Fleet Operations with Fleetcodes in 2026
