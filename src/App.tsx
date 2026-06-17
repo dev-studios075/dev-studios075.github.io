@@ -10,6 +10,7 @@ import BlogPost from "./pages/BlogPost";
 import BookDemo from "./pages/BookDemo";
 import NotFound from "./pages/NotFound";
 import GoogleAnalytics from "./components/analytics/GoogleAnalytics";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <GoogleAnalytics />
           <Routes>
             <Route path="/" element={<Index />} />
