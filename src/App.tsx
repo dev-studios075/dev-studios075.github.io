@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/hooks/use-theme";
 import Index from "./pages/Index";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import BookDemo from "./pages/BookDemo";
 import NotFound from "./pages/NotFound";
 import GoogleAnalytics from "./components/analytics/GoogleAnalytics";
 
@@ -24,6 +25,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/book-demo" element={<BookDemo />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

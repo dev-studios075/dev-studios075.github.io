@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, PlayCircle, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import heroDashboard from "@/assets/hero-dashboard.jpg";
 import { trackEvent } from "@/lib/analytics";
 
@@ -47,10 +48,12 @@ const Hero = () => {
               variant="hero"
               size="xl"
               className="group"
-              onClick={() => trackHeroCta("Book Demo")}
+              asChild
             >
-              Book Demo
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <Link to="/book-demo" onClick={() => trackHeroCta("Book Demo")}>
+                Book Demo
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </Button>
             <Button
               variant="glass"

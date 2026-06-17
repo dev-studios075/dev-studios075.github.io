@@ -94,8 +94,10 @@ const Navbar = () => {
                 Sign in
               </a>
             </Button>
-            <Button variant="hero" size="sm" onClick={() => trackNavEvent("Book Demo", "desktop_nav")}>
-              Book Demo
+            <Button variant="hero" size="sm" asChild>
+              <Link to="/book-demo" onClick={() => trackNavEvent("Book Demo", "desktop_nav")}>
+                Book Demo
+              </Link>
             </Button>
           </div>
 
@@ -156,12 +158,17 @@ const Navbar = () => {
             <Button
               variant="hero"
               className="mt-2"
-              onClick={() => {
-                trackNavEvent("Book Demo", "mobile_nav");
-                setOpen(false);
-              }}
+              asChild
             >
-              Book Demo
+              <Link
+                to="/book-demo"
+                onClick={() => {
+                  trackNavEvent("Book Demo", "mobile_nav");
+                  setOpen(false);
+                }}
+              >
+                Book Demo
+              </Link>
             </Button>
           </div>
         )}
