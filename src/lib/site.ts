@@ -1,5 +1,5 @@
 export const SITE_NAME = "Fleetcodes";
-export const SITE_URL = (import.meta.env.VITE_SITE_URL || "https://fleetcodes.com").replace(/\/$/, "");
+export const SITE_URL = (import.meta.env.VITE_SITE_URL || "https://www.fleetcodes.com").replace(/\/$/, "");
 
 export const DEFAULT_TITLE = "Fleetcodes - Automation-First TMS for Logistics";
 export const DEFAULT_DESCRIPTION = "AI-powered TMS that learns your SOPs and runs your logistics autonomously. Cut cost, eliminate errors, and scale fleet operations without scaling headcount.";

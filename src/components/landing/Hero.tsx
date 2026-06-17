@@ -2,8 +2,16 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, PlayCircle, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import heroDashboard from "@/assets/hero-dashboard.jpg";
+import { trackEvent } from "@/lib/analytics";
 
 const Hero = () => {
+  const trackHeroCta = (label: string) => {
+    trackEvent("select_promotion", {
+      cta_label: label,
+      cta_location: "hero",
+    });
+  };
+
   return (
     <section className="relative pt-36 pb-20 lg:pt-44 lg:pb-32 overflow-hidden">
       {/* Background grid */}
@@ -35,11 +43,21 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button variant="hero" size="xl" className="group">
+            <Button
+              variant="hero"
+              size="xl"
+              className="group"
+              onClick={() => trackHeroCta("Book Demo")}
+            >
               Book Demo
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="glass" size="xl" className="group">
+            <Button
+              variant="glass"
+              size="xl"
+              className="group"
+              onClick={() => trackHeroCta("See How It Works")}
+            >
               <PlayCircle className="w-4 h-4" />
               See How It Works
             </Button>

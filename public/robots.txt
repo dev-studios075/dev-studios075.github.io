@@ -3,6 +3,6 @@ User-agent: *
 Allow: /
 Disallow: /private/
 
-Host: https://fleetcodes.com
+Host: https://www.fleetcodes.com
 
-Sitemap: https://fleetcodes.com/sitemap.xml
+Sitemap: https://www.fleetcodes.com/sitemap.xml
