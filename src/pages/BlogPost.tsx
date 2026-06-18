@@ -54,7 +54,7 @@ const BlogPost = () => {
   const category = getCategory(title);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Seo
         title={`${title} | ${SITE_NAME}`}
         description={post.excerpt}
@@ -83,7 +83,7 @@ const BlogPost = () => {
       />
       <Navbar />
 
-      <main className="relative pb-24">
+      <main className="relative pb-24 overflow-x-hidden">
         {/* Ambient glow */}
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none -z-10" />
 
@@ -98,7 +98,19 @@ const BlogPost = () => {
             Back to blog
           </Link>
 
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            {/* Cover image — shows first on mobile, second on desktop */}
+            {post.coverImage && (
+              <div className="lg:order-last rounded-2xl overflow-hidden border border-border/50 shadow-elegant">
+                <img
+                  src={post.coverImage}
+                  alt={title}
+                  className="w-full object-cover"
+                  style={{ maxHeight: "360px" }}
+                />
+              </div>
+            )}
+
             {/* Left — title & meta */}
             <div>
               {/* Category + reading time pills */}
@@ -147,18 +159,6 @@ const BlogPost = () => {
                 )}
               </div>
             </div>
-
-            {/* Right — cover image */}
-            {post.coverImage && (
-              <div className="rounded-2xl overflow-hidden border border-border/50 shadow-elegant">
-                <img
-                  src={post.coverImage}
-                  alt={title}
-                  className="w-full object-cover"
-                  style={{ maxHeight: "360px" }}
-                />
-              </div>
-            )}
           </div>
         </div>
 
