@@ -71,6 +71,24 @@ const urls = [
     priority: "1.0",
   },
   {
+    loc: "/about",
+    title: "About Us | Fleetcodes",
+    image: "/new-og-image.png",
+    priority: "0.8",
+  },
+  {
+    loc: "/careers",
+    title: "Careers at Fleetcodes",
+    image: "/new-og-image.png",
+    priority: "0.8",
+  },
+  {
+    loc: "/book-demo",
+    title: "Book a Demo | Fleetcodes",
+    image: "/new-og-image.png",
+    priority: "0.9",
+  },
+  {
     loc: "/blog",
     title: "Fleet Management Blog | Fleetcodes",
     image: "/new-og-image.png",
@@ -138,6 +156,9 @@ Fleetcodes is an automation-first transport management system for logistics team
 ## Core Pages
 
 - Homepage: ${siteUrl}/
+- About: ${siteUrl}/about
+- Careers: ${siteUrl}/careers
+- Book Demo: ${siteUrl}/book-demo
 - Blog: ${siteUrl}/blog
 - Sitemap: ${siteUrl}/sitemap.xml
 
