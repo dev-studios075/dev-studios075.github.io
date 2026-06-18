@@ -8,7 +8,7 @@ import {
   ArrowLeft, ArrowRight,
   CheckCircle2, Loader2, ShieldCheck, Clock, Sparkles,
   Building, Mail, User, Phone, MessageSquare, Sun, Moon,
-  Zap, BarChart3, Globe,
+  Zap, BarChart3, Globe, CheckCircle,
 } from "lucide-react";
 
 import { Input }    from "@/components/ui/input";
@@ -80,8 +80,36 @@ const checkpoints = [
 const BookDemo = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess,    setIsSuccess]    = useState(false);
+  const [email,        setEmail]        = useState("");
+  const [subscribed,   setSubscribed]   = useState(false);
+  const [nlLoading,    setNlLoading]    = useState(false);
   const { theme, toggleTheme }          = useTheme();
   const [scrolled, setScrolled]         = useState(false);
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setNlLoading(true);
+
+    const sheetUrl = import.meta.env.VITE_GOOGLE_SHEET_URL;
+    if (sheetUrl) {
+      try {
+        const params = new URLSearchParams();
+        params.append("email",  email);
+        params.append("source", "News Letter");
+        await fetch(sheetUrl, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: params.toString(),
+        });
+      } catch { /* no-cors fetch always throws — ignore */ }
+    }
+
+    setNlLoading(false);
+    setSubscribed(true);
+    setEmail("");
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -118,7 +146,7 @@ const BookDemo = () => {
       params.append("company",   data.company);
       params.append("fleetSize", data.fleetSize);
       params.append("message",   data.message || "");
-      params.append("source",    "Website Book Demo Page");
+      params.append("source",    "Form Data");
 
       await fetch(googleSheetUrl, {
         method: "POST",
@@ -436,6 +464,49 @@ const BookDemo = () => {
 
       {/* ── Footer ─────────────────────────────────────────────────────────── */}
       <footer style={{ background: "#0a0d14", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+
+        {/* Newsletter strip */}
+        <div style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+          <div className="container-tight py-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div>
+              <p className="text-xs font-mono uppercase tracking-[0.18em] mb-1.5" style={{ color: "#7c3aed" }}>NEWSLETTER</p>
+              <h3 className="font-display font-semibold text-lg text-white mb-1">Stay ahead of logistics</h3>
+              <p className="text-sm" style={{ color: "#64748b" }}>Product updates, industry insights, and automation tips — weekly.</p>
+            </div>
+            {!subscribed ? (
+              <form onSubmit={handleSubscribe} className="flex gap-2 w-full lg:w-auto">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your work email"
+                  required
+                  className="flex-1 lg:w-60 px-4 py-2.5 rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none transition-all"
+                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.10)" }}
+                  onFocus={(e) => (e.target.style.borderColor = "rgba(124,58,237,0.5)")}
+                  onBlur={(e)  => (e.target.style.borderColor = "rgba(255,255,255,0.10)")}
+                />
+                <button
+                  type="submit"
+                  disabled={nlLoading}
+                  className="flex items-center gap-1.5 px-4 py-2.5 bg-primary rounded-xl text-sm font-semibold text-white hover:opacity-90 transition-opacity whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {nlLoading ? "Subscribing…" : <>Subscribe <ArrowRight className="w-3.5 h-3.5" /></>}
+                </button>
+              </form>
+            ) : (
+              <div
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium"
+                style={{ background: "rgba(52,211,153,0.08)", border: "1px solid rgba(52,211,153,0.2)", color: "#34d399" }}
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                You're subscribed — welcome aboard! 🎉
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Copyright bar */}
         <div className="container-tight py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <p className="text-xs" style={{ color: "#4b5563" }}>
