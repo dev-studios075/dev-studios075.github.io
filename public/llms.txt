@@ -5,6 +5,9 @@ Fleetcodes is an automation-first transport management system for logistics team
 ## Core Pages
 
 - Homepage: https://www.fleetcodes.com/
+- About: https://www.fleetcodes.com/about
+- Careers: https://www.fleetcodes.com/careers
+- Book Demo: https://www.fleetcodes.com/book-demo
 - Blog: https://www.fleetcodes.com/blog
 - Sitemap: https://www.fleetcodes.com/sitemap.xml
 

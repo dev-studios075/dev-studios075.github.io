@@ -16,17 +16,6 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.fleetcodes.com/blog</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog" />
-    <image:image>
-      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
-      <image:title>Fleet Management Blog | Fleetcodes</image:title>
-    </image:image>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.fleetcodes.com/about</loc>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/about" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/about" />
@@ -34,7 +23,7 @@
       <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
       <image:title>About Us | Fleetcodes</image:title>
     </image:image>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
@@ -56,8 +45,19 @@
       <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
       <image:title>Book a Demo | Fleetcodes</image:title>
     </image:image>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/blog</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.fleetcodes.com/blog/ai-fleet-management-software-india-transform-operations-2026</loc>

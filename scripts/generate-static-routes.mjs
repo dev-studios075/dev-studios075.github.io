@@ -211,4 +211,61 @@ posts.forEach((post) => {
   );
 });
 
-console.log(`Generated static HTML for /blog and ${posts.length} blog posts`);
+writeRoute(
+  "/about",
+  renderPage({
+    title: `About Us | ${siteName}`,
+    description:
+      "Learn how Fleetcodes was built by logistics operators for logistics operators — and why we're obsessed with automating fleet management across India.",
+    path: "/about",
+    image: defaultImage,
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      name: `About Us | ${siteName}`,
+      url: absoluteUrl("/about"),
+      description:
+        "Learn how Fleetcodes was built by logistics operators for logistics operators — and why we're obsessed with automating fleet management across India.",
+    },
+  }),
+);
+
+writeRoute(
+  "/careers",
+  renderPage({
+    title: `Careers | ${siteName}`,
+    description:
+      "Join the Fleetcodes team and help build the automation-first TMS transforming Indian logistics. View open roles in engineering, product, and sales.",
+    path: "/careers",
+    image: defaultImage,
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      name: `Careers at ${siteName}`,
+      url: absoluteUrl("/careers"),
+      description:
+        "Join the Fleetcodes team and help build the automation-first TMS transforming Indian logistics. View open roles in engineering, product, and sales.",
+    },
+  }),
+);
+
+writeRoute(
+  "/book-demo",
+  renderPage({
+    title: `Book a Free Live Demo | ${siteName}`,
+    description:
+      "Schedule a 30-minute personalized walkthrough with our logistics automation experts. Learn how Fleetcodes TMS can digitize and automate your operations.",
+    path: "/book-demo",
+    image: defaultImage,
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      name: `Book a Free Live Demo | ${siteName}`,
+      url: absoluteUrl("/book-demo"),
+      description:
+        "Schedule a 30-minute personalized walkthrough with our logistics automation experts. Learn how Fleetcodes TMS can digitize and automate your operations.",
+    },
+  }),
+);
+
+console.log(`Generated static HTML for /blog, /about, /careers, /book-demo, and ${posts.length} blog posts`);
