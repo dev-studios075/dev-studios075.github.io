@@ -18,9 +18,9 @@ const cols = [
   {
     title: "Company",
     links: [
-      { label: "About",     href: "#" },
+      { label: "About",     href: "/about", isInternal: true      },
       { label: "Customers", href: "#" },
-      { label: "Careers",   href: "#" },
+      { label: "Careers",   href: "/careers", isInternal: true },
       { label: "Press",     href: "#" },
       { label: "Contact",   href: "#" },
     ],
