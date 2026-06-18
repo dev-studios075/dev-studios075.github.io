@@ -39,9 +39,9 @@ const navItems: NavItem[] = [
   {
     label: "Company",
     dropdown: [
-      { label: "About",     desc: "Our story and mission",                  href: "#", icon: Info      },
+      { label: "About",     desc: "Our story and mission",                  href: "/about", icon: Info, internal: true      },
       { label: "Customers", desc: "Trusted by leading logistics companies", href: "#", icon: Users     },
-      { label: "Careers",   desc: "Join the Fleetcodes team",              href: "#", icon: Briefcase },
+      { label: "Careers",   desc: "Join the Fleetcodes team",              href: "/careers", icon: Briefcase, internal: true },
       { label: "Contact",   desc: "Get in touch with our team",            href: "#", icon: Mail      },
     ],
   },
