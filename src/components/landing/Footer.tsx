@@ -46,12 +46,33 @@ const socials = [
 
 // ─── Component ────────────────────────────────────────────────────────────────
 const Footer = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail]         = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [loading, setLoading]       = useState(false);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.includes("@")) { setSubscribed(true); setEmail(""); }
+    if (!email.includes("@")) return;
+    setLoading(true);
+
+    const sheetUrl = import.meta.env.VITE_GOOGLE_SHEET_URL;
+    if (sheetUrl) {
+      try {
+        const params = new URLSearchParams();
+        params.append("email",  email);
+        params.append("source", "News Letter");
+        await fetch(sheetUrl, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: params.toString(),
+        });
+      } catch { /* no-cors fetch always throws — ignore */ }
+    }
+
+    setLoading(false);
+    setSubscribed(true);
+    setEmail("");
   };
 
   return (
@@ -92,9 +113,10 @@ const Footer = () => {
               />
               <button
                 type="submit"
-                className="flex items-center gap-1.5 px-4 py-2.5 bg-primary rounded-xl text-sm font-semibold text-white hover:opacity-90 transition-opacity whitespace-nowrap"
+                disabled={loading}
+                className="flex items-center gap-1.5 px-4 py-2.5 bg-primary rounded-xl text-sm font-semibold text-white hover:opacity-90 transition-opacity whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Subscribe <ArrowRight className="w-3.5 h-3.5" />
+                {loading ? "Subscribing…" : <>{"Subscribe"} <ArrowRight className="w-3.5 h-3.5" /></>}
               </button>
             </form>
           ) : (
