@@ -31,7 +31,7 @@ export function parseFrontmatter(raw: string): { meta: Record<string, string>; c
 const contentModules = import.meta.glob('/src/content/blog/*.md', { query: '?raw', eager: false, import: 'default' });
 
 export function getAllPosts(): BlogPost[] {
-  return (blogIndex as any[]).map((post) => ({
+  return (blogIndex as unknown as Omit<BlogPost, "content">[]).map((post) => ({
     ...post,
     content: "",
   }));
