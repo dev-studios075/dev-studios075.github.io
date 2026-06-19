@@ -115,7 +115,7 @@ const Blog = () => {
                 placeholder="Search articles..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 text-sm bg-slate-950/40 border border-border/80 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 rounded-xl outline-none text-foreground placeholder:text-muted-foreground transition-all"
+                className="w-full pl-10 pr-4 py-2 text-sm bg-slate-50/50 dark:bg-slate-950/40 border border-border/80 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 rounded-xl outline-none text-foreground placeholder:text-muted-foreground transition-all"
               />
             </div>
             {/* Categories */}
@@ -127,7 +127,7 @@ const Blog = () => {
                   className={`px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide border transition-all whitespace-nowrap ${
                     activeCategory === cat
                       ? "bg-primary text-primary-foreground border-primary"
-                      : "bg-slate-900/40 text-muted-foreground border-border/40 hover:text-foreground hover:border-border/80"
+                      : "bg-slate-100/80 dark:bg-slate-900/40 text-slate-600 dark:text-muted-foreground border-border/40 hover:bg-slate-200/50 dark:hover:bg-slate-900/60"
                   }`}
                 >
                   {cat}

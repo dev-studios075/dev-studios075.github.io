@@ -20,7 +20,8 @@ const faqData: FAQItem[] = [
   {
     question: "Does it integrate with existing GPS hardware and FASTag accounts?",
     answer: "Yes, fully! Fleetcodes has pre-built API integrations for all leading GPS tracking devices (LocoNav, Trimble, etc.) and direct bank connections (ICICI, HDFC, SBI) for live toll deduction tracking and FASTag balance alerts."
-  },  {
+  },
+  {
     question: "How long does it take to onboard our fleet?",
     answer: "A standard onboarding takes between 7 to 10 days. Our dedicated customer success team will setup your vehicle lists, driver KYC records, and client rates, and run training sessions for your managers and dispatch coordinators."
   },
@@ -40,38 +41,37 @@ const faqData: FAQItem[] = [
 
 export default function FAQ() {
   return (
-    <section id="faq" className="relative py-24 bg-slate-950">
+    <section id="faq" className="pt-10 pb-8 lg:pt-12 lg:pb-10 relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="container relative z-10 px-4 mx-auto max-w-4xl">
+      <div className="container-tight relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 text-sm font-medium rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 mb-4">
-            <HelpCircle className="w-4 h-4" />
+        <div className="max-w-3xl mb-16">
+          <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-3 font-semibold">
             Common Questions
-          </div>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-6">
+          </p>
+          <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-tight text-slate-900 dark:text-white mb-6">
             Frequently Asked Questions
           </h2>
-          <p className="text-lg text-slate-400">
+          <p className="text-lg text-slate-500 dark:text-slate-400 leading-relaxed">
             Got questions about Fleetcodes? We've compiled answers to the most common queries from fleet owners and logistics managers.
           </p>
         </div>
 
         {/* Accordion Container */}
-        <div className="bg-slate-900/40 backdrop-blur-sm border border-slate-800/80 rounded-3xl p-6 sm:p-10">
+        <div className="bg-white dark:bg-slate-900/40 backdrop-blur-sm border border-slate-200 dark:border-slate-800/80 rounded-3xl p-6 sm:p-10 shadow-sm">
           <Accordion type="single" collapsible className="w-full space-y-4">
             {faqData.map((item, idx) => (
               <AccordionItem 
                 key={idx} 
                 value={`faq-${idx}`}
-                className="border-slate-800/60 last:border-b-0"
+                className="border-slate-200 dark:border-slate-800/60 last:border-b-0"
               >
-                <AccordionTrigger className="text-left text-base sm:text-lg font-medium text-white hover:text-indigo-400 hover:no-underline py-4">
+                <AccordionTrigger className="text-left text-base sm:text-lg font-medium text-slate-800 dark:text-white hover:text-primary hover:no-underline py-4">
                   {item.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-slate-400 text-sm sm:text-base leading-relaxed pb-6">
+                <AccordionContent className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed pb-6">
                   {item.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -80,10 +80,10 @@ export default function FAQ() {
         </div>
 
         {/* Footer Link */}
-        <div className="text-center mt-12 text-sm text-slate-400 flex items-center justify-center gap-2">
-          <MessagesSquare className="w-4 h-4 text-indigo-400" />
+        <div className="text-center mt-12 text-sm text-slate-500 dark:text-slate-400 flex items-center justify-center gap-2">
+          <MessagesSquare className="w-4 h-4 text-primary" />
           Still have questions? 
-          <a href="/book-demo" className="text-indigo-400 hover:text-indigo-300 font-semibold underline underline-offset-4">
+          <a href="/book-demo" className="text-primary hover:underline font-semibold underline-offset-4 pl-1">
             Schedule a callback with our team
           </a>
         </div>

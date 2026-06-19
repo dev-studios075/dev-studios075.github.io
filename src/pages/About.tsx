@@ -226,23 +226,23 @@ const About = () => {
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-950 border border-slate-200 dark:border-white/[0.08] shadow-2xl relative overflow-hidden font-mono text-left select-none">
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#0d1117]/80 border border-slate-200 dark:border-white/[0.08] shadow-2xl relative overflow-hidden font-mono text-left select-none">
               {/* Top ambient glow */}
               <div className="absolute top-0 left-1/4 w-1/2 h-10 bg-primary/10 blur-xl rounded-full pointer-events-none" />
 
               {/* Console Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-5">
+              <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/[0.08] mb-5">
                 <div className="flex items-center gap-2">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                   </span>
-                  <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Live Network Console</span>
+                  <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Live Network Console</span>
                 </div>
                 <div className="flex gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-red-500/25" />
-                  <span className="w-2 h-2 rounded-full bg-yellow-500/25" />
-                  <span className="w-2 h-2 rounded-full bg-green-500/25" />
+                  <span className="w-2 h-2 rounded-full bg-red-500/20 dark:bg-red-500/25" />
+                  <span className="w-2 h-2 rounded-full bg-yellow-500/20 dark:bg-yellow-500/25" />
+                  <span className="w-2 h-2 rounded-full bg-green-500/20 dark:bg-green-500/25" />
                 </div>
               </div>
 
@@ -254,29 +254,29 @@ const About = () => {
                   { value: "97%",   label: "Billing Match" },
                   { value: "94%",   label: "TMS Retention" },
                 ].map((s) => (
-                  <div key={s.label} className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.04] text-center hover:border-primary/20 hover:bg-white/[0.03] transition-all duration-300">
-                    <div className="text-[10px] text-slate-400 mb-1 font-medium truncate">{s.label}</div>
+                  <div key={s.label} className="p-3 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/60 dark:border-white/[0.04] text-center hover:border-primary/20 hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-all duration-300">
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400 mb-1 font-medium truncate">{s.label}</div>
                     <div className="text-xl font-bold font-display text-gradient-primary">{s.value}</div>
                   </div>
                 ))}
               </div>
 
               {/* Live Telemetry Stream Terminal */}
-              <div className="space-y-1.5 text-[10px] text-slate-400 font-mono bg-black/45 p-4 rounded-xl border border-white/[0.03]">
-                <div className="text-emerald-400/85 flex items-center gap-1.5">
-                  <span className="text-slate-600">&gt;</span>
+              <div className="space-y-1.5 text-[10px] text-slate-600 dark:text-slate-400 font-mono bg-slate-100/50 dark:bg-black/45 p-4 rounded-xl border border-slate-200/50 dark:border-white/[0.03]">
+                <div className="text-emerald-600 dark:text-emerald-400/85 flex items-center gap-1.5">
+                  <span className="text-slate-400 dark:text-slate-600">&gt;</span>
                   <span>[15:27:01] MH-12-Q-4029 auto-dispatched</span>
                 </div>
-                <div className="text-slate-400/85 flex items-center gap-1.5">
-                  <span className="text-slate-600">&gt;</span>
-                  <span>[15:27:14] Fastag matched (toll_id: 8291)</span>
+                <div className="text-slate-600 dark:text-slate-400/85 flex items-center gap-1.5">
+                  <span className="text-slate-400 dark:text-slate-600">&gt;</span>
+                  <span>[15:27:14] FASTag matched (toll_id: 8291)</span>
                 </div>
-                <div className="text-slate-400/85 flex items-center gap-1.5">
-                  <span className="text-slate-600">&gt;</span>
+                <div className="text-slate-600 dark:text-slate-400/85 flex items-center gap-1.5">
+                  <span className="text-slate-400 dark:text-slate-600">&gt;</span>
                   <span>[15:27:28] Telemetry ping received (12k/sec)</span>
                 </div>
                 <div className="text-primary/90 flex items-center gap-1.5 animate-pulse">
-                  <span className="text-slate-600">&gt;</span>
+                  <span className="text-slate-400 dark:text-slate-600">&gt;</span>
                   <span>[15:27:31] Syncing billing ledger...</span>
                 </div>
               </div>

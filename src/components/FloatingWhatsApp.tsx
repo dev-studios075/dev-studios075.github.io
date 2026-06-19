@@ -23,7 +23,7 @@ export default function FloatingWhatsApp({
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 15, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="mr-3 px-4 py-2 bg-slate-900 border border-slate-800 text-white text-xs font-semibold rounded-xl shadow-xl pointer-events-none whitespace-nowrap flex items-center gap-1.5"
+            className="mr-3 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-white text-xs font-semibold rounded-xl shadow-xl pointer-events-none whitespace-nowrap flex items-center gap-1.5"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             Chat on WhatsApp

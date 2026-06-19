@@ -26,7 +26,7 @@ const App = () => (
         <BrowserRouter>
           <ScrollToTop />
           <GoogleAnalytics />
-          <FloatingWhatsApp />
+          {/* <FloatingWhatsApp /> */}
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/blog" element={<Blog />} />

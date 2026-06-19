@@ -128,7 +128,7 @@ const HowItWorks = () => {
                   
                   <div className="space-y-1">
                     <h3 className={`font-display font-semibold text-[15px] leading-tight transition-colors ${
-                      isActive ? "text-primary dark:text-[#948cf4]" : "text-slate-700 dark:text-slate-300"
+                      isActive ? "text-primary dark:text-primary" : "text-slate-700 dark:text-slate-300"
                     }`}>
                       {s.title}
                     </h3>
@@ -229,7 +229,7 @@ const HowItWorks = () => {
                       </div>
 
                       <div className="space-y-1.5 py-3 flex-1 leading-relaxed text-slate-400">
-                        <div>[02:14:15.002] <span className="text-[#948cf4] font-semibold">TRIP_REQUEST</span>: Load ID Acme-DEL-MUM-892</div>
+                        <div>[02:14:15.002] <span className="text-primary font-semibold">TRIP_REQUEST</span>: Load ID Acme-DEL-MUM-892</div>
                         <div>[02:14:15.018] [SOP_EVAL] Parsing constraint parameters... OK</div>
                         <div>[02:14:15.050] [CORRIDOR] Calculated route NH-48 toll estimate: ₹6,450</div>
                         <div>[02:14:15.110] [VEHICLE_SELECT] Roster MH-01-AB-1234 matched successfully</div>
@@ -314,7 +314,7 @@ const HowItWorks = () => {
                         </div>
                         <div className="bg-slate-900/60 p-2 rounded-xl border border-slate-800/60">
                           <div className="text-[8px] text-slate-500 font-semibold">ON-TIME DISP</div>
-                          <div className="text-xs font-bold text-[#948cf4] mt-1.5">99.4%</div>
+                          <div className="text-xs font-bold text-primary mt-1.5">99.4%</div>
                         </div>
                         <div className="bg-slate-900/60 p-2 rounded-xl border border-slate-800/60">
                           <div className="text-[8px] text-slate-500 font-semibold">RETENTION</div>
