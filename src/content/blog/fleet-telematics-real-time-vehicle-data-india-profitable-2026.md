@@ -3,7 +3,7 @@ title: "Fleet Telematics Explained: How Real-Time Vehicle Data Makes Indian Flee
 date: 2026-05-15
 author: Fleetcodes Team
 excerpt: "Fleet telematics in India is growing at 18% per year — but most fleet operators still use GPS for location tracking alone. This guide explains what telematics data actually tells you and how turning that data into operational intelligence makes Indian fleets more profitable."
-coverImage: /uploads/blog24.png
+coverImage: /uploads/blog24.jpg
 ---
 
 # Fleet Telematics Explained: How Real-Time Vehicle Data Makes Indian Fleets More Profitable in 2026

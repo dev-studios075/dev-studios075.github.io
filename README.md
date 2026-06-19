@@ -44,6 +44,17 @@ npm run build
 
 Output goes to `dist/`. Static HTML is generated for `/blog` and each blog article, and a `404.html` is created for GitHub Pages SPA support.
 
+## Publishing Blog Posts
+
+After adding a new markdown file in `src/content/blog` and its cover image in `public/uploads`, run:
+
+```sh
+npm run blog:prepare
+npm run build
+```
+
+`blog:prepare` optimizes PNG blog cover images to lighter JPG files, updates the blog frontmatter, and reports any remaining oversized upload images.
+
 ## Deployment
 
 The site is deployed to GitHub Pages via a GitHub Actions workflow that triggers when a `release-main-*` tag is pushed:

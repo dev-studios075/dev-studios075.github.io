@@ -7,6 +7,9 @@
     "dev": "node scripts/generate-blog-index.mjs && vite",
     "build": "node scripts/generate-blog-index.mjs && node scripts/generate-sitemap.mjs && vite build && node scripts/generate-static-routes.mjs && cp dist/index.html dist/404.html",
     "build:dev": "node scripts/generate-blog-index.mjs && vite build --mode development",
+    "audit:images": "node scripts/audit-images.mjs",
+    "optimize:blog-images": "node scripts/optimize-blog-cover-images.mjs",
+    "blog:prepare": "npm run optimize:blog-images && npm run audit:images",
     "lint": "eslint .",
     "preview": "vite preview"
   },

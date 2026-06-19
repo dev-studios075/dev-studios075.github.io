@@ -3,7 +3,7 @@ title: "Predictive Maintenance for Indian Fleets: How AI Is Ending the Breakdown
 date: 2026-05-25
 author: Fleetcodes Team
 excerpt: "AI predictive maintenance fleet India 2026 — how predictive fleet analytics, OBD diagnostics, and maintenance management systems are helping Indian transporters prevent truck breakdowns and reduce downtime."
-coverImage: /uploads/blog52.png
+coverImage: /uploads/blog52.jpg
 ---
 
 # Predictive Maintenance for Indian Fleets: How AI Is Ending the Breakdown Cycle in 2026

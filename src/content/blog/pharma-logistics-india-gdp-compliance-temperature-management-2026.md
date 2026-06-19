@@ -3,7 +3,7 @@ title: "Pharma Logistics in India: Fleet Compliance, GDP Standards and Temperatu
 date: 2026-05-25
 author: Fleetcodes Team
 excerpt: "Pharma logistics India 2026 — GDP compliance, pharmaceutical cold chain, temperature-controlled transport, CDSCO regulations, and fleet management for pharmaceutical logistics operators."
-coverImage: /uploads/blog55.png
+coverImage: /uploads/blog55.jpg
 ---
 
 # Pharma Logistics in India: Fleet Compliance, GDP Standards and Temperature Management in 2026

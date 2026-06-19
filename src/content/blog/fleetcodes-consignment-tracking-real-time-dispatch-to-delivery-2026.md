@@ -3,7 +3,7 @@ title: "How Fleetcodes Tracks Every Consignment in Real Time — From Dispatch t
 date: 2026-05-28
 author: Fleetcodes Team
 excerpt: "How Fleetcodes tracks every consignment in real time — live GPS status, customer portal visibility, digital POD and automatic exception alerts from dispatch to delivery for Indian transporters."
-coverImage: /uploads/blog68.png
+coverImage: /uploads/blog68.jpg
 ---
 
 # How Fleetcodes Tracks Every Consignment in Real Time — From Dispatch to Delivery

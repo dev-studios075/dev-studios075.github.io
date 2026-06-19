@@ -3,7 +3,7 @@ title: "India's National Logistics Policy 2026: What It Means for Fleet Operator
 date: 2026-05-18
 author: Fleetcodes Team
 excerpt: "India's National Logistics Policy and PM Gati Shakti have set ambitious targets — including reducing logistics costs from 13% to 8% of GDP. For fleet operators and transporters, these are not abstract government targets. They are the commercial and regulatory environment your business will operate in for the next decade."
-coverImage: /uploads/blog28.png
+coverImage: /uploads/blog28.jpg
 ---
 
 # India's National Logistics Policy 2026: What It Means for Fleet Operators and Transporters

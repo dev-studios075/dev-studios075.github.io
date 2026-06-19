@@ -3,7 +3,7 @@ title: "How Fleetcodes Helps Fleet Operators Win Enterprise Shipper Contracts in
 date: 2026-05-30
 author: Fleetcodes Team
 excerpt: "How Fleetcodes helps Indian fleet operators win enterprise shipper contracts in 2026 — digital documentation, real-time visibility, compliance tracking, performance reporting and billing automation."
-coverImage: /uploads/blog70.png
+coverImage: /uploads/blog70.jpg
 ---
 
 # How Fleetcodes Helps Fleet Operators Win Enterprise Shipper Contracts in 2026

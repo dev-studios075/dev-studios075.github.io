@@ -3,7 +3,7 @@ title: "Reverse Logistics in India: Why Managing Returns Is the Next Frontier fo
 date: 2026-05-19
 author: Fleetcodes Team
 excerpt: "Returns now account for 20% of total parcel volume in India — and cost 1.6x the forward shipment to process. For fleet operators, reverse logistics is either a margin drain managed reactively, or a structured operational capability that creates competitive advantage. This guide shows you how to build the latter."
-coverImage: /uploads/blog34.png
+coverImage: /uploads/blog34.jpg
 ---
 
 # Reverse Logistics in India: Why Managing Returns Is the Next Frontier for Fleet Operators in 2026

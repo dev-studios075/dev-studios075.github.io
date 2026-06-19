@@ -3,7 +3,7 @@ title: "How to Manage a Multi-State Fleet in India: Compliance, Permits and Oper
 date: 2026-05-30
 author: Fleetcodes Team
 excerpt: "Managing a multi-state fleet in India 2026 — national permits, e-way bill validity, state-specific compliance, toll management and how Fleetcodes keeps multi-state operations compliant."
-coverImage: /uploads/blog72.png
+coverImage: /uploads/blog72.jpg
 ---
 
 # How to Manage a Multi-State Fleet in India: Compliance, Permits and Operations in 2026

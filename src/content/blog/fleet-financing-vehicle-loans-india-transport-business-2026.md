@@ -3,7 +3,7 @@ title: "Fleet Financing in India: How to Fund Vehicle Acquisition and Fleet Grow
 date: 2026-05-21
 author: Fleetcodes Team
 excerpt: "Complete guide to fleet financing in India 2026 — commercial vehicle loans, NBFC options, government schemes, working capital, and how fleet data improves loan terms."
-coverImage: /uploads/blog44.png
+coverImage: /uploads/blog44.jpg
 ---
 
 # Fleet Financing in India: How to Fund Vehicle Acquisition and Fleet Growth in 2026

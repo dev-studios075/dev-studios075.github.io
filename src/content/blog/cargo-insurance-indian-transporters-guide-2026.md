@@ -3,7 +3,7 @@ title: "Cargo Insurance for Indian Transporters: What's Covered, What Isn't, and
 date: 2026-05-18
 author: Fleetcodes Team
 excerpt: "Cargo insurance is one of the most misunderstood financial tools in Indian logistics. Most transporters find out what their policy actually covers only when they file a claim — and by then it is too late. This guide covers everything you need to know before that moment arrives."
-coverImage: /uploads/blog26.png
+coverImage: /uploads/blog26.jpg
 ---
 
 # Cargo Insurance for Indian Transporters: What's Covered, What Isn't, and What You Must Know in 2026
