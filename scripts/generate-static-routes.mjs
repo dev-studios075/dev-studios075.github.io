@@ -7,7 +7,10 @@ const rootDir = path.resolve(__dirname, "..");
 const blogDir = path.join(rootDir, "src", "content", "blog");
 const distDir = path.join(rootDir, "dist");
 
-const siteUrl = (process.env.VITE_SITE_URL || "https://www.fleetcodes.com").replace(/\/$/, "");
+let siteUrl = (process.env.VITE_SITE_URL || "https://www.fleetcodes.com").replace(/\/$/, "");
+if (siteUrl === "https://fleetcodes.com") {
+  siteUrl = "https://www.fleetcodes.com";
+}
 const siteName = "Fleetcodes";
 const defaultImage = "/new-og-image.png";
 const defaultKeywords =
