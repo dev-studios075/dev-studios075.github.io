@@ -46,11 +46,11 @@ Output goes to `dist/`. Static HTML is generated for `/blog` and each blog artic
 
 ## Deployment
 
-The site is deployed to GitHub Pages via a GitHub Actions workflow that triggers when a version tag is pushed:
+The site is deployed to GitHub Pages via a GitHub Actions workflow that triggers when a `release-main-*` tag is pushed:
 
 ```sh
-git tag v1.0.0
-git push origin v1.0.0
+git tag release-main-2026-06-19
+git push origin release-main-2026-06-19
 ```
 
 The workflow builds the project and deploys `dist/` to GitHub Pages.

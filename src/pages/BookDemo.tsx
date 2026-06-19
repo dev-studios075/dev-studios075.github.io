@@ -226,12 +226,14 @@ const BookDemo = () => {
       finalMessage = `${finalMessage}\n\n[Preferred Demo Slot: ${selectedDate} at ${selectedTime}]`.trim();
     }
     
-    trackEvent("submit_lead", { fleet_size: data.fleetSize, company: data.company });
-
     const googleSheetUrl = import.meta.env.VITE_GOOGLE_SHEET_URL;
 
     if (!googleSheetUrl) {
       await new Promise((r) => setTimeout(r, 1500));
+      trackEvent("generate_lead", {
+        fleet_size: data.fleetSize,
+        demo_slot_selected: Boolean(selectedDate && selectedTime),
+      });
       setIsSubmitting(false);
       setIsSuccess(true);
       toast.success("Demo request submitted (Dev Mode)!");
@@ -255,6 +257,10 @@ const BookDemo = () => {
         body: params.toString(),
       });
 
+      trackEvent("generate_lead", {
+        fleet_size: data.fleetSize,
+        demo_slot_selected: Boolean(selectedDate && selectedTime),
+      });
       setIsSubmitting(false);
       setIsSuccess(true);
       toast.success("Demo request submitted successfully!");
