@@ -3,7 +3,7 @@ title: "How to Manage an EV Fleet in India: A Practical Guide for Transporters i
 date: 2026-05-15
 author: Fleetcodes Team
 excerpt: "Electric fleets are no longer a pilot project in India — they are a commercial reality in logistics. This practical guide covers what Indian transporters need to know about managing an EV fleet in 2026: costs, charging, telematics, and operations."
-coverImage: /uploads/blog20.png
+coverImage: /uploads/blog20.jpg
 ---
 
 # How to Manage an EV Fleet in India: A Practical Guide for Transporters in 2026

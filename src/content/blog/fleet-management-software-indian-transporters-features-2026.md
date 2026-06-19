@@ -3,7 +3,7 @@ title: "Fleet Management Software for Indian Transporters: Essential Features Ex
 date: 2026-05-14
 author: Fleetcodes Team
 excerpt: "Not all fleet management software is built equal — and most global platforms weren't built for India. Here are the essential features Indian transporters need, and how Fleetcodes delivers them."
-coverImage: /uploads/blog15.png
+coverImage: /uploads/blog15.jpg
 ---
 
 # Fleet Management Software for Indian Transporters: Essential Features Explained, 2026

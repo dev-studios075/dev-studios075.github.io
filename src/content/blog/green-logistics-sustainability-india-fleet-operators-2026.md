@@ -3,7 +3,7 @@ title: "Green Logistics in India: How Fleet Operators Can Build a Sustainable Tr
 date: 2026-05-20
 author: Fleetcodes Team
 excerpt: "Green logistics India 2026: how fleet operators can reduce emissions, meet shipper sustainability requirements, adopt EVs, and build a commercially competitive sustainable transport business."
-coverImage: /uploads/blog42.png
+coverImage: /uploads/blog42.jpg
 ---
 
 # Green Logistics in India: How Fleet Operators Can Build a Sustainable Transport Business in 2026

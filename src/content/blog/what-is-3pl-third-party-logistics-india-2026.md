@@ -3,7 +3,7 @@ title: "What Is a 3PL? How Third-Party Logistics Works for Growing Indian Busine
 date: 2026-05-19
 author: Fleetcodes Team
 excerpt:"What is a 3PL and how does third-party logistics work in India? Complete guide covering 3PL vs in-house logistics, costs, and how fleet technology changes the equation in 2026."
-coverImage: /uploads/blog33.png
+coverImage: /uploads/blog33.jpg
 ---
 
 # What Is a 3PL? How Third-Party Logistics Works for Growing Indian Businesses in 2026

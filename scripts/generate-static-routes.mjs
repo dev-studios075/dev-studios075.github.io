@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { micromark } from "micromark";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
@@ -22,6 +23,25 @@ const escapeHtml = (value = "") =>
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+
+const cleanMarkdown = (content = "") =>
+  content
+    .replace(/^#\s+.*$/m, "")
+    .replace(/^\*\*By[^\n]+Min Read\*\*$/im, "")
+    .replace(/^By[^\n]+Min Read$/im, "")
+    .trim();
+
+const renderMarkdown = (content = "") => micromark(cleanMarkdown(content));
+
+const renderStaticFallback = ({ eyebrow, title, description, image, meta, contentHtml }) => `
+        <main data-static-fallback style="max-width: 920px; margin: 0 auto; padding: 48px 24px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #111827;">
+          ${eyebrow ? `<p style="margin: 0 0 12px; color: #4f46e5; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;">${escapeHtml(eyebrow)}</p>` : ""}
+          <h1 style="margin: 0 0 16px; font-size: clamp(32px, 6vw, 56px); line-height: 1.05; letter-spacing: -0.02em;">${escapeHtml(title)}</h1>
+          ${description ? `<p style="margin: 0 0 20px; color: #4b5563; font-size: 18px; line-height: 1.65;">${escapeHtml(description)}</p>` : ""}
+          ${meta ? `<p style="margin: 0 0 28px; color: #6b7280; font-size: 14px;">${escapeHtml(meta)}</p>` : ""}
+          ${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(title)}" style="display: block; width: 100%; max-height: 420px; object-fit: cover; border-radius: 18px; margin: 0 0 36px;" />` : ""}
+          ${contentHtml ? `<article style="font-size: 17px; line-height: 1.78;">${contentHtml}</article>` : ""}
+        </main>`;
 
 const absoluteUrl = (value = "/") => {
   if (/^https?:\/\//i.test(value)) {
@@ -81,6 +101,7 @@ const posts = fs.existsSync(blogDir)
           date: meta.date || "",
           author: meta.author || siteName,
           image: meta.coverImage || defaultImage,
+          content,
           wordCount,
         };
       })
@@ -125,7 +146,7 @@ const setJsonLd = (html, jsonLd) =>
     `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`,
   );
 
-const renderPage = ({ title, description, path: routePath, image, type = "website", jsonLd }) => {
+const renderPage = ({ title, description, path: routePath, image, type = "website", jsonLd, bodyHtml = "" }) => {
   const canonicalUrl = absoluteUrl(routePath);
   const imageUrl = absoluteUrl(image);
   let html = template;
@@ -146,6 +167,7 @@ const renderPage = ({ title, description, path: routePath, image, type = "websit
   html = setMetaName(html, "twitter:description", description);
   html = setMetaName(html, "twitter:image", imageUrl);
   html = setJsonLd(html, jsonLd);
+  html = html.replace('<div id="root"></div>', `<div id="root">${bodyHtml}</div>`);
 
   return html;
 };
@@ -181,6 +203,18 @@ writeRoute(
         },
       })),
     },
+    bodyHtml: renderStaticFallback({
+      eyebrow: "Fleet Management Blog",
+      title: `Fleet Management Blog | ${siteName}`,
+      description:
+        "Fleet management, AI dispatch, TMS automation, compliance, and logistics operations insights for Indian transporters and shippers.",
+      contentHtml: `<ul>${posts
+        .map(
+          (post) =>
+            `<li><a href="${escapeHtml(`/blog/${post.slug}`)}">${escapeHtml(post.title)}</a>${post.description ? ` - ${escapeHtml(post.description)}` : ""}</li>`,
+        )
+        .join("")}</ul>`,
+    }),
   }),
 );
 
@@ -219,6 +253,14 @@ posts.forEach((post) => {
         },
         mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
       },
+      bodyHtml: renderStaticFallback({
+        eyebrow: "Fleetcodes Blog",
+        title: post.title,
+        description: post.description,
+        image: post.image,
+        meta: [post.author, post.date].filter(Boolean).join(" | "),
+        contentHtml: renderMarkdown(post.content),
+      }),
     }),
   );
 });

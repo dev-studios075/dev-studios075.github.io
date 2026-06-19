@@ -3,7 +3,7 @@ title: "How to Build Standard Operating Procedures for Your Fleet — and Automa
 date: 2026-05-18
 author: Fleetcodes Team
 excerpt: "Your best dispatcher carries your fleet's SOPs in their head. When they leave, chaos begins. This guide shows Indian fleet operators how to document, standardise, and automate the 5 core SOPs that determine whether your operation runs smoothly — or doesn't."
-coverImage: /uploads/blog25.png
+coverImage: /uploads/blog25.jpg
 ---
 
 # How to Build Standard Operating Procedures for Your Fleet — and Automate Them in 2026

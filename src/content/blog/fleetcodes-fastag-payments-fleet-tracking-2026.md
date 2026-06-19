@@ -3,7 +3,7 @@ title: "How Fleetcodes Simplifies FASTag Payments and Fleet Tracking in 2026"
 date: 2026-05-11
 author: Fleetcodes Team
 excerpt: "Managing FASTag for 50 or more vehicles manually? Fleetcodes automates toll tracking, recharge alerts and per-trip cost allocation. Cut toll admin time and recover more revenue."
-coverImage: /uploads/blog10.png
+coverImage: /uploads/blog10.jpg
 ---
 
 # How Fleetcodes Simplifies FASTag Payments and Fleet Tracking in 2026

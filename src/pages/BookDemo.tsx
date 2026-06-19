@@ -35,17 +35,6 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-interface PendingLead {
-  id: string;
-  timestamp: number;
-  name?: string;
-  email?: string;
-  phone?: string;
-  company?: string;
-  fleetSize?: string;
-  message?: string;
-}
-
 // ─── Field wrapper ─────────────────────────────────────────────────────────────
 const Field = ({
   id, label, icon: Icon, error, children,
@@ -117,68 +106,6 @@ const BookDemo = () => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
 
-  const savePendingLead = (lead: FormData) => {
-    try {
-      const pending = JSON.parse(localStorage.getItem("pending_leads") || "[]") as PendingLead[];
-      pending.push({ ...lead, id: Math.random().toString(36).substr(2, 9), timestamp: Date.now() });
-      localStorage.setItem("pending_leads", JSON.stringify(pending));
-    } catch (e) {
-      console.error("Failed to save pending lead locally:", e);
-    }
-  };
-
-  const syncPendingLeads = async () => {
-    if (!navigator.onLine) return;
-    const googleSheetUrl = import.meta.env.VITE_GOOGLE_SHEET_URL;
-    if (!googleSheetUrl) return;
-
-    try {
-      const pending = JSON.parse(localStorage.getItem("pending_leads") || "[]") as PendingLead[];
-      if (pending.length === 0) return;
-
-      const remaining: PendingLead[] = [];
-      for (const lead of pending) {
-        try {
-          const params = new URLSearchParams();
-          params.append("name",      lead.name || "");
-          params.append("email",     lead.email || "");
-          params.append("phone",     lead.phone || "");
-          params.append("company",   lead.company || "");
-          params.append("fleetSize", lead.fleetSize || "");
-          params.append("message",   lead.message || "");
-          params.append("source",    "Form Data (Offline Cache Sync)");
-
-          await fetch(googleSheetUrl, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: params.toString(),
-          });
-        } catch (err) {
-          remaining.push(lead);
-        }
-      }
-
-      if (remaining.length === 0) {
-        localStorage.removeItem("pending_leads");
-        toast.success("All offline demo requests synced successfully!");
-      } else {
-        localStorage.setItem("pending_leads", JSON.stringify(remaining));
-      }
-    } catch (e) {
-      console.error("Error syncing pending leads:", e);
-    }
-  };
-
-  useEffect(() => {
-    const handleOnline = () => {
-      syncPendingLeads();
-    };
-    window.addEventListener("online", handleOnline);
-    syncPendingLeads();
-    return () => window.removeEventListener("online", handleOnline);
-  }, []);
-
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
@@ -196,7 +123,9 @@ const BookDemo = () => {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           body: params.toString(),
         });
-      } catch { /* no-cors fetch always throws — ignore */ }
+      } catch {
+        toast.error("Subscription could not be submitted. Please try again.");
+      }
     }
 
     setNlLoading(false);
@@ -226,12 +155,14 @@ const BookDemo = () => {
       finalMessage = `${finalMessage}\n\n[Preferred Demo Slot: ${selectedDate} at ${selectedTime}]`.trim();
     }
     
-    trackEvent("submit_lead", { fleet_size: data.fleetSize, company: data.company });
-
     const googleSheetUrl = import.meta.env.VITE_GOOGLE_SHEET_URL;
 
     if (!googleSheetUrl) {
       await new Promise((r) => setTimeout(r, 1500));
+      trackEvent("generate_lead", {
+        fleet_size: data.fleetSize,
+        demo_slot_selected: Boolean(selectedDate && selectedTime),
+      });
       setIsSubmitting(false);
       setIsSuccess(true);
       toast.success("Demo request submitted (Dev Mode)!");
@@ -255,21 +186,16 @@ const BookDemo = () => {
         body: params.toString(),
       });
 
+      trackEvent("generate_lead", {
+        fleet_size: data.fleetSize,
+        demo_slot_selected: Boolean(selectedDate && selectedTime),
+      });
       setIsSubmitting(false);
       setIsSuccess(true);
       toast.success("Demo request submitted successfully!");
     } catch {
-      savePendingLead({
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        company: data.company,
-        fleetSize: data.fleetSize,
-        message: finalMessage,
-      });
       setIsSubmitting(false);
-      setIsSuccess(true);
-      toast.info("Demo request saved locally. We will automatically sync it when your connection is restored.");
+      toast.error("Demo request could not be submitted. Please check your connection and try again.");
     }
   };
 

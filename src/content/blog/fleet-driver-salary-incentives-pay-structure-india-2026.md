@@ -3,7 +3,7 @@ title: "Fleet Driver Salary, Incentives and Pay Structures in India: What Works 
 date: 2026-05-25
 author: Fleetcodes Team
 excerpt: "Truck driver salary India 2026 — fleet driver pay structures, incentives, settlement automation, driver retention strategies, and salary transparency in Indian logistics."
-coverImage: /uploads/blog57.png
+coverImage: /uploads/blog57.jpg
 ---
 
 # Fleet Driver Salary, Incentives and Pay Structures in India: What Works in 2026

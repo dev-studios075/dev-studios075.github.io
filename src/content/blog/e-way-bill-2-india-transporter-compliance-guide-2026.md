@@ -3,7 +3,7 @@ title: "E-Way Bill 2.0: What Every Indian Transporter Must Know to Stay Complian
 date: 2026-05-15
 author: Fleetcodes Team
 excerpt: "E-Way Bill 2.0 launched in July 2025 and the rules have changed significantly. Here is everything Indian transporters need to know about the new portal, stricter penalties, and the 180-day invoice rule to stay compliant in 2026."
-coverImage: /uploads/blog19.png
+coverImage: /uploads/blog19.jpg
 ---
 
 # E-Way Bill 2.0: What Every Indian Transporter Must Know to Stay Compliant in 2026
