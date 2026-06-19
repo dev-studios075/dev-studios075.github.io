@@ -76,6 +76,24 @@ const checkpoints = [
   },
 ];
 
+// ─── Weekdays helper ───────────────────────────────────────────────────────────
+const getNextFiveWeekdays = () => {
+  const days = [];
+  const current = new Date();
+  while (days.length < 5) {
+    current.setDate(current.getDate() + 1);
+    const dayOfWeek = current.getDay();
+    if (dayOfWeek !== 0 && dayOfWeek !== 6) { // Skip Sunday & Saturday
+      days.push(new Date(current));
+    }
+  }
+  return days;
+};
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+};
+
 // ─── Component ─────────────────────────────────────────────────────────────────
 const BookDemo = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -85,6 +103,8 @@ const BookDemo = () => {
   const [nlLoading,    setNlLoading]    = useState(false);
   const { theme, toggleTheme }          = useTheme();
   const [scrolled, setScrolled]         = useState(false);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -126,6 +146,13 @@ const BookDemo = () => {
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
+    
+    // Append slot if selected
+    let finalMessage = data.message || "";
+    if (selectedDate && selectedTime) {
+      finalMessage = `${finalMessage}\n\n[Preferred Demo Slot: ${selectedDate} at ${selectedTime}]`.trim();
+    }
+    
     trackEvent("submit_lead", { fleet_size: data.fleetSize, company: data.company });
 
     const googleSheetUrl = import.meta.env.VITE_GOOGLE_SHEET_URL;
@@ -145,7 +172,7 @@ const BookDemo = () => {
       params.append("phone",     data.phone);
       params.append("company",   data.company);
       params.append("fleetSize", data.fleetSize);
-      params.append("message",   data.message || "");
+      params.append("message",   finalMessage);
       params.append("source",    "Form Data");
 
       await fetch(googleSheetUrl, {
@@ -388,6 +415,67 @@ const BookDemo = () => {
                           />
                         </Field>
 
+                        {/* Preferred Slot Picker */}
+                        <div className="space-y-4 pt-2">
+                          <Label className="text-xs font-medium text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                            <Clock className="w-3.5 h-3.5 text-primary/70" />
+                            Select a Preferred Demo Slot (Optional)
+                          </Label>
+                          
+                          {/* Date Picker */}
+                          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
+                            {getNextFiveWeekdays().map((d) => {
+                              const dateStr = formatDate(d);
+                              const isSelected = selectedDate === dateStr;
+                              return (
+                                <button
+                                  key={dateStr}
+                                  type="button"
+                                  onClick={() => {
+                                    setSelectedDate(isSelected ? null : dateStr);
+                                    if (isSelected) setSelectedTime(null);
+                                  }}
+                                  className={`flex flex-col items-center justify-center p-2.5 rounded-xl border text-center transition-all min-w-[72px] shrink-0 ${
+                                    isSelected
+                                      ? "bg-primary/10 border-primary text-primary"
+                                      : "bg-white dark:bg-[#0d1117] border-slate-200 dark:border-white/[0.08] hover:border-slate-300 dark:hover:border-white/20 text-slate-700 dark:text-slate-300"
+                                  }`}
+                                >
+                                  <span className="text-[10px] uppercase font-bold tracking-wider opacity-60">
+                                    {d.toLocaleDateString("en-US", { weekday: "short" })}
+                                  </span>
+                                  <span className="text-sm font-bold mt-0.5">
+                                    {d.toLocaleDateString("en-US", { day: "numeric" })}
+                                  </span>
+                                </button>
+                              );
+                            })}
+                          </div>
+
+                          {/* Time Picker */}
+                          {selectedDate && (
+                            <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 pt-1">
+                              {["10:30 AM", "12:00 PM", "2:30 PM", "4:00 PM", "5:30 PM"].map((t) => {
+                                const isSelected = selectedTime === t;
+                                return (
+                                  <button
+                                    key={t}
+                                    type="button"
+                                    onClick={() => setSelectedTime(isSelected ? null : t)}
+                                    className={`py-2 px-3 rounded-lg border text-center text-xs font-semibold tracking-wide transition-all ${
+                                      isSelected
+                                        ? "bg-primary text-white border-primary"
+                                        : "bg-white dark:bg-[#0d1117] border-slate-200 dark:border-white/[0.08] hover:border-slate-300 dark:hover:border-white/20 text-slate-600 dark:text-slate-400"
+                                    }`}
+                                  >
+                                    {t}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          )}
+                        </div>
+
                         {/* Submit */}
                         <button
                           type="submit"
@@ -436,19 +524,31 @@ const BookDemo = () => {
                         </p>
                       </div>
 
-                      <div className="p-5 rounded-2xl text-left max-w-sm mx-auto space-y-2"
-                        style={{ background: "rgba(124,58,237,0.06)", border: "1px solid rgba(124,58,237,0.15)" }}>
-                        <h4 className="font-display font-semibold text-xs uppercase tracking-wider text-primary flex items-center gap-1.5">
-                          <Clock className="w-3.5 h-3.5" /> What happens next?
-                        </h4>
-                        <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                          Expect an email or call with a personalized Calendly link for your 30-min walkthrough.
-                        </p>
-                      </div>
+                      {selectedDate && selectedTime ? (
+                        <div className="p-5 rounded-2xl text-left max-w-sm mx-auto space-y-2 mt-4"
+                          style={{ background: "rgba(16,185,129,0.06)", border: "1px solid rgba(16,185,129,0.15)" }}>
+                          <h4 className="font-display font-semibold text-xs uppercase tracking-wider text-emerald-500 flex items-center gap-1.5">
+                            <Clock className="w-3.5 h-3.5" /> Booked Slot Details
+                          </h4>
+                          <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                            Preferred Time: <strong className="text-slate-800 dark:text-slate-200">{selectedDate}</strong> at <strong className="text-slate-800 dark:text-slate-200">{selectedTime}</strong>. We'll send the calendar invite shortly.
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="p-5 rounded-2xl text-left max-w-sm mx-auto space-y-2 mt-4"
+                          style={{ background: "rgba(124,58,237,0.06)", border: "1px solid rgba(124,58,237,0.15)" }}>
+                          <h4 className="font-display font-semibold text-xs uppercase tracking-wider text-primary flex items-center gap-1.5">
+                            <Clock className="w-3.5 h-3.5" /> What happens next?
+                          </h4>
+                          <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                            Expect an email or call with a personalized Calendly link for your 30-min walkthrough.
+                          </p>
+                        </div>
+                      )}
 
                       <Link
                         to="/"
-                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white bg-primary transition-all hover:opacity-90"
+                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white bg-primary transition-all hover:opacity-90 mt-6"
                       >
                         Return to Homepage <ArrowRight className="w-4 h-4" />
                       </Link>
