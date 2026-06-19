@@ -1,7 +1,8 @@
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Calendar, Clock, User, Tag } from "lucide-react";
 import ReactMarkdown from "react-markdown";
-import { getPostBySlug } from "@/lib/blog";
+import { getPostBySlug, getPostContent } from "@/lib/blog";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import Seo from "@/components/seo/Seo";
@@ -28,6 +29,26 @@ const getCategory = (title: string) => {
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? getPostBySlug(slug) : undefined;
+  const [content, setContent] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [loadError, setLoadError] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (slug) {
+      setIsLoading(true);
+      setLoadError(false);
+      getPostContent(slug)
+        .then((text) => {
+          setContent(text);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.error("Failed to load post content:", err);
+          setLoadError(true);
+          setIsLoading(false);
+        });
+    }
+  }, [slug]);
 
   if (!post) {
     return (
@@ -50,7 +71,7 @@ const BlogPost = () => {
   }
 
   const title    = cleanTitle(post.title);
-  const mins     = readingTime(post.content);
+  const mins     = post.readingTime || readingTime(content);
   const category = getCategory(title);
 
   return (
@@ -177,17 +198,29 @@ const BlogPost = () => {
             prose-hr:border-border/40
             prose-blockquote:border-l-primary/50 prose-blockquote:text-muted-foreground prose-blockquote:not-italic
             prose-code:text-primary prose-code:bg-primary/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none">
-            <ReactMarkdown>
-              {post.content
-                ? post.content
-                    // Strip first H1 heading (duplicates the title)
-                    .replace(/^#\s+.*$/m, "")
-                    // Strip embedded "By ... | Min Read" meta lines from markdown
-                    .replace(/^\*\*By[^\n]+Min Read\*\*$/im, "")
-                    .replace(/^By[^\n]+Min Read$/im, "")
-                    .trim()
-                : ""}
-            </ReactMarkdown>
+            {isLoading ? (
+              <div className="space-y-4 animate-pulse py-4">
+                <div className="h-4 bg-slate-200 dark:bg-slate-850 rounded w-3/4"></div>
+                <div className="h-4 bg-slate-200 dark:bg-slate-850 rounded w-5/6"></div>
+                <div className="h-4 bg-slate-200 dark:bg-slate-850 rounded w-2/3"></div>
+                <div className="h-4 bg-slate-200 dark:bg-slate-850 rounded w-full"></div>
+                <div className="h-4 bg-slate-200 dark:bg-slate-850 rounded w-4/5"></div>
+              </div>
+            ) : loadError ? (
+              <p className="text-destructive font-medium">Failed to load article content. Please refresh the page.</p>
+            ) : (
+              <ReactMarkdown>
+                {content
+                  ? content
+                      // Strip first H1 heading (duplicates the title)
+                      .replace(/^#\s+.*$/m, "")
+                      // Strip embedded "By ... | Min Read" meta lines from markdown
+                      .replace(/^\*\*By[^\n]+Min Read\*\*$/im, "")
+                      .replace(/^By[^\n]+Min Read$/im, "")
+                      .trim()
+                  : ""}
+              </ReactMarkdown>
+            )}
           </div>
 
           {/* CTA bar */}
