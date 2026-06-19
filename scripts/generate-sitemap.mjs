@@ -7,7 +7,10 @@ const rootDir = path.resolve(__dirname, "..");
 const blogDir = path.join(rootDir, "src", "content", "blog");
 const publicDir = path.join(rootDir, "public");
 
-const siteUrl = (process.env.VITE_SITE_URL || "https://www.fleetcodes.com").replace(/\/$/, "");
+let siteUrl = (process.env.VITE_SITE_URL || "https://www.fleetcodes.com").replace(/\/$/, "");
+if (siteUrl === "https://fleetcodes.com") {
+  siteUrl = "https://www.fleetcodes.com";
+}
 
 const escapeXml = (value) =>
   value
