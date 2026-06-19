@@ -3,9 +3,8 @@ import { createPortal } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
 import {
   Menu, Moon, Sun, X, ArrowRight, ChevronDown,
-  Layers, GitMerge, MapPin, Zap, Receipt,
-  BookOpen, FileText, BarChart3, Clock,
-  Info, Users, Briefcase, Mail,
+  Layers, GitMerge, Zap, Receipt, BookOpen, 
+  Info, Briefcase, Mail, HelpCircle
 } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
 import { trackEvent } from "@/lib/analytics";
@@ -22,27 +21,23 @@ const navItems: NavItem[] = [
     dropdown: [
       { label: "Features",             desc: "Explore all platform capabilities",  href: "/#features", icon: Layers   },
       { label: "How it works",         desc: "Step-by-step automation flow",       href: "/#how",      icon: GitMerge },
-      { label: "GPS & Fastag",         desc: "Real-time vehicle & toll tracking",  href: "/#features", icon: MapPin   },
-      { label: "Dispatch Automation",  desc: "AI-powered trip planning",           href: "/#features", icon: Zap      },
-      { label: "Billing & Settlement", desc: "Automated freight billing engine",   href: "/#features", icon: Receipt  },
+      { label: "Savings Estimator",    desc: "Calculate your operational savings", href: "/#roi-calculator", icon: Receipt  },
+      { label: "Outcomes",             desc: "What teams unlock with automation-first ops", href: "/#benefits", icon: Zap },
     ],
   },
   {
     label: "Resources",
     dropdown: [
-      { label: "Blog",          desc: "Industry insights & product updates",   href: "/blog", icon: BookOpen, internal: true },
-      { label: "Documentation", desc: "API references & integration guides",    href: "#",     icon: FileText  },
-      { label: "Case Studies",  desc: "How customers scaled with Fleetcodes",  href: "#",     icon: BarChart3 },
-      { label: "Changelog",     desc: "Latest product updates & releases",      href: "#",     icon: Clock     },
+      { label: "Blog",          desc: "Industry insights & updates",           href: "/blog", icon: BookOpen, internal: true },
+      { label: "FAQ",           desc: "Frequently asked questions",            href: "/#faq", icon: HelpCircle },
     ],
   },
   {
     label: "Company",
     dropdown: [
-      { label: "About",     desc: "Our story and mission",                  href: "/about", icon: Info, internal: true      },
-      { label: "Customers", desc: "Trusted by leading logistics companies", href: "#", icon: Users     },
-      { label: "Careers",   desc: "Join the Fleetcodes team",              href: "/careers", icon: Briefcase, internal: true },
-      { label: "Contact",   desc: "Get in touch with our team",            href: "#", icon: Mail      },
+      { label: "About",         desc: "Our story and mission",                  href: "/about", icon: Info, internal: true      },
+      { label: "Careers",       desc: "Join the Fleetcodes team",              href: "/careers", icon: Briefcase, internal: true },
+      { label: "Book a Demo",   desc: "Schedule a live walkthrough",            href: "/book-demo", icon: Mail, internal: true },
     ],
   },
 ];

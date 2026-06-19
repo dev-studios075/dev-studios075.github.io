@@ -2,40 +2,32 @@ import { useState } from "react";
 import { Linkedin, Twitter, Github, Shield, Zap, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
 const cols = [
   {
     title: "Product",
     links: [
       { label: "Features",            href: "/#features" },
       { label: "How it works",        href: "/#how"      },
-      { label: "GPS & Fastag",        href: "/#features" },
-      { label: "Dispatch Automation", href: "/#features" },
-      { label: "Integrations",        href: "#"          },
-      { label: "Security",            href: "#"          },
+      { label: "Compare",             href: "/#compare"  },
+      { label: "Savings Estimator",   href: "/#roi-calculator" },
+      { label: "Outcomes",            href: "/#benefits" },
     ],
   },
   {
     title: "Company",
     links: [
       { label: "About",     href: "/about", isInternal: true      },
-      { label: "Customers", href: "#" },
       { label: "Careers",   href: "/careers", isInternal: true },
-      { label: "Press",     href: "#" },
-      { label: "Contact",   href: "#" },
+      { label: "Book a Demo", href: "/book-demo", isInternal: true },
     ],
   },
   {
     title: "Resources",
     links: [
       { label: "Blog",          href: "/blog", isInternal: true },
-      { label: "Documentation", href: "#" },
-      { label: "API",           href: "#" },
-      { label: "Case Studies",  href: "#" },
-      { label: "Changelog",     href: "#" },
+      { label: "FAQ",           href: "/#faq" },
     ],
   },
-
 ];
 
 const socials = [
