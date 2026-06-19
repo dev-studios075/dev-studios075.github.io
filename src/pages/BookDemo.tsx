@@ -315,7 +315,7 @@ const BookDemo = () => {
                 <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500 border border-white dark:border-slate-900 animate-pulse" />
               </span>
               <span className="text-gradient hidden sm:inline">Fleetcodes</span>
-              <span className="text-muted-foreground/60 text-[10px] font-body uppercase tracking-[0.18em] hidden lg:inline border-l border-border/40 pl-2.5">TMS</span>
+              <span className="text-muted-foreground text-[10px] font-body uppercase tracking-[0.18em] hidden lg:inline border-l border-border/40 pl-2.5">TMS</span>
             </Link>
 
             {/* Right actions */}
@@ -323,7 +323,7 @@ const BookDemo = () => {
               <button
                 onClick={toggleTheme}
                 aria-label="Toggle theme"
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-foreground hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-all"
+                className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-all"
               >
                 {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               </button>
