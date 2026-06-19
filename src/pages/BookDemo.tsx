@@ -35,6 +35,17 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
+interface PendingLead {
+  id: string;
+  timestamp: number;
+  name?: string;
+  email?: string;
+  phone?: string;
+  company?: string;
+  fleetSize?: string;
+  message?: string;
+}
+
 // ─── Field wrapper ─────────────────────────────────────────────────────────────
 const Field = ({
   id, label, icon: Icon, error, children,
@@ -106,9 +117,9 @@ const BookDemo = () => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
 
-  const savePendingLead = (lead: any) => {
+  const savePendingLead = (lead: FormData) => {
     try {
-      const pending = JSON.parse(localStorage.getItem("pending_leads") || "[]");
+      const pending = JSON.parse(localStorage.getItem("pending_leads") || "[]") as PendingLead[];
       pending.push({ ...lead, id: Math.random().toString(36).substr(2, 9), timestamp: Date.now() });
       localStorage.setItem("pending_leads", JSON.stringify(pending));
     } catch (e) {
@@ -122,19 +133,19 @@ const BookDemo = () => {
     if (!googleSheetUrl) return;
 
     try {
-      const pending = JSON.parse(localStorage.getItem("pending_leads") || "[]") as any[];
+      const pending = JSON.parse(localStorage.getItem("pending_leads") || "[]") as PendingLead[];
       if (pending.length === 0) return;
 
-      const remaining: any[] = [];
+      const remaining: PendingLead[] = [];
       for (const lead of pending) {
         try {
           const params = new URLSearchParams();
-          params.append("name",      lead.name);
-          params.append("email",     lead.email);
-          params.append("phone",     lead.phone);
-          params.append("company",   lead.company);
-          params.append("fleetSize", lead.fleetSize);
-          params.append("message",   lead.message);
+          params.append("name",      lead.name || "");
+          params.append("email",     lead.email || "");
+          params.append("phone",     lead.phone || "");
+          params.append("company",   lead.company || "");
+          params.append("fleetSize", lead.fleetSize || "");
+          params.append("message",   lead.message || "");
           params.append("source",    "Form Data (Offline Cache Sync)");
 
           await fetch(googleSheetUrl, {
