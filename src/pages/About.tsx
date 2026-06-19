@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
-  ArrowLeft, ArrowRight,
-  Zap, Shield, Heart, Globe, Target, Lightbulb,
+  ArrowRight,
+  Zap, Shield, Globe, Target, Lightbulb,
   Users, TrendingUp, BarChart3, Clock,
-  Sun, Moon, Sparkles, MapPin, Mail,
+  Sparkles, MapPin, Mail,
+  Heart,
 } from "lucide-react";
 import Seo from "@/components/seo/Seo";
 import { SITE_NAME } from "@/lib/site";
-import { useTheme } from "@/hooks/use-theme";
+import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -72,15 +72,6 @@ const milestones = [
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 const About = () => {
-  const { theme, toggleTheme } = useTheme();
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
     <div className="min-h-screen bg-background text-foreground relative flex flex-col">
       <Seo
@@ -96,52 +87,7 @@ const About = () => {
       <div className="fixed inset-0 grid-bg opacity-[0.12] pointer-events-none -z-10" />
 
       {/* ── Navbar ─────────────────────────────────────────────────────────── */}
-      <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "pt-3" : "pt-5"}`}>
-        <div className="container-tight">
-          <nav
-            className="flex items-center justify-between rounded-2xl px-4 py-2.5 transition-all duration-300"
-            style={{
-              background: scrolled
-                ? theme === "dark" ? "rgba(15,17,25,0.88)" : "rgba(255,255,255,0.92)"
-                : theme === "dark" ? "rgba(15,17,25,0.4)"  : "rgba(255,255,255,0.5)",
-              backdropFilter: "blur(20px)",
-              WebkitBackdropFilter: "blur(20px)",
-              border: scrolled
-                ? theme === "dark" ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.08)"
-                : "1px solid transparent",
-              boxShadow: scrolled ? "0 4px 24px rgba(0,0,0,0.12)" : "none",
-            }}
-          >
-            <Link to="/" className="flex items-center gap-2.5 font-display font-semibold text-lg shrink-0">
-              <span className="relative grid place-items-center w-8 h-8 rounded-xl bg-white border border-border/40 shadow-sm overflow-hidden shrink-0">
-                <img src="/favicon.png" alt="Fleetcodes Logo" className="w-5 h-5 object-contain" />
-                <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500 border border-white dark:border-slate-900 animate-pulse" />
-              </span>
-              <span className="text-gradient hidden sm:inline">Fleetcodes</span>
-              <span className="text-muted-foreground/60 text-[10px] font-body uppercase tracking-[0.18em] hidden lg:inline border-l border-border/40 pl-2.5">TMS</span>
-            </Link>
-
-            <div className="flex items-center gap-2">
-              <button
-                onClick={toggleTheme}
-                aria-label="Toggle theme"
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-foreground hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-all"
-              >
-                {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-              </button>
-              <div className="w-px h-5 bg-border/60 hidden sm:block" />
-              <Link
-                to="/"
-                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-foreground dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-all"
-              >
-                <ArrowLeft className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Back to home</span>
-                <span className="sm:hidden">Back</span>
-              </Link>
-            </div>
-          </nav>
-        </div>
-      </header>
+      <Navbar />
 
       {/* ── Hero ───────────────────────────────────────────────────────────── */}
       <section className="pt-40 pb-20 sm:pt-44 sm:pb-24 text-center relative">
@@ -226,23 +172,23 @@ const About = () => {
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-950 border border-slate-200 dark:border-white/[0.08] shadow-2xl relative overflow-hidden font-mono text-left select-none">
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#0d1117]/80 border border-slate-200 dark:border-white/[0.08] shadow-2xl relative overflow-hidden font-mono text-left select-none">
               {/* Top ambient glow */}
               <div className="absolute top-0 left-1/4 w-1/2 h-10 bg-primary/10 blur-xl rounded-full pointer-events-none" />
 
               {/* Console Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-5">
+              <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/[0.08] mb-5">
                 <div className="flex items-center gap-2">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                   </span>
-                  <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Live Network Console</span>
+                  <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Live Network Console</span>
                 </div>
                 <div className="flex gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-red-500/25" />
-                  <span className="w-2 h-2 rounded-full bg-yellow-500/25" />
-                  <span className="w-2 h-2 rounded-full bg-green-500/25" />
+                  <span className="w-2 h-2 rounded-full bg-red-500/20 dark:bg-red-500/25" />
+                  <span className="w-2 h-2 rounded-full bg-yellow-500/20 dark:bg-yellow-500/25" />
+                  <span className="w-2 h-2 rounded-full bg-green-500/20 dark:bg-green-500/25" />
                 </div>
               </div>
 
@@ -254,29 +200,29 @@ const About = () => {
                   { value: "97%",   label: "Billing Match" },
                   { value: "94%",   label: "TMS Retention" },
                 ].map((s) => (
-                  <div key={s.label} className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.04] text-center hover:border-primary/20 hover:bg-white/[0.03] transition-all duration-300">
-                    <div className="text-[10px] text-slate-400 mb-1 font-medium truncate">{s.label}</div>
+                  <div key={s.label} className="p-3 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/60 dark:border-white/[0.04] text-center hover:border-primary/20 hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-all duration-300">
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400 mb-1 font-medium truncate">{s.label}</div>
                     <div className="text-xl font-bold font-display text-gradient-primary">{s.value}</div>
                   </div>
                 ))}
               </div>
 
               {/* Live Telemetry Stream Terminal */}
-              <div className="space-y-1.5 text-[10px] text-slate-400 font-mono bg-black/45 p-4 rounded-xl border border-white/[0.03]">
-                <div className="text-emerald-400/85 flex items-center gap-1.5">
-                  <span className="text-slate-600">&gt;</span>
+              <div className="space-y-1.5 text-[10px] text-slate-600 dark:text-slate-400 font-mono bg-slate-100/50 dark:bg-black/45 p-4 rounded-xl border border-slate-200/50 dark:border-white/[0.03]">
+                <div className="text-emerald-600 dark:text-emerald-400/85 flex items-center gap-1.5">
+                  <span className="text-slate-400 dark:text-slate-600">&gt;</span>
                   <span>[15:27:01] MH-12-Q-4029 auto-dispatched</span>
                 </div>
-                <div className="text-slate-400/85 flex items-center gap-1.5">
-                  <span className="text-slate-600">&gt;</span>
-                  <span>[15:27:14] Fastag matched (toll_id: 8291)</span>
+                <div className="text-slate-600 dark:text-slate-400/85 flex items-center gap-1.5">
+                  <span className="text-slate-400 dark:text-slate-600">&gt;</span>
+                  <span>[15:27:14] FASTag matched (toll_id: 8291)</span>
                 </div>
-                <div className="text-slate-400/85 flex items-center gap-1.5">
-                  <span className="text-slate-600">&gt;</span>
+                <div className="text-slate-600 dark:text-slate-400/85 flex items-center gap-1.5">
+                  <span className="text-slate-400 dark:text-slate-600">&gt;</span>
                   <span>[15:27:28] Telemetry ping received (12k/sec)</span>
                 </div>
                 <div className="text-primary/90 flex items-center gap-1.5 animate-pulse">
-                  <span className="text-slate-600">&gt;</span>
+                  <span className="text-slate-400 dark:text-slate-600">&gt;</span>
                   <span>[15:27:31] Syncing billing ledger...</span>
                 </div>
               </div>

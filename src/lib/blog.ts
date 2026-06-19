@@ -1,3 +1,5 @@
+import blogIndex from "../content/blog-index.json";
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -6,9 +8,10 @@ export interface BlogPost {
   excerpt: string;
   coverImage?: string;
   content: string;
+  readingTime?: number;
 }
 
-function parseFrontmatter(raw: string): { meta: Record<string, string>; content: string } {
+export function parseFrontmatter(raw: string): { meta: Record<string, string>; content: string } {
   const match = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   if (!match) return { meta: {}, content: raw };
 
@@ -24,26 +27,27 @@ function parseFrontmatter(raw: string): { meta: Record<string, string>; content:
   return { meta, content: match[2].trim() };
 }
 
-const modules = import.meta.glob('/src/content/blog/*.md', { query: '?raw', eager: true, import: 'default' }) as Record<string, string>;
+// Dynamic lazy-loading glob of raw markdown content
+const contentModules = import.meta.glob('/src/content/blog/*.md', { query: '?raw', eager: false, import: 'default' });
 
 export function getAllPosts(): BlogPost[] {
-  return Object.entries(modules)
-    .map(([path, raw]) => {
-      const slug = path.split('/').pop()!.replace(/\.md$/, '');
-      const { meta, content } = parseFrontmatter(raw);
-      return {
-        slug,
-        title: meta.title || slug,
-        date: meta.date || '',
-        author: meta.author || '',
-        excerpt: meta.excerpt || '',
-        coverImage: meta.coverImage,
-        content,
-      };
-    })
-    .sort((a, b) => (b.date > a.date ? 1 : -1));
+  return (blogIndex as unknown as Omit<BlogPost, "content">[]).map((post) => ({
+    ...post,
+    content: "",
+  }));
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
   return getAllPosts().find((p) => p.slug === slug);
+}
+
+export async function getPostContent(slug: string): Promise<string> {
+  const path = `/src/content/blog/${slug}.md`;
+  const loader = contentModules[path];
+  if (!loader) {
+    throw new Error(`Blog post not found: ${slug}`);
+  }
+  const raw = await loader() as string;
+  const { content } = parseFrontmatter(raw);
+  return content;
 }

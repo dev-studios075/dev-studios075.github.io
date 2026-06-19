@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Calendar, Clock, ArrowUpRight, Tag } from "lucide-react";
+import { Calendar, Clock, ArrowUpRight, Tag, Search } from "lucide-react";
 import { getAllPosts } from "@/lib/blog";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
@@ -32,7 +33,22 @@ const getCategory = (title: string) => {
 
 const Blog = () => {
   const posts = getAllPosts();
-  const [featured, ...rest] = posts;
+  const [searchTerm, setSearchTerm] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const filteredPosts = posts.filter(post => {
+    const matchesSearch = 
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      (post.excerpt || "").toLowerCase().includes(searchTerm.toLowerCase());
+    
+    const matchesCategory = 
+      activeCategory === "All" || 
+      getCategory(post.title) === activeCategory;
+      
+    return matchesSearch && matchesCategory;
+  });
+
+  const [featured, ...rest] = filteredPosts;
   const pageTitle = `Fleet Management Blog | ${SITE_NAME}`;
   const description =
     "Fleet management, AI dispatch, TMS automation, compliance, and logistics operations insights for Indian transporters and shippers.";
@@ -87,6 +103,37 @@ const Blog = () => {
             <p className="text-lg text-muted-foreground">
               Deep dives on AI-powered TMS, fleet intelligence, and the operational future of logistics.
             </p>
+          </div>
+
+          {/* ── Search & Filter Controls ──────────────────────── */}
+          <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between mb-12 p-6 glass rounded-2xl">
+            {/* Search Bar */}
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <input
+                type="text"
+                placeholder="Search articles..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 text-sm bg-slate-50/50 dark:bg-slate-950/40 border border-border/80 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 rounded-xl outline-none text-foreground placeholder:text-muted-foreground transition-all"
+              />
+            </div>
+            {/* Categories */}
+            <div className="flex flex-wrap items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+              {["All", "AI & Automation", "Compliance", "Fleet", "Operations", "Analytics", "Technology"].map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide border transition-all whitespace-nowrap ${
+                    activeCategory === cat
+                      ? "bg-primary text-primary-foreground border-primary"
+                      : "bg-slate-100/80 dark:bg-slate-900/40 text-slate-600 dark:text-muted-foreground border-border/40 hover:bg-slate-200/50 dark:hover:bg-slate-900/60"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* ── Featured post ───────────────────────────────── */}
@@ -212,11 +259,16 @@ const Blog = () => {
             </div>
           )}
 
-          {posts.length === 0 && (
+          {posts.length === 0 ? (
             <p className="text-muted-foreground text-center py-16">
               No blog posts yet. Check back soon!
             </p>
-          )}
+          ) : filteredPosts.length === 0 ? (
+            <div className="text-center py-16 border border-dashed border-border/60 rounded-2xl glass">
+              <p className="text-muted-foreground font-medium mb-2">No matching articles found.</p>
+              <p className="text-xs text-muted-foreground">Try adjusting your filters or search terms.</p>
+            </div>
+          ) : null}
         </div>
       </main>
 
