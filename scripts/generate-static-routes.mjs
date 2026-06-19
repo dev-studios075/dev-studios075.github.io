@@ -70,6 +70,10 @@ const posts = fs.existsSync(blogDir)
         const raw = fs.readFileSync(path.join(blogDir, file), "utf8");
         const meta = parseFrontmatter(raw);
 
+        const match = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+        const content = match ? match[2] : raw;
+        const wordCount = content ? content.trim().split(/\s+/).length : 0;
+
         return {
           slug,
           title: meta.title || slug,
@@ -77,6 +81,7 @@ const posts = fs.existsSync(blogDir)
           date: meta.date || "",
           author: meta.author || siteName,
           image: meta.coverImage || defaultImage,
+          wordCount,
         };
       })
       .sort((a, b) => (b.date > a.date ? 1 : -1))
@@ -196,16 +201,20 @@ posts.forEach((post) => {
         image: absoluteUrl(post.image),
         datePublished: post.date,
         dateModified: post.date,
-        author: {
+        author: post.author ? {
           "@type": "Person",
           name: post.author,
-        },
+        } : undefined,
+        inLanguage: "en-IN",
+        wordCount: post.wordCount,
         publisher: {
           "@type": "Organization",
           name: siteName,
           logo: {
             "@type": "ImageObject",
             url: absoluteUrl("/favicon.png"),
+            width: 32,
+            height: 32,
           },
         },
         mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),

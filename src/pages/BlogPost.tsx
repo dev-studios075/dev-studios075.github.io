@@ -94,10 +94,17 @@ const BlogPost = () => {
           datePublished: post.date,
           dateModified: post.date,
           author: post.author ? { "@type": "Person", name: post.author } : undefined,
+          inLanguage: "en-IN",
+          wordCount: content ? content.trim().split(/\s+/).length : undefined,
           publisher: {
             "@type": "Organization",
             name: SITE_NAME,
-            logo: { "@type": "ImageObject", url: absoluteUrl("/favicon.png") },
+            logo: { 
+              "@type": "ImageObject", 
+              url: absoluteUrl("/favicon.png"),
+              width: 32,
+              height: 32
+            },
           },
           mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
         }}
