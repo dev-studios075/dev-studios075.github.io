@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Route, Clock, Satellite, FileBarChart2, BellRing,
-  Users, Wrench, Boxes, Wallet,
+  Users, Wrench, Boxes, Wallet, ChevronLeft, ChevronRight,
+  Sparkles
 } from "lucide-react";
 
 // 1. Trip Planning Visualizer
@@ -316,191 +317,129 @@ const features = [
   },
 ];
 
-// ─── Scroll-driven single card ───────────────────────────────────────────────
-const StackCard = ({
-  f,
-  i,
-  total,
-  scrollYProgress,
-}: {
-  f: typeof features[0];
-  i: number;
-  total: number;
-  scrollYProgress: MotionValue<number>;
-}) => {
-  const Icon = f.icon;
-  const Visualizer = f.visualizer;
-
-  const rangeStart = i / total;
-  const rangeEnd = (i + 1) / total;
-  const fadeIn = Math.max(0, rangeStart - 0.07);
-
-  const y = useTransform(scrollYProgress, [fadeIn, rangeStart], [60, 0]);
-  const opacity = useTransform(scrollYProgress, [fadeIn, rangeStart], [0, 1]);
-  const scale = useTransform(
-    scrollYProgress,
-    [rangeStart, rangeEnd, Math.min(1, rangeEnd + 0.005)],
-    [1, 1, 0.96]
-  );
-
-  return (
-    <motion.div
-      style={{ y, opacity, scale, zIndex: i + 1 }}
-      className="absolute inset-0"
-    >
-      {/* Terminal window wrapper */}
-      <div className="group relative h-full rounded-2xl overflow-hidden transition-all duration-300 bg-white dark:bg-[#0d1117] border border-slate-200 dark:border-white/[0.08]">
-
-        {/* ── Title bar ── */}
-        <div className="flex items-center gap-3 px-5 py-3 shrink-0 bg-slate-50 dark:bg-[#161b22] border-b border-slate-200 dark:border-white/[0.07]">
-          <div className="flex gap-1.5">
-            <div className="w-3 h-3 rounded-full" style={{ background: "#ff5f56" }} />
-            <div className="w-3 h-3 rounded-full" style={{ background: "#ffbd2e" }} />
-            <div className="w-3 h-3 rounded-full" style={{ background: "#27c93f" }} />
-          </div>
-          <span className="flex-1 text-center font-mono text-[10px] tracking-widest uppercase text-slate-400 dark:text-[#4b5563]">
-            FLEETCODES AUTOPILOT · {f.title.toUpperCase()}
-          </span>
-          <span className="font-mono text-[10px] font-bold text-slate-400 dark:text-[#4b5563]">
-            {String(i + 1).padStart(2, "0")}/{String(features.length).padStart(2, "0")}
-          </span>
-        </div>
-
-        {/* ── Content ── */}
-        <div className="grid lg:grid-cols-2 gap-0" style={{ height: "calc(100% - 44px)" }}>
-          {/* Left: text */}
-          <div className="p-8 lg:p-12 flex flex-col justify-center border-r border-slate-200 dark:border-white/[0.07]">
-            <div className="inline-flex p-3 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/25 mb-6 w-fit group-hover:scale-110 group-hover:shadow-glow transition-all duration-300">
-              <Icon className="w-5 h-5 text-primary" />
-            </div>
-            <h3 className="font-display font-bold text-2xl sm:text-3xl mb-3 text-slate-800 dark:text-white group-hover:text-primary transition-colors">
-              {f.title}
-            </h3>
-            <p className="text-sm sm:text-base leading-relaxed max-w-sm mb-6 text-slate-500 dark:text-slate-400">{f.desc}</p>
-
-            {/* Bullet points */}
-            <ul className="space-y-2.5">
-              {f.bullets.map((b) => (
-                <li key={b} className="flex items-start gap-2.5 text-sm text-slate-500 dark:text-slate-400">
-                  <span className="mt-0.5 w-4 h-4 rounded-full bg-primary/15 border border-primary/30 flex items-center justify-center shrink-0">
-                    <svg viewBox="0 0 10 10" className="w-2.5 h-2.5" fill="none">
-                      <path d="M2 5l2 2 4-4" stroke="var(--color-primary)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                  {b}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Right: visualizer */}
-          <div className="p-8 lg:p-12 flex items-center justify-center bg-slate-50/80 dark:bg-white/[0.02]">
-            <div className="w-full">
-              <Visualizer />
-            </div>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-// ─── Progress dots on the right ──────────────────────────────────────────────
-const ProgressDot = ({
-  i,
-  total,
-  scrollYProgress,
-}: {
-  i: number;
-  total: number;
-  scrollYProgress: MotionValue<number>;
-}) => {
-  const start = i / total;
-  const end = (i + 1) / total;
-  const scale = useTransform(scrollYProgress, [start, end], [1, 1.4]);
-  const opacity = useTransform(scrollYProgress, [start, (start + end) / 2, end], [0.3, 1, 0.3]);
-  return (
-    <motion.div
-      style={{ scale, opacity }}
-      className="w-1.5 h-1.5 rounded-full bg-primary"
-    />
-  );
-};
-
 // ─── Main Features section ────────────────────────────────────────────────────
-const NAVBAR_H = 64;   // px  — navbar height
-const HEADER_H = 180;  // px  — heading strip height (includes extra top gap)
-const PB       = 80;   // px  — bottom padding → controls card height (larger = smaller card)
-
 const Features = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: scrollRef,
-    offset: ["start 64px", "end 64px"],
-  });
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const cardH = `calc(100vh - ${NAVBAR_H}px - ${HEADER_H}px - ${PB}px)`;
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -600, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 600, behavior: "smooth" });
+    }
+  };
 
   return (
-    <section id="features" className="relative">
+    <section id="features" className="relative pt-10 pb-2 lg:pt-12 lg:pb-4 overflow-hidden">
       {/* Background glow orbs */}
       <div className="absolute top-1/4 left-0 w-[300px] h-[300px] rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-0 w-[320px] h-[320px] rounded-full bg-[#948cf4]/5 blur-[120px] pointer-events-none" />
 
-      {/* ── Scroll container: height = num cards × scroll-per-card ── */}
-      <div
-        ref={scrollRef}
-        style={{ height: `${features.length * 100}vh` }}
-        className="relative"
-      >
-        {/*
-          sticky top = navbar height so content never slides under nav.
-          h = 100vh − navbar so the panel fills the visible window exactly.
-        */}
-        <div
-          className="sticky overflow-hidden flex flex-col"
-          style={{ top: `${NAVBAR_H}px`, height: `calc(100vh - ${NAVBAR_H}px)` }}
-        >
-          <div className="container-tight w-full h-full flex flex-col pt-14 pb-6">
-
-            {/* ── Section heading strip — always visible ── */}
-            <div className="max-w-2xl shrink-0 mb-4" style={{ height: `${HEADER_H}px` }}>
-              <p className="text-xs uppercase tracking-[0.2em] text-primary mb-2">Capabilities</p>
-              <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-tight mb-2 text-slate-900 dark:text-white">
-                One platform. <span className="text-gradient">Nine autonomous systems.</span>
-              </h2>
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                Replace fragmented tools and manual coordination with a single,
-                self-operating engine built for modern logistics.
-              </p>
-            </div>
-
-            {/* ── Card stack + progress dots row ── */}
-            <div className="relative" style={{ height: cardH }}>
-              {/* Progress dots — aligned to card area, right edge */}
-              <div className="absolute -right-6 inset-y-0 flex flex-col items-center justify-center gap-2.5 z-50">
-                {features.map((_, i) => (
-                  <ProgressDot
-                    key={i}
-                    i={i}
-                    total={features.length}
-                    scrollYProgress={scrollYProgress}
-                  />
-                ))}
-              </div>
-
-              {/* Cards — all absolute inset-0, driven by scroll progress */}
-              {features.map((f, i) => (
-                <StackCard
-                  key={f.title}
-                  f={f}
-                  i={i}
-                  total={features.length}
-                  scrollYProgress={scrollYProgress}
-                />
-              ))}
-            </div>
+      <div className="container-tight w-full">
+        {/* ── Section heading strip + Navigation Buttons ── */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div className="max-w-2xl">
+            <p className="text-xs uppercase tracking-[0.2em] text-primary mb-2.5 font-bold">Capabilities</p>
+            <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-tight mb-3 text-slate-900 dark:text-white leading-tight">
+              One platform. <span className="text-gradient">Nine autonomous systems.</span>
+            </h2>
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+              Replace fragmented tools and manual coordination with a single,
+              self-operating engine built for modern logistics.
+            </p>
           </div>
+          
+          {/* Navigation Controls */}
+          <div className="flex gap-2.5 shrink-0 self-start md:self-end">
+            <button
+              onClick={scrollLeft}
+              className="w-11 h-11 rounded-full border border-border/80 dark:border-white/[0.08] flex items-center justify-center hover:bg-slate-100 dark:hover:bg-white/[0.06] active:scale-95 transition-all text-slate-500 hover:text-foreground dark:text-slate-400 shadow-sm bg-white dark:bg-[#0d1117]/40"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={scrollRight}
+              className="w-11 h-11 rounded-full border border-border/80 dark:border-white/[0.08] flex items-center justify-center hover:bg-slate-100 dark:hover:bg-white/[0.06] active:scale-95 transition-all text-slate-500 hover:text-foreground dark:text-slate-400 shadow-sm bg-white dark:bg-[#0d1117]/40"
+              aria-label="Scroll right"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* ── Horizontal scroll track ── */}
+        <div
+          ref={scrollContainerRef}
+          className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-none scroll-smooth"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {features.map((f, i) => {
+            const Icon = f.icon;
+            const Visualizer = f.visualizer;
+            return (
+              <div
+                key={f.title}
+                className="snap-center shrink-0 w-[88vw] md:w-[680px] lg:w-[820px] rounded-2xl overflow-hidden bg-white dark:bg-[#0d1117] border border-slate-200 dark:border-white/[0.08] shadow-sm flex flex-col group transition-all duration-300 hover:border-primary/30"
+              >
+                {/* Title bar */}
+                <div className="flex items-center gap-3 px-5 py-3.5 bg-slate-50 dark:bg-[#161b22] border-b border-slate-200 dark:border-white/[0.07] shrink-0 select-none">
+                  <div className="flex gap-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                  </div>
+                  <span className="flex-1 text-center font-mono text-[9px] tracking-widest uppercase text-slate-400 dark:text-[#4b5563] truncate">
+                    FLEETCODES AUTOPILOT · {f.title.toUpperCase()}
+                  </span>
+                  <span className="font-mono text-[9px] font-bold text-slate-400 dark:text-[#4b5563]">
+                    {String(i + 1).padStart(2, "0")}/{String(features.length).padStart(2, "0")}
+                  </span>
+                </div>
+
+                {/* Content area: Grid on wide desktop, flex column on regular screens */}
+                <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100 dark:divide-white/[0.06] flex-grow">
+                  {/* Left: text */}
+                  <div className="p-6 md:p-8 flex flex-col justify-center gap-5">
+                    <div>
+                      <div className="inline-flex p-2.5 rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 mb-3 group-hover:scale-105 transition-all">
+                        <Icon className="w-4.5 h-4.5 text-primary" />
+                      </div>
+                      <h3 className="font-display font-bold text-lg mb-1.5 text-slate-800 dark:text-white group-hover:text-primary transition-colors leading-snug">
+                        {f.title}
+                      </h3>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{f.desc}</p>
+                    </div>
+
+                    {/* Bullets */}
+                    <ul className="space-y-2">
+                      {f.bullets.map((b) => (
+                        <li key={b} className="flex items-start gap-2 text-xs text-slate-500 dark:text-slate-400">
+                          <span className="mt-0.5 w-3.5 h-3.5 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                            <svg viewBox="0 0 10 10" className="w-1.5 h-1.5 text-primary" fill="none">
+                              <path d="M2 5l2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                          </span>
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Right: visualizer container */}
+                  <div className="p-6 md:p-8 flex items-center justify-center bg-slate-50/50 dark:bg-white/[0.01]">
+                    <div className="w-full">
+                      <Visualizer />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -508,5 +447,3 @@ const Features = () => {
 };
 
 export default Features;
-
-

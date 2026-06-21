@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   LayoutDashboard, 
   Settings, 
@@ -101,8 +102,8 @@ type TabType = "dashboard" | "operations" | "trips" | "expenses" | "vehicles" | 
 const TABS_ORDER: TabType[] = [
   "dashboard",
   "operations",
-  "trips",
   "expenses",
+  "trips",
   "vehicles",
   "drivers",
   "master-data"
@@ -122,6 +123,7 @@ const DashboardMockup: React.FC = () => {
 
   const [tripsSubTab, setTripsSubTab] = useState<"tracking" | "itinerary" | "details">("itinerary");
   const [playbackPercent, setPlaybackPercent] = useState<number>(52);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
 
   // Playback timer effect for live animated routing tracking
   useEffect(() => {
@@ -133,6 +135,21 @@ const DashboardMockup: React.FC = () => {
     }
     return () => clearInterval(interval);
   }, [isPlaying, activeTab]);
+
+  // Autoplay effect to cycle/switch tabs/modules every 6 seconds when not hovered
+  useEffect(() => {
+    if (isHovered) return;
+
+    const interval = setInterval(() => {
+      setActiveTab((currentTab) => {
+        const currentIndex = TABS_ORDER.indexOf(currentTab);
+        const nextIndex = (currentIndex + 1) % TABS_ORDER.length;
+        return TABS_ORDER[nextIndex];
+      });
+    }, 4000); // cycle every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [isHovered]);
 
   // Route point coordinate percentages mapped onto the detailed India SVG container
   const routePoints = [
@@ -163,6 +180,35 @@ const DashboardMockup: React.FC = () => {
       y: start.y + (end.y - start.y) * segmentPercent
     };
   };
+
+  // Generate current week dates dynamically starting from Sunday
+  const getWeekDays = () => {
+    const current = new Date();
+    const day = current.getDay(); // 0 is Sunday, 1 is Monday, etc.
+    const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const subs = [
+      "40 pl / 17 ac",
+      "40 pl / 10 ac",
+      "41 pl / 21 ac",
+      "40 pl / 19 ac",
+      "40 pl / 0 ac",
+      "40 pl / --",
+      "40 pl / --"
+    ];
+    
+    return Array.from({ length: 7 }).map((_, i) => {
+      const diff = i - day;
+      const date = new Date(current);
+      date.setDate(current.getDate() + diff);
+      return {
+        day: `${dayNames[i]} ${date.getDate()}`,
+        sub: subs[i]
+      };
+    });
+  };
+
+  const weekDays = getWeekDays();
+  const currentDayIdx = new Date().getDay();
 
   const truckCoords = getPlaybackCoords(playbackPercent);
 
@@ -205,7 +251,11 @@ const DashboardMockup: React.FC = () => {
   };
 
   return (
-    <div className="w-full bg-[#f4f5f8] dark:bg-[#0e111a] text-slate-800 dark:text-slate-200 rounded-xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 font-sans text-[11px] sm:text-xs select-none">
+    <div 
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="w-full bg-[#f4f5f8] dark:bg-[#0e111a] text-slate-800 dark:text-slate-200 rounded-xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 font-sans text-[11px] sm:text-xs select-none"
+    >
       <div className="flex h-[460px] sm:h-[510px] md:h-[550px]">
         
         {/* Left Sidebar */}
@@ -404,7 +454,16 @@ const DashboardMockup: React.FC = () => {
           {/* Dynamic Content Area */}
           <div className="p-3 sm:p-4 space-y-3 sm:space-y-4 flex-1 overflow-y-auto flex flex-col justify-between">
             
-            <div className="space-y-3 sm:space-y-4">
+            <div className="relative flex-grow min-h-0">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTab}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.18, ease: "easeInOut" }}
+                  className="space-y-3 sm:space-y-4 w-full"
+                >
               {/* VIEW 1: DASHBOARD */}
               {activeTab === "dashboard" && (
                 <>
@@ -518,16 +577,8 @@ const DashboardMockup: React.FC = () => {
                     {/* Days Column Header Grid */}
                     <div className="grid grid-cols-8 bg-slate-50 dark:bg-[#1f213a]/30 border-b border-slate-200 dark:border-slate-800 text-[8px] sm:text-[9px] text-center font-bold text-slate-800 dark:text-slate-300 shrink-0">
                       <div className="p-1.5 border-r border-slate-200 dark:border-slate-800 font-medium text-slate-400">GMT+5:30</div>
-                      {[
-                        { day: "Sun 14", sub: "40 pl / 17 ac" },
-                        { day: "Mon 15", sub: "40 pl / 10 ac" },
-                        { day: "Tue 16", sub: "41 pl / 21 ac" },
-                        { day: "Wed 17", sub: "40 pl / 19 ac" },
-                        { day: "Thu 18", sub: "40 pl / 0 ac" },
-                        { day: "Fri 19", sub: "40 pl / --" },
-                        { day: "Sat 20", sub: "40 pl / --" }
-                      ].map((d, index) => (
-                        <div key={d.day} className={`p-1 flex flex-col justify-center border-r border-slate-200 dark:border-slate-800 last:border-r-0 ${index === 4 ? "bg-[#5b4dd3]/5 text-[#5b4dd3] dark:text-[#948cf4]" : ""}`}>
+                      {weekDays.map((d, index) => (
+                        <div key={d.day} className={`p-1 flex flex-col justify-center border-r border-slate-200 dark:border-slate-800 last:border-r-0 ${index === currentDayIdx ? "bg-[#5b4dd3]/5 text-[#5b4dd3] dark:text-[#948cf4]" : ""}`}>
                           <span className="font-semibold text-[8px] sm:text-[9px]">{d.day}</span>
                           <span className="text-[6.5px] text-slate-400 font-normal leading-tight">{d.sub}</span>
                         </div>
@@ -550,10 +601,10 @@ const DashboardMockup: React.FC = () => {
                           </div>
 
                           {Array.from({ length: 7 }).map((_, dayIdx) => {
-                            const isThu = dayIdx === 4;
+                            const isToday = dayIdx === currentDayIdx;
                             let block = null;
                             if (row.hour === "02:00") {
-                              const isPast = dayIdx < 4;
+                              const isPast = dayIdx < currentDayIdx;
                               block = (
                                 <div className={`mx-0.5 p-1 rounded h-10 flex flex-col justify-between text-[7px] leading-tight border transition-transform hover:scale-105 cursor-pointer ${
                                   isPast 
@@ -601,7 +652,7 @@ const DashboardMockup: React.FC = () => {
                               <div 
                                 key={dayIdx} 
                                 className={`border-r border-slate-200 dark:border-slate-800 last:border-r-0 relative p-1 ${
-                                  isThu ? "bg-[#5b4dd3]/5" : ""
+                                  isToday ? "bg-[#5b4dd3]/5" : ""
                                 }`}
                               >
                                 {block}
@@ -1535,6 +1586,8 @@ const DashboardMockup: React.FC = () => {
                   )}
                 </div>
               )}
+                </motion.div>
+              </AnimatePresence>
             </div>
             
             {/* Walkthrough Previous & Next Navigation HUD Bar */}
