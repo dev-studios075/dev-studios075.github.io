@@ -210,7 +210,7 @@
   }
 
   .animate-float {
-    animation: float 6s ease-in-out infinite;
+    animation: float 3s ease-in-out infinite;
   }
 
   .animate-pulse-glow {
@@ -220,6 +220,14 @@
   .animate-shimmer {
     background-size: 200% 100%;
     animation: shimmer 3s linear infinite;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 
