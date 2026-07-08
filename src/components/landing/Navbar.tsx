@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import {
   Menu, Moon, Sun, X, ArrowRight, ChevronDown,
   Layers, GitMerge, Zap, Receipt, BookOpen, 
-  Info, Briefcase, Mail, HelpCircle
+  Info, Briefcase, Mail, HelpCircle, Smartphone
 } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
 import { trackEvent } from "@/lib/analytics";
@@ -23,6 +23,7 @@ const navItems: NavItem[] = [
       { label: "How it works",         desc: "Step-by-step automation flow",       href: "/#how",      icon: GitMerge },
       { label: "Savings Estimator",    desc: "Calculate your operational savings", href: "/#roi-calculator", icon: Receipt  },
       { label: "Outcomes",             desc: "What teams unlock with automation-first ops", href: "/#benefits", icon: Zap },
+      { label: "Mobile app",           desc: "Scan QR code to download the app",   href: "/#footer", icon: Smartphone },
     ],
   },
   {

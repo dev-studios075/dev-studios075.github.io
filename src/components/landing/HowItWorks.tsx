@@ -99,10 +99,10 @@ const HowItWorks = () => {
                     setIsAutoplayPaused(false);
                   }}
                   onClick={() => setActiveStep(idx)}
-                  className={`relative p-4 rounded-xl border text-left cursor-pointer transition-all duration-300 flex items-start gap-4 select-none ${
+                  className={`group relative p-4 rounded-xl border text-left cursor-pointer transition-all duration-300 flex items-start gap-4 select-none ${
                     isActive 
-                      ? "bg-primary/5 border-primary/25 shadow-sm opacity-100 dark:bg-primary/5" 
-                      : "bg-transparent border-transparent hover:bg-slate-100 dark:hover:bg-slate-900/30 opacity-60 hover:opacity-90"
+                      ? "bg-primary/8 border-primary/35 shadow-sm dark:bg-primary/5" 
+                      : "bg-transparent border-transparent hover:bg-white/80 hover:border-slate-200 dark:hover:bg-slate-900/30 dark:hover:border-slate-800/70"
                   }`}
                 >
                   {/* Left Active Timer Progress Line */}
@@ -121,18 +121,20 @@ const HowItWorks = () => {
                   <div className={`p-2 rounded-lg shrink-0 transition-colors ${
                     isActive 
                       ? "bg-primary text-white" 
-                      : "bg-slate-100 dark:bg-slate-800 text-slate-400 group-hover:text-slate-600"
+                      : "bg-white/80 border border-slate-200 text-slate-500 group-hover:text-slate-700 dark:bg-slate-800 dark:border-slate-700/70 dark:text-slate-400 dark:group-hover:text-slate-200"
                   }`}>
                     <Icon className="w-5 h-5" />
                   </div>
                   
                   <div className="space-y-1">
                     <h3 className={`font-display font-semibold text-[15px] leading-tight transition-colors ${
-                      isActive ? "text-primary dark:text-primary" : "text-slate-700 dark:text-slate-300"
+                      isActive ? "text-primary dark:text-primary" : "text-slate-700 group-hover:text-slate-900 dark:text-slate-300 dark:group-hover:text-white"
                     }`}>
                       {s.title}
                     </h3>
-                    <p className="text-[11px] sm:text-xs text-muted-foreground leading-relaxed">
+                    <p className={`text-[11px] sm:text-xs leading-relaxed transition-colors ${
+                      isActive ? "text-slate-600 dark:text-slate-400" : "text-slate-500 group-hover:text-slate-600 dark:text-slate-400 dark:group-hover:text-slate-300"
+                    }`}>
                       {s.desc}
                     </p>
                   </div>
@@ -143,10 +145,10 @@ const HowItWorks = () => {
 
           {/* Right Column: Live Animated Simulation Screen */}
           <div className="lg:col-span-7">
-            <div className="bg-slate-950/80 border border-slate-200/10 dark:border-slate-800/80 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-md">
+            <div className="bg-white dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800/80 rounded-2xl shadow-sm dark:shadow-2xl overflow-hidden backdrop-blur-md">
               
               {/* Window Header */}
-              <div className="bg-slate-950 px-4 py-3 border-b border-slate-200/5 dark:border-slate-800/80 flex items-center justify-between">
+              <div className="bg-slate-50 dark:bg-slate-950 px-4 py-3 border-b border-slate-200 dark:border-slate-800/80 flex items-center justify-between">
                 <div className="flex gap-1.5 shrink-0">
                   <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
                   <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
@@ -159,7 +161,7 @@ const HowItWorks = () => {
               </div>
 
               {/* Console Body Area */}
-              <div className="p-5 h-[280px] sm:h-[300px] flex flex-col justify-between bg-slate-950/90 font-mono">
+              <div className="p-5 h-[280px] sm:h-[300px] flex flex-col justify-between bg-white dark:bg-slate-950/90 font-mono">
                 <AnimatePresence mode="wait">
                   {activeStep === 0 && (
                     <motion.div
@@ -170,8 +172,8 @@ const HowItWorks = () => {
                       transition={{ duration: 0.3 }}
                       className="space-y-4 flex-1 flex flex-col justify-between"
                     >
-                      <div className="flex items-center justify-between border-b border-slate-800/60 pb-2">
-                        <div className="flex items-center gap-2 text-slate-400 text-xs font-semibold">
+                      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/60 pb-2">
+                        <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-xs font-semibold">
                           <FileText className="w-4 h-4 text-primary" />
                           <span>Acme_Standard_Operations_SOP.pdf</span>
                         </div>
@@ -184,27 +186,27 @@ const HowItWorks = () => {
                         <div className="flex items-start gap-2.5">
                           <span className="text-emerald-500 font-bold">✔</span>
                           <div>
-                            <span className="text-slate-200 font-semibold">Clause 1.4: Route Deviation</span>
-                            <p className="text-[10.5px] text-slate-400 mt-0.5">IF vehicle deviating &gt; 10km ➔ Alert Dispatcher + SMS Client</p>
+                            <span className="text-slate-800 dark:text-slate-200 font-semibold">Clause 1.4: Route Deviation</span>
+                            <p className="text-[10.5px] text-slate-500 dark:text-slate-400 mt-0.5">IF vehicle deviating &gt; 10km ➔ Alert Dispatcher + SMS Client</p>
                           </div>
                         </div>
                         <div className="flex items-start gap-2.5">
                           <span className="text-emerald-500 font-bold">✔</span>
                           <div>
-                            <span className="text-slate-200 font-semibold">Clause 2.1: Driver Safety Hours</span>
-                            <p className="text-[10.5px] text-slate-400 mt-0.5">IF active duty exceeds 9h ➔ Flag rest window mandatory</p>
+                            <span className="text-slate-800 dark:text-slate-200 font-semibold">Clause 2.1: Driver Safety Hours</span>
+                            <p className="text-[10.5px] text-slate-500 dark:text-slate-400 mt-0.5">IF active duty exceeds 9h ➔ Flag rest window mandatory</p>
                           </div>
                         </div>
                         <div className="flex items-start gap-2.5">
                           <span className="text-emerald-500 font-bold">✔</span>
                           <div>
-                            <span className="text-slate-200 font-semibold">Clause 4.3: Automated Toll Settlements</span>
-                            <p className="text-[10.5px] text-slate-400 mt-0.5">IF Fastag charges &gt; ₹5,000 ➔ Auto-reconcile with trip ledger</p>
+                            <span className="text-slate-800 dark:text-slate-200 font-semibold">Clause 4.3: Automated Toll Settlements</span>
+                            <p className="text-[10.5px] text-slate-500 dark:text-slate-400 mt-0.5">IF Fastag charges &gt; ₹5,000 ➔ Auto-reconcile with trip ledger</p>
                           </div>
                         </div>
                       </div>
 
-                      <div className="border-t border-slate-800/60 pt-2.5 flex justify-between text-[10px] text-slate-500 font-semibold">
+                      <div className="border-t border-slate-200 dark:border-slate-800/60 pt-2.5 flex justify-between text-[10px] text-slate-500 font-semibold">
                         <span>Progress: 100% processed</span>
                         <span className="text-emerald-400">Operational DNA mapped successfully</span>
                       </div>
@@ -220,15 +222,15 @@ const HowItWorks = () => {
                       transition={{ duration: 0.3 }}
                       className="flex-1 flex flex-col justify-between text-[10.5px]"
                     >
-                      <div className="flex items-center justify-between border-b border-slate-800/60 pb-2">
-                        <div className="flex items-center gap-2 text-slate-400 text-xs font-semibold">
+                      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/60 pb-2">
+                        <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-xs font-semibold">
                           <Terminal className="w-4 h-4 text-amber-500" />
                           <span>decision-engine.log</span>
                         </div>
                         <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
                       </div>
 
-                      <div className="space-y-1.5 py-3 flex-1 leading-relaxed text-slate-400">
+                      <div className="space-y-1.5 py-3 flex-1 leading-relaxed text-slate-600 dark:text-slate-400">
                         <div>[02:14:15.002] <span className="text-primary font-semibold">TRIP_REQUEST</span>: Load ID Acme-DEL-MUM-892</div>
                         <div>[02:14:15.018] [SOP_EVAL] Parsing constraint parameters... OK</div>
                         <div>[02:14:15.050] [CORRIDOR] Calculated route NH-48 toll estimate: ₹6,450</div>
@@ -237,7 +239,7 @@ const HowItWorks = () => {
                         <div className="text-amber-500 font-bold">[02:14:15.220] [DISPATCH] Status: AUTO-DISPATCH (0 exceptions, 218ms latency)</div>
                       </div>
 
-                      <div className="border-t border-slate-800/60 pt-2 flex justify-between text-[10px] text-slate-500">
+                      <div className="border-t border-slate-200 dark:border-slate-800/60 pt-2 flex justify-between text-[10px] text-slate-500">
                         <span>Engine Load: 8%</span>
                         <span className="text-primary font-bold">DISPATCH SENT ➔</span>
                       </div>
@@ -254,9 +256,9 @@ const HowItWorks = () => {
                       className="flex-1 flex flex-col items-center justify-center space-y-4"
                     >
                       {/* Interactive Mobile Notification Mockup */}
-                      <div className="w-64 bg-slate-900 border border-slate-800 rounded-xl p-3.5 shadow-2xl relative overflow-hidden text-left">
-                        <div className="flex items-center justify-between border-b border-slate-800/60 pb-2 mb-2">
-                          <div className="flex items-center gap-1.5 text-[9px] text-slate-400">
+                      <div className="w-64 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-3.5 shadow-sm dark:shadow-2xl relative overflow-hidden text-left">
+                        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/60 pb-2 mb-2">
+                          <div className="flex items-center gap-1.5 text-[9px] text-slate-500 dark:text-slate-400">
                             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                             <span>Auto-Dispatch Notification</span>
                           </div>
@@ -264,19 +266,19 @@ const HowItWorks = () => {
                         </div>
                         
                         <div className="space-y-1.5">
-                          <div className="font-bold text-[11px] text-white">🔔 New Trip Roster Assigned</div>
-                          <p className="text-[9.5px] text-slate-400 leading-tight">
+                          <div className="font-bold text-[11px] text-slate-900 dark:text-white">🔔 New Trip Roster Assigned</div>
+                          <p className="text-[9.5px] text-slate-600 dark:text-slate-400 leading-tight">
                             Route: <strong>Mumbai ➔ Delhi NH-48</strong><br/>
                             Vehicle: <strong>MH-01-AB-1234 (Trailer)</strong><br/>
                             Report Time: <strong>02:30 AM (Tonight)</strong>
                           </p>
                         </div>
                         
-                        <div className="grid grid-cols-2 gap-2 mt-3 pt-2.5 border-t border-slate-800/60 text-[9px] font-bold text-center">
+                        <div className="grid grid-cols-2 gap-2 mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-800/60 text-[9px] font-bold text-center">
                           <div className="bg-primary hover:bg-primary/90 text-white py-1 rounded cursor-pointer transition-all">
                             Accept
                           </div>
-                          <div className="bg-slate-800 hover:bg-slate-800/90 text-slate-400 py-1 rounded cursor-pointer transition-all">
+                          <div className="bg-slate-200 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-800/90 text-slate-600 dark:text-slate-400 py-1 rounded cursor-pointer transition-all">
                             Decline
                           </div>
                         </div>
@@ -297,8 +299,8 @@ const HowItWorks = () => {
                       transition={{ duration: 0.3 }}
                       className="flex-1 flex flex-col justify-between text-[10.5px]"
                     >
-                      <div className="flex items-center justify-between border-b border-slate-800/60 pb-2">
-                        <div className="flex items-center gap-2 text-slate-400 text-xs font-semibold">
+                      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/60 pb-2">
+                        <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-xs font-semibold">
                           <LineChart className="w-4 h-4 text-emerald-400" />
                           <span>retraining-analysis.report</span>
                         </div>
@@ -308,15 +310,15 @@ const HowItWorks = () => {
                       </div>
 
                       <div className="grid grid-cols-3 gap-2.5 py-2.5 text-center leading-tight">
-                        <div className="bg-slate-900/60 p-2 rounded-xl border border-slate-800/60">
+                        <div className="bg-slate-50 dark:bg-slate-900/60 p-2 rounded-xl border border-slate-200 dark:border-slate-800/60">
                           <div className="text-[8px] text-slate-500 font-semibold">EMPTY MILES</div>
                           <div className="text-xs font-bold text-emerald-400 mt-1.5">-18.4%</div>
                         </div>
-                        <div className="bg-slate-900/60 p-2 rounded-xl border border-slate-800/60">
+                        <div className="bg-slate-50 dark:bg-slate-900/60 p-2 rounded-xl border border-slate-200 dark:border-slate-800/60">
                           <div className="text-[8px] text-slate-500 font-semibold">ON-TIME DISP</div>
                           <div className="text-xs font-bold text-primary mt-1.5">99.4%</div>
                         </div>
-                        <div className="bg-slate-900/60 p-2 rounded-xl border border-slate-800/60">
+                        <div className="bg-slate-50 dark:bg-slate-900/60 p-2 rounded-xl border border-slate-200 dark:border-slate-800/60">
                           <div className="text-[8px] text-slate-500 font-semibold">RETENTION</div>
                           <div className="text-xs font-bold text-amber-500 mt-1.5">+24%</div>
                         </div>
@@ -326,9 +328,9 @@ const HowItWorks = () => {
                       <div className="h-20 w-full relative flex items-end">
                         <svg viewBox="0 0 200 65" className="w-full h-full text-emerald-500/5 fill-current">
                           {/* Grid Lines */}
-                          <line x1="0" y1="15" x2="200" y2="15" className="stroke-slate-800/40" strokeWidth="0.5" />
-                          <line x1="0" y1="35" x2="200" y2="35" className="stroke-slate-800/40" strokeWidth="0.5" />
-                          <line x1="0" y1="55" x2="200" y2="55" className="stroke-slate-800/40" strokeWidth="0.5" />
+                          <line x1="0" y1="15" x2="200" y2="15" className="stroke-slate-200 dark:stroke-slate-800/40" strokeWidth="0.5" />
+                          <line x1="0" y1="35" x2="200" y2="35" className="stroke-slate-200 dark:stroke-slate-800/40" strokeWidth="0.5" />
+                          <line x1="0" y1="55" x2="200" y2="55" className="stroke-slate-200 dark:stroke-slate-800/40" strokeWidth="0.5" />
                           
                           {/* Path 1: Efficiency curve */}
                           <path d="M 0,55 Q 35,45 70,30 T 140,20 T 200,10 L 200,65 L 0,65 Z" />

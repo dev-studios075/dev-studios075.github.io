@@ -6,11 +6,14 @@ import {
   Sparkles
 } from "lucide-react";
 
+const visualPanelClass =
+  "bg-white dark:bg-[#0d1117] border border-slate-200 dark:border-white/[0.08] shadow-sm";
+
 // 1. Trip Planning Visualizer
 const TripPlanningVisualizer = () => {
   return (
-    <div className="relative h-28 w-full rounded-xl overflow-hidden p-3 font-mono text-[10px]" style={{ background: "#0d1117", border: "1px solid rgba(255,255,255,0.08)" }}>
-      <div className="absolute inset-0 dot-bg opacity-30" />
+    <div className="relative h-28 w-full rounded-xl overflow-hidden p-3 font-mono text-[10px] bg-white dark:bg-[#0d1117] border border-slate-200 dark:border-white/[0.08] shadow-sm">
+      <div className="absolute inset-0 dot-bg opacity-25 dark:opacity-30" />
       <svg className="absolute inset-0 w-full h-full" viewBox="0 0 200 90">
         <motion.path d="M 30,70 L 100,25 L 170,65" fill="none" stroke="rgba(94, 92, 230, 0.15)" strokeWidth="2" />
         <motion.path
@@ -26,18 +29,19 @@ const TripPlanningVisualizer = () => {
           </linearGradient>
         </defs>
         <circle cx="30" cy="70" r="3.5" className="fill-primary animate-pulse" />
-        <text x="22" y="81" className="fill-slate-400 font-bold" fontSize="7">MUM</text>
+        <text x="22" y="81" className="fill-slate-500 dark:fill-slate-400 font-bold" fontSize="7">MUM</text>
         <circle cx="100" cy="25" r="3.5" className="fill-primary" />
-        <text x="94" y="16" className="fill-slate-400 font-bold" fontSize="7">DEL</text>
+        <text x="94" y="16" className="fill-slate-500 dark:fill-slate-400 font-bold" fontSize="7">DEL</text>
         <circle cx="170" cy="65" r="3.5" className="fill-primary" />
-        <text x="164" y="76" className="fill-slate-400 font-bold" fontSize="7">BLR</text>
-        <motion.circle cx="0" cy="0" r="3" className="fill-white shadow-glow"
+        <text x="164" y="76" className="fill-slate-500 dark:fill-slate-400 font-bold" fontSize="7">BLR</text>
+        <motion.circle cx="0" cy="0" r="3" className="fill-white stroke-primary shadow-glow"
+          strokeWidth="1"
           animate={{ cx: [30, 100, 170], cy: [70, 25, 65] }}
           transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
         />
       </svg>
       <div className="absolute top-2 right-2 bg-primary/10 border border-primary/20 rounded px-1.5 py-0.5 text-primary text-[8px] font-bold tracking-wider animate-pulse">SAVED 14.8%</div>
-      <div className="absolute bottom-2 left-2 text-[8px] text-slate-400 bg-slate-950/80 px-2 py-0.5 rounded border border-slate-800">NH-48 Optimal Route Selected</div>
+      <div className="absolute bottom-2 left-2 text-[8px] text-slate-600 dark:text-slate-400 bg-white/90 dark:bg-slate-950/80 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-800 shadow-sm">NH-48 Optimal Route Selected</div>
     </div>
   );
 };
@@ -45,28 +49,28 @@ const TripPlanningVisualizer = () => {
 // 2. GPS Tracking Visualizer
 const GPSTrackingVisualizer = () => {
   return (
-    <div className="relative h-28 w-full rounded-xl overflow-hidden p-3 font-mono text-[9px] flex flex-col justify-between" style={{ background: "#0d1117", border: "1px solid rgba(255,255,255,0.08)" }}>
-      <div className="flex justify-between items-center text-slate-400">
+    <div className={`relative h-28 w-full rounded-xl overflow-hidden p-3 font-mono text-[9px] flex flex-col justify-between ${visualPanelClass}`}>
+      <div className="flex justify-between items-center text-slate-500 dark:text-slate-400">
         <span>SHIPMENT TRACKER</span>
         <span className="flex items-center gap-1 text-emerald-400"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />LIVE</span>
       </div>
       <div className="relative my-2">
-        <div className="h-1 bg-slate-800 rounded-full w-full relative">
+        <div className="h-1 bg-slate-200 dark:bg-slate-800 rounded-full w-full relative">
           <motion.div className="absolute left-0 top-0 h-full bg-primary rounded-full"
             animate={{ width: ["0%", "84%", "0%"] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
-          <motion.div className="absolute top-1/2 -translate-y-1/2 bg-primary rounded-full border-2 border-slate-950 flex items-center justify-center shadow-glow"
+          <motion.div className="absolute top-1/2 -translate-y-1/2 bg-primary rounded-full border-2 border-white dark:border-slate-950 flex items-center justify-center shadow-glow"
             animate={{ left: ["0%", "84%", "0%"] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             style={{ transform: "translate(-50%, -50%)", width: "18px", height: "18px" }}>
             <span className="text-[8px]">🚛</span>
           </motion.div>
         </div>
-        <div className="flex justify-between text-[7px] text-slate-500 mt-2">
+        <div className="flex justify-between text-[7px] text-slate-500 dark:text-slate-500 mt-2">
           <span>MUMBAI</span><span>84% ARRIVED</span><span>DELHI</span>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-1 text-[7.5px] text-slate-400 border-t border-slate-900 pt-1.5">
-        <div>SPEED: <span className="text-white">58 km/h</span></div>
-        <div>ETA: <span className="text-white">06:30 AM</span></div>
+      <div className="grid grid-cols-2 gap-1 text-[7.5px] text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-900 pt-1.5">
+        <div>SPEED: <span className="text-slate-900 dark:text-white">58 km/h</span></div>
+        <div>ETA: <span className="text-slate-900 dark:text-white">06:30 AM</span></div>
       </div>
     </div>
   );
@@ -90,13 +94,13 @@ const DepartureMgmtVisualizer = () => {
   }, []);
   const items = ["Loading Sheet mapped", "Gate Pass validated", "E-Way Bill registered"];
   return (
-    <div className="h-28 w-full rounded-xl p-3 flex flex-col justify-between font-mono text-[9px]" style={{ background: "#0d1117", border: "1px solid rgba(255,255,255,0.08)" }}>
+    <div className={`h-28 w-full rounded-xl p-3 flex flex-col justify-between font-mono text-[9px] ${visualPanelClass}`}>
       <div className="text-slate-500 font-semibold uppercase tracking-wider">GATE OUT INTEGRATION</div>
       <div className="space-y-1 my-1">
         {items.map((item, idx) => (
           <div key={item} className="flex items-center gap-2">
-            <div className={`w-3.5 h-3.5 rounded border flex items-center justify-center transition-all duration-300 ${checked[idx] ? "bg-emerald-500/10 border-emerald-500 text-emerald-400 shadow-glow" : "border-slate-800 text-transparent"}`}>✓</div>
-            <span className={checked[idx] ? "text-slate-200" : "text-slate-500"}>{item}</span>
+            <div className={`w-3.5 h-3.5 rounded border flex items-center justify-center transition-all duration-300 ${checked[idx] ? "bg-emerald-500/10 border-emerald-500 text-emerald-500 dark:text-emerald-400 shadow-glow" : "border-slate-300 dark:border-slate-800 text-transparent"}`}>✓</div>
+            <span className={checked[idx] ? "text-slate-800 dark:text-slate-200" : "text-slate-500"}>{item}</span>
           </div>
         ))}
       </div>
@@ -107,21 +111,21 @@ const DepartureMgmtVisualizer = () => {
 
 // 4. Expense Visualizer
 const ExpenseVisualizer = () => (
-  <div className="relative h-28 w-full rounded-xl overflow-hidden p-3 font-mono text-[9px] flex flex-col justify-between" style={{ background: "#0d1117", border: "1px solid rgba(255,255,255,0.08)" }}>
-    <div className="flex justify-between items-center border-b border-slate-900 pb-1.5">
-      <span className="text-slate-400">EXPENSE BALANCES</span>
+  <div className={`relative h-28 w-full rounded-xl overflow-hidden p-3 font-mono text-[9px] flex flex-col justify-between ${visualPanelClass}`}>
+    <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-900 pb-1.5">
+      <span className="text-slate-500 dark:text-slate-400">EXPENSE BALANCES</span>
       <span className="text-emerald-400 font-bold">RECONCILED</span>
     </div>
     <div className="flex items-baseline gap-1 mt-1">
-      <span className="text-base font-bold text-white">₹12,45,000</span>
+      <span className="text-base font-bold text-slate-900 dark:text-white">₹12,45,000</span>
       <span className="text-emerald-500 font-bold text-[8px]">↓ 18.4% cost</span>
     </div>
     <div className="h-10 w-full relative flex items-end">
       <svg viewBox="0 0 200 40" className="w-full h-full text-primary/10 fill-current">
         <path d="M 0,40 Q 40,30 80,18 T 160,8 T 200,2 L 200,40 L 0,40 Z" />
         <path d="M 0,40 Q 40,30 80,18 T 160,8 T 200,2" fill="none" className="stroke-primary" strokeWidth="1.5" />
-        <line x1="0" y1="30" x2="200" y2="30" className="stroke-slate-900/60" strokeWidth="0.5" />
-        <line x1="0" y1="15" x2="200" y2="15" className="stroke-slate-900/60" strokeWidth="0.5" />
+        <line x1="0" y1="30" x2="200" y2="30" className="stroke-slate-200 dark:stroke-slate-900/60" strokeWidth="0.5" />
+        <line x1="0" y1="15" x2="200" y2="15" className="stroke-slate-200 dark:stroke-slate-900/60" strokeWidth="0.5" />
       </svg>
     </div>
     <div className="flex justify-between text-[7px] text-slate-500 pt-1">
@@ -138,7 +142,7 @@ const AlertsVisualizer = () => {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="h-28 w-full rounded-xl p-3 flex flex-col justify-between font-mono text-[9px] relative overflow-hidden" style={{ background: "#0d1117", border: "1px solid rgba(255,255,255,0.08)" }}>
+    <div className={`h-28 w-full rounded-xl p-3 flex flex-col justify-between font-mono text-[9px] relative overflow-hidden ${visualPanelClass}`}>
       <div className="text-slate-500 font-semibold uppercase tracking-wider">EXCEPTION TRIAGE</div>
       <div className="flex-1 flex items-center justify-center">
         {step === 0 ? (
@@ -146,14 +150,14 @@ const AlertsVisualizer = () => {
             className="w-full bg-rose-500/10 border border-rose-500/30 rounded-lg p-2 flex items-start gap-1.5 text-rose-400">
             <span className="animate-pulse">⚠️</span>
             <div><div className="font-bold text-[9px]">ROUTE DEVIATION DETECTED</div>
-              <p className="text-[8px] text-rose-300/80 mt-0.5">MH-01 deviation &gt; 12km</p></div>
+              <p className="text-[8px] text-rose-500/80 dark:text-rose-300/80 mt-0.5">MH-01 deviation &gt; 12km</p></div>
           </motion.div>
         ) : (
           <motion.div key="resolved" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
             className="w-full bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-2 flex items-start gap-1.5 text-emerald-400">
             <span>✓</span>
             <div><div className="font-bold text-[9px]">AUTO-RESOLVED</div>
-              <p className="text-[8px] text-emerald-300/80 mt-0.5">Rerouted via NH-52. Customer SMS sent.</p></div>
+              <p className="text-[8px] text-emerald-500/80 dark:text-emerald-300/80 mt-0.5">Rerouted via NH-52. Customer SMS sent.</p></div>
           </motion.div>
         )}
       </div>
@@ -164,16 +168,16 @@ const AlertsVisualizer = () => {
 
 // 6. Maintenance Visualizer
 const MaintenanceVisualizer = () => (
-  <div className="h-28 w-full rounded-xl p-3 flex flex-col justify-between font-mono text-[9px]" style={{ background: "#0d1117", border: "1px solid rgba(255,255,255,0.08)" }}>
+  <div className={`h-28 w-full rounded-xl p-3 flex flex-col justify-between font-mono text-[9px] ${visualPanelClass}`}>
     <div className="text-slate-500 font-semibold uppercase tracking-wider">TELEMATICS DIAGNOSTICS</div>
     <div className="space-y-2 py-1">
       <div className="space-y-1">
-        <div className="flex justify-between text-[8.5px] text-slate-300"><span>Engine Health</span><span className="text-emerald-400 font-bold">96% (Optimal)</span></div>
-        <div className="h-1 bg-slate-900 rounded-full w-full overflow-hidden"><div className="h-full bg-emerald-500 rounded-full" style={{ width: "96%" }} /></div>
+        <div className="flex justify-between text-[8.5px] text-slate-700 dark:text-slate-300"><span>Engine Health</span><span className="text-emerald-500 dark:text-emerald-400 font-bold">96% (Optimal)</span></div>
+        <div className="h-1 bg-slate-200 dark:bg-slate-900 rounded-full w-full overflow-hidden"><div className="h-full bg-emerald-500 rounded-full" style={{ width: "96%" }} /></div>
       </div>
       <div className="space-y-1">
-        <div className="flex justify-between text-[8.5px] text-slate-300"><span>Tire Tread Wear</span><span className="text-amber-500 font-bold">48% (Service Scheduled)</span></div>
-        <div className="h-1 bg-slate-900 rounded-full w-full overflow-hidden"><div className="h-full bg-amber-500 rounded-full" style={{ width: "48%" }} /></div>
+        <div className="flex justify-between text-[8.5px] text-slate-700 dark:text-slate-300"><span>Tire Tread Wear</span><span className="text-amber-500 font-bold">48% (Service Scheduled)</span></div>
+        <div className="h-1 bg-slate-200 dark:bg-slate-900 rounded-full w-full overflow-hidden"><div className="h-full bg-amber-500 rounded-full" style={{ width: "48%" }} /></div>
       </div>
     </div>
     <div className="text-[7px] text-slate-600">OBD-II Predictive Telemetry</div>
@@ -182,15 +186,15 @@ const MaintenanceVisualizer = () => (
 
 // 7. Spare Parts Visualizer
 const SparePartsVisualizer = () => (
-  <div className="h-28 w-full rounded-xl p-3 flex flex-col justify-between font-mono text-[9px] relative overflow-hidden" style={{ background: "#0d1117", border: "1px solid rgba(255,255,255,0.08)" }}>
+  <div className={`h-28 w-full rounded-xl p-3 flex flex-col justify-between font-mono text-[9px] relative overflow-hidden ${visualPanelClass}`}>
     <div className="text-slate-500 font-semibold uppercase tracking-wider">VISION INVENTORY SCAN</div>
-    <div className="relative flex-1 flex items-center justify-center my-1 bg-slate-900/60 border border-slate-800/60 rounded-lg">
+    <div className="relative flex-1 flex items-center justify-center my-1 bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/60 rounded-lg">
       <motion.div className="absolute left-0 right-0 h-[2.5px] bg-primary shadow-[0_0_10px_#5e5ce6] z-10"
         animate={{ top: ["5%", "95%", "5%"] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }} />
-      <div className="relative border border-slate-800 rounded p-1.5 flex items-center gap-2">
+      <div className="relative border border-slate-200 dark:border-slate-800 rounded p-1.5 flex items-center gap-2 bg-white/70 dark:bg-transparent">
         <span className="text-base animate-pulse">📦</span>
-        <div className="text-[8px] leading-tight text-slate-400">
-          <div>SKU: <span className="text-white">AIR-FILT-892</span></div>
+        <div className="text-[8px] leading-tight text-slate-500 dark:text-slate-400">
+          <div>SKU: <span className="text-slate-900 dark:text-white">AIR-FILT-892</span></div>
           <div>STATUS: <span className="text-amber-400 font-bold">LOW STOCK</span></div>
         </div>
       </div>
@@ -203,24 +207,24 @@ const SparePartsVisualizer = () => (
 
 // 8. Task Automation Visualizer
 const TaskAutomationVisualizer = () => (
-  <div className="relative h-28 w-full rounded-xl overflow-hidden p-3 font-mono text-[8.5px] flex flex-col justify-between" style={{ background: "#0d1117", border: "1px solid rgba(255,255,255,0.08)" }}>
+  <div className={`relative h-28 w-full rounded-xl overflow-hidden p-3 font-mono text-[8.5px] flex flex-col justify-between ${visualPanelClass}`}>
     <div className="text-slate-500 font-semibold uppercase tracking-wider">WORKFLOW DISPATCH ENGINE</div>
     <div className="relative flex items-center justify-between py-2.5">
-      <div className="bg-slate-900/80 border border-slate-800 rounded p-1.5 text-center text-slate-300 relative z-10">
+      <div className="bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded p-1.5 text-center text-slate-700 dark:text-slate-300 relative z-10">
         <div>Demand Load</div><div className="text-[7.5px] text-emerald-400 mt-0.5">Auto-Created</div>
       </div>
-      <div className="h-[1px] bg-slate-800 flex-1 relative mx-1">
+      <div className="h-[1px] bg-slate-200 dark:bg-slate-800 flex-1 relative mx-1">
         <motion.div className="absolute top-0 bottom-0 bg-primary shadow-glow"
           animate={{ left: ["0%", "100%"] }} transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }} style={{ width: "20px" }} />
       </div>
-      <div className="bg-slate-900/80 border border-slate-800 rounded p-1.5 text-center text-slate-300 relative z-10">
+      <div className="bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded p-1.5 text-center text-slate-700 dark:text-slate-300 relative z-10">
         <div>Match Driver</div><div className="text-[7.5px] text-primary mt-0.5">SOP Verified</div>
       </div>
-      <div className="h-[1px] bg-slate-800 flex-1 relative mx-1">
+      <div className="h-[1px] bg-slate-200 dark:bg-slate-800 flex-1 relative mx-1">
         <motion.div className="absolute top-0 bottom-0 bg-primary shadow-glow"
           animate={{ left: ["0%", "100%"] }} transition={{ duration: 2.5, repeat: Infinity, ease: "linear", delay: 1.25 }} style={{ width: "20px" }} />
       </div>
-      <div className="bg-slate-900/80 border border-slate-800 rounded p-1.5 text-center text-slate-300 relative z-10">
+      <div className="bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded p-1.5 text-center text-slate-700 dark:text-slate-300 relative z-10">
         <div>Mobile Push</div><div className="text-[7.5px] text-emerald-400 mt-0.5">Dispatched</div>
       </div>
     </div>
@@ -241,9 +245,9 @@ const ReportGenVisualizer = () => {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="h-28 w-full rounded-xl p-3 flex flex-col justify-between font-mono text-[9px] relative overflow-hidden" style={{ background: "#0d1117", border: "1px solid rgba(255,255,255,0.08)" }}>
+    <div className={`h-28 w-full rounded-xl p-3 flex flex-col justify-between font-mono text-[9px] relative overflow-hidden ${visualPanelClass}`}>
       <div className="text-slate-500 font-semibold uppercase tracking-wider">AI REPORT AUTO-GEN</div>
-      <div className="flex-1 bg-slate-950/60 border border-slate-900/60 rounded p-2 text-slate-300 leading-normal overflow-hidden mt-1 select-none">
+      <div className="flex-1 bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-900/60 rounded p-2 text-slate-700 dark:text-slate-300 leading-normal overflow-hidden mt-1 select-none">
         <span>{text}</span><span className="w-1.5 h-3 bg-primary inline-block ml-0.5 animate-pulse" />
       </div>
       <div className="text-[7px] text-slate-600 text-right">PDF format · Scheduled Daily</div>
