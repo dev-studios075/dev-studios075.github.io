@@ -3,7 +3,7 @@ title: Fleetcodes vs Manual Operations - A Side-by-Side Day in the Life of an In
 date: 2026-07-09
 author: Fleetcodes Team
 excerpt: It's one thing to talk about automation in the abstract. Here's what a working day looks like, hour by hour, with and without a connected TMS running underneath it.
-coverImage: /public/uploads/blog83.jpg
+coverImage: /uploads/blog83.jpg
 ---
 It's one thing to talk about "automation" and "efficiency gains" in the abstract. It's another to actually see what a working day looks like — hour by hour — with and without a connected TMS running underneath it. Here's that comparison, for a mid-sized fleet running roughly 50 vehicles.
 
