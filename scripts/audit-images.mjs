@@ -4,11 +4,34 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
+const blogDir = path.join(rootDir, "src", "content", "blog");
+const publicDir = path.join(rootDir, "public");
 const uploadDir = path.join(rootDir, "public", "uploads");
 const maxRecommendedBytes = 500 * 1024;
 const maxRecommendedWidth = 1200;
 
 const formatKb = (bytes) => `${Math.round(bytes / 1024)} KB`;
+
+const readCoverImage = (raw) => {
+  const match = raw.match(/^coverImage:\s*(["']?)([^"'\n]+)\1\s*$/m);
+  return match?.[2]?.trim();
+};
+
+const suggestCoverImage = (coverImage) => {
+  if (!coverImage.startsWith("/")) return undefined;
+
+  const normalized = coverImage.replace(/^\/public\//, "/");
+  const dir = path.join(publicDir, path.dirname(normalized).replace(/^\//, ""));
+  const parsed = path.parse(normalized);
+
+  if (!fs.existsSync(dir)) return undefined;
+
+  const candidate = fs
+    .readdirSync(dir)
+    .find((file) => path.parse(file).name === parsed.name && /\.(png|jpe?g)$/i.test(file));
+
+  return candidate ? path.posix.join(path.posix.dirname(normalized), candidate) : undefined;
+};
 
 const getImageSize = (filePath) => {
   const buffer = fs.readFileSync(filePath);
@@ -95,4 +118,69 @@ if (oversized.length === 0) {
   if (oversized.length > 30) {
     console.log(`...and ${oversized.length - 30} more.`);
   }
+}
+
+const coverImageIssues = fs.existsSync(blogDir)
+  ? fs
+      .readdirSync(blogDir)
+      .filter((file) => file.endsWith(".md"))
+      .flatMap((file) => {
+        const raw = fs.readFileSync(path.join(blogDir, file), "utf8");
+        const coverImage = readCoverImage(raw);
+
+        if (!coverImage || /^https?:\/\//i.test(coverImage)) {
+          return [];
+        }
+
+        const issues = [];
+
+        if (!coverImage.startsWith("/")) {
+          issues.push("must start with /");
+        }
+
+        if (coverImage.startsWith("/public/")) {
+          issues.push("must not include /public");
+        }
+
+        if (!coverImage.replace(/^\/public/, "").startsWith("/uploads/")) {
+          issues.push("should point inside /uploads");
+        }
+
+        const publicPath = coverImage.replace(/^\/public\//, "/");
+        const filePath = path.join(publicDir, publicPath.replace(/^\//, ""));
+
+        if (!fs.existsSync(filePath)) {
+          const suggestion = suggestCoverImage(coverImage);
+          issues.push(
+            suggestion
+              ? `file does not exist; did you mean ${suggestion}?`
+              : "file does not exist",
+          );
+        }
+
+        return issues.length > 0
+          ? [
+              {
+                file: path.relative(rootDir, path.join(blogDir, file)),
+                coverImage,
+                issues,
+              },
+            ]
+          : [];
+      })
+  : [];
+
+if (coverImageIssues.length === 0) {
+  console.log("All blog cover images point to existing public uploads.");
+} else {
+  console.error(`${coverImageIssues.length} blog cover image references need attention:`);
+
+  coverImageIssues.forEach((issue) => {
+    console.error(`- ${issue.file}: ${issue.coverImage}`);
+    issue.issues.forEach((message) => {
+      console.error(`  ${message}`);
+    });
+  });
+
+  process.exitCode = 1;
 }
