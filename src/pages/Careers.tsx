@@ -4,12 +4,15 @@ import {
   ArrowRight, MapPin, Clock, Briefcase,
   Code2, BarChart3, Headphones, Rocket, Globe, Heart,
   Laptop, ShieldCheck, Zap, Users, TrendingUp, Coffee,
-  ChevronDown, ChevronUp, Sparkles, Star,
+  ChevronDown, ChevronUp, Sparkles, Star, Check,
 } from "lucide-react";
 import Seo from "@/components/seo/Seo";
 import { SITE_NAME } from "@/lib/site";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const values = [
@@ -174,6 +177,68 @@ const JobCard = ({ job }: { job: Job }) => {
   const [open, setOpen] = useState(false);
   const Icon = job.icon;
 
+  const [formOpen, setFormOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [linkedin, setLinkedin] = useState("");
+  const [resume, setResume] = useState("");
+  const [message, setMessage] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !email || !resume) {
+      setError("Name, email, and resume link are required.");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    setSubmitting(true);
+    setError("");
+
+    const sheetUrl = import.meta.env.VITE_GOOGLE_SHEET_URL;
+    if (sheetUrl) {
+      try {
+        const finalMessage = `Role: ${job.title}
+LinkedIn: ${linkedin || "N/A"}
+Resume/Portfolio: ${resume}
+
+Message:
+${message || "N/A"}`;
+
+        const params = new URLSearchParams();
+        params.append("name", name);
+        params.append("email", email);
+        params.append("message", finalMessage);
+        params.append("source", "Careers Application");
+
+        await fetch(sheetUrl, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: params.toString(),
+        });
+      } catch (err) {
+        /* ignore error for no-cors */
+      }
+    }
+
+    setSubmitting(false);
+    setSubmitted(true);
+    setName("");
+    setEmail("");
+    setLinkedin("");
+    setResume("");
+    setMessage("");
+  };
+
   return (
     <div
       className={`rounded-2xl overflow-hidden transition-all duration-300 bg-white dark:bg-white/[0.03] border ${
@@ -261,12 +326,132 @@ const JobCard = ({ job }: { job: Job }) => {
             </div>
           </div>
 
-          <a
-            href={`mailto:careers@fleetcodes.com?subject=Application: ${job.title}`}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-primary hover:opacity-90 transition-all"
-          >
-            Apply for this role <ArrowRight className="w-4 h-4" />
-          </a>
+          <div className="pt-4">
+            {!formOpen ? (
+              <button
+                onClick={() => setFormOpen(true)}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-primary hover:opacity-90 hover:shadow-glow transition-all cursor-pointer"
+              >
+                Apply for this role <ArrowRight className="w-4 h-4" />
+              </button>
+            ) : (
+              <div className="pt-6 border-t border-slate-100 dark:border-white/[0.06] animate-fade-in">
+                <h4 className="font-display font-semibold text-sm text-slate-800 dark:text-white mb-4">
+                  Apply for {job.title}
+                </h4>
+                
+                {submitted ? (
+                  <div className="p-4 rounded-xl bg-success/15 border border-success/30 text-success text-sm font-medium leading-relaxed animate-scale-in">
+                    <p className="font-semibold mb-1">Application Submitted Successfully!</p>
+                    <p className="text-xs opacity-90">Thank you for applying. Our hiring team will review your details and get back to you shortly.</p>
+                    <button 
+                      onClick={() => { setFormOpen(false); setSubmitted(false); }}
+                      className="mt-3 text-xs underline font-semibold cursor-pointer"
+                    >
+                      Close Form
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <Label htmlFor={`name-${job.id}`} className="text-xs font-semibold text-slate-600 dark:text-slate-400">
+                          Full Name *
+                        </Label>
+                        <Input
+                          id={`name-${job.id}`}
+                          type="text"
+                          required
+                          placeholder="John Doe"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-1.5">
+                        <Label htmlFor={`email-${job.id}`} className="text-xs font-semibold text-slate-600 dark:text-slate-400">
+                          Email Address *
+                        </Label>
+                        <Input
+                          id={`email-${job.id}`}
+                          type="email"
+                          required
+                          placeholder="john@example.com"
+                          value={email}
+                          onChange={(e) => { setEmail(e.target.value); setError(""); }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <Label htmlFor={`linkedin-${job.id}`} className="text-xs font-semibold text-slate-600 dark:text-slate-400">
+                          LinkedIn Profile URL
+                        </Label>
+                        <Input
+                          id={`linkedin-${job.id}`}
+                          type="url"
+                          placeholder="https://linkedin.com/in/username"
+                          value={linkedin}
+                          onChange={(e) => setLinkedin(e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-1.5">
+                        <Label htmlFor={`resume-${job.id}`} className="text-xs font-semibold text-slate-600 dark:text-slate-400">
+                          Resume/Portfolio Link *
+                        </Label>
+                        <Input
+                          id={`resume-${job.id}`}
+                          type="url"
+                          required
+                          placeholder="Google Drive, Dropbox, or PDF URL"
+                          value={resume}
+                          onChange={(e) => setResume(e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <Label htmlFor={`message-${job.id}`} className="text-xs font-semibold text-slate-600 dark:text-slate-400">
+                        Why Fleetcodes? (Optional)
+                      </Label>
+                      <Textarea
+                        id={`message-${job.id}`}
+                        rows={3}
+                        placeholder="Tell us why you want to join our team..."
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        className="resize-none"
+                      />
+                    </div>
+
+                    {error && (
+                      <p className="text-xs text-destructive/80 font-medium font-sans">
+                        {error}
+                      </p>
+                    )}
+
+                    <div className="flex items-center gap-3">
+                      <button
+                        type="submit"
+                        disabled={submitting}
+                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-primary hover:opacity-90 hover:shadow-glow transition-all cursor-pointer disabled:opacity-50"
+                      >
+                        {submitting ? "Submitting..." : "Submit Application"}
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => { setFormOpen(false); setError(""); }}
+                        className="text-sm font-semibold px-5 py-2.5 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-all cursor-pointer"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>
