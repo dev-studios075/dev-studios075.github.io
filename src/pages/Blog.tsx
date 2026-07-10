@@ -16,9 +16,7 @@ const fallbackImages = [blog1, blog2, blog3];
 /** Strip YAML-encoded wrapping quotes */
 const cleanTitle = (t = "") => t.replace(/^["'""]|["'""]$/g, "").trim();
 
-/** Rough reading time */
-const readingTime = (content = "") =>
-  Math.max(1, Math.round(content.trim().split(/\s+/).length / 200));
+const formatReadingTime = (minutes?: number) => `${minutes || 1} min`;
 
 /** Category from title */
 const getCategory = (title: string) => {
@@ -162,7 +160,7 @@ const Blog = () => {
                     </span>
                     <span className="text-[11px] font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full glass border border-border/50 text-muted-foreground inline-flex items-center gap-1.5">
                       <Clock className="w-3 h-3" />
-                      {readingTime(featured.content)} min read
+                      {formatReadingTime(featured.readingTime)} read
                     </span>
                     <span className="text-[11px] text-muted-foreground inline-flex items-center gap-1.5">
                       <Calendar className="w-3 h-3" />
@@ -228,7 +226,7 @@ const Blog = () => {
                       )}
                       <span className="inline-flex items-center gap-1">
                         <Clock className="w-3 h-3" />
-                        {readingTime(post.content)} min
+                        {formatReadingTime(post.readingTime)}
                       </span>
                     </div>
 
