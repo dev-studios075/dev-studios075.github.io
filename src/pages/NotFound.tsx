@@ -69,7 +69,7 @@ const NotFound = () => {
             </Link>
           </Button>
           <Button asChild variant="outline" className="w-full sm:w-auto px-6 py-5 rounded-xl border-border/60 hover:bg-slate-100 dark:hover:bg-white/[0.06] text-slate-650 dark:text-slate-300">
-            <Link to="/blog" className="flex items-center gap-2 justify-center">
+            <Link to="/blog/" className="flex items-center gap-2 justify-center">
               <BookOpen className="w-4 h-4" />
               Read Blog Logs
             </Link>

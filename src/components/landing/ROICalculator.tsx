@@ -230,7 +230,7 @@ export default function ROICalculator() {
                 Start recovering your hard-earned revenue today.
               </div>
               <Button asChild variant="hero" size="lg" className="w-full sm:w-auto hover:shadow-glow-strong group">
-                <Link to="/book-demo">
+                <Link to="/book-demo/">
                   Lock in Your Savings
                   <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                 </Link>

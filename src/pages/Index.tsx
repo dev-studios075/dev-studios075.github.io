@@ -11,7 +11,7 @@ import FAQ from "@/components/landing/FAQ";
 import CTA from "@/components/landing/CTA";
 import Footer from "@/components/landing/Footer";
 import Seo from "@/components/seo/Seo";
-import { APP_DOWNLOAD_URL, DEFAULT_DESCRIPTION, DEFAULT_TITLE, LINKEDIN_URL, SITE_NAME, absoluteUrl } from "@/lib/site";
+import { APP_DOWNLOAD_URL, DEFAULT_DESCRIPTION, DEFAULT_TITLE, LINKEDIN_URL, SITE_NAME, absolutePageUrl, absoluteUrl } from "@/lib/site";
 
 const Index = () => {
   return (
@@ -25,7 +25,7 @@ const Index = () => {
             "@context": "https://schema.org",
             "@type": "Organization",
             name: SITE_NAME,
-            url: absoluteUrl("/"),
+            url: absolutePageUrl("/"),
             logo: absoluteUrl("/favicon.png"),
             sameAs: [LINKEDIN_URL],
           },
@@ -35,7 +35,7 @@ const Index = () => {
             name: SITE_NAME,
             applicationCategory: "BusinessApplication",
             operatingSystem: "Web, Android",
-            url: absoluteUrl("/"),
+            url: absolutePageUrl("/"),
             downloadUrl: APP_DOWNLOAD_URL,
             installUrl: APP_DOWNLOAD_URL,
             description: DEFAULT_DESCRIPTION,

@@ -33,7 +33,7 @@ const cleanMarkdown = (content = "") =>
 
 const renderMarkdown = (content = "") => micromark(cleanMarkdown(content));
 
-const renderStaticFallback = ({ eyebrow, title, description, image, meta, contentHtml }) => `
+const renderStaticFallback = ({ eyebrow, title, description, image, meta, contentHtml, relatedHtml }) => `
         <main data-static-fallback style="max-width: 920px; margin: 0 auto; padding: 48px 24px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #111827;">
           ${eyebrow ? `<p style="margin: 0 0 12px; color: #4f46e5; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;">${escapeHtml(eyebrow)}</p>` : ""}
           <h1 style="margin: 0 0 16px; font-size: clamp(32px, 6vw, 56px); line-height: 1.05; letter-spacing: -0.02em;">${escapeHtml(title)}</h1>
@@ -41,6 +41,7 @@ const renderStaticFallback = ({ eyebrow, title, description, image, meta, conten
           ${meta ? `<p style="margin: 0 0 28px; color: #6b7280; font-size: 14px;">${escapeHtml(meta)}</p>` : ""}
           ${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(title)}" style="display: block; width: 100%; max-height: 420px; object-fit: cover; border-radius: 18px; margin: 0 0 36px;" />` : ""}
           ${contentHtml ? `<article style="font-size: 17px; line-height: 1.78;">${contentHtml}</article>` : ""}
+          ${relatedHtml || ""}
         </main>`;
 
 const absoluteUrl = (value = "/") => {
@@ -50,6 +51,30 @@ const absoluteUrl = (value = "/") => {
 
   const normalizedPath = value.startsWith("/") ? value : `/${value}`;
   return `${siteUrl}${encodeURI(normalizedPath)}`;
+};
+
+const canonicalPath = (value = "/") => {
+  if (/^https?:\/\//i.test(value)) {
+    return value;
+  }
+
+  const basePath = value.split(/[?#]/)[0] || "/";
+  const normalizedPath = basePath.startsWith("/") ? basePath : `/${basePath}`;
+
+  if (normalizedPath === "/" || normalizedPath.endsWith("/")) {
+    return normalizedPath;
+  }
+
+  if (/\/[^/]+\.[^/]+$/.test(normalizedPath)) {
+    return normalizedPath;
+  }
+
+  return `${normalizedPath}/`;
+};
+
+const absolutePageUrl = (value = "/") => {
+  const canonical = canonicalPath(value);
+  return /^https?:\/\//i.test(canonical) ? canonical : absoluteUrl(canonical);
 };
 
 const parseFrontmatter = (raw) => {
@@ -108,6 +133,53 @@ const posts = fs.existsSync(blogDir)
       .sort((a, b) => (b.date > a.date ? 1 : -1))
   : [];
 
+const getCategory = (title = "") => {
+  const normalized = title.toLowerCase();
+  if (normalized.includes("dispatch") || normalized.includes("operations")) return "Operations";
+  if (normalized.includes("compliance") || normalized.includes("permit")) return "Compliance";
+  if (normalized.includes("analytics") || normalized.includes("data")) return "Analytics";
+  if (normalized.includes("ai") || normalized.includes("automation")) return "AI & Automation";
+  if (normalized.includes("fleet") || normalized.includes("vehicle")) return "Fleet Management";
+  return "Technology";
+};
+
+const getRelatedPosts = (currentPost) =>
+  posts
+    .filter((candidate) => candidate.slug !== currentPost.slug)
+    .sort((a, b) => {
+      const category = getCategory(currentPost.title);
+      const aSameCategory = getCategory(a.title) === category ? 1 : 0;
+      const bSameCategory = getCategory(b.title) === category ? 1 : 0;
+
+      if (aSameCategory !== bSameCategory) {
+        return bSameCategory - aSameCategory;
+      }
+
+      return (b.date || "").localeCompare(a.date || "");
+    })
+    .slice(0, 6);
+
+const renderRelatedLinks = (currentPost) => {
+  const related = getRelatedPosts(currentPost);
+
+  if (!related.length) {
+    return "";
+  }
+
+  return `
+          <nav aria-label="Related Fleetcodes articles" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid #e5e7eb;">
+            <h2 style="margin: 0 0 16px; font-size: 22px; line-height: 1.2;">Related fleet management guides</h2>
+            <ul style="margin: 0; padding-left: 20px;">
+              ${related
+                .map(
+                  (post) =>
+                    `<li style="margin: 0 0 10px;"><a href="${escapeHtml(canonicalPath(`/blog/${post.slug}`))}">${escapeHtml(post.title)}</a></li>`,
+                )
+                .join("")}
+            </ul>
+          </nav>`;
+};
+
 const templatePath = path.join(distDir, "index.html");
 const template = fs.readFileSync(templatePath, "utf8");
 
@@ -147,7 +219,7 @@ const setJsonLd = (html, jsonLd) =>
   );
 
 const renderPage = ({ title, description, path: routePath, image, type = "website", jsonLd, bodyHtml = "" }) => {
-  const canonicalUrl = absoluteUrl(routePath);
+  const canonicalUrl = absolutePageUrl(routePath);
   const imageUrl = absoluteUrl(image);
   let html = template;
 
@@ -179,6 +251,73 @@ const writeRoute = (routePath, html) => {
 };
 
 writeRoute(
+  "/",
+  renderPage({
+    title: `${siteName} - Automation-First TMS for Logistics`,
+    description:
+      "AI-powered TMS that learns your SOPs and runs your logistics autonomously. Cut cost, eliminate errors, and scale fleet operations without scaling headcount.",
+    path: "/",
+    image: defaultImage,
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          name: siteName,
+          url: absolutePageUrl("/"),
+          logo: absoluteUrl("/favicon.png"),
+          sameAs: ["https://www.linkedin.com/company/fleetcodes"],
+        },
+        {
+          "@type": "SoftwareApplication",
+          name: siteName,
+          applicationCategory: "BusinessApplication",
+          operatingSystem: "Web, Android",
+          url: absolutePageUrl("/"),
+          image: absoluteUrl(defaultImage),
+        },
+        {
+          "@type": "ItemList",
+          name: "Latest Fleetcodes logistics guides",
+          itemListElement: posts.slice(0, 12).map((post, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            url: absolutePageUrl(`/blog/${post.slug}`),
+            name: post.title,
+          })),
+        },
+      ],
+    },
+    bodyHtml: renderStaticFallback({
+      eyebrow: "Fleetcodes",
+      title: `${siteName} - Automation-First TMS for Logistics`,
+      description:
+        "AI-powered TMS for dispatch, visibility, billing, compliance, and fleet operations automation.",
+      contentHtml: `
+        <nav aria-label="Core Fleetcodes pages">
+          <ul>
+            <li><a href="/">Homepage</a></li>
+            <li><a href="/book-demo/">Book a Demo</a></li>
+            <li><a href="/blog/">Fleet Management Blog</a></li>
+            <li><a href="/about/">About Fleetcodes</a></li>
+            <li><a href="/careers/">Careers</a></li>
+          </ul>
+        </nav>
+        <section>
+          <h2>Latest fleet management guides</h2>
+          <ul>
+            ${posts
+              .slice(0, 12)
+              .map((post) => `<li><a href="${escapeHtml(canonicalPath(`/blog/${post.slug}`))}">${escapeHtml(post.title)}</a></li>`)
+              .join("")}
+          </ul>
+        </section>
+      `,
+    }),
+  }),
+);
+
+writeRoute(
   "/blog",
   renderPage({
     title: `Fleet Management Blog | ${siteName}`,
@@ -190,11 +329,11 @@ writeRoute(
       "@context": "https://schema.org",
       "@type": "Blog",
       name: `Fleet Management Blog | ${siteName}`,
-      url: absoluteUrl("/blog"),
-      blogPost: posts.slice(0, 50).map((post) => ({
+      url: absolutePageUrl("/blog"),
+      blogPost: posts.map((post) => ({
         "@type": "BlogPosting",
         headline: post.title,
-        url: absoluteUrl(`/blog/${post.slug}`),
+        url: absolutePageUrl(`/blog/${post.slug}`),
         datePublished: post.date,
         image: absoluteUrl(post.image),
         author: {
@@ -211,7 +350,7 @@ writeRoute(
       contentHtml: `<ul>${posts
         .map(
           (post) =>
-            `<li><a href="${escapeHtml(`/blog/${post.slug}`)}">${escapeHtml(post.title)}</a>${post.description ? ` - ${escapeHtml(post.description)}` : ""}</li>`,
+            `<li><a href="${escapeHtml(canonicalPath(`/blog/${post.slug}`))}">${escapeHtml(post.title)}</a>${post.description ? ` - ${escapeHtml(post.description)}` : ""}</li>`,
         )
         .join("")}</ul>`,
     }),
@@ -251,7 +390,13 @@ posts.forEach((post) => {
             height: 32,
           },
         },
-        mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
+        mainEntityOfPage: absolutePageUrl(`/blog/${post.slug}`),
+        isPartOf: {
+          "@type": "Blog",
+          name: `Fleet Management Blog | ${siteName}`,
+          url: absolutePageUrl("/blog"),
+        },
+        relatedLink: getRelatedPosts(post).map((related) => absolutePageUrl(`/blog/${related.slug}`)),
       },
       bodyHtml: renderStaticFallback({
         eyebrow: "Fleetcodes Blog",
@@ -260,6 +405,7 @@ posts.forEach((post) => {
         image: post.image,
         meta: [post.author, post.date].filter(Boolean).join(" | "),
         contentHtml: renderMarkdown(post.content),
+        relatedHtml: renderRelatedLinks(post),
       }),
     }),
   );
@@ -277,7 +423,7 @@ writeRoute(
       "@context": "https://schema.org",
       "@type": "AboutPage",
       name: `About Us | ${siteName}`,
-      url: absoluteUrl("/about"),
+      url: absolutePageUrl("/about"),
       description:
         "Learn how Fleetcodes was built by logistics operators for logistics operators — and why we're obsessed with automating fleet management across India.",
     },
@@ -296,7 +442,7 @@ writeRoute(
       "@context": "https://schema.org",
       "@type": "AboutPage",
       name: `Careers at ${siteName}`,
-      url: absoluteUrl("/careers"),
+      url: absolutePageUrl("/careers"),
       description:
         "Join the Fleetcodes team and help build the automation-first TMS transforming Indian logistics. View open roles in engineering, product, and sales.",
     },
@@ -315,11 +461,11 @@ writeRoute(
       "@context": "https://schema.org",
       "@type": "ContactPage",
       name: `Book a Free Live Demo | ${siteName}`,
-      url: absoluteUrl("/book-demo"),
+      url: absolutePageUrl("/book-demo"),
       description:
         "Schedule a 30-minute personalized walkthrough with our logistics automation experts. Learn how Fleetcodes TMS can digitize and automate your operations.",
     },
   }),
 );
 
-console.log(`Generated static HTML for /blog, /about, /careers, /book-demo, and ${posts.length} blog posts`);
+console.log(`Generated static HTML for /, /blog, /about, /careers, /book-demo, and ${posts.length} blog posts`);

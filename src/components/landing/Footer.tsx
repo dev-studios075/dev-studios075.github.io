@@ -18,15 +18,15 @@ const cols = [
   {
     title: "Company",
     links: [
-      { label: "About",     href: "/about", isInternal: true      },
-      { label: "Careers",   href: "/careers", isInternal: true },
-      { label: "Book a Demo", href: "/book-demo", isInternal: true },
+      { label: "About",     href: "/about/", isInternal: true      },
+      { label: "Careers",   href: "/careers/", isInternal: true },
+      { label: "Book a Demo", href: "/book-demo/", isInternal: true },
     ],
   },
   {
     title: "Resources",
     links: [
-      { label: "Blog",          href: "/blog", isInternal: true },
+      { label: "Blog",          href: "/blog/", isInternal: true },
       { label: "FAQ",           href: "/#faq" },
     ],
   },

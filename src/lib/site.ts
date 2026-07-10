@@ -20,3 +20,27 @@ export const absoluteUrl = (path = "/") => {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
   return `${SITE_URL}${normalizedPath}`;
 };
+
+export const canonicalPath = (path = "/") => {
+  if (/^https?:\/\//i.test(path)) {
+    return path;
+  }
+
+  const basePath = path.split(/[?#]/)[0] || "/";
+  const normalizedPath = basePath.startsWith("/") ? basePath : `/${basePath}`;
+
+  if (normalizedPath === "/" || normalizedPath.endsWith("/")) {
+    return normalizedPath;
+  }
+
+  if (/\/[^/]+\.[^/]+$/.test(normalizedPath)) {
+    return normalizedPath;
+  }
+
+  return `${normalizedPath}/`;
+};
+
+export const absolutePageUrl = (path = "/") => {
+  const canonical = canonicalPath(path);
+  return /^https?:\/\//i.test(canonical) ? canonical : absoluteUrl(canonical);
+};

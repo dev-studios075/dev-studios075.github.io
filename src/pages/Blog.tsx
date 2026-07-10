@@ -5,7 +5,7 @@ import { getAllPosts } from "@/lib/blog";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import Seo from "@/components/seo/Seo";
-import { SITE_NAME, absoluteUrl } from "@/lib/site";
+import { SITE_NAME, absolutePageUrl } from "@/lib/site";
 import { trackEvent } from "@/lib/analytics";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
@@ -70,11 +70,11 @@ const Blog = () => {
           "@type": "Blog",
           name: pageTitle,
           description,
-          url: absoluteUrl("/blog"),
+          url: absolutePageUrl("/blog"),
           blogPost: posts.slice(0, 20).map((post) => ({
             "@type": "BlogPosting",
             headline: post.title,
-            url: absoluteUrl(`/blog/${post.slug}`),
+            url: absolutePageUrl(`/blog/${post.slug}`),
             datePublished: post.date,
             author: post.author ? { "@type": "Person", name: post.author } : undefined,
           })),
@@ -137,7 +137,7 @@ const Blog = () => {
           {/* ── Featured post ───────────────────────────────── */}
           {featured && (
             <Link
-              to={`/blog/${featured.slug}`}
+              to={`/blog/${featured.slug}/`}
               onClick={() => trackArticleClick(featured.title, featured.slug)}
               className="group block glass rounded-2xl overflow-hidden mb-10 hover:border-primary/20 hover:shadow-elegant transition-all duration-300"
             >
@@ -196,7 +196,7 @@ const Blog = () => {
                 >
                   {/* Thumbnail */}
                   <Link
-                    to={`/blog/${post.slug}`}
+                    to={`/blog/${post.slug}/`}
                     className="relative overflow-hidden aspect-[16/10] block shrink-0"
                     onClick={() => trackArticleClick(post.title, post.slug)}
                   >
@@ -232,7 +232,7 @@ const Blog = () => {
 
                     <h2 className="font-display font-semibold text-base leading-snug mb-2.5 group-hover:text-primary transition-colors line-clamp-2">
                       <Link
-                        to={`/blog/${post.slug}`}
+                        to={`/blog/${post.slug}/`}
                         onClick={() => trackArticleClick(post.title, post.slug)}
                       >
                         {cleanTitle(post.title)}
@@ -244,7 +244,7 @@ const Blog = () => {
                     </p>
 
                     <Link
-                      to={`/blog/${post.slug}`}
+                      to={`/blog/${post.slug}/`}
                       className="inline-flex items-center gap-1 text-xs font-semibold text-primary group/link"
                       onClick={() => trackArticleClick(post.title, post.slug)}
                     >

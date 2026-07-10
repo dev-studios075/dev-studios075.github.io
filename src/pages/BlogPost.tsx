@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Calendar, Clock, User, Tag } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Calendar, Clock, User, Tag } from "lucide-react";
 import ReactMarkdown from "react-markdown";
-import { getPostBySlug, getPostContent } from "@/lib/blog";
+import { getAllPosts, getPostBySlug, getPostContent } from "@/lib/blog";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import Seo from "@/components/seo/Seo";
-import { DEFAULT_IMAGE, SITE_NAME, absoluteUrl } from "@/lib/site";
+import { DEFAULT_IMAGE, SITE_NAME, SITE_URL, absolutePageUrl, absoluteUrl } from "@/lib/site";
 
 /** Strip wrapping quotes from YAML-parsed titles */
 const cleanTitle = (t = "") => t.replace(/^["'""]|["'""]$/g, "").trim();
@@ -14,6 +14,23 @@ const cleanTitle = (t = "") => t.replace(/^["'""]|["'""]$/g, "").trim();
 /** Rough reading time: 200 wpm */
 const readingTime = (content = "") =>
   Math.max(1, Math.round(content.trim().split(/\s+/).length / 200));
+
+const normalizeArticleHref = (href?: string) => {
+  if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) {
+    return href;
+  }
+
+  try {
+    const url = new URL(href, SITE_URL);
+    if (url.hostname === "fleetcodes.com" || url.hostname === "www.fleetcodes.com") {
+      return `${absolutePageUrl(url.pathname)}${url.search}${url.hash}`;
+    }
+  } catch {
+    return href;
+  }
+
+  return href;
+};
 
 /** Derive a category tag from the title */
 const getCategory = (title: string) => {
@@ -25,6 +42,21 @@ const getCategory = (title: string) => {
   if (t.includes("fleet") || t.includes("vehicle")) return "Fleet Management";
   return "Technology";
 };
+
+const getRelatedPosts = (currentSlug: string, currentCategory: string) =>
+  getAllPosts()
+    .filter((candidate) => candidate.slug !== currentSlug)
+    .sort((a, b) => {
+      const aSameCategory = getCategory(a.title) === currentCategory ? 1 : 0;
+      const bSameCategory = getCategory(b.title) === currentCategory ? 1 : 0;
+
+      if (aSameCategory !== bSameCategory) {
+        return bSameCategory - aSameCategory;
+      }
+
+      return (b.date || "").localeCompare(a.date || "");
+    })
+    .slice(0, 4);
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -61,7 +93,7 @@ const BlogPost = () => {
         <Navbar />
         <main className="pt-36 pb-16 text-center container-tight">
           <h1 className="font-display text-3xl font-bold mb-4">Post not found</h1>
-          <Link to="/blog" className="text-primary hover:underline inline-flex items-center gap-2">
+          <Link to="/blog/" className="text-primary hover:underline inline-flex items-center gap-2">
             <ArrowLeft className="w-4 h-4" /> Back to blog
           </Link>
         </main>
@@ -73,6 +105,7 @@ const BlogPost = () => {
   const title    = cleanTitle(post.title);
   const mins     = post.readingTime || readingTime(content);
   const category = getCategory(title);
+  const relatedPosts = getRelatedPosts(post.slug, category);
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -106,7 +139,13 @@ const BlogPost = () => {
               height: 32
             },
           },
-          mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
+          mainEntityOfPage: absolutePageUrl(`/blog/${post.slug}`),
+          isPartOf: {
+            "@type": "Blog",
+            name: `Fleet Management Blog | ${SITE_NAME}`,
+            url: absolutePageUrl("/blog"),
+          },
+          relatedLink: relatedPosts.map((related) => absolutePageUrl(`/blog/${related.slug}`)),
         }}
       />
       <Navbar />
@@ -119,7 +158,7 @@ const BlogPost = () => {
         <div className="container-tight pt-28 pb-10">
           {/* Back link */}
           <Link
-            to="/blog"
+            to="/blog/"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-10 font-medium group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
@@ -216,7 +255,27 @@ const BlogPost = () => {
             ) : loadError ? (
               <p className="text-destructive font-medium">Failed to load article content. Please refresh the page.</p>
             ) : (
-              <ReactMarkdown>
+              <ReactMarkdown
+                components={{
+                  a: ({ href, children, ...props }) => {
+                    const normalizedHref = normalizeArticleHref(href);
+                    const isExternal =
+                      !!normalizedHref &&
+                      /^https?:\/\//i.test(normalizedHref) &&
+                      !normalizedHref.startsWith(SITE_URL);
+
+                    return (
+                      <a
+                        {...props}
+                        href={normalizedHref}
+                        rel={isExternal ? "nofollow noopener noreferrer" : props.rel}
+                      >
+                        {children}
+                      </a>
+                    );
+                  },
+                }}
+              >
                 {content
                   ? content
                       // Strip first H1 heading (duplicates the title)
@@ -237,17 +296,60 @@ const BlogPost = () => {
               <p className="text-xs text-muted-foreground">See how Fleetcodes can cut costs and replace manual work.</p>
             </div>
             <Link
-              to="/book-demo"
+              to="/book-demo/"
               className="shrink-0 inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-xl bg-primary text-white hover:bg-primary/90 transition-colors"
             >
               Book a Demo
             </Link>
           </div>
 
+          {relatedPosts.length > 0 && (
+            <section className="mt-12" aria-labelledby="related-articles">
+              <div className="flex items-end justify-between gap-4 mb-5">
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-primary mb-2">
+                    Keep reading
+                  </p>
+                  <h2 id="related-articles" className="font-display text-xl font-bold tracking-tight text-foreground">
+                    Related fleet guides
+                  </h2>
+                </div>
+                <Link
+                  to="/blog/"
+                  className="hidden sm:inline-flex items-center gap-1 text-xs font-semibold text-primary"
+                >
+                  All articles
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {relatedPosts.map((related) => (
+                  <Link
+                    key={related.slug}
+                    to={`/blog/${related.slug}/`}
+                    className="group rounded-lg border border-border/60 bg-card/40 p-4 hover:border-primary/30 transition-colors"
+                  >
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-2">
+                      {getCategory(related.title)}
+                    </p>
+                    <h3 className="text-sm font-semibold leading-snug text-foreground group-hover:text-primary transition-colors">
+                      {cleanTitle(related.title)}
+                    </h3>
+                    {related.excerpt && (
+                      <p className="mt-2 text-xs leading-relaxed text-muted-foreground line-clamp-2">
+                        {cleanTitle(related.excerpt)}
+                      </p>
+                    )}
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* Bottom nav */}
           <div className="mt-10 pt-8 border-t border-border/40">
             <Link
-              to="/blog"
+              to="/blog/"
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors font-medium group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />

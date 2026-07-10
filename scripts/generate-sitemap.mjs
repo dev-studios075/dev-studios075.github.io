@@ -24,6 +24,23 @@ const normalizeUrl = (value) => encodeURI(value);
 
 const absoluteUrl = (loc) => normalizeUrl(`${siteUrl}${loc}`);
 
+const canonicalPath = (loc = "/") => {
+  const basePath = loc.split(/[?#]/)[0] || "/";
+  const normalizedPath = basePath.startsWith("/") ? basePath : `/${basePath}`;
+
+  if (normalizedPath === "/" || normalizedPath.endsWith("/")) {
+    return normalizedPath;
+  }
+
+  if (/\/[^/]+\.[^/]+$/.test(normalizedPath)) {
+    return normalizedPath;
+  }
+
+  return `${normalizedPath}/`;
+};
+
+const absolutePageUrl = (loc) => absoluteUrl(canonicalPath(loc));
+
 const parseDate = (raw) => {
   const match = raw.match(/^date:\s*["']?([^"'\n]+)["']?/m);
   return match?.[1]?.trim();
@@ -48,6 +65,33 @@ const parseField = (raw, field) => {
   return value.trim();
 };
 
+const daysSince = (dateValue) => {
+  if (!dateValue) {
+    return Number.POSITIVE_INFINITY;
+  }
+
+  const date = new Date(dateValue);
+  if (Number.isNaN(date.getTime())) {
+    return Number.POSITIVE_INFINITY;
+  }
+
+  return (Date.now() - date.getTime()) / 86400000;
+};
+
+const blogPriority = (dateValue) => {
+  const age = daysSince(dateValue);
+  if (age <= 30) return "0.85";
+  if (age <= 90) return "0.8";
+  return "0.7";
+};
+
+const blogChangefreq = (dateValue) => {
+  const age = daysSince(dateValue);
+  if (age <= 30) return "weekly";
+  if (age <= 90) return "weekly";
+  return "monthly";
+};
+
 const blogUrls = fs.existsSync(blogDir)
   ? fs
       .readdirSync(blogDir)
@@ -56,14 +100,18 @@ const blogUrls = fs.existsSync(blogDir)
         const raw = fs.readFileSync(path.join(blogDir, file), "utf8");
         const slug = file.replace(/\.md$/, "");
 
+        const lastmod = parseDate(raw);
+
         return {
           loc: `/blog/${slug}`,
-          lastmod: parseDate(raw),
+          lastmod,
           title: parseField(raw, "title"),
           image: parseField(raw, "coverImage"),
-          priority: "0.7",
+          priority: blogPriority(lastmod),
+          changefreq: blogChangefreq(lastmod),
         };
       })
+      .sort((a, b) => (b.lastmod || "").localeCompare(a.lastmod || ""))
   : [];
 
 const urls = [
@@ -101,7 +149,7 @@ const urls = [
 ];
 
 const alternateLinks = (loc) => {
-  const href = absoluteUrl(loc);
+  const href = absolutePageUrl(loc);
 
   return `
     <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(href)}" />
@@ -123,6 +171,11 @@ const imageEntry = (url) => {
     </image:image>`;
 };
 
+const pubDate = (dateValue) => {
+  const date = dateValue ? new Date(dateValue) : new Date();
+  return Number.isNaN(date.getTime()) ? new Date().toUTCString() : date.toUTCString();
+};
+
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -132,9 +185,9 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 ${urls
   .map(
     (url) => `  <url>
-    <loc>${escapeXml(absoluteUrl(url.loc))}</loc>${alternateLinks(url.loc)}${imageEntry(url)}${url.lastmod ? `
+    <loc>${escapeXml(absolutePageUrl(url.loc))}</loc>${alternateLinks(url.loc)}${imageEntry(url)}${url.lastmod ? `
     <lastmod>${escapeXml(url.lastmod)}</lastmod>` : ""}
-    <changefreq>${url.loc.startsWith("/blog/") ? "monthly" : "weekly"}</changefreq>
+    <changefreq>${url.changefreq || (url.loc.startsWith("/blog/") ? "monthly" : "weekly")}</changefreq>
     <priority>${url.priority}</priority>
   </url>`,
   )
@@ -159,11 +212,12 @@ Fleetcodes is an automation-first transport management system for logistics team
 ## Core Pages
 
 - Homepage: ${siteUrl}/
-- About: ${siteUrl}/about
-- Careers: ${siteUrl}/careers
-- Book Demo: ${siteUrl}/book-demo
-- Blog: ${siteUrl}/blog
+- About: ${siteUrl}/about/
+- Careers: ${siteUrl}/careers/
+- Book Demo: ${siteUrl}/book-demo/
+- Blog: ${siteUrl}/blog/
 - Sitemap: ${siteUrl}/sitemap.xml
+- Blog Feed: ${siteUrl}/feed.xml
 
 ## Topics
 
@@ -177,13 +231,37 @@ Fleetcodes is an automation-first transport management system for logistics team
 ## Blog Articles
 
 ${blogUrls
-  .map((post) => `- ${post.title || post.loc.replace("/blog/", "")}: ${siteUrl}${post.loc}`)
+  .map((post) => `- ${post.title || post.loc.replace("/blog/", "")}: ${absolutePageUrl(post.loc)}`)
   .join("\n")}
+`;
+
+const feed = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fleetcodes Blog</title>
+    <link>${siteUrl}/blog/</link>
+    <description>Fleet management, TMS automation, dispatch, compliance, and logistics operations insights from Fleetcodes.</description>
+    <language>en-IN</language>
+    <atom:link href="${siteUrl}/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+${blogUrls
+  .map(
+    (post) => `    <item>
+      <title>${escapeXml(post.title || post.loc.replace("/blog/", ""))}</title>
+      <link>${escapeXml(absolutePageUrl(post.loc))}</link>
+      <guid isPermaLink="true">${escapeXml(absolutePageUrl(post.loc))}</guid>${post.lastmod ? `
+      <pubDate>${pubDate(post.lastmod)}</pubDate>` : ""}
+    </item>`,
+  )
+  .join("\n")}
+  </channel>
+</rss>
 `;
 
 fs.mkdirSync(publicDir, { recursive: true });
 fs.writeFileSync(path.join(publicDir, "sitemap.xml"), sitemap);
 fs.writeFileSync(path.join(publicDir, "robots.txt"), robots);
 fs.writeFileSync(path.join(publicDir, "llms.txt"), llms);
+fs.writeFileSync(path.join(publicDir, "feed.xml"), feed);
 
-console.log(`Generated sitemap.xml, robots.txt, and llms.txt for ${siteUrl}`);
+console.log(`Generated sitemap.xml, robots.txt, llms.txt, and feed.xml for ${siteUrl}`);
