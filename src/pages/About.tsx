@@ -109,14 +109,14 @@ const About = () => {
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
-              to="/book-demo"
+              to="/book-demo/"
               className="group flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-primary hover:opacity-90 hover:shadow-glow transition-all"
             >
               See the Platform
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
             <Link
-              to="/careers"
+              to="/careers/"
               className="flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-300 border border-border hover:border-primary/40 hover:text-primary transition-all"
             >
               Join Our Team
@@ -332,7 +332,7 @@ const About = () => {
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4">
                 <Link
-                  to="/book-demo"
+                  to="/book-demo/"
                   className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-primary hover:opacity-90 hover:shadow-glow transition-all"
                 >
                   Book a Live Demo

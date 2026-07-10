@@ -8,6 +8,7 @@ import {
   DEFAULT_KEYWORDS,
   DEFAULT_TITLE,
   SITE_NAME,
+  absolutePageUrl,
   absoluteUrl,
 } from "@/lib/site";
 
@@ -93,7 +94,7 @@ const Seo = ({
   const location = useLocation();
 
   useEffect(() => {
-    const canonicalUrl = absoluteUrl(path || `${location.pathname}${location.search}`);
+    const canonicalUrl = absolutePageUrl(path || location.pathname);
     const imageUrl = absoluteUrl(image);
 
     document.title = title;

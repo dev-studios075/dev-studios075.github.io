@@ -50,7 +50,7 @@ const Hero = () => {
               className="group"
               asChild
             >
-              <Link to="/book-demo" onClick={() => trackHeroCta("Book Demo")}>
+              <Link to="/book-demo/" onClick={() => trackHeroCta("Book Demo")}>
                 Book Demo
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>

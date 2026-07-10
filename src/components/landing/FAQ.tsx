@@ -83,7 +83,7 @@ export default function FAQ() {
         <div className="text-center mt-12 text-sm text-slate-500 dark:text-slate-400 flex items-center justify-center gap-2">
           <MessagesSquare className="w-4 h-4 text-primary" />
           Still have questions? 
-          <a href="/book-demo" className="text-primary hover:underline font-semibold underline-offset-4 pl-1">
+          <a href="/book-demo/" className="text-primary hover:underline font-semibold underline-offset-4 pl-1">
             Schedule a callback with our team
           </a>
         </div>

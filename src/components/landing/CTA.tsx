@@ -45,13 +45,13 @@ function CallToAction() {
                 className="group/btn w-full sm:w-auto"
                 asChild
               >
-                <Link to="/book-demo" onClick={() => trackBottomCta("Schedule a Demo")}>
+                <Link to="/book-demo/" onClick={() => trackBottomCta("Schedule a Demo")}>
                   Schedule a Demo
                   <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                 </Link>
               </Button>
               <Button variant="glass" size="lg" className="w-full sm:w-auto" asChild>
-                <Link to="/book-demo" onClick={() => trackBottomCta("Talk to sales")}>
+                <Link to="/book-demo/" onClick={() => trackBottomCta("Talk to sales")}>
                   Talk to sales
                 </Link>
               </Button>

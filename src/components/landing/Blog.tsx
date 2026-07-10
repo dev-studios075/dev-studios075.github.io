@@ -27,7 +27,9 @@ const getReadTime = (title: string) => {
 };
 
 const Blog = () => {
-  const posts = getAllPosts().slice(0, 3);
+  const posts = getAllPosts();
+  const featuredPosts = posts.slice(0, 3);
+  const morePosts = posts.slice(3, 9);
 
   return (
     <section id="blog" className="pt-10 pb-8 lg:pt-12 lg:pb-10 relative overflow-hidden">
@@ -52,7 +54,7 @@ const Blog = () => {
             </h2>
           </div>
           <Button asChild variant="glass" size="lg" className="self-start lg:self-auto group">
-            <Link to="/blog">
+            <Link to="/blog/">
               View all articles
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
@@ -60,7 +62,7 @@ const Blog = () => {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((post, i) => (
+          {featuredPosts.map((post, i) => (
             <motion.article
               key={post.slug}
               initial={{ opacity: 0, y: 30 }}
@@ -72,7 +74,7 @@ const Blog = () => {
               {/* Premium CSS-only card hover glow */}
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-              <Link to={`/blog/${post.slug}`} className="relative overflow-hidden aspect-[16/10] block">
+              <Link to={`/blog/${post.slug}/`} className="relative overflow-hidden aspect-[16/10] block">
                 <img
                   src={post.coverImage || fallbackImages[i % fallbackImages.length]}
                   alt={post.title}
@@ -106,7 +108,7 @@ const Blog = () => {
                 </div>
 
                 <h3 className="font-display font-semibold text-[15px] sm:text-base leading-snug mb-3 text-slate-900 dark:text-slate-100 group-hover:text-primary transition-colors">
-                  <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+                  <Link to={`/blog/${post.slug}/`}>{post.title}</Link>
                 </h3>
                 
                 <p className="text-[12px] sm:text-xs text-muted-foreground leading-relaxed mb-5 flex-1">
@@ -114,7 +116,7 @@ const Blog = () => {
                 </p>
 
                 <Link
-                  to={`/blog/${post.slug}`}
+                  to={`/blog/${post.slug}/`}
                   className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary group/link mt-auto"
                 >
                   Read article
@@ -124,6 +126,26 @@ const Blog = () => {
             </motion.article>
           ))}
         </div>
+
+        {morePosts.length > 0 && (
+          <nav className="mt-8 border-t border-border/50 pt-6" aria-label="More logistics articles">
+            <p className="text-[11px] font-bold uppercase tracking-widest text-primary mb-4">
+              More fleet management guides
+            </p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3">
+              {morePosts.map((post) => (
+                <Link
+                  key={post.slug}
+                  to={`/blog/${post.slug}/`}
+                  className="group inline-flex items-start gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary transition-colors"
+                >
+                  <ArrowUpRight className="w-3.5 h-3.5 mt-0.5 shrink-0 text-primary/70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <span>{post.title}</span>
+                </Link>
+              ))}
+            </div>
+          </nav>
+        )}
       </div>
     </section>
   );
