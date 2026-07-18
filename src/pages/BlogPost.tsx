@@ -6,7 +6,7 @@ import { getAllPosts, getPostBySlug, getPostContent } from "@/lib/blog";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import Seo from "@/components/seo/Seo";
-import { DEFAULT_IMAGE, SITE_NAME, SITE_URL, absolutePageUrl, absoluteUrl } from "@/lib/site";
+import { DEFAULT_IMAGE, SITE_NAME, SITE_URL, absolutePageUrl, absoluteUrl, seoDescription, seoTitle } from "@/lib/site";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
@@ -290,8 +290,8 @@ const BlogPost = () => {
         style={{ width: `${scrollProgress}%` }}
       />
       <Seo
-        title={`${title} | ${SITE_NAME}`}
-        description={post.excerpt}
+        title={seoTitle(title)}
+        description={seoDescription(post.excerpt)}
         path={`/blog/${post.slug}`}
         image={post.coverImage || DEFAULT_IMAGE}
         type="article"
@@ -300,13 +300,17 @@ const BlogPost = () => {
         author={post.author}
         jsonLd={{
           "@context": "https://schema.org",
+          "@graph": [{
           "@type": "BlogPosting",
           headline: title,
-          description: post.excerpt,
+          description: seoDescription(post.excerpt),
           image: absoluteUrl(post.coverImage || DEFAULT_IMAGE),
           datePublished: post.date,
           dateModified: post.date,
-          author: post.author ? { "@type": "Person", name: post.author } : undefined,
+          author: post.author ? {
+            "@type": post.author.toLowerCase().includes("fleetcodes") ? "Organization" : "Person",
+            name: post.author,
+          } : undefined,
           inLanguage: "en-IN",
           wordCount: content ? content.trim().split(/\s+/).length : undefined,
           publisher: {
@@ -326,6 +330,14 @@ const BlogPost = () => {
             url: absolutePageUrl("/blog"),
           },
           relatedLink: relatedPosts.map((related) => absolutePageUrl(`/blog/${related.slug}`)),
+        }, {
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: absolutePageUrl("/") },
+            { "@type": "ListItem", position: 2, name: "Blog", item: absolutePageUrl("/blog") },
+            { "@type": "ListItem", position: 3, name: title, item: absolutePageUrl(`/blog/${post.slug}`) },
+          ],
+        }],
         }}
       />
       <Navbar />

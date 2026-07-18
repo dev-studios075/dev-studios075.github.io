@@ -24,6 +24,24 @@ const escapeHtml = (value = "") =>
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 
+const truncateAtWord = (value = "", maxLength) => {
+  const clean = String(value).replace(/\s+/g, " ").trim();
+  if (clean.length <= maxLength) return clean;
+  const shortened = clean.slice(0, maxLength + 1);
+  const boundary = shortened.lastIndexOf(" ");
+  return `${shortened.slice(0, boundary > maxLength * 0.7 ? boundary : maxLength).trim()}…`;
+};
+
+const seoTitle = (title = "") => {
+  const suffix = ` | ${siteName}`;
+  const clean = String(title).replace(/\s+/g, " ").trim();
+  if (clean.toLowerCase().includes(siteName.toLowerCase())) return truncateAtWord(clean, 60);
+  if (`${clean}${suffix}`.length <= 60) return `${clean}${suffix}`;
+  return `${truncateAtWord(clean, 60 - suffix.length - 1)}${suffix}`;
+};
+
+const seoDescription = (description = "") => truncateAtWord(description, 160);
+
 const cleanMarkdown = (content = "") =>
   content
     .replace(/^#\s+.*$/m, "")
@@ -358,24 +376,26 @@ writeRoute(
 );
 
 posts.forEach((post) => {
+  const canonicalUrl = absolutePageUrl(`/blog/${post.slug}`);
   writeRoute(
     `/blog/${post.slug}`,
     renderPage({
-      title: `${post.title} | ${siteName}`,
-      description: post.description,
+      title: seoTitle(post.title),
+      description: seoDescription(post.description),
       path: `/blog/${post.slug}`,
       image: post.image,
       type: "article",
       jsonLd: {
         "@context": "https://schema.org",
+        "@graph": [{
         "@type": "BlogPosting",
         headline: post.title,
-        description: post.description,
+        description: seoDescription(post.description),
         image: absoluteUrl(post.image),
         datePublished: post.date,
         dateModified: post.date,
         author: post.author ? {
-          "@type": "Person",
+          "@type": post.author.toLowerCase().includes("fleetcodes") ? "Organization" : "Person",
           name: post.author,
         } : undefined,
         inLanguage: "en-IN",
@@ -397,6 +417,14 @@ posts.forEach((post) => {
           url: absolutePageUrl("/blog"),
         },
         relatedLink: getRelatedPosts(post).map((related) => absolutePageUrl(`/blog/${related.slug}`)),
+      }, {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: absolutePageUrl("/") },
+          { "@type": "ListItem", position: 2, name: "Blog", item: absolutePageUrl("/blog") },
+          { "@type": "ListItem", position: 3, name: post.title, item: canonicalUrl },
+        ],
+      }],
       },
       bodyHtml: renderStaticFallback({
         eyebrow: "Fleetcodes Blog",

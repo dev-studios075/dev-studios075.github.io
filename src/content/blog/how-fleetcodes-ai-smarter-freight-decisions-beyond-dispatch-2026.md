@@ -2,7 +2,7 @@
 title: "How Fleetcodes Uses AI to Make Smarter Freight Decisions — Beyond Just Dispatch"
 date: 2026-05-28
 author: Fleetcodes Team
-excerpt: "metaDescription: "How Fleetcodes uses AI beyond dispatch in 2026 — revenue intelligence, predictive maintenance, cost anomaly detection, driver analytics and freight profitability for Indian fleet operators."
+excerpt: "See how Fleetcodes uses AI beyond dispatch for revenue intelligence, predictive maintenance, cost detection, driver analytics, and freight profitability."
 coverImage: /uploads/blog65.jpg
 ---
 
