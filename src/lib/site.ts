@@ -44,3 +44,23 @@ export const absolutePageUrl = (path = "/") => {
   const canonical = canonicalPath(path);
   return /^https?:\/\//i.test(canonical) ? canonical : absoluteUrl(canonical);
 };
+
+const truncateAtWord = (value: string, maxLength: number) => {
+  const clean = value.replace(/\s+/g, " ").trim();
+  if (clean.length <= maxLength) return clean;
+  const shortened = clean.slice(0, maxLength + 1);
+  const boundary = shortened.lastIndexOf(" ");
+  return `${shortened.slice(0, boundary > maxLength * 0.7 ? boundary : maxLength).trim()}…`;
+};
+
+export const seoTitle = (title: string, includeBrand = true) => {
+  const brandSuffix = ` | ${SITE_NAME}`;
+  const clean = title.replace(/\s+/g, " ").trim();
+  if (!includeBrand || clean.toLowerCase().includes(SITE_NAME.toLowerCase())) {
+    return truncateAtWord(clean, 60);
+  }
+  if (`${clean}${brandSuffix}`.length <= 60) return `${clean}${brandSuffix}`;
+  return `${truncateAtWord(clean, 60 - brandSuffix.length - 1)}${brandSuffix}`;
+};
+
+export const seoDescription = (description: string) => truncateAtWord(description, 160);

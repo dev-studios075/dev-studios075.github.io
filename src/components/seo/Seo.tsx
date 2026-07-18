@@ -56,6 +56,8 @@ const setLink = (rel: string, href: string) => {
   element.href = href;
 };
 
+const removeMeta = (selector: string) => document.head.querySelector(selector)?.remove();
+
 const setJsonLd = (jsonLd?: JsonLd | JsonLd[]) => {
   const id = "route-json-ld";
   const existing = document.getElementById(id);
@@ -134,18 +136,21 @@ const Seo = ({
         property: "article:published_time",
         content: publishedTime,
       });
-    }
+    } else removeMeta('meta[property="article:published_time"]');
 
     if (modifiedTime) {
       setMeta('meta[property="article:modified_time"]', {
         property: "article:modified_time",
         content: modifiedTime,
       });
-    }
+    } else removeMeta('meta[property="article:modified_time"]');
 
     if (author) {
       setMeta('meta[name="author"]', { name: "author", content: author });
       setMeta('meta[property="article:author"]', { property: "article:author", content: author });
+    } else {
+      removeMeta('meta[name="author"]');
+      removeMeta('meta[property="article:author"]');
     }
 
     setJsonLd(jsonLd);
