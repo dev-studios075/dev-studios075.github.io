@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Calendar, Clock, ArrowUpRight, Tag, Search } from "lucide-react";
+import { Calendar, Clock, ArrowUpRight, Tag, Search, BookOpen } from "lucide-react";
 import { getAllPosts } from "@/lib/blog";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
@@ -12,6 +12,15 @@ import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
 
 const fallbackImages = [blog1, blog2, blog3];
+
+const essentialGuideSlugs = [
+  "what-is-fleet-management-system-india-guide-2026",
+  "how-to-start-transport-business-india-guide-2026",
+  "e-way-bill-2-india-transporter-compliance-guide-2026",
+  "fleet-sop-automation-transport-operations-india-2026",
+  "automating-billing-pods-driver-settlements-fleetcodes-2026",
+  "what-is-transport-manifest-guide-transporters-shippers-2026",
+];
 
 /** Strip YAML-encoded wrapping quotes */
 const cleanTitle = (t = "") => t.replace(/^["'""]|["'""]$/g, "").trim();
@@ -211,6 +220,9 @@ const Blog = () => {
   });
 
   const [featured, ...rest] = filteredPosts;
+  const essentialGuides = essentialGuideSlugs
+    .map((slug) => posts.find((post) => post.slug === slug))
+    .filter((post): post is (typeof posts)[number] => Boolean(post));
   const pageTitle = `Fleet Management Blog | ${SITE_NAME}`;
   const description =
     "Fleet management, AI dispatch, TMS automation, compliance, and logistics operations insights for Indian transporters and shippers.";
@@ -266,6 +278,32 @@ const Blog = () => {
               Deep dives on AI-powered TMS, fleet intelligence, and the operational future of logistics.
             </p>
           </div>
+
+          <section aria-labelledby="essential-guides-heading" className="mb-10 rounded-2xl border border-primary/15 bg-primary/[0.035] p-6 sm:p-7">
+            <div className="flex items-start gap-3 mb-5">
+              <span className="grid place-items-center w-9 h-9 rounded-xl bg-primary/10 text-primary shrink-0">
+                <BookOpen className="w-4 h-4" />
+              </span>
+              <div>
+                <h2 id="essential-guides-heading" className="font-display text-xl font-bold tracking-tight">Essential fleet and transport guides</h2>
+                <p className="text-sm text-muted-foreground mt-1">Start with these practical guides for running compliant, efficient fleet operations in India.</p>
+              </div>
+            </div>
+            <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+              {essentialGuides.map((post) => (
+                <li key={post.slug}>
+                  <Link
+                    to={`/blog/${post.slug}/`}
+                    onClick={() => trackArticleClick(post.title, post.slug)}
+                    className="group flex h-full items-start justify-between gap-3 rounded-xl border border-border/60 bg-background/60 p-3.5 text-sm font-semibold leading-snug hover:border-primary/30 hover:text-primary transition-colors"
+                  >
+                    {cleanTitle(post.title)}
+                    <ArrowUpRight className="w-3.5 h-3.5 shrink-0 mt-0.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
 
           {/* ── Search & Filter Controls ──────────────────────── */}
           <div className="relative z-20 flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between mb-12 p-6 glass rounded-2xl">
