@@ -33,7 +33,7 @@ const customers: Customer[] = [
     logo: "/assets/clients/chhikara-logistics.png",
     width: 623,
     height: 212,
-    monochrome: true,
+    monochrome: false,
   },
 ];
 
@@ -64,10 +64,10 @@ const CustomerLogos = () => (
             height={customer.height}
             loading="lazy"
             decoding="async"
-            className={`h-9 w-auto max-w-[145px] object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 sm:h-10 sm:max-w-[175px] ${
+            className={`h-9 w-auto max-w-[145px] object-contain opacity-70 transition-all duration-300 group-hover:opacity-100 sm:h-10 sm:max-w-[175px] ${
               customer.monochrome
-                ? "mix-blend-multiply dark:invert dark:mix-blend-screen"
-                : "group-hover:grayscale-0 dark:brightness-110"
+                ? "grayscale mix-blend-multiply dark:invert dark:mix-blend-screen"
+                : "dark:brightness-110"
             }`}
           />
         </li>
