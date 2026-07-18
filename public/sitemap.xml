@@ -60,6 +60,94 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.fleetcodes.com/blog/page/2/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/page/2/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/page/2/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog - Page 2 | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/blog/page/3/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/page/3/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/page/3/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog - Page 3 | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/blog/page/4/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/page/4/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/page/4/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog - Page 4 | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/blog/page/5/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/page/5/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/page/5/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog - Page 5 | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/blog/page/6/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/page/6/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/page/6/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog - Page 6 | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/blog/page/7/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/page/7/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/page/7/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog - Page 7 | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/blog/page/8/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/page/8/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/page/8/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog - Page 8 | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/blog/page/9/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/page/9/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/page/9/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog - Page 9 | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.fleetcodes.com/blog/ev-fleet-management-india-2026-how-fleetcodes-prepares-transport-businesses-electrification/</loc>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/ev-fleet-management-india-2026-how-fleetcodes-prepares-transport-businesses-electrification/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/ev-fleet-management-india-2026-how-fleetcodes-prepares-transport-businesses-electrification/" />

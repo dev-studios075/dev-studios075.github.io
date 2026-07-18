@@ -193,6 +193,7 @@ const essentialGuideSlugs = [
   "automating-billing-pods-driver-settlements-fleetcodes-2026",
   "what-is-transport-manifest-guide-transporters-shippers-2026",
 ];
+const postsPerPage = 10;
 
 const renderRelatedLinks = (currentPost) => {
   const related = getRelatedPosts(currentPost);
@@ -352,20 +353,37 @@ writeRoute(
   }),
 );
 
-writeRoute(
-  "/blog",
-  renderPage({
-    title: `Fleet Management Blog | ${siteName}`,
+const blogPageCount = Math.max(1, Math.ceil(posts.length / postsPerPage));
+
+for (let pageNumber = 1; pageNumber <= blogPageCount; pageNumber += 1) {
+  const routePath = pageNumber === 1 ? "/blog" : `/blog/page/${pageNumber}`;
+  const pagePosts = posts.slice((pageNumber - 1) * postsPerPage, pageNumber * postsPerPage);
+  const pageTitle = pageNumber === 1
+    ? `Fleet Management Blog | ${siteName}`
+    : `Fleet Management Blog - Page ${pageNumber} | ${siteName}`;
+  const paginationHtml = `
+    <nav aria-label="Blog pagination">
+      ${pageNumber > 1 ? `<a rel="prev" href="${pageNumber === 2 ? "/blog/" : `/blog/page/${pageNumber - 1}/`}">Previous</a>` : ""}
+      ${Array.from({ length: blogPageCount }, (_, index) => index + 1)
+        .map((page) => `<a href="${page === 1 ? "/blog/" : `/blog/page/${page}/`}"${page === pageNumber ? ' aria-current="page"' : ""}>${page}</a>`)
+        .join(" ")}
+      ${pageNumber < blogPageCount ? `<a rel="next" href="/blog/page/${pageNumber + 1}/">Next</a>` : ""}
+    </nav>`;
+
+  writeRoute(
+    routePath,
+    renderPage({
+    title: pageTitle,
     description:
       "Fleet management, AI dispatch, TMS automation, compliance, and logistics operations insights for Indian transporters and shippers.",
-    path: "/blog",
+    path: routePath,
     image: defaultImage,
     jsonLd: {
       "@context": "https://schema.org",
       "@type": "Blog",
-      name: `Fleet Management Blog | ${siteName}`,
-      url: absolutePageUrl("/blog"),
-      blogPost: posts.map((post) => ({
+      name: pageTitle,
+      url: absolutePageUrl(routePath),
+      blogPost: pagePosts.map((post) => ({
         "@type": "BlogPosting",
         headline: post.title,
         url: absolutePageUrl(`/blog/${post.slug}`),
@@ -379,28 +397,29 @@ writeRoute(
     },
     bodyHtml: renderStaticFallback({
       eyebrow: "Fleet Management Blog",
-      title: `Fleet Management Blog | ${siteName}`,
+      title: pageTitle,
       description:
         "Fleet management, AI dispatch, TMS automation, compliance, and logistics operations insights for Indian transporters and shippers.",
       contentHtml: `
-        <section aria-labelledby="essential-guides-heading">
+        ${pageNumber === 1 ? `<section aria-labelledby="essential-guides-heading">
           <h2 id="essential-guides-heading">Essential fleet and transport guides</h2>
           <ul>${essentialGuideSlugs
             .map((slug) => posts.find((post) => post.slug === slug))
             .filter(Boolean)
             .map((post) => `<li><a href="${escapeHtml(canonicalPath(`/blog/${post.slug}`))}">${escapeHtml(post.title)}</a></li>`)
             .join("")}</ul>
-        </section>
+        </section>` : ""}
         <h2>All fleet management articles</h2>
-        <ul>${posts
+        <ul>${pagePosts
         .map(
           (post) =>
             `<li><a href="${escapeHtml(canonicalPath(`/blog/${post.slug}`))}">${escapeHtml(post.title)}</a>${post.description ? ` - ${escapeHtml(post.description)}` : ""}</li>`,
         )
-        .join("")}</ul>`,
+        .join("")}</ul>
+        ${paginationHtml}`,
     }),
-  }),
-);
+  }));
+}
 
 posts.forEach((post) => {
   const canonicalUrl = absolutePageUrl(`/blog/${post.slug}`);

@@ -114,6 +114,17 @@ const blogUrls = fs.existsSync(blogDir)
       .sort((a, b) => (b.lastmod || "").localeCompare(a.lastmod || ""))
   : [];
 
+const blogArchiveUrls = Array.from(
+  { length: Math.max(0, Math.ceil(blogUrls.length / 10) - 1) },
+  (_, index) => ({
+    loc: `/blog/page/${index + 2}`,
+    title: `Fleet Management Blog - Page ${index + 2} | Fleetcodes`,
+    image: "/new-og-image.png",
+    priority: "0.6",
+    changefreq: "weekly",
+  }),
+);
+
 const urls = [
   {
     loc: "/",
@@ -145,6 +156,7 @@ const urls = [
     image: "/new-og-image.png",
     priority: "0.8",
   },
+  ...blogArchiveUrls,
   ...blogUrls,
 ];
 
