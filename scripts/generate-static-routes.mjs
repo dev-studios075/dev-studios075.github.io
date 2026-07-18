@@ -162,9 +162,14 @@ const getCategory = (title = "") => {
 };
 
 const getRelatedPosts = (currentPost) =>
-  posts
-    .filter((candidate) => candidate.slug !== currentPost.slug)
-    .sort((a, b) => {
+  (() => {
+    const currentIndex = posts.findIndex((post) => post.slug === currentPost.slug);
+    const guaranteedNeighbors = [-2, -1, 1, 2]
+      .map((offset) => posts[(currentIndex + offset + posts.length) % posts.length])
+      .filter((post) => post && post.slug !== currentPost.slug);
+    const semanticMatches = posts
+      .filter((candidate) => candidate.slug !== currentPost.slug)
+      .sort((a, b) => {
       const category = getCategory(currentPost.title);
       const aSameCategory = getCategory(a.title) === category ? 1 : 0;
       const bSameCategory = getCategory(b.title) === category ? 1 : 0;
@@ -174,8 +179,20 @@ const getRelatedPosts = (currentPost) =>
       }
 
       return (b.date || "").localeCompare(a.date || "");
-    })
-    .slice(0, 6);
+      });
+
+    return [...new Map([...guaranteedNeighbors, ...semanticMatches].map((post) => [post.slug, post])).values()]
+      .slice(0, 6);
+  })();
+
+const essentialGuideSlugs = [
+  "what-is-fleet-management-system-india-guide-2026",
+  "how-to-start-transport-business-india-guide-2026",
+  "e-way-bill-2-india-transporter-compliance-guide-2026",
+  "fleet-sop-automation-transport-operations-india-2026",
+  "automating-billing-pods-driver-settlements-fleetcodes-2026",
+  "what-is-transport-manifest-guide-transporters-shippers-2026",
+];
 
 const renderRelatedLinks = (currentPost) => {
   const related = getRelatedPosts(currentPost);
@@ -365,7 +382,17 @@ writeRoute(
       title: `Fleet Management Blog | ${siteName}`,
       description:
         "Fleet management, AI dispatch, TMS automation, compliance, and logistics operations insights for Indian transporters and shippers.",
-      contentHtml: `<ul>${posts
+      contentHtml: `
+        <section aria-labelledby="essential-guides-heading">
+          <h2 id="essential-guides-heading">Essential fleet and transport guides</h2>
+          <ul>${essentialGuideSlugs
+            .map((slug) => posts.find((post) => post.slug === slug))
+            .filter(Boolean)
+            .map((post) => `<li><a href="${escapeHtml(canonicalPath(`/blog/${post.slug}`))}">${escapeHtml(post.title)}</a></li>`)
+            .join("")}</ul>
+        </section>
+        <h2>All fleet management articles</h2>
+        <ul>${posts
         .map(
           (post) =>
             `<li><a href="${escapeHtml(canonicalPath(`/blog/${post.slug}`))}">${escapeHtml(post.title)}</a>${post.description ? ` - ${escapeHtml(post.description)}` : ""}</li>`,

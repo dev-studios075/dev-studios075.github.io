@@ -144,9 +144,15 @@ const getCategory = (title: string) => {
 };
 
 const getRelatedPosts = (currentSlug: string, currentCategory: string) =>
-  getAllPosts()
-    .filter((candidate) => candidate.slug !== currentSlug)
-    .sort((a, b) => {
+  (() => {
+    const posts = getAllPosts();
+    const currentIndex = posts.findIndex((post) => post.slug === currentSlug);
+    const guaranteedNeighbors = [-2, -1, 1, 2]
+      .map((offset) => posts[(currentIndex + offset + posts.length) % posts.length])
+      .filter((post) => post && post.slug !== currentSlug);
+    const semanticMatches = posts
+      .filter((candidate) => candidate.slug !== currentSlug)
+      .sort((a, b) => {
       const aSameCategory = getCategory(a.title) === currentCategory ? 1 : 0;
       const bSameCategory = getCategory(b.title) === currentCategory ? 1 : 0;
 
@@ -155,8 +161,11 @@ const getRelatedPosts = (currentSlug: string, currentCategory: string) =>
       }
 
       return (b.date || "").localeCompare(a.date || "");
-    })
-    .slice(0, 3);
+      });
+
+    return [...new Map([...guaranteedNeighbors, ...semanticMatches].map((post) => [post.slug, post])).values()]
+      .slice(0, 4);
+  })();
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
