@@ -200,8 +200,6 @@ User-agent: *
 Allow: /
 Disallow: /private/
 
-Host: ${siteUrl}
-
 Sitemap: ${siteUrl}/sitemap.xml
 `;
 
