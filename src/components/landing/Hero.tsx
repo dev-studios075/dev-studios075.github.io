@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import DashboardMockup from "./DashboardMockup";
 import { trackEvent } from "@/lib/analytics";
+import CustomerLogos from "./CustomerLogos";
 
 const Hero = () => {
   const trackHeroCta = (label: string) => {
@@ -105,19 +106,7 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* Logo strip */}
-        <div className="mt-12 lg:mt-16 text-center">
-          <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground/70 mb-6">
-            Trusted by forward-thinking logistics teams
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4 opacity-60">
-            {["NORTHWIND", "FREIGHTOS", "CARGOLINK", "FLEETCORE", "AXIS LOGISTICS", "ROUTEX"].map((n) => (
-              <span key={n} className="font-display font-semibold tracking-widest text-sm text-muted-foreground">
-                {n}
-              </span>
-            ))}
-          </div>
-        </div>
+        <CustomerLogos />
       </div>
     </section>
   );
