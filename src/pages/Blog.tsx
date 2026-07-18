@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Calendar, Clock, ArrowUpRight, Tag, Search, BookOpen } from "lucide-react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { Calendar, Clock, ArrowUpRight, Tag, Search, BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
 import { getAllPosts } from "@/lib/blog";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
@@ -12,6 +12,16 @@ import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
 
 const fallbackImages = [blog1, blog2, blog3];
+const POSTS_PER_PAGE = 10;
+
+const getPaginationItems = (currentPage: number, totalPages: number): Array<number | "ellipsis-start" | "ellipsis-end"> => {
+  if (totalPages <= 5) return Array.from({ length: totalPages }, (_, index) => index + 1);
+  if (currentPage <= 3) return [1, 2, 3, 4, "ellipsis-end"];
+  if (currentPage >= totalPages - 2) {
+    return ["ellipsis-start", totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+  }
+  return ["ellipsis-start", currentPage - 1, currentPage, currentPage + 1, "ellipsis-end"];
+};
 
 const essentialGuideSlugs = [
   "what-is-fleet-management-system-india-guide-2026",
@@ -107,6 +117,7 @@ const FeaturedCardSkeleton = () => (
 const Blog = () => {
   const posts = getAllPosts();
   const navigate = useNavigate();
+  const { page: pageParam } = useParams<{ page?: string }>();
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -174,6 +185,7 @@ const Blog = () => {
         } else {
           setActiveCategory(selected.categoryName);
           setSearchTerm("");
+          navigate("/blog/");
         }
         setShowSuggestions(false);
       }
@@ -219,11 +231,24 @@ const Blog = () => {
     return matchesSearch && matchesCategory;
   });
 
-  const [featured, ...rest] = filteredPosts;
+  const isFiltering = searchTerm.trim() !== "" || activeCategory !== "All";
+  const requestedPage = Number.parseInt(pageParam || "1", 10);
+  const totalPages = isFiltering ? 1 : Math.max(1, Math.ceil(filteredPosts.length / POSTS_PER_PAGE));
+  const currentPage = Number.isFinite(requestedPage)
+    ? Math.min(Math.max(requestedPage, 1), totalPages)
+    : 1;
+  const pagePosts = isFiltering
+    ? filteredPosts
+    : filteredPosts.slice((currentPage - 1) * POSTS_PER_PAGE, currentPage * POSTS_PER_PAGE);
+  const [featured, ...rest] = pagePosts;
+  const paginationItems = getPaginationItems(currentPage, totalPages);
   const essentialGuides = essentialGuideSlugs
     .map((slug) => posts.find((post) => post.slug === slug))
     .filter((post): post is (typeof posts)[number] => Boolean(post));
-  const pageTitle = `Fleet Management Blog | ${SITE_NAME}`;
+  const pageTitle = currentPage > 1
+    ? `Fleet Management Blog - Page ${currentPage} | ${SITE_NAME}`
+    : `Fleet Management Blog | ${SITE_NAME}`;
+  const pagePath = currentPage > 1 ? `/blog/page/${currentPage}` : "/blog";
   const description =
     "Fleet management, AI dispatch, TMS automation, compliance, and logistics operations insights for Indian transporters and shippers.";
 
@@ -240,14 +265,15 @@ const Blog = () => {
       <Seo
         title={pageTitle}
         description={description}
-        path="/blog"
+        path={pagePath}
+        noindex={requestedPage !== currentPage}
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Blog",
           name: pageTitle,
           description,
-          url: absolutePageUrl("/blog"),
-          blogPost: posts.slice(0, 20).map((post) => ({
+          url: absolutePageUrl(pagePath),
+          blogPost: pagePosts.map((post) => ({
             "@type": "BlogPosting",
             headline: post.title,
             url: absolutePageUrl(`/blog/${post.slug}`),
@@ -279,6 +305,7 @@ const Blog = () => {
             </p>
           </div>
 
+          {currentPage === 1 && !isFiltering && (
           <section aria-labelledby="essential-guides-heading" className="mb-10 rounded-2xl border border-primary/15 bg-primary/[0.035] p-6 sm:p-7">
             <div className="flex items-start gap-3 mb-5">
               <span className="grid place-items-center w-9 h-9 rounded-xl bg-primary/10 text-primary shrink-0">
@@ -304,6 +331,7 @@ const Blog = () => {
               ))}
             </ul>
           </section>
+          )}
 
           {/* ── Search & Filter Controls ──────────────────────── */}
           <div className="relative z-20 flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between mb-12 p-6 glass rounded-2xl">
@@ -318,6 +346,7 @@ const Blog = () => {
                   setSearchTerm(e.target.value);
                   setShowSuggestions(true);
                   setFocusedIndex(-1);
+                  if (currentPage !== 1) navigate("/blog/");
                 }}
                 onFocus={() => setShowSuggestions(true)}
                 onKeyDown={handleKeyDown}
@@ -335,9 +364,10 @@ const Blog = () => {
                           if (item.type === "post") {
                             trackArticleClick(item.title, item.slug);
                             navigate(`/blog/${item.slug}/`);
-                          } else {
-                            setActiveCategory(item.categoryName);
-                            setSearchTerm("");
+                        } else {
+                          setActiveCategory(item.categoryName);
+                          setSearchTerm("");
+                          navigate("/blog/");
                           }
                           setShowSuggestions(false);
                         }}
@@ -369,7 +399,10 @@ const Blog = () => {
               {["All", "AI & Automation", "Compliance", "Fleet", "Operations", "Analytics", "Technology"].map((cat) => (
                 <button
                   key={cat}
-                  onClick={() => setActiveCategory(cat)}
+                  onClick={() => {
+                    setActiveCategory(cat);
+                    if (currentPage !== 1) navigate("/blog/");
+                  }}
                   className={`px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide border transition-all whitespace-nowrap flex items-center gap-1.5 ${
                     activeCategory === cat
                       ? "bg-primary text-primary-foreground border-primary"
@@ -397,7 +430,7 @@ const Blog = () => {
               <Link
                 to={`/blog/${featured.slug}/`}
                 onClick={() => trackArticleClick(featured.title, featured.slug)}
-                className="group block glass rounded-2xl overflow-hidden mb-10 hover:border-primary/20 hover:shadow-elegant transition-all duration-300 animate-in fade-in duration-300"
+                className="group block glass rounded-2xl overflow-hidden mb-10 hover:border-primary/20 hover:shadow-elegant transition-all duration-300 animate-in fade-in"
               >
                 <div className="grid lg:grid-cols-2 gap-0">
                   {/* Image */}
@@ -524,6 +557,54 @@ const Blog = () => {
                 ))}
               </div>
             )
+          )}
+
+          {!isLoading && filteredPosts.length > POSTS_PER_PAGE && searchTerm === "" && activeCategory === "All" && (
+            <nav aria-label="Blog pagination" className="mt-14 mx-auto flex w-fit max-w-full items-center justify-center gap-1 sm:gap-2 rounded-2xl glass border border-border/60 p-2 shadow-card">
+              {currentPage > 1 ? (
+                <Link
+                  to={currentPage === 2 ? "/blog/" : `/blog/page/${currentPage - 1}/`}
+                  rel="prev"
+                  className="inline-flex h-11 items-center gap-1.5 rounded-xl px-2 sm:px-3 text-xs sm:text-sm font-semibold text-muted-foreground hover:bg-primary/10 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-colors"
+                >
+                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" /> <span className="hidden sm:inline">Previous</span>
+                </Link>
+              ) : (
+                <span aria-disabled="true" className="inline-flex h-11 items-center gap-1.5 rounded-xl px-2 sm:px-3 text-xs sm:text-sm font-semibold text-muted-foreground/30 cursor-not-allowed">
+                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" /> <span className="hidden sm:inline">Previous</span>
+                </span>
+              )}
+              {paginationItems.map((item) => item === "ellipsis-start" || item === "ellipsis-end" ? (
+                <span key={item} aria-hidden="true" className="grid h-11 w-7 sm:w-9 place-items-center text-sm font-bold tracking-wider text-muted-foreground">•••</span>
+              ) : (
+                  <Link
+                    key={item}
+                    to={item === 1 ? "/blog/" : `/blog/page/${item}/`}
+                    aria-current={item === currentPage ? "page" : undefined}
+                    aria-label={`Page ${item}`}
+                    className={`grid h-11 w-9 sm:w-11 place-items-center rounded-xl text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-all ${
+                      item === currentPage
+                        ? "border border-primary/25 bg-primary/10 text-primary shadow-sm"
+                        : "text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                    }`}
+                  >
+                    {item}
+                  </Link>
+              ))}
+              {currentPage < totalPages ? (
+                <Link
+                  to={`/blog/page/${currentPage + 1}/`}
+                  rel="next"
+                  className="inline-flex h-11 items-center gap-1.5 rounded-xl px-2 sm:px-3 text-xs sm:text-sm font-semibold text-muted-foreground hover:bg-primary/10 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-colors"
+                >
+                  <span className="hidden sm:inline">Next</span> <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                </Link>
+              ) : (
+                <span aria-disabled="true" className="inline-flex h-11 items-center gap-1.5 rounded-xl px-2 sm:px-3 text-xs sm:text-sm font-semibold text-muted-foreground/30 cursor-not-allowed">
+                  <span className="hidden sm:inline">Next</span> <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                </span>
+              )}
+            </nav>
           )}
 
           {!isLoading && (
