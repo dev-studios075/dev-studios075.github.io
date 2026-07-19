@@ -34,11 +34,10 @@ const TripPlanningVisualizer = () => {
         <text x="94" y="16" className="fill-slate-500 dark:fill-slate-400 font-bold" fontSize="7">DEL</text>
         <circle cx="170" cy="65" r="3.5" className="fill-primary" />
         <text x="164" y="76" className="fill-slate-500 dark:fill-slate-400 font-bold" fontSize="7">BLR</text>
-        <motion.circle cx="0" cy="0" r="3" className="fill-white stroke-primary shadow-glow"
-          strokeWidth="1"
-          animate={{ cx: [30, 100, 170], cy: [70, 25, 65] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-        />
+        <circle cx="30" cy="70" r="3" className="fill-white stroke-primary shadow-glow" strokeWidth="1">
+          <animate attributeName="cx" values="30;100;170" dur="4s" repeatCount="indefinite" />
+          <animate attributeName="cy" values="70;25;65" dur="4s" repeatCount="indefinite" />
+        </circle>
       </svg>
       <div className="absolute top-2 right-2 bg-primary/10 border border-primary/20 rounded px-1.5 py-0.5 text-primary text-[8px] font-bold tracking-wider animate-pulse">SAVED 14.8%</div>
       <div className="absolute bottom-2 left-2 text-[8px] text-slate-600 dark:text-slate-400 bg-white/90 dark:bg-slate-950/80 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-800 shadow-sm">NH-48 Optimal Route Selected</div>
