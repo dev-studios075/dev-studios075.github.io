@@ -106,11 +106,11 @@ const Seo = ({
     setMeta('meta[name="keywords"]', { name: "keywords", content: keywords });
     setMeta('meta[name="robots"]', {
       name: "robots",
-      content: noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large",
+      content: noindex ? "noindex, follow" : "index, follow, max-image-preview:large",
     });
     setMeta('meta[name="googlebot"]', {
       name: "googlebot",
-      content: noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large",
+      content: noindex ? "noindex, follow" : "index, follow, max-image-preview:large",
     });
 
     setMeta('meta[property="og:site_name"]', { property: "og:site_name", content: SITE_NAME });

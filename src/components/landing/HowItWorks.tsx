@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import useInViewport from "@/hooks/useInViewport";
 import { 
   Brain, 
   Zap, 
@@ -35,13 +36,14 @@ const steps = [
 ];
 
 const HowItWorks = () => {
+  const { ref: sectionRef, isInViewport } = useInViewport<HTMLElement>();
   const [activeStep, setActiveStep] = useState(0);
   const [progress, setProgress] = useState(0);
   const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
 
   // Auto-advance loop effect
   useEffect(() => {
-    if (isAutoplayPaused) {
+    if (!isInViewport || isAutoplayPaused) {
       setProgress(0);
       return;
     }
@@ -61,10 +63,10 @@ const HowItWorks = () => {
     }, 100);
 
     return () => clearInterval(interval);
-  }, [activeStep, isAutoplayPaused]);
+  }, [activeStep, isAutoplayPaused, isInViewport]);
 
   return (
-    <section id="how" className="pt-10 pb-8 lg:pt-12 lg:pb-10 relative overflow-hidden">
+    <section ref={sectionRef} id="how" className="pt-10 pb-8 lg:pt-12 lg:pb-10 relative overflow-hidden">
       {/* Background dot grid and soft ambient light glows */}
       <div className="absolute inset-0 dot-bg opacity-30 pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full bg-primary/5 blur-[130px] pointer-events-none" />

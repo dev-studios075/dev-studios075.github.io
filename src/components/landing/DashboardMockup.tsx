@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import useInViewport from "@/hooks/useInViewport";
 import { 
   LayoutDashboard, 
   Settings, 
@@ -110,6 +111,7 @@ const TABS_ORDER: TabType[] = [
 ];
 
 const DashboardMockup: React.FC = () => {
+  const { ref: dashboardRef, isInViewport } = useInViewport<HTMLDivElement>();
   const [activeTab, setActiveTab] = useState<TabType>("dashboard");
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [placesViewMode, setPlacesViewMode] = useState<"Table" | "Map">("Map");
@@ -128,17 +130,17 @@ const DashboardMockup: React.FC = () => {
   // Playback timer effect for live animated routing tracking
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    if (isPlaying && activeTab === "trips") {
+    if (isInViewport && isPlaying && activeTab === "trips") {
       interval = setInterval(() => {
         setPlaybackPercent(prev => (prev >= 100 ? 0 : prev + 1));
       }, 180);
     }
     return () => clearInterval(interval);
-  }, [isPlaying, activeTab]);
+  }, [isInViewport, isPlaying, activeTab]);
 
   // Autoplay effect to cycle/switch tabs/modules every 6 seconds when not hovered
   useEffect(() => {
-    if (isHovered) return;
+    if (!isInViewport || isHovered) return;
 
     const interval = setInterval(() => {
       setActiveTab((currentTab) => {
@@ -149,7 +151,7 @@ const DashboardMockup: React.FC = () => {
     }, 4000); // cycle every 4 seconds
 
     return () => clearInterval(interval);
-  }, [isHovered]);
+  }, [isHovered, isInViewport]);
 
   // Route point coordinate percentages mapped onto the detailed India SVG container
   const routePoints = [
@@ -251,7 +253,8 @@ const DashboardMockup: React.FC = () => {
   };
 
   return (
-    <div 
+    <div
+      ref={dashboardRef}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="w-full bg-[#f4f5f8] dark:bg-[#0e111a] text-slate-800 dark:text-slate-200 rounded-xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 font-sans text-[11px] sm:text-xs select-none"

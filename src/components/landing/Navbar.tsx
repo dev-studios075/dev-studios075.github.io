@@ -111,9 +111,24 @@ const Navbar = () => {
     trackEvent(label === "Sign in" ? "login_click" : "generate_lead", { cta_label: label, cta_location: loc });
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    let frameId = 0;
+    const onScroll = () => {
+      if (frameId) return;
+      frameId = window.requestAnimationFrame(() => {
+        setScrolled((current) => {
+          const next = window.scrollY > 20;
+          return current === next ? current : next;
+        });
+        frameId = 0;
+      });
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frameId) window.cancelAnimationFrame(frameId);
+    };
   }, []);
 
   useEffect(() => { setMobileOpen(false); setActiveMenu(null); }, [location]);
