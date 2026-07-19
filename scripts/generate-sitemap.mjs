@@ -160,6 +160,9 @@ const urls = [
   ...blogUrls,
 ];
 
+// Search, filter, tracking, and fragment variants must never enter the sitemap.
+const sitemapUrls = urls.filter(({ loc }) => !/[?#]/.test(loc));
+
 const alternateLinks = (loc) => {
   const href = absolutePageUrl(loc);
 
@@ -194,7 +197,7 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
 >
-${urls
+${sitemapUrls
   .map(
     (url) => `  <url>
     <loc>${escapeXml(absolutePageUrl(url.loc))}</loc>${alternateLinks(url.loc)}${imageEntry(url)}${url.lastmod ? `
@@ -211,6 +214,7 @@ const robots = `# *
 User-agent: *
 Allow: /
 Disallow: /private/
+# Search and filter query URLs stay crawlable so their meta noindex can be read.
 
 Sitemap: ${siteUrl}/sitemap.xml
 `;

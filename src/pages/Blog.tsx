@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { Calendar, Clock, ArrowUpRight, Tag, Search, BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
 import { getAllPosts } from "@/lib/blog";
 import Navbar from "@/components/landing/Navbar";
@@ -13,6 +13,7 @@ import blog3 from "@/assets/blog-3.jpg";
 
 const fallbackImages = [blog1, blog2, blog3];
 const POSTS_PER_PAGE = 10;
+const BLOG_CATEGORIES = ["AI & Automation", "Compliance", "Fleet", "Operations", "Analytics", "Technology"];
 
 const getPaginationItems = (currentPage: number, totalPages: number): Array<number | "ellipsis-start" | "ellipsis-end"> => {
   if (totalPages <= 5) return Array.from({ length: totalPages }, (_, index) => index + 1);
@@ -118,8 +119,16 @@ const Blog = () => {
   const posts = getAllPosts();
   const navigate = useNavigate();
   const { page: pageParam } = useParams<{ page?: string }>();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialCategory = searchParams.get("category") || "All";
+  const [searchTerm, setSearchTerm] = useState(() => searchParams.get("q") || "");
+  const [activeCategory, setActiveCategory] = useState(() =>
+    BLOG_CATEGORIES.includes(initialCategory) ? initialCategory : "All",
+  );
+  const [filterPage, setFilterPage] = useState(() => {
+    const page = Number.parseInt(searchParams.get("page") || "1", 10);
+    return Number.isFinite(page) && page > 0 ? page : 1;
+  });
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const searchContainerRef = useRef<HTMLDivElement>(null);
@@ -134,8 +143,40 @@ const Blog = () => {
     return () => clearTimeout(timer);
   }, [searchTerm, activeCategory]);
 
+  useEffect(() => {
+    const query = searchParams.get("q") || "";
+    const categoryParam = searchParams.get("category") || "All";
+    const category = BLOG_CATEGORIES.includes(categoryParam) ? categoryParam : "All";
+    const pageParamValue = Number.parseInt(searchParams.get("page") || "1", 10);
+    const page = Number.isFinite(pageParamValue) && pageParamValue > 0 ? pageParamValue : 1;
+
+    setSearchTerm((current) => current === query ? current : query);
+    setActiveCategory((current) => current === category ? current : category);
+    setFilterPage((current) => current === page ? current : page);
+  }, [searchParams]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      const nextParams = new URLSearchParams();
+      const query = searchTerm.trim();
+      if (query) nextParams.set("q", query);
+      if (activeCategory !== "All") nextParams.set("category", activeCategory);
+      if ((query || activeCategory !== "All") && filterPage > 1) {
+        nextParams.set("page", String(filterPage));
+      }
+
+      if (pageParam && nextParams.toString()) {
+        navigate(`/blog/?${nextParams.toString()}`, { replace: true });
+      } else if (nextParams.toString() !== searchParams.toString()) {
+        setSearchParams(nextParams, { replace: true });
+      }
+    }, 300);
+
+    return () => window.clearTimeout(timer);
+  }, [activeCategory, filterPage, navigate, pageParam, searchParams, searchTerm, setSearchParams]);
+
   // Compute matched categories and posts for suggestions
-  const categories = ["AI & Automation", "Compliance", "Fleet", "Operations", "Analytics", "Technology"];
+  const categories = BLOG_CATEGORIES;
   const matchedCategories = searchTerm.trim() !== "" 
     ? categories.filter(cat => cat.toLowerCase().includes(searchTerm.toLowerCase()))
     : [];
@@ -185,7 +226,7 @@ const Blog = () => {
         } else {
           setActiveCategory(selected.categoryName);
           setSearchTerm("");
-          navigate("/blog/");
+          setFilterPage(1);
         }
         setShowSuggestions(false);
       }
@@ -214,41 +255,44 @@ const Blog = () => {
     );
   };
 
+  const normalizedSearch = searchTerm.trim().toLowerCase();
+  const matchesSearch = (post: (typeof posts)[number]) =>
+    normalizedSearch === "" ||
+    post.title.toLowerCase().includes(normalizedSearch) ||
+    (post.excerpt || "").toLowerCase().includes(normalizedSearch);
+
   const getCategoryCount = (cat: string) => {
-    if (cat === "All") return posts.length;
-    return posts.filter(post => getCategory(post.title) === cat).length;
+    const searchMatches = posts.filter(matchesSearch);
+    if (cat === "All") return searchMatches.length;
+    return searchMatches.filter(post => getCategory(post.title) === cat).length;
   };
 
   const filteredPosts = posts.filter(post => {
-    const matchesSearch = 
-      post.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      (post.excerpt || "").toLowerCase().includes(searchTerm.toLowerCase());
-    
     const matchesCategory = 
       activeCategory === "All" || 
       getCategory(post.title) === activeCategory;
       
-    return matchesSearch && matchesCategory;
+    return matchesSearch(post) && matchesCategory;
   });
 
   const isFiltering = searchTerm.trim() !== "" || activeCategory !== "All";
   const requestedPage = Number.parseInt(pageParam || "1", 10);
-  const totalPages = isFiltering ? 1 : Math.max(1, Math.ceil(filteredPosts.length / POSTS_PER_PAGE));
-  const currentPage = Number.isFinite(requestedPage)
+  const totalPages = Math.max(1, Math.ceil(filteredPosts.length / POSTS_PER_PAGE));
+  const routePage = Number.isFinite(requestedPage)
     ? Math.min(Math.max(requestedPage, 1), totalPages)
     : 1;
-  const pagePosts = isFiltering
-    ? filteredPosts
-    : filteredPosts.slice((currentPage - 1) * POSTS_PER_PAGE, currentPage * POSTS_PER_PAGE);
+  const currentPage = isFiltering ? Math.min(filterPage, totalPages) : routePage;
+  const pagePosts = filteredPosts.slice((currentPage - 1) * POSTS_PER_PAGE, currentPage * POSTS_PER_PAGE);
   const [featured, ...rest] = pagePosts;
   const paginationItems = getPaginationItems(currentPage, totalPages);
   const essentialGuides = essentialGuideSlugs
     .map((slug) => posts.find((post) => post.slug === slug))
     .filter((post): post is (typeof posts)[number] => Boolean(post));
-  const pageTitle = currentPage > 1
-    ? `Fleet Management Blog - Page ${currentPage} | ${SITE_NAME}`
+  const seoPage = isFiltering ? 1 : currentPage;
+  const pageTitle = seoPage > 1
+    ? `Fleet Management Blog - Page ${seoPage} | ${SITE_NAME}`
     : `Fleet Management Blog | ${SITE_NAME}`;
-  const pagePath = currentPage > 1 ? `/blog/page/${currentPage}` : "/blog";
+  const pagePath = seoPage > 1 ? `/blog/page/${seoPage}` : "/blog";
   const description =
     "Fleet management, AI dispatch, TMS automation, compliance, and logistics operations insights for Indian transporters and shippers.";
 
@@ -260,13 +304,20 @@ const Blog = () => {
     });
   };
 
+  const changeFilterPage = (page: number) => {
+    setFilterPage(Math.min(Math.max(page, 1), totalPages));
+    window.requestAnimationFrame(() => {
+      document.getElementById("blog-results")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Seo
         title={pageTitle}
         description={description}
         path={pagePath}
-        noindex={requestedPage !== currentPage}
+        noindex={isFiltering || requestedPage !== currentPage}
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Blog",
@@ -344,9 +395,9 @@ const Blog = () => {
                 value={searchTerm}
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
+                  setFilterPage(1);
                   setShowSuggestions(true);
                   setFocusedIndex(-1);
-                  if (currentPage !== 1) navigate("/blog/");
                 }}
                 onFocus={() => setShowSuggestions(true)}
                 onKeyDown={handleKeyDown}
@@ -367,7 +418,7 @@ const Blog = () => {
                         } else {
                           setActiveCategory(item.categoryName);
                           setSearchTerm("");
-                          navigate("/blog/");
+                          setFilterPage(1);
                           }
                           setShowSuggestions(false);
                         }}
@@ -396,12 +447,12 @@ const Blog = () => {
             </div>
             {/* Categories */}
             <div className="flex flex-wrap items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-              {["All", "AI & Automation", "Compliance", "Fleet", "Operations", "Analytics", "Technology"].map((cat) => (
+              {["All", ...BLOG_CATEGORIES].map((cat) => (
                 <button
                   key={cat}
                   onClick={() => {
                     setActiveCategory(cat);
-                    if (currentPage !== 1) navigate("/blog/");
+                    setFilterPage(1);
                   }}
                   className={`px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide border transition-all whitespace-nowrap flex items-center gap-1.5 ${
                     activeCategory === cat
@@ -421,6 +472,8 @@ const Blog = () => {
               ))}
             </div>
           </div>
+
+          <div id="blog-results" className="scroll-mt-28" />
 
           {/* ── Featured post ───────────────────────────────── */}
           {isLoading ? (
@@ -559,16 +612,26 @@ const Blog = () => {
             )
           )}
 
-          {!isLoading && filteredPosts.length > POSTS_PER_PAGE && searchTerm === "" && activeCategory === "All" && (
+          {filteredPosts.length > POSTS_PER_PAGE && (
             <nav aria-label="Blog pagination" className="mt-14 mx-auto flex w-fit max-w-full items-center justify-center gap-1 sm:gap-2 rounded-2xl glass border border-border/60 p-2 shadow-card">
               {currentPage > 1 ? (
-                <Link
-                  to={currentPage === 2 ? "/blog/" : `/blog/page/${currentPage - 1}/`}
-                  rel="prev"
-                  className="inline-flex h-11 items-center gap-1.5 rounded-xl px-2 sm:px-3 text-xs sm:text-sm font-semibold text-muted-foreground hover:bg-primary/10 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-colors"
-                >
-                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" /> <span className="hidden sm:inline">Previous</span>
-                </Link>
+                isFiltering ? (
+                  <button
+                    type="button"
+                    onClick={() => changeFilterPage(currentPage - 1)}
+                    className="inline-flex h-11 items-center gap-1.5 rounded-xl px-2 sm:px-3 text-xs sm:text-sm font-semibold text-muted-foreground hover:bg-primary/10 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-colors"
+                  >
+                    <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" /> <span className="hidden sm:inline">Previous</span>
+                  </button>
+                ) : (
+                  <Link
+                    to={currentPage === 2 ? "/blog/" : `/blog/page/${currentPage - 1}/`}
+                    rel="prev"
+                    className="inline-flex h-11 items-center gap-1.5 rounded-xl px-2 sm:px-3 text-xs sm:text-sm font-semibold text-muted-foreground hover:bg-primary/10 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-colors"
+                  >
+                    <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" /> <span className="hidden sm:inline">Previous</span>
+                  </Link>
+                )
               ) : (
                 <span aria-disabled="true" className="inline-flex h-11 items-center gap-1.5 rounded-xl px-2 sm:px-3 text-xs sm:text-sm font-semibold text-muted-foreground/30 cursor-not-allowed">
                   <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" /> <span className="hidden sm:inline">Previous</span>
@@ -577,28 +640,55 @@ const Blog = () => {
               {paginationItems.map((item) => item === "ellipsis-start" || item === "ellipsis-end" ? (
                 <span key={item} aria-hidden="true" className="grid h-11 w-7 sm:w-9 place-items-center text-sm font-bold tracking-wider text-muted-foreground">•••</span>
               ) : (
-                  <Link
-                    key={item}
-                    to={item === 1 ? "/blog/" : `/blog/page/${item}/`}
-                    aria-current={item === currentPage ? "page" : undefined}
-                    aria-label={`Page ${item}`}
-                    className={`grid h-11 w-9 sm:w-11 place-items-center rounded-xl text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-all ${
-                      item === currentPage
-                        ? "border border-primary/25 bg-primary/10 text-primary shadow-sm"
-                        : "text-muted-foreground hover:bg-primary/10 hover:text-primary"
-                    }`}
-                  >
-                    {item}
-                  </Link>
+                  isFiltering ? (
+                    <button
+                      key={item}
+                      type="button"
+                      onClick={() => changeFilterPage(item)}
+                      aria-current={item === currentPage ? "page" : undefined}
+                      aria-label={`Page ${item}`}
+                      className={`grid h-11 w-9 sm:w-11 place-items-center rounded-xl text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-all ${
+                        item === currentPage
+                          ? "border border-primary/25 bg-primary/10 text-primary shadow-sm"
+                          : "text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                      }`}
+                    >
+                      {item}
+                    </button>
+                  ) : (
+                    <Link
+                      key={item}
+                      to={item === 1 ? "/blog/" : `/blog/page/${item}/`}
+                      aria-current={item === currentPage ? "page" : undefined}
+                      aria-label={`Page ${item}`}
+                      className={`grid h-11 w-9 sm:w-11 place-items-center rounded-xl text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-all ${
+                        item === currentPage
+                          ? "border border-primary/25 bg-primary/10 text-primary shadow-sm"
+                          : "text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                      }`}
+                    >
+                      {item}
+                    </Link>
+                  )
               ))}
               {currentPage < totalPages ? (
-                <Link
-                  to={`/blog/page/${currentPage + 1}/`}
-                  rel="next"
-                  className="inline-flex h-11 items-center gap-1.5 rounded-xl px-2 sm:px-3 text-xs sm:text-sm font-semibold text-muted-foreground hover:bg-primary/10 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-colors"
-                >
-                  <span className="hidden sm:inline">Next</span> <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
-                </Link>
+                isFiltering ? (
+                  <button
+                    type="button"
+                    onClick={() => changeFilterPage(currentPage + 1)}
+                    className="inline-flex h-11 items-center gap-1.5 rounded-xl px-2 sm:px-3 text-xs sm:text-sm font-semibold text-muted-foreground hover:bg-primary/10 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-colors"
+                  >
+                    <span className="hidden sm:inline">Next</span> <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </button>
+                ) : (
+                  <Link
+                    to={`/blog/page/${currentPage + 1}/`}
+                    rel="next"
+                    className="inline-flex h-11 items-center gap-1.5 rounded-xl px-2 sm:px-3 text-xs sm:text-sm font-semibold text-muted-foreground hover:bg-primary/10 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-colors"
+                  >
+                    <span className="hidden sm:inline">Next</span> <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </Link>
+                )
               ) : (
                 <span aria-disabled="true" className="inline-flex h-11 items-center gap-1.5 rounded-xl px-2 sm:px-3 text-xs sm:text-sm font-semibold text-muted-foreground/30 cursor-not-allowed">
                   <span className="hidden sm:inline">Next</span> <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
