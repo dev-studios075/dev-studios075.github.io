@@ -98,15 +98,15 @@ const Index = () => {
       />
       <Navbar />
       <Hero />
-      <Features />
-      <HowItWorks />
-      <Compare />
-      <ROICalculator />
-      <Benefits />
-      <SocialProof />
-      <Blog />
-      <FAQ />
-      <CTA />
+      <div className="landing-deferred"><Features /></div>
+      <div className="landing-deferred"><HowItWorks /></div>
+      <div className="landing-deferred"><Compare /></div>
+      <div className="landing-deferred"><ROICalculator /></div>
+      <div className="landing-deferred"><Benefits /></div>
+      <div className="landing-deferred"><SocialProof /></div>
+      <div className="landing-deferred"><Blog /></div>
+      <div className="landing-deferred"><FAQ /></div>
+      <div className="landing-deferred"><CTA /></div>
       <Footer />
     </main>
   );

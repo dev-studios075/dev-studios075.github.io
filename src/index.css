@@ -145,7 +145,7 @@
   body {
     @apply bg-background text-foreground font-body antialiased;
     background: var(--gradient-hero);
-    background-attachment: fixed;
+    background-attachment: scroll;
   }
 
   ::selection {
@@ -164,6 +164,11 @@
   .glass-strong {
     background: var(--gradient-card);
     @apply backdrop-blur-2xl border border-border/80;
+  }
+
+  .landing-deferred {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 720px;
   }
 
   .text-gradient {
@@ -201,6 +206,14 @@
   .dot-bg {
     background-image: radial-gradient(hsl(var(--primary) / 0.18) 1px, transparent 1px);
     background-size: 24px 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .glass,
+  .glass-strong {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 }
 
