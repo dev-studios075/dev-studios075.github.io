@@ -1,23 +1,17 @@
 import fs from 'fs';
 import sharp from 'sharp';
 
-// Render the blue ring design matching the user's screenshot
-// Center (48,48) with white circular backing disc and the blue ring
-const svgString = `<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">
-  <circle cx="48" cy="48" r="44" fill="#ffffff" />
-  <circle cx="48" cy="48" r="34.5" fill="none" stroke="#2466a0" stroke-width="19" />
-</svg>`;
-
 async function run() {
   try {
     const pngPath = 'public/favicon.png';
     const icoPath = 'public/favicon.ico';
 
-    // 1. Generate 96x96 PNG using sharp
-    await sharp(Buffer.from(svgString))
+    // Generate a compact browser icon from the official app-logo source.
+    await sharp('public/assets/brand/logo-with-bg.png')
+      .resize(192, 192)
       .png()
       .toFile(pngPath);
-    console.log('Successfully generated public/favicon.png using sharp!');
+    console.log('Successfully generated the Fleetcodes favicon PNG.');
 
     // 2. Read PNG and convert to ICO
     const pngData = fs.readFileSync(pngPath);
@@ -30,8 +24,8 @@ async function run() {
     
     // Icon Directory Entry (16 bytes)
     const entry = Buffer.alloc(16);
-    entry.writeUInt8(96, 0);   // Width: 96px
-    entry.writeUInt8(96, 1);   // Height: 96px
+    entry.writeUInt8(192, 0);  // Width: 192px
+    entry.writeUInt8(192, 1);  // Height: 192px
     entry.writeUInt8(0, 2);    // Color count (0 if >=8bpp)
     entry.writeUInt8(0, 3);    // Reserved (0)
     entry.writeUInt16LE(1, 4);  // Color planes (1)

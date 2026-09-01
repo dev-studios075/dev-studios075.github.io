@@ -235,13 +235,16 @@ const BookDemo = () => {
             }}
           >
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2.5 font-display font-semibold text-lg shrink-0">
-              <span className="relative grid place-items-center w-8 h-8 rounded-xl bg-white border border-border/40 shadow-sm overflow-hidden shrink-0">
-                <img src="/favicon.png" alt="Fleetcodes Logo" className="w-5 h-5 object-contain" />
-                <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500 border border-white dark:border-slate-900 animate-pulse" />
+            <Link to="/" className="flex shrink-0 items-center gap-2" aria-label="Fleetcodes home">
+              <img src="/favicon.png" alt="" className="h-9 w-9 rounded-lg object-contain" />
+              <span className="leading-none">
+                <span className="block font-display text-lg font-bold tracking-tight text-slate-950 dark:text-white">
+                  fleet<span className="text-[#5542f6]">codes</span>
+                </span>
+                <span className="mt-1 hidden text-[5px] font-medium uppercase tracking-[0.13em] text-slate-500 sm:block dark:text-slate-400">
+                  AI operating system for fleet operations
+                </span>
               </span>
-              <span className="text-gradient hidden sm:inline">Fleetcodes</span>
-              <span className="text-muted-foreground text-[10px] font-body uppercase tracking-[0.18em] hidden lg:inline border-l border-border/40 pl-2.5">TMS</span>
             </Link>
 
             {/* Right actions */}
