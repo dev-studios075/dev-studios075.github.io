@@ -138,17 +138,15 @@ const Footer = () => {
 
           {/* Brand column */}
           <div className="space-y-5 sm:col-span-2 lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2.5 font-display font-semibold text-lg w-fit">
-              <span className="relative grid place-items-center w-8 h-8 rounded-xl bg-white border border-white/10 overflow-hidden shrink-0">
-                <img src="/favicon.png" alt="Fleetcodes Logo" className="w-5 h-5 object-contain" />
-                <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500 border border-[#0a0d14]" />
-              </span>
-              <span className="text-white font-bold">Fleetcodes</span>
-              <span
-                className="text-[10px] font-body uppercase tracking-[0.18em] border-l border-white/10 pl-2.5"
-                style={{ color: "#64748b" }}
-              >
-                TMS
+            <Link to="/" className="flex w-fit items-center gap-3" aria-label="Fleetcodes home">
+              <img src="/favicon.png" alt="" className="h-12 w-12 rounded-xl object-contain" />
+              <span className="leading-none">
+                <span className="block font-display text-2xl font-bold tracking-tight text-white">
+                  Fleet<span className="text-[#5b45ff]">codes</span>
+                </span>
+                <span className="mt-1.5 block text-[6px] font-medium uppercase tracking-[0.14em] text-slate-400">
+                  AI operating system for fleet operations
+                </span>
               </span>
             </Link>
 
