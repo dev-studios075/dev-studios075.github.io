@@ -478,10 +478,10 @@ const Careers = () => {
       <Navbar />
 
       {/* ── Hero ───────────────────────────────────────────────────────────── */}
-      <section className="pt-40 pb-24 sm:pt-44 sm:pb-28 text-center relative">
+      <section className="relative pt-32 pb-14 text-center sm:pt-36 sm:pb-16 lg:pt-40">
         <div className="container-tight">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold text-primary border border-primary/20 bg-primary/5 mb-8">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3.5 py-1.5 text-xs font-semibold text-primary">
             <Sparkles className="w-3.5 h-3.5" />
             We're hiring across 5 roles
           </div>
@@ -491,7 +491,7 @@ const Careers = () => {
             <span className="text-gradient-primary">Logistics</span>
           </h1>
 
-          <p className="text-slate-500 dark:text-slate-400 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
+          <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-slate-500 dark:text-slate-400 sm:text-xl">
             Join a small, high-ownership team solving one of India's biggest operational challenges —
             moving goods efficiently at scale.
           </p>
@@ -513,7 +513,7 @@ const Careers = () => {
           </div>
 
           {/* Quick stats */}
-          <div className="flex flex-wrap items-center justify-center gap-8 mt-14">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-8">
             {[
               { value: "15+", label: "Team size" },
               { value: "100%", label: "Remote-friendly" },
@@ -529,9 +529,9 @@ const Careers = () => {
       </section>
 
       {/* ── Values ─────────────────────────────────────────────────────────── */}
-      <section className="py-20 border-t border-slate-200 dark:border-white/[0.05]">
+      <section className="border-t border-slate-200 py-14 dark:border-white/[0.05] sm:py-16">
         <div className="container-tight">
-          <div className="text-center mb-14">
+          <div className="mb-10 text-center">
             <p className="text-xs font-mono uppercase tracking-[0.2em] mb-3" style={{ color: "#7c3aed" }}>
               Culture
             </p>
@@ -546,7 +546,7 @@ const Careers = () => {
               return (
                 <div
                   key={v.title}
-                  className="p-6 rounded-2xl transition-all duration-300 hover:scale-[1.02] group bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.07]"
+                  className="group rounded-2xl border border-slate-200 bg-slate-50 p-5 transition-all duration-300 hover:scale-[1.02] dark:border-white/[0.07] dark:bg-white/[0.02]"
                 >
                   <span
                     className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
@@ -566,9 +566,9 @@ const Careers = () => {
       </section>
 
       {/* ── Open Roles ─────────────────────────────────────────────────────── */}
-      <section id="open-roles" className="py-20 border-t border-slate-200 dark:border-white/[0.05]">
+      <section id="open-roles" className="scroll-mt-24 border-t border-slate-200 py-14 dark:border-white/[0.05] sm:py-16">
         <div className="container-tight">
-          <div className="text-center mb-14">
+          <div className="mb-10 text-center">
             <p className="text-xs font-mono uppercase tracking-[0.2em] mb-3" style={{ color: "#7c3aed" }}>
               Open Positions
             </p>
@@ -589,9 +589,9 @@ const Careers = () => {
       </section>
 
       {/* ── Perks ──────────────────────────────────────────────────────────── */}
-      <section className="py-20 border-t border-slate-200 dark:border-white/[0.05]">
+      <section className="border-t border-slate-200 py-14 dark:border-white/[0.05] sm:py-16">
         <div className="container-tight">
-          <div className="text-center mb-14">
+          <div className="mb-10 text-center">
             <p className="text-xs font-mono uppercase tracking-[0.2em] mb-3" style={{ color: "#7c3aed" }}>
               Benefits
             </p>
@@ -626,10 +626,10 @@ const Careers = () => {
       </section>
 
       {/* ── CTA ────────────────────────────────────────────────────────────── */}
-      <section className="py-20 border-t border-slate-200 dark:border-white/[0.05]">
+      <section className="border-t border-slate-200 py-14 dark:border-white/[0.05] sm:py-16">
         <div className="container-tight">
           <div
-            className="rounded-3xl p-10 sm:p-14 text-center relative overflow-hidden"
+            className="relative overflow-hidden rounded-3xl p-8 text-center sm:p-10"
             style={{
               background: "linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(124,58,237,0.04) 100%)",
               border: "1px solid rgba(124,58,237,0.2)",

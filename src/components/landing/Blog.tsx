@@ -84,7 +84,7 @@ const Blog = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 {/* Floating category badge inside image */}
-                <div className="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-sm border border-slate-800/80 text-slate-200 px-2 py-0.5 rounded text-[8px] uppercase tracking-widest font-bold font-mono">
+                <div className="absolute bottom-3 left-3 bg-slate-950/80 backdrop-blur-md border border-white/15 text-white px-2.5 py-1 rounded-full text-[9px] uppercase tracking-widest font-bold font-mono shadow-lg">
                   {getCategory(post.title)}
                 </div>
               </Link>
