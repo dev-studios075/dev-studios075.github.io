@@ -743,6 +743,7 @@ const BlogPost = () => {
                       <a
                         {...props}
                         href={normalizedHref}
+                        target={isExternal ? "_blank" : props.target}
                         rel={isExternal ? "nofollow noopener noreferrer" : props.rel}
                       >
                         {children}
