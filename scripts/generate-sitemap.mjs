@@ -179,7 +179,7 @@ const urls = [
 ];
 
 const hindiUrls = urls
-  .filter(({ loc }) => ["/", "/about", "/careers", "/book-demo", "/privacy", "/terms", "/security", "/blog"].includes(loc) || /^\/blog\/page\/\d+$/.test(loc))
+  .filter(({ loc }) => ["/", "/about", "/careers", "/book-demo", "/privacy", "/terms", "/security", "/blog"].includes(loc) || /^\/blog\/page\/\d+$/.test(loc) || loc.startsWith("/blog/"))
   .map((url) => ({ ...url, loc: url.loc === "/" ? "/hi" : `/hi${url.loc}`, priority: url.loc === "/" ? "0.9" : url.priority }));
 
 urls.push(...hindiUrls);
@@ -188,11 +188,23 @@ urls.push(...hindiUrls);
 const sitemapUrls = urls.filter(({ loc }) => !/[?#]/.test(loc));
 
 const alternateLinks = (loc) => {
-  const href = absolutePageUrl(loc);
+  const englishPath = loc.replace(/^\/hi(?=\/|$)/, "") || "/";
+  const hindiPath = englishPath === "/" ? "/hi" : `/hi${englishPath}`;
+  const enHref = absolutePageUrl(englishPath);
+  const hiHref = absolutePageUrl(hindiPath);
 
-  return `
-    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(href)}" />
-    <xhtml:link rel="alternate" hreflang="en" href="${escapeXml(href)}" />`;
+  const hasHindiVersion = ["/", "/about", "/careers", "/book-demo", "/privacy", "/terms", "/security", "/blog"].includes(englishPath) || /^\/blog\/page\/\d+$/.test(englishPath) || englishPath.startsWith("/blog/");
+
+  let links = `
+    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(enHref)}" />
+    <xhtml:link rel="alternate" hreflang="en" href="${escapeXml(enHref)}" />`;
+
+  if (hasHindiVersion) {
+    links += `
+    <xhtml:link rel="alternate" hreflang="hi" href="${escapeXml(hiHref)}" />`;
+  }
+
+  return links;
 };
 
 const imageEntry = (url) => {
