@@ -66,7 +66,7 @@ const HowItWorks = () => {
   }, [activeStep, isAutoplayPaused, isInViewport]);
 
   return (
-    <section ref={sectionRef} id="how" className="pt-10 pb-8 lg:pt-12 lg:pb-10 relative overflow-hidden">
+    <section ref={sectionRef} id="how" className="scroll-mt-24 pt-10 pb-8 lg:pt-12 lg:pb-10 relative overflow-hidden">
       {/* Background dot grid and soft ambient light glows */}
       <div className="absolute inset-0 dot-bg opacity-30 pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full bg-primary/5 blur-[130px] pointer-events-none" />

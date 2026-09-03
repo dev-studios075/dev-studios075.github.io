@@ -542,4 +542,52 @@ writeRoute(
   }),
 );
 
-console.log(`Generated static HTML for /, /blog, /about, /careers, /book-demo, and ${posts.length} blog posts`);
+writeRoute(
+  "/privacy",
+  renderPage({
+    title: `Privacy Policy | ${siteName}`,
+    description:
+      "Learn how Fleetcodes collects, uses, shares, retains and protects personal data across its website and fleet management services.",
+    path: "/privacy",
+    image: defaultImage,
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: `Privacy Policy | ${siteName}`,
+      url: absolutePageUrl("/privacy"),
+      dateModified: "2026-09-03",
+    },
+    bodyHtml: renderStaticFallback({
+      eyebrow: "Privacy & data protection",
+      title: "Privacy Policy",
+      description:
+        "How Fleetcodes Technologies Pvt. Ltd. handles personal data across its website and fleet management services.",
+    }),
+  }),
+);
+
+writeRoute(
+  "/terms",
+  renderPage({
+    title: `Terms of Service | ${siteName}`,
+    description: "Review the terms governing access to and use of the Fleetcodes fleet and logistics operations platform.",
+    path: "/terms",
+    image: defaultImage,
+    jsonLd: { "@context": "https://schema.org", "@type": "WebPage", name: `Terms of Service | ${siteName}`, url: absolutePageUrl("/terms"), dateModified: "2026-09-03" },
+    bodyHtml: renderStaticFallback({ eyebrow: "Service agreement", title: "Terms of Service", description: "The rules and responsibilities that apply when a business accesses the Fleetcodes website or fleet management services." }),
+  }),
+);
+
+writeRoute(
+  "/security",
+  renderPage({
+    title: `Security at ${siteName}`,
+    description: "Learn about Fleetcodes security practices for access control, data protection, infrastructure, monitoring, development and incident response.",
+    path: "/security",
+    image: defaultImage,
+    jsonLd: { "@context": "https://schema.org", "@type": "WebPage", name: `Security at ${siteName}`, url: absolutePageUrl("/security"), dateModified: "2026-09-03" },
+    bodyHtml: renderStaticFallback({ eyebrow: "Trust & protection", title: `Security at ${siteName}`, description: "How we approach platform security and protect the operational information entrusted to our services." }),
+  }),
+);
+
+console.log(`Generated static HTML for /, /blog, /about, /careers, /book-demo, /privacy, /terms, /security, and ${posts.length} blog posts`);

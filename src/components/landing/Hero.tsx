@@ -60,10 +60,12 @@ const Hero = () => {
               variant="glass"
               size="lg"
               className="group"
-              onClick={() => trackHeroCta("See How It Works")}
+              asChild
             >
-              <PlayCircle className="w-4 h-4" />
-              See How It Works
+              <a href="#how" onClick={() => trackHeroCta("See How It Works")}>
+                <PlayCircle className="w-4 h-4" />
+                See How It Works
+              </a>
             </Button>
           </div>
 

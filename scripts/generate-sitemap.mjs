@@ -151,6 +151,24 @@ const urls = [
     priority: "0.9",
   },
   {
+    loc: "/privacy",
+    title: "Privacy Policy | Fleetcodes",
+    image: "/new-og-image.png",
+    priority: "0.5",
+  },
+  {
+    loc: "/terms",
+    title: "Terms of Service | Fleetcodes",
+    image: "/new-og-image.png",
+    priority: "0.5",
+  },
+  {
+    loc: "/security",
+    title: "Security at Fleetcodes",
+    image: "/new-og-image.png",
+    priority: "0.5",
+  },
+  {
     loc: "/blog",
     title: "Fleet Management Blog | Fleetcodes",
     image: "/new-og-image.png",
