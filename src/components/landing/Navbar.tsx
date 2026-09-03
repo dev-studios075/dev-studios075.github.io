@@ -170,7 +170,7 @@ const Navbar = () => {
               <img src="/favicon.png" alt="" className="h-9 w-9 rounded-lg object-contain" />
               <span className="leading-none">
                 <span className="block font-display text-lg font-bold tracking-tight text-slate-950 dark:text-white">
-                  Fleet<span className="text-[#5542f6]">codes</span>
+                  fleet<span className="text-[#5542f6]">codes</span>
                 </span>
                 <span className="hidden text-[5px] font-medium uppercase tracking-[0.13em] text-slate-500 sm:block dark:text-slate-400">
                   AI operating system for fleet operations
