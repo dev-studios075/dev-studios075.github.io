@@ -139,10 +139,10 @@ const Footer = () => {
           {/* Brand column */}
           <div className="space-y-5 sm:col-span-2 lg:col-span-1">
             <Link to="/" className="flex w-fit items-center gap-3" aria-label="Fleetcodes home">
-              <img src="/favicon.png" alt="" className="h-12 w-12 rounded-xl object-contain" />
+              <img src="/assets/brand/logo-with-bg.png" alt="" className="h-12 w-12 object-contain" />
               <span className="leading-none">
                 <span className="block font-display text-2xl font-bold tracking-tight text-white">
-                  Fleet<span className="text-[#5b45ff]">codes</span>
+                  fleet<span className="text-[#5b45ff]">codes</span>
                 </span>
                 <span className="mt-1.5 block text-[6px] font-medium uppercase tracking-[0.14em] text-slate-400">
                   AI operating system for fleet operations

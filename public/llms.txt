@@ -23,6 +23,8 @@ Fleetcodes is an automation-first transport management system for logistics team
 
 ## Blog Articles
 
+- AIS-140 VLTD Compliance 2026: How Fleet Software Can Help Haulage Operators Prepare Before October 1: https://www.fleetcodes.com/blog/ais-140-vltd-compliance-haulage-tractors-october-2026/
+- PARIVARTAN Scheme 2026: Delhi-NCR Truck Owners' Eligibility, Benefits, Subsidy & Application Guide: https://www.fleetcodes.com/blog/parivartan-scheme-2026-delhi-ncr-truck-owners-guide/
 - EV Fleet Management in India 2026 - How Fleetcodes Prepares Transport Businesses for Electrification: https://www.fleetcodes.com/blog/ev-fleet-management-india-2026-how-fleetcodes-prepares-transport-businesses-electrification/
 - Fleet Utilization Optimization - How to Move More Freight Without Adding More Trucks in 2026: https://www.fleetcodes.com/blog/fleet-utilization-optimization-move-more-freight-without-adding-trucks-2026/
 - How Fleetcodes Helps Fleets Align with India's National Logistics Policy Cost-Reduction Goals: https://www.fleetcodes.com/blog/how-fleetcodes-aligns-fleets-national-logistics-policy-cost-reduction-goals/

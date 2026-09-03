@@ -90,9 +90,9 @@ const About = () => {
       <Navbar />
 
       {/* ── Hero ───────────────────────────────────────────────────────────── */}
-      <section className="pt-40 pb-20 sm:pt-44 sm:pb-24 text-center relative">
+      <section className="relative pt-32 pb-14 text-center sm:pt-36 sm:pb-16 lg:pt-40">
         <div className="container-tight">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold text-primary border border-primary/20 bg-primary/5 mb-8">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3.5 py-1.5 text-xs font-semibold text-primary">
             <Sparkles className="w-3.5 h-3.5" />
             Our story
           </div>
@@ -102,7 +102,7 @@ const About = () => {
             <span className="text-gradient-primary">for operators.</span>
           </h1>
 
-          <p className="text-slate-500 dark:text-slate-400 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
+          <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-slate-500 dark:text-slate-400 sm:text-xl">
             We started Fleetcodes because we lived the chaos of running fleet operations manually.
             WhatsApp dispatch. Paper chalans. Excel billing. We knew there was a better way.
           </p>
@@ -126,7 +126,7 @@ const About = () => {
       </section>
 
       {/* ── Stats ──────────────────────────────────────────────────────────── */}
-      <section className="py-16 border-t border-slate-200 dark:border-white/[0.05]">
+      <section className="border-t border-slate-200 py-12 dark:border-white/[0.05] sm:py-14">
         <div className="container-tight">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {stats.map((s) => {
@@ -152,9 +152,9 @@ const About = () => {
       </section>
 
       {/* ── Mission ────────────────────────────────────────────────────────── */}
-      <section className="py-20 border-t border-slate-200 dark:border-white/[0.05]">
+      <section className="border-t border-slate-200 py-14 dark:border-white/[0.05] sm:py-16">
         <div className="container-tight">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
             <div>
               <p className="text-xs font-mono uppercase tracking-[0.2em] mb-4 text-primary">Mission</p>
               <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white mb-6 leading-tight">
@@ -232,9 +232,9 @@ const About = () => {
       </section>
 
       {/* ── Story / Timeline ───────────────────────────────────────────────── */}
-      <section className="py-20 border-t border-slate-200 dark:border-white/[0.05]">
+      <section className="border-t border-slate-200 py-14 dark:border-white/[0.05] sm:py-16">
         <div className="container-tight">
-          <div className="text-center mb-14">
+          <div className="mb-10 text-center">
             <p className="text-xs font-mono uppercase tracking-[0.2em] mb-3 text-primary">Our Journey</p>
             <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white">
               How we got here
@@ -272,9 +272,9 @@ const About = () => {
       </section>
 
       {/* ── Values ─────────────────────────────────────────────────────────── */}
-      <section className="py-20 border-t border-slate-200 dark:border-white/[0.05]">
+      <section className="border-t border-slate-200 py-14 dark:border-white/[0.05] sm:py-16">
         <div className="container-tight">
-          <div className="text-center mb-14">
+          <div className="mb-10 text-center">
             <p className="text-xs font-mono uppercase tracking-[0.2em] mb-3 text-primary">Principles</p>
             <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white">
               What we believe in
@@ -307,10 +307,10 @@ const About = () => {
       </section>
 
       {/* ── CTA ────────────────────────────────────────────────────────────── */}
-      <section className="py-20 border-t border-slate-200 dark:border-white/[0.05]">
+      <section className="border-t border-slate-200 py-14 dark:border-white/[0.05] sm:py-16">
         <div className="container-tight">
           <div
-            className="rounded-3xl p-10 sm:p-14 text-center relative overflow-hidden"
+            className="relative overflow-hidden rounded-3xl p-8 text-center sm:p-10"
             style={{
               background: "linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(124,58,237,0.04) 100%)",
               border: "1px solid rgba(124,58,237,0.2)",

@@ -267,7 +267,7 @@ const DashboardMockup: React.FC = () => {
             {/* Logo */}
             <div className="flex items-center gap-2 px-2 py-1">
               <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center p-0.5 shadow-sm">
-                <img src="/favicon.png" alt="logo" className="w-full h-full object-contain" />
+                <img src="/assets/brand/logo-with-bg.png" alt="logo" className="w-full h-full object-contain" />
               </div>
               <span className="font-bold tracking-tight text-sm">Fleetcodes</span>
             </div>

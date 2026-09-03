@@ -164,7 +164,7 @@ const getRelatedPosts = (currentSlug: string, currentCategory: string) =>
       });
 
     return [...new Map([...guaranteedNeighbors, ...semanticMatches].map((post) => [post.slug, post])).values()]
-      .slice(0, 4);
+      .slice(0, 3);
   })();
 
 const BlogPost = () => {
@@ -327,9 +327,9 @@ const BlogPost = () => {
             name: SITE_NAME,
             logo: { 
               "@type": "ImageObject", 
-              url: absoluteUrl("/favicon.png"),
-              width: 32,
-              height: 32
+              url: absoluteUrl("/assets/brand/logo-with-bg.png"),
+              width: 1254,
+              height: 1254
             },
           },
           mainEntityOfPage: absolutePageUrl(`/blog/${post.slug}`),
@@ -743,6 +743,7 @@ const BlogPost = () => {
                       <a
                         {...props}
                         href={normalizedHref}
+                        target={isExternal ? "_blank" : props.target}
                         rel={isExternal ? "nofollow noopener noreferrer" : props.rel}
                       >
                         {children}
@@ -827,7 +828,7 @@ const BlogPost = () => {
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                           />
                           {/* Category badge over image */}
-                          <span className="absolute top-3 left-3 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 text-foreground">
+                          <span className="absolute bottom-3 left-3 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/15 text-white shadow-lg">
                             {getCategory(related.title)}
                           </span>
                         </Link>

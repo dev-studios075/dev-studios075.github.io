@@ -3,7 +3,7 @@ title: "The Hidden Cost of Manual Logistics Operations — And How to Fix It in 
 date: 2026-05-11
 author: Fleetcodes Team
 excerpt: "Manual logistics is costing you more than you think. See how Fleetcodes TMS eliminates double entry, billing errors and inefficiency. Book a free demo today."
-coverImage: /uploads/ChatGPT Image May 11, 2026, 02_50_47 PM.jpg
+coverImage: /uploads/blog90.jpg
 ---
 
 # The Hidden Cost of Manual Logistics Operations — And How to Fix It in 2026
