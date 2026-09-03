@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/hooks/use-theme";
 import { useEffect } from "react";
 import GoogleAnalytics from "./components/analytics/GoogleAnalytics";
 import BackToTop from "./components/BackToTop";
+import CookieConsent from "./components/CookieConsent";
 
 // Lazy loaded pages
 const Index = lazy(() => import("./pages/Index"));
@@ -69,6 +70,7 @@ const App = () => (
         <BrowserRouter>
           <ScrollToTop />
           <GoogleAnalytics />
+          <CookieConsent />
           {/* <FloatingWhatsApp /> */}
           <Suspense fallback={<PageLoader />}>
             <AppRoutes />

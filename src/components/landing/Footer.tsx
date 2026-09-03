@@ -3,6 +3,7 @@ import { Linkedin, Twitter, Github, Shield, Zap, ArrowRight, ArrowDownToLine } f
 import { Link } from "react-router-dom";
 import { trackEvent } from "@/lib/analytics";
 import { APP_DOWNLOAD_QR_SRC, APP_DOWNLOAD_URL, LINKEDIN_URL } from "@/lib/site";
+import { openCookiePreferences } from "@/lib/cookieConsent";
 
 const cols = [
   {
@@ -294,6 +295,7 @@ const Footer = () => {
             <Link to="/privacy/" className="hover:text-white transition-colors">Privacy</Link>
             <Link to="/terms/" className="hover:text-white transition-colors">Terms</Link>
             <Link to="/security/" className="hover:text-white transition-colors">Security</Link>
+            <button type="button" onClick={openCookiePreferences} className="hover:text-white transition-colors">Cookie Preferences</button>
           </div>
         </div>
       </div>

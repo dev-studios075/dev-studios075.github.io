@@ -51,7 +51,7 @@ const sections = [
     id: "cookies",
     title: "5. Cookies and analytics",
     content: (
-      <p>Our website may use essential browser storage and analytics technologies to keep the site functional, understand traffic and improve user experience. You can control cookies through your browser settings, although disabling essential storage may affect some features.</p>
+      <><p>We use essential browser storage to remember preferences and support core site functions. With your permission, we may use analytics technologies to understand visits and improve user experience, and optional marketing technologies where disclosed in the consent controls.</p><p>You can accept, reject or customise non-essential categories in the consent banner and change your selection later through “Cookie Preferences” in the footer. Analytics does not load until you opt in. Browser controls can also remove stored preferences, in which case we will ask for your choice again.</p></>
     ),
   },
   {
