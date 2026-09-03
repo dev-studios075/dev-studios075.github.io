@@ -11,7 +11,7 @@ import {
   absolutePageUrl,
   absoluteUrl,
 } from "@/lib/site";
-import { isLocalizablePath } from "@/hooks/use-language";
+import { isLocalizablePath } from "@/hooks/useTranslation";
 
 type JsonLd = Record<string, unknown>;
 

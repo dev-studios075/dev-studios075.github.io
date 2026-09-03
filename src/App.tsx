@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import GoogleAnalytics from "./components/analytics/GoogleAnalytics";
 import BackToTop from "./components/BackToTop";
 import CookieConsent from "./components/CookieConsent";
-import { getPreferredLanguage, isLocalizablePath } from "@/hooks/use-language";
+import { getPreferredLanguage, isLocalizablePath } from "@/hooks/useTranslation";
 
 // Lazy loaded pages
 const Index = lazy(() => import("./pages/Index"));

@@ -8,6 +8,83 @@
     "security": "Security",
     "cookiePreferences": "Cookie Preferences"
   },
+  "faq": {
+    "badge": "Common Questions",
+    "title": "Frequently Asked Questions",
+    "description": "Got questions about Fleetcodes? We've compiled answers to the most common queries from fleet owners and logistics managers.",
+    "stillHaveQuestions": "Still have questions?",
+    "scheduleCallback": "Schedule a callback with our team",
+    "items": [
+      {
+        "question": "How does Fleetcodes' AI-powered dispatch planning work?",
+        "answer": "Our system reads your operational standards (SOPs), truck types, route history, and driver availability logs. The AI algorithm then auto-recommends optimal load matches and schedules, reducing vehicle dry-runs and admin planning time by over 50%."
+      },
+      {
+        "question": "Does it integrate with existing GPS hardware and FASTag accounts?",
+        "answer": "Yes, fully! Fleetcodes has pre-built API integrations for all leading GPS tracking devices (LocoNav, Trimble, etc.) and direct bank connections (ICICI, HDFC, SBI) for live toll deduction tracking and FASTag balance alerts."
+      },
+      {
+        "question": "How long does it take to onboard our fleet?",
+        "answer": "A standard onboarding takes between 7 to 10 days. Our dedicated customer success team will setup your vehicle lists, driver KYC records, and client rates, and run training sessions for your managers and dispatch coordinators."
+      },
+      {
+        "question": "How does Fleetcodes prevent toll leakage and expense overcharging?",
+        "answer": "The platform dynamically correlates actual FASTag transactions with the vehicle's GPS route timeline. If a vehicle takes an unauthorized route, stands waiting excessively, or gets charged for an incorrect axle category, it gets flagged instantly on the reconciliation dashboard."
+      },
+      {
+        "question": "Is our shipper contract and customer data secure?",
+        "answer": "Absolutely. Security is central to our design. Fleetcodes utilizes multi-tenant architecture with row-level data isolation and end-to-end TLS encryption. Your commercial rates, client contracts, and driver records are completely secure and private to your account."
+      },
+      {
+        "question": "Can we request custom reports or connect Fleetcodes to our ERP?",
+        "answer": "Yes, we support enterprise integrations. Fleetcodes provides outbound REST APIs and Webhooks to sync trip sheets, POD confirmations, and billing invoices directly with standard ERPs like SAP, Oracle, and Tally Prime."
+      }
+    ]
+  },
+  "footer": {
+    "newsletter": "NEWSLETTER",
+    "newsletterTitle": "Stay ahead of logistics",
+    "newsletterDesc": "Product updates, industry insights, and automation tips — weekly.",
+    "emailPlaceholder": "Enter your work email",
+    "subscribing": "Subscribing…",
+    "subscribe": "Subscribe",
+    "subscribedMsg": "You're subscribed — welcome aboard! 🎉",
+    "companyDesc": "Automation-first TMS for logistics, fleet, and supply-chain enterprises. Built to think, decide, and execute — without human intervention.",
+    "systemStatus": "All systems operational · 99.99% uptime",
+    "downloadApp": "Download App",
+    "appName": "Fleetcodes App",
+    "appDesc": "Scan QR or install Android APK directly.",
+    "downloadApk": "Download APK",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "security": "Security",
+    "cookiePreferences": "Cookie Preferences"
+  },
+  "config": {
+    "dateLocale": "en-US"
+  },
+  "cookieConsent": {
+    "preferences": "Cookie preferences",
+    "choose": "Choose what you share",
+    "description": "Essential storage is required. Everything else stays off unless you choose to enable it.",
+    "essential": "Essential",
+    "essentialDesc": "Required for preferences, navigation and core site functions.",
+    "alwaysOn": "Always on",
+    "analytics": "Analytics",
+    "analyticsDesc": "Helps us understand visits and improve the website.",
+    "marketing": "Marketing",
+    "marketingDesc": "Allows optional marketing measurement if we add it in future.",
+    "rejectNonEssential": "Reject non-essential",
+    "reject": "Reject non-essential",
+    "savePreferences": "Save preferences",
+    "controls": "Cookie controls",
+    "yourPrivacy": "Your privacy, your choice",
+    "bannerDesc": "We use essential storage to keep the site working. Optional analytics helps us improve your experience and loads only with your permission.",
+    "privacyPolicy": "Privacy Policy",
+    "customize": "Customize",
+    "acceptAll": "Accept all",
+    "footerText": "We never sell personal data. Change your choice anytime from the footer."
+  },
   "nav": {
     "product": "Product",
     "resources": "Resources",
@@ -22,7 +99,40 @@
     "about": "About",
     "careers": "Careers"
   },
+  "navbarMenu": {
+    "Product": "Product",
+    "Resources": "Resources",
+    "Company": "Company",
+    "Features": "Features",
+    "How it works": "How it works",
+    "Savings Estimator": "Savings Estimator",
+    "Outcomes": "Outcomes",
+    "Mobile app": "Mobile app",
+    "Blog": "Blog",
+    "FAQ": "FAQ",
+    "About": "About",
+    "Careers": "Careers",
+    "Book a Demo": "Book a Demo",
+    "Explore all platform capabilities": "Explore all platform capabilities",
+    "Step-by-step automation flow": "Step-by-step automation flow",
+    "Calculate your operational savings": "Calculate your operational savings",
+    "What teams unlock with automation-first ops": "What teams unlock with automation-first ops",
+    "Scan QR code to download the app": "Scan QR code to download the app",
+    "Industry insights & updates": "Industry insights & updates",
+    "Frequently asked questions": "Frequently asked questions",
+    "Our story and mission": "Our story and mission",
+    "Join the Fleetcodes team": "Join the Fleetcodes team",
+    "Schedule a live walkthrough": "Schedule a live walkthrough",
+    "switchLanguage": "हिंदी में देखें",
+    "langAbbr": "हिं",
+    "signIn": "Sign in",
+    "bookDemo": "Book Demo"
+  },
   "home": {
+    "seo": {
+      "title": "Fleetcodes — AI-Powered Transport Management System",
+      "description": "Automate dispatch, tracking, billing and fleet operations with an AI-powered TMS. Grow your business with less headcount."
+    },
     "hero": {
       "badge": "Automation-first TMS · Powered by AI, ML & Vision",
       "title": "Your Transport Operations.",

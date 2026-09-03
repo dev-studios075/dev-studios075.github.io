@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft, ArrowRight,
   CheckCircle2, Loader2, ShieldCheck, Clock, Sparkles,
-  Building, Mail, User, Phone, MessageSquare, Sun, Moon,
+  Building, Mail, User, Phone, MessageSquare, Sun, Moon, Languages,
   Zap, BarChart3, Globe, CheckCircle,
 } from "lucide-react";
 
@@ -75,7 +75,7 @@ const formatDate = (date: Date, locale: string) => {
 
 // ─── Component ─────────────────────────────────────────────────────────────────
 const BookDemo = () => {
-  const { t, tObject, language, isHindi, localizePath, setLanguage } = useTranslation();
+  const { t, tObject, language, localizePath, setLanguage } = useTranslation();
   const locale = language === "hi" ? "hi-IN" : "en-US";
   const stats = tObject<Array<{ value: string; label: string }>>("pages.demo.stats");
   const checkpoints = tObject<Array<{ title: string; desc: string }>>("pages.demo.checkpoints").map((item, index) => ({ ...item, icon: checkpointIcons[index] }));
@@ -232,41 +232,32 @@ const BookDemo = () => {
             </Link>
 
             {/* Right actions */}
-            <div className="flex items-center gap-2">
-              <div
-                className="flex items-center rounded-lg border border-slate-200/80 bg-white/50 p-0.5 text-[11px] font-bold dark:border-white/10 dark:bg-white/[0.04]"
-                aria-label="Language selector"
-              >
+            <div className="flex items-center gap-4">
+              <div className="flex h-9 items-center rounded-[14px] border border-slate-200 bg-white p-1 dark:border-white/[0.08] dark:bg-white/[0.04] shadow-sm">
                 <button
                   type="button"
-                  onClick={() => setLanguage("en")}
-                  className={`rounded-md px-2 py-1 transition-colors ${!isHindi ? "bg-primary text-white" : "text-slate-500 hover:text-primary"}`}
-                  aria-pressed={!isHindi}
+                  onClick={() => setLanguage(language === "hi" ? "en" : "hi")}
+                  className="flex h-7 items-center gap-1.5 rounded-[10px] pl-2 pr-1.5 transition-colors text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-white/[0.06]"
+                  aria-label={t("navbarMenu.switchLanguage") as string}
                 >
-                  EN
+                  <Languages className="h-3.5 w-3.5" />
+                  <span className="text-[11px] font-semibold tracking-wide mt-0.5">{t("navbarMenu.langAbbr")}</span>
                 </button>
+                <div className="mx-1 h-3.5 w-px bg-slate-200 dark:bg-white/20" />
                 <button
-                  type="button"
-                  onClick={() => setLanguage("hi")}
-                  className={`rounded-md px-2 py-1 transition-colors ${isHindi ? "bg-primary text-white" : "text-slate-500 hover:text-primary"}`}
-                  aria-pressed={isHindi}
+                  onClick={toggleTheme}
+                  aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+                  className="flex h-7 w-7 items-center justify-center rounded-[10px] transition-colors text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-white/[0.06]"
                 >
-                  हिं
+                  {theme === "dark" ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
                 </button>
               </div>
-              <button
-                onClick={toggleTheme}
-                aria-label="Toggle theme"
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-all"
-              >
-                {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-              </button>
               <div className="w-px h-5 bg-border/60 hidden sm:block" />
               <Link
                 to={localizePath("/")}
-                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-foreground dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-all"
+                className="group flex h-9 items-center justify-center gap-2 px-4 text-sm font-medium text-slate-700 transition-all duration-200 rounded-[14px] bg-white border border-slate-200 shadow-sm hover:bg-slate-50 dark:text-slate-300 dark:bg-white/[0.04] dark:border-white/[0.08] dark:hover:bg-white/[0.08] dark:shadow-none"
               >
-                <ArrowLeft className="w-3.5 h-3.5" />
+                <ArrowLeft className="w-3.5 h-3.5 transition-transform duration-200 group-hover:-translate-x-0.5" />
                 <span className="hidden sm:inline">{t("pages.demo.back")}</span>
                 <span className="sm:hidden">{t("pages.demo.backShort")}</span>
               </Link>

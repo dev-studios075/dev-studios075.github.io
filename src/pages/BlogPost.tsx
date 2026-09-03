@@ -170,7 +170,7 @@ const getRelatedPosts = (currentSlug: string, currentCategory: string) =>
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { t, isHindi, localizePath } = useTranslation();
+  const { t, language, localizePath } = useTranslation();
   const post = slug ? getPostBySlug(slug) : undefined;
   const [content, setContent] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -293,7 +293,7 @@ const BlogPost = () => {
   const category = getCategory(title);
   const categoryLabel = t(`pages.blogPost.categories.${category}`);
   const relatedPosts = getRelatedPosts(post.slug, category);
-  const dateLocale = isHindi ? "hi-IN" : "en-US";
+  const dateLocale = t("config.dateLocale");
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-clip">
