@@ -236,7 +236,7 @@ const BookDemo = () => {
           >
             {/* Logo */}
             <Link to="/" className="flex shrink-0 items-center gap-2" aria-label="Fleetcodes home">
-              <img src="/favicon.png" alt="" className="h-9 w-9 rounded-lg object-contain" />
+              <img src="/assets/brand/logo-with-bg.png" alt="" className="h-9 w-9 object-contain" />
               <span className="leading-none">
                 <span className="block font-display text-lg font-bold tracking-tight text-slate-950 dark:text-white">
                   fleet<span className="text-[#5542f6]">codes</span>
