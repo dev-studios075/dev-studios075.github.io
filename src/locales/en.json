@@ -1,0 +1,151 @@
+{
+  "common": {
+    "bookDemo": "Book Demo",
+    "signIn": "Sign in",
+    "learnMore": "Learn more",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "security": "Security",
+    "cookiePreferences": "Cookie Preferences"
+  },
+  "nav": {
+    "product": "Product",
+    "resources": "Resources",
+    "company": "Company",
+    "features": "Features",
+    "howItWorks": "How it works",
+    "savingsEstimator": "Savings Estimator",
+    "outcomes": "Outcomes",
+    "mobileApp": "Mobile app",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "about": "About",
+    "careers": "Careers"
+  },
+  "home": {
+    "hero": {
+      "badge": "Automation-first TMS · Powered by AI, ML & Vision",
+      "title": "Your Transport Operations.",
+      "accent": "Fully Autonomous.",
+      "description": "An AI-powered TMS that learns your SOPs, makes real-time decisions, and runs your logistics with minimal human intervention.",
+      "seeHow": "See How It Works",
+      "noCard": "No-credit-card demo",
+      "soc": "SOC 2 ready",
+      "deploy": "Deploys in 14 days"
+    },
+    "features": { "eyebrow": "Capabilities", "title": "One platform.", "accent": "Nine autonomous systems.", "description": "Replace fragmented tools and manual coordination with a single, self-operating engine built for modern logistics." },
+    "how": { "eyebrow": "Autonomous Workflow", "titlePrefix": "From SOP to", "accent": "self-driving operations", "titleSuffix": "in four steps.", "description": "See how Fleetcodes parses static operational rules and automates decisions, dispatch schedules, and continuous feedback loops." },
+    "compare": { "eyebrow": "Why Fleetcodes", "title": "Traditional SaaS waits for input.", "accent": "Fleetcodes takes action." },
+    "roi": { "eyebrow": "Savings Estimator", "titlePrefix": "Calculate How Much You Save with", "titleSuffix": "", "description": "Enter your current fleet metrics to visualize how automation-first fleet management directly translates into increased profitability." },
+    "benefits": { "eyebrow": "Outcomes", "titlePrefix": "What teams unlock with", "accent": "automation-first ops.", "description": "One intelligent operating layer continuously plans, validates, and improves fleet execution." },
+    "proof": { "eyebrow": "Operators talking", "titlePrefix": "Loved by", "accent": "operations leaders." },
+    "blog": { "eyebrow": "From the blog", "titlePrefix": "Insights for the", "accent": "autonomous era", "titleSuffix": "of logistics.", "viewAll": "View all articles" },
+    "cta": { "badge": "14-Day Deployment Guarantee", "title": "Let your logistics run on autopilot.", "description": "See how Fleetcodes maps your SOPs and runs a live operation in a 30-minute walkthrough.", "schedule": "Schedule a Demo", "sales": "Talk to sales" }
+  },
+  "pages": {
+    "blog": {
+      "seoTitle":"Fleet Management Blog","seoDescription":"Fleet management, AI dispatch, TMS automation, compliance, and logistics operations insights for Indian transporters and shippers.","page":"Page {{page}}","eyebrow":"From the blog","titlePrefix":"Insights for the","titleAccent":"autonomous era","titleSuffix":"of logistics.","description":"Deep dives on AI-powered TMS, fleet intelligence, and the operational future of logistics.","guidesTitle":"Essential fleet and transport guides","guidesDescription":"Start with these practical guides for running compliant, efficient fleet operations in India.","search":"Search articles...","all":"All","category":"Category","categories":{"AI & Automation":"AI & Automation","Compliance":"Compliance","Fleet":"Fleet","Operations":"Operations","Analytics":"Analytics","Technology":"Technology"},"read":"read","readArticle":"Read article","previous":"Previous","next":"Next","pageLabel":"Page {{page}}","empty":"No blog posts yet. Check back soon!","noResults":"No matching articles found.","adjust":"Try adjusting your filters or search terms.","filterCategory":"Filter by Category: {{category}}"
+    },
+    "blogPost": {"back":"Back to blog","minuteRead":"{{minutes}} min read","share":"Share article","shareArticle":"Share Article:","onPage":"On this page","loadError":"Failed to load article content. Please refresh the page.","ctaTitle":"Ready to automate your fleet operations?","ctaDesc":"See how Fleetcodes can cut costs and replace manual work.","bookDemo":"Book a Demo","keepReading":"Keep reading","related":"Related fleet guides","allArticles":"All articles","readArticle":"Read article","backAll":"Back to all articles","postNotFound":"Post not found","categories":{"AI & Automation":"AI & Automation","Compliance":"Compliance","Fleet Management":"Fleet Management","Operations":"Operations","Analytics":"Analytics","Technology":"Technology"}},
+    "about": {
+      "seoTitle": "About Us | Fleetcodes",
+      "seoDescription": "Learn how Fleetcodes was built by logistics operators for logistics operators — and why we're obsessed with automating fleet management across India.",
+      "heroBadge": "Our story",
+      "heroTitle": "Built by operators,",
+      "heroAccent": "for operators.",
+      "heroDescription": "We started Fleetcodes because we lived the chaos of running fleet operations manually. WhatsApp dispatch. Paper challans. Excel billing. We knew there was a better way.",
+      "seePlatform": "See the Platform",
+      "joinTeam": "Join Our Team",
+      "stats": [{"value":"500+","label":"Fleets managed"},{"value":"12k+","label":"Vehicles tracked daily"},{"value":"38%","label":"Avg cost reduction"},{"value":"14d","label":"Deploy guarantee"}],
+      "missionLabel": "Mission",
+      "missionTitle": "Make Indian logistics run on",
+      "missionAccent": "software, not instinct.",
+      "missionP1": "India moves ₹140 lakh crore of goods every year, yet most of it is managed with phone calls, paper receipts, and tribal knowledge locked in a dispatcher's head.",
+      "missionP2": "Fleetcodes is building the operating system for Indian logistics — a platform that gives every fleet manager the same digital leverage that a Fortune 500 company has, at a price that makes sense for a 50-truck operation.",
+      "console": "Live Network Console",
+      "consoleStats": [{"value":"90%","label":"Dispatch Auto"},{"value":"99.9%","label":"GPS Telemetry"},{"value":"97%","label":"Billing Match"},{"value":"94%","label":"TMS Retention"}],
+      "journeyLabel": "Our Journey",
+      "journeyTitle": "How we got here",
+      "milestones": [{"year":"2024","title":"Founding & Launch","desc":"Founded with a mission to eliminate manual dispatch. Launched our core platform to early fleet operators in Pune."},{"year":"2025","title":"100+ Active Fleets","desc":"Crossed 100+ active fleets. Shipped our automated billing engine, driver app, and real-time Fastag integration."},{"year":"2026","title":"AI-Powered Dispatch","desc":"Expanded to 500+ fleets across India. Launched AI dispatch planning, automated route optimization, and instant e-way bills."}],
+      "principlesLabel": "Principles",
+      "principlesTitle": "What we believe in",
+      "values": [{"title":"Operator-First","desc":"Every feature starts with a real pain point from a fleet operator, not a product brainstorm session."},{"title":"Automation Over Headcount","desc":"We believe the best logistics companies of the next decade will run 10x the volume with the same team — through software."},{"title":"Trust Through Reliability","desc":"A TMS that's down costs real money. We obsess over uptime, data accuracy, and response times."},{"title":"Simplicity at Scale","desc":"Complex operations shouldn't mean complex software. We hide the complexity so your team can focus on moving goods."},{"title":"Long-Term Partnerships","desc":"We don't do pilots that go nowhere. Our 14-day deployment SLA and dedicated CSM model is built for real adoption."},{"title":"India-Built, India-First","desc":"Designed ground-up for Indian logistics — Fastag, e-way bills, regional languages, and India-specific compliance."}],
+      "ctaBadge": "500+ fleets trust Fleetcodes",
+      "ctaTitle": "Ready to see it in action?",
+      "ctaDescription": "Book a 30-minute live walkthrough. We'll show you how your fleet can cut operational costs by 38% and run on autopilot.",
+      "ctaButton": "Book a Live Demo"
+    },
+    "careers": {
+      "seoTitle":"Careers | Fleetcodes","seoDescription":"Join the Fleetcodes team and help build the automation-first TMS transforming Indian logistics.",
+      "heroBadge":"We're hiring across 5 roles","heroTitle":"Build the Future of","heroAccent":"Logistics","heroDescription":"Join a small, high-ownership team solving one of India's biggest operational challenges — moving goods efficiently at scale.","viewRoles":"View Open Roles","openApplication":"Send Open Application",
+      "stats":[{"value":"15+","label":"Team size"},{"value":"100%","label":"Remote-friendly"},{"value":"5","label":"Open roles"}],
+      "cultureLabel":"Culture","cultureTitle":"How we work","values":[{"title":"Move Fast","desc":"We ship weekly. Every engineer owns their feature end-to-end — from PRD to production."},{"title":"Customer Obsessed","desc":"Every decision starts with the fleet operator. We regularly ride along on deliveries to stay grounded."},{"title":"Remote-First","desc":"Work from wherever you do your best thinking. We care about output, not office hours."},{"title":"High Ownership","desc":"Small team, big surface area. You'll have real equity and real impact from day one."}],
+      "rolesLabel":"Open Positions","rolesTitle":"Find your role","rolesDescription":"Click any role to expand — see responsibilities, requirements, and apply directly.","responsibilities":"Responsibilities","requirements":"Requirements","apply":"Apply for this role","applyFor":"Apply for {{role}}",
+      "jobs":[
+        {"id":"swe-backend","title":"Senior Backend Engineer","team":"Engineering","location":"Remote (India)","type":"Full-time","level":"Senior","desc":"Build the data pipelines and APIs that power real-time fleet tracking, dispatch automation, and billing for thousands of vehicles.","responsibilities":["Design and maintain high-throughput microservices in Node.js / Python","Own the GPS data ingestion pipeline (10M+ events/day)","Collaborate with product on dispatch automation features","Set engineering standards and mentor junior engineers"],"requirements":["5+ years backend experience (Node.js, Python, or Go)","Strong understanding of event-driven architectures (Kafka / RabbitMQ)","Experience with PostgreSQL, Redis, and cloud platforms (AWS / GCP)","Bonus: logistics, IoT, or fintech domain experience"]},
+        {"id":"swe-frontend","title":"Frontend Engineer","team":"Engineering","location":"Remote (India)","type":"Full-time","level":"Mid–Senior","desc":"Own the operator dashboard used to dispatch trips, monitor vehicles, and settle payments in real time.","responsibilities":["Build performant React + TypeScript dashboards with live data updates","Implement map-based vehicle tracking UI","Own the design system and component library","Work closely with design to ship polished experiences"],"requirements":["4+ years of React / TypeScript experience","Strong CSS, animation, and responsive design skills","Experience with real-time data","Bonus: experience with mapping libraries or logistics tools"]},
+        {"id":"pm","title":"Product Manager – Fleet Operations","team":"Product","location":"Remote (India)","type":"Full-time","level":"Senior","desc":"Define the product roadmap for dispatch, GPS tracking, Fastag integration, and freight billing.","responsibilities":["Own the roadmap for new fleet automation modules","Interview fleet operators weekly","Write detailed PRDs and work with engineering","Define and track adoption and retention KPIs"],"requirements":["4+ years of B2B SaaS product management","Strong analytical skills","Experience in logistics, supply chain, or fleet management","Ability to translate workflows into product specifications"]},
+        {"id":"bdm","title":"Business Development Manager","team":"Sales","location":"Hybrid – Bangalore / Remote","type":"Full-time","level":"Mid–Senior","desc":"Own the full sales cycle for mid-market and enterprise fleet operators across India.","responsibilities":["Identify logistics companies with 50+ vehicle fleets","Conduct product demos and manage pilots","Negotiate contracts and close enterprise deals","Build logistics-industry relationships"],"requirements":["3+ years B2B enterprise sales","Strong Indian logistics network","Proven record of closing large deals","Willingness to travel for client meetings"]},
+        {"id":"csm","title":"Customer Success Manager","team":"Customer Success","location":"Remote (India)","type":"Full-time","level":"Mid","desc":"Help fleet operators go live fast, use the platform deeply, and renew every year.","responsibilities":["Own onboarding with a 14-day deployment SLA","Conduct regular customer check-ins","Identify expansion opportunities","Synthesize product feedback"],"requirements":["2+ years in customer success or logistics operations","Strong communication skills","Ability to explain technical product features","Bonus: fleet or transport industry experience"]}
+      ],
+      "form":{"required":"Name, email, and resume link are required.","invalidEmail":"Please enter a valid email address.","success":"Application Submitted Successfully!","successText":"Thank you for applying. Our hiring team will review your details and contact you shortly.","close":"Close Form","name":"Full Name *","namePlaceholder":"John Doe","email":"Email Address *","linkedin":"LinkedIn Profile URL","resume":"Resume/Portfolio Link *","resumePlaceholder":"Google Drive, Dropbox, or PDF URL","why":"Why Fleetcodes? (Optional)","whyPlaceholder":"Tell us why you want to join our team...","submitting":"Submitting...","submit":"Submit Application","cancel":"Cancel"},
+      "benefitsLabel":"Benefits","benefitsTitle":"What you get","perks":[{"label":"Remote-first","desc":"Work from anywhere in India"},{"label":"Health Insurance","desc":"Full family coverage included"},{"label":"ESOP","desc":"Equity stake in Fleetcodes"},{"label":"Flexible Hours","desc":"Async-first culture"},{"label":"Learning Budget","desc":"₹50k/year for courses & books"},{"label":"Annual Retreats","desc":"Full team off-sites twice a year"}],
+      "ctaLabel":"Don't see a fit?","ctaTitle":"Send us your CV anyway","ctaDescription":"We hire for talent, not just headcount. If you're exceptional at what you do and care about logistics, we want to hear from you.","ctaButton":"Email careers@fleetcodes.com"
+    },
+    "demo": {
+      "seoTitle":"Book a Free Live Demo | Fleetcodes","seoDescription":"Schedule a 30-minute personalized walkthrough with our logistics automation experts.","back":"Back to home","backShort":"Back","badge":"30-Minute Live Walkthrough","heroTitle":"See Fleetcodes in","heroAccent":"Autopilot Mode.","heroDescription":"Discover how our automation-first TMS connects operations, billing, Fastag tracking, and driver management into a single, self-running engine.",
+      "stats":[{"value":"−38%","label":"Operational cost"},{"value":"10×","label":"Scale per ops head"},{"value":"14d","label":"Deploy guarantee"}],"checkpoints":[{"title":"Custom SOP Mapping","desc":"We'll map one of your core dispatch SOPs live during the demo."},{"title":"Real-time Cost Audit","desc":"See how our AI identifies leakages and empty miles instantly."},{"title":"Integration Consultation","desc":"Learn how we connect with your existing GPS providers and ERPs."}],
+      "trust":{"schedule":"Schedule in 60s","soc":"SOC 2 compliant","card":"No credit card"},"formTitle":"Schedule your live demo","formDescription":"Fill in your details — we'll set up a screen share at your convenience.","name":"Full Name","namePlaceholder":"John Doe","company":"Company Name","companyPlaceholder":"Acme Transportation","email":"Work Email","phone":"Phone Number","fleet":"Fleet Size (No. of Vehicles)","fleetPlaceholder":"Select fleet size","vehicles":"vehicles","challenge":"What challenges are you looking to solve?","challengePlaceholder":"e.g. tracking empty miles, manual billing delays, driver shortages...","slot":"Select a Preferred Demo Slot (Optional)","scheduling":"Scheduling Demo…","submit":"Request Live Demo","response":"No credit card required · Our team responds within 2 hours",
+      "validation":{"name":"Name must be at least 2 characters","email":"Please enter a valid work email","phone":"Please enter a valid phone number (minimum 10 digits)","company":"Company name must be at least 2 characters","fleet":"Please select your fleet size"},"toastSuccess":"Demo request submitted successfully!","toastError":"Demo request could not be submitted. Please check your connection and try again.","successTitle":"Demo Slot Reserved!","successText":"We've logged your request. Our team will review your fleet profile and reach out within 2 hours to confirm your calendar slot.","slotDetails":"Booked Slot Details","preferred":"Preferred Time: {{date}} at {{time}}. We'll send the calendar invite shortly.","next":"What happens next?","nextText":"Expect an email or call with a personalized calendar link for your 30-minute walkthrough.","returnHome":"Return to Homepage",
+      "newsletter":{"label":"Newsletter","title":"Stay ahead of logistics","description":"Product updates, industry insights, and automation tips — weekly.","placeholder":"Enter your work email","subscribing":"Subscribing…","subscribe":"Subscribe","success":"You're subscribed — welcome aboard!","error":"Subscription could not be submitted. Please try again.","rights":"All rights reserved.","deploy":"14-day deploy"}
+    },
+    "privacy": {
+      "seoTitle": "Privacy Policy | Fleetcodes",
+      "seoDescription": "Learn how Fleetcodes collects, uses, shares, retains and protects personal data across its website and fleet management services.",
+      "badge": "Privacy & data protection",
+      "title": "Privacy Policy",
+      "subtitle": "This policy explains how Fleetcodes Technologies Pvt. Ltd. handles personal data when you visit our website, contact us or use our fleet management services.",
+      "lastUpdated": "Last updated: September 3, 2026",
+      "onPage": "On this page",
+      "contactTitle": "11. Contact us",
+      "contactText": "For privacy questions, requests or grievances, email us. Please include enough detail for us to identify the relevant account or interaction.",
+      "cards": [
+        { "label": "Purpose limited", "text": "Data used to operate and improve our services." },
+        { "label": "Safeguarded", "text": "Controls designed to protect business data." },
+        { "label": "Your choices", "text": "Requests and preferences are supported." }
+      ]
+    },
+    "terms": {
+      "seoTitle": "Terms of Service | Fleetcodes",
+      "seoDescription": "Review the terms governing access to and use of the Fleetcodes fleet and logistics operations platform.",
+      "badge": "Service agreement",
+      "title": "Terms of Service",
+      "subtitle": "These terms explain the rules and responsibilities that apply when a business accesses the Fleetcodes website or fleet management services.",
+      "lastUpdated": "Last updated: September 3, 2026",
+      "onPage": "On this page",
+      "contactTitle": "14. Contact us",
+      "contactText": "Questions about these terms can be sent to Fleetcodes Technologies Pvt. Ltd.",
+      "cards": [
+        { "label": "Clear scope", "text": "Your signed order form controls commercial details." },
+        { "label": "Responsible use", "text": "Protect accounts, data and platform security." },
+        { "label": "Business terms", "text": "Built for authorised fleet and logistics users." }
+      ]
+    },
+    "security": {
+      "seoTitle": "Security at Fleetcodes",
+      "seoDescription": "Learn about Fleetcodes security practices for access control, data protection, infrastructure, monitoring, development and incident response.",
+      "badge": "Trust & protection",
+      "title": "Security at Fleetcodes",
+      "subtitle": "How we approach platform security and protect the fleet, driver, trip and business information entrusted to our services.",
+      "lastUpdated": "Last updated: September 3, 2026",
+      "onPage": "On this page",
+      "contactTitle": "11. Contact security",
+      "contactText": "Report suspected vulnerabilities or account-security concerns privately to our support team.",
+      "cards": [
+        { "label": "Controlled access", "text": "Authenticated accounts and assigned permissions." },
+        { "label": "Protected transit", "text": "Secure HTTPS/TLS connections for data in transit." },
+        { "label": "Operational awareness", "text": "Monitoring supports reliability and investigation." }
+      ]
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Activity, Gauge, Route, ShieldCheck, TrendingDown, Users } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const stats = [
   {
@@ -46,18 +47,20 @@ const stats = [
   },
 ];
 
-const Benefits = () => (
+const Benefits = () => {
+  const { t } = useTranslation();
+  return (
   <section id="benefits" className="pt-10 pb-8 lg:pt-12 lg:pb-10 relative overflow-hidden">
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
 
     <div className="container-tight relative">
       <div className="max-w-2xl mb-10">
-          <p className="text-xs uppercase tracking-[0.2em] text-primary mb-3 font-semibold">Outcomes</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-primary mb-3 font-semibold">{t("home.benefits.eyebrow")}</p>
           <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-tight mb-4 text-slate-900 dark:text-white">
-            What teams unlock with <span className="text-gradient">automation-first ops.</span>
+            {t("home.benefits.titlePrefix")} <span className="text-gradient">{t("home.benefits.accent")}</span>
           </h2>
         <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-          One intelligent operating layer continuously plans, validates, and improves fleet execution.
+          {t("home.benefits.description")}
         </p>
       </div>
 
@@ -106,6 +109,7 @@ const Benefits = () => (
       </p>
     </div>
   </section>
-);
+  );
+};
 
 export default Benefits;

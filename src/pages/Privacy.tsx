@@ -4,6 +4,7 @@ import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import Seo from "@/components/seo/Seo";
 import { SITE_NAME, absolutePageUrl } from "@/lib/site";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const sections = [
   {
@@ -51,7 +52,7 @@ const sections = [
     id: "cookies",
     title: "5. Cookies and analytics",
     content: (
-      <><p>We use essential browser storage to remember preferences and support core site functions. With your permission, we may use analytics technologies to understand visits and improve user experience, and optional marketing technologies where disclosed in the consent controls.</p><p>You can accept, reject or customise non-essential categories in the consent banner and change your selection later through “Cookie Preferences” in the footer. Analytics does not load until you opt in. Browser controls can also remove stored preferences, in which case we will ask for your choice again.</p></>
+      <><p>We use essential browser storage to remember preferences and support core site functions. With your permission, we may use analytics technologies to understand visits and improve user experience, and optional marketing technologies where disclosed in the consent controls.</p><p>You can accept, reject or customise non-essential categories in the consent banner and change your selection later through "Cookie Preferences" in the footer. Analytics does not load until you opt in. Browser controls can also remove stored preferences, in which case we will ask for your choice again.</p></>
     ),
   },
   {
@@ -91,9 +92,13 @@ const sections = [
   },
 ];
 
+const icons = [Database, LockKeyhole, UserRoundCheck];
+
 const Privacy = () => {
+  const { t, tObject } = useTranslation();
   const [activeId, setActiveId] = useState(sections[0].id);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const cards = tObject<{ label: string; text: string }[]>("pages.privacy.cards");
 
   useEffect(() => {
     const sectionIds = [...sections.map((section) => section.id), "contact"];
@@ -128,8 +133,8 @@ const Privacy = () => {
       aria-hidden="true"
     />
     <Seo
-      title={`Privacy Policy | ${SITE_NAME}`}
-      description="Learn how Fleetcodes collects, uses, shares, retains and protects personal data across its website and fleet management services."
+      title={t("pages.privacy.seoTitle")}
+      description={t("pages.privacy.seoDescription")}
       path="/privacy"
       jsonLd={{
         "@context": "https://schema.org",
@@ -146,28 +151,28 @@ const Privacy = () => {
         <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-[700px] -translate-x-1/2 rounded-full bg-primary/10 blur-[120px]" />
         <div className="container-tight relative">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3.5 py-1.5 text-xs font-semibold text-primary">
-            <ShieldCheck className="h-3.5 w-3.5" /> Privacy & data protection
+            <ShieldCheck className="h-3.5 w-3.5" /> {t("pages.privacy.badge")}
           </div>
-          <h1 className="max-w-3xl font-display text-4xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">Privacy Policy</h1>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg">This policy explains how Fleetcodes Technologies Pvt. Ltd. handles personal data when you visit our website, contact us or use our fleet management services.</p>
-          <p className="mt-4 text-sm font-medium text-slate-500">Last updated: September 3, 2026</p>
+          <h1 className="max-w-3xl font-display text-4xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">{t("pages.privacy.title")}</h1>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg">{t("pages.privacy.subtitle")}</p>
+          <p className="mt-4 text-sm font-medium text-slate-500">{t("pages.privacy.lastUpdated")}</p>
         </div>
       </section>
 
       <section className="py-12 sm:py-16">
         <div className="container-tight px-6 lg:px-8">
           <nav aria-label="Privacy policy sections" className="glass mb-8 rounded-2xl p-5 shadow-elegant lg:hidden">
-            <p className="mb-3 font-sans text-[11px] font-bold uppercase tracking-widest text-primary">On this page</p>
+            <p className="mb-3 font-sans text-[11px] font-bold uppercase tracking-widest text-primary">{t("pages.privacy.onPage")}</p>
             <ol className="space-y-2.5">
               {sections.map((section) => <li key={section.id}><a href={`#${section.id}`} className={`text-sm leading-snug transition-colors hover:text-primary ${activeId === section.id ? "font-semibold text-primary" : "text-muted-foreground"}`}>{section.title}</a></li>)}
-              <li><a href="#contact" className={`text-sm leading-snug transition-colors hover:text-primary ${activeId === "contact" ? "font-semibold text-primary" : "text-muted-foreground"}`}>11. Contact us</a></li>
+              <li><a href="#contact" className={`text-sm leading-snug transition-colors hover:text-primary ${activeId === "contact" ? "font-semibold text-primary" : "text-muted-foreground"}`}>{t("pages.privacy.contactTitle")}</a></li>
             </ol>
           </nav>
 
           <div className="grid items-start justify-center gap-10 lg:grid-cols-[220px_minmax(0,768px)] xl:grid-cols-[260px_minmax(0,768px)]">
             <aside className="sticky top-28 hidden max-h-[calc(100vh-8rem)] overflow-y-auto pr-2 lg:block">
               <nav aria-label="Privacy policy sections" className="border-l border-border/70 pl-4">
-                <p className="mb-4 font-sans text-[11px] font-bold uppercase tracking-widest text-primary">On this page</p>
+                <p className="mb-4 font-sans text-[11px] font-bold uppercase tracking-widest text-primary">{t("pages.privacy.onPage")}</p>
                 <ol className="space-y-3">
                   {sections.map((section) => (
                     <li key={section.id} className="relative">
@@ -177,7 +182,7 @@ const Privacy = () => {
                   ))}
                   <li className="relative">
                     {activeId === "contact" && <span className="absolute -left-4 top-1/2 h-3.5 w-0.5 -translate-y-1/2 rounded-full bg-primary" />}
-                    <a href="#contact" className={`block text-sm font-medium leading-snug transition-all duration-200 hover:translate-x-1 hover:text-primary ${activeId === "contact" ? "translate-x-1 font-semibold text-primary" : "text-muted-foreground"}`}>11. Contact us</a>
+                    <a href="#contact" className={`block text-sm font-medium leading-snug transition-all duration-200 hover:translate-x-1 hover:text-primary ${activeId === "contact" ? "translate-x-1 font-semibold text-primary" : "text-muted-foreground"}`}>{t("pages.privacy.contactTitle")}</a>
                   </li>
                 </ol>
               </nav>
@@ -185,17 +190,16 @@ const Privacy = () => {
 
             <article className="min-w-0">
             <div className="mb-10 grid gap-4 sm:grid-cols-3">
-              {[
-                { icon: Database, label: "Purpose limited", text: "Data used to operate and improve our services." },
-                { icon: LockKeyhole, label: "Safeguarded", text: "Controls designed to protect business data." },
-                { icon: UserRoundCheck, label: "Your choices", text: "Requests and preferences are supported." },
-              ].map(({ icon: Icon, label, text }) => (
-                <div key={label} className="rounded-2xl border border-slate-200 bg-white p-5 dark:border-white/[0.07] dark:bg-white/[0.025]">
-                  <Icon className="mb-3 h-5 w-5 text-primary" />
-                  <h2 className="font-display text-base font-semibold text-slate-900 dark:text-white">{label}</h2>
-                  <p className="mt-1 text-sm leading-relaxed text-slate-500 dark:text-slate-400">{text}</p>
-                </div>
-              ))}
+              {(cards || []).map(({ label, text }, i) => {
+                const Icon = icons[i];
+                return (
+                  <div key={label} className="rounded-2xl border border-slate-200 bg-white p-5 dark:border-white/[0.07] dark:bg-white/[0.025]">
+                    <Icon className="mb-3 h-5 w-5 text-primary" />
+                    <h2 className="font-display text-base font-semibold text-slate-900 dark:text-white">{label}</h2>
+                    <p className="mt-1 text-sm leading-relaxed text-slate-500 dark:text-slate-400">{text}</p>
+                  </div>
+                );
+              })}
             </div>
 
             <div className="space-y-10">
@@ -207,8 +211,8 @@ const Privacy = () => {
               ))}
               <section id="contact" className="scroll-mt-28 rounded-2xl border border-primary/20 bg-primary/5 p-6 sm:p-8">
                 <Eye className="mb-4 h-6 w-6 text-primary" />
-                <h2 className="font-display text-2xl font-semibold text-slate-900 dark:text-white">11. Contact us</h2>
-                <p className="mt-3 leading-7 text-slate-600 dark:text-slate-400">For privacy questions, requests or grievances, email us. Please include enough detail for us to identify the relevant account or interaction.</p>
+                <h2 className="font-display text-2xl font-semibold text-slate-900 dark:text-white">{t("pages.privacy.contactTitle")}</h2>
+                <p className="mt-3 leading-7 text-slate-600 dark:text-slate-400">{t("pages.privacy.contactText")}</p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <a href="mailto:support@fleetcodes.com" className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"><Mail className="h-4 w-4" />support@fleetcodes.com</a>
                   <a href="https://www.fleetcodes.com" className="inline-flex items-center rounded-xl border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:border-primary hover:text-primary dark:border-white/15 dark:text-slate-300">www.fleetcodes.com</a>

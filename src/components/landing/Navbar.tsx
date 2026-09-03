@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
 import { trackEvent } from "@/lib/analytics";
+import { useLanguage } from "@/hooks/use-language";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type DropItem = { label: string; desc: string; href: string; icon: React.ElementType; internal?: boolean };
@@ -103,9 +104,26 @@ const Navbar = () => {
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const [dropPos, setDropPos]               = useState<DropPos | null>(null);
   const { theme, toggleTheme }              = useTheme();
+  const { isHindi, localizePath, setLanguage } = useLanguage();
   const location                            = useLocation();
   const leaveTimer                          = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navRef                              = useRef<HTMLElement>(null); // ref on the nav PILL
+  const translations: Record<string, string> = {
+    Product: "प्रोडक्ट", Resources: "संसाधन", Company: "कंपनी", Features: "फीचर्स",
+    "How it works": "यह कैसे काम करता है", "Savings Estimator": "बचत कैलकुलेटर",
+    Outcomes: "परिणाम", "Mobile app": "मोबाइल ऐप", Blog: "ब्लॉग", FAQ: "सामान्य प्रश्न",
+    About: "हमारे बारे में", Careers: "करियर", "Book a Demo": "डेमो बुक करें",
+    "Explore all platform capabilities": "प्लेटफ़ॉर्म की सभी क्षमताएँ देखें",
+    "Step-by-step automation flow": "ऑटोमेशन का चरण-दर-चरण तरीका",
+    "Calculate your operational savings": "अपनी परिचालन बचत जानें",
+    "What teams unlock with automation-first ops": "ऑटोमेशन से मिलने वाले व्यावसायिक परिणाम",
+    "Scan QR code to download the app": "ऐप डाउनलोड करने के लिए QR स्कैन करें",
+    "Industry insights & updates": "उद्योग से जुड़ी जानकारी और अपडेट",
+    "Frequently asked questions": "अक्सर पूछे जाने वाले सवाल",
+    "Our story and mission": "हमारी कहानी और मिशन", "Join the Fleetcodes team": "Fleetcodes टीम से जुड़ें",
+    "Schedule a live walkthrough": "लाइव प्रोडक्ट डेमो तय करें",
+  };
+  const localizedNavItems = navItems.map((item) => ({ ...item, label: isHindi ? translations[item.label] || item.label : item.label, dropdown: item.dropdown?.map((sub) => ({ ...sub, href: localizePath(sub.href), label: isHindi ? translations[sub.label] || sub.label : sub.label, desc: isHindi ? translations[sub.desc] || sub.desc : sub.desc })) }));
 
   const trackNavEvent = (label: string, loc: string) =>
     trackEvent(label === "Sign in" ? "login_click" : "generate_lead", { cta_label: label, cta_location: loc });
@@ -166,7 +184,7 @@ const Navbar = () => {
             }}
           >
             {/* Logo */}
-            <Link to="/" className="flex shrink-0 items-center gap-2" aria-label="Fleetcodes home">
+            <Link to={localizePath("/")} className="flex shrink-0 items-center gap-2" aria-label="Fleetcodes home">
               <img src="/assets/brand/logo-with-bg.png" alt="" className="h-9 w-9 object-contain" />
               <span className="leading-none">
                 <span className="block font-display text-lg font-bold tracking-tight text-slate-950 dark:text-white">
@@ -184,7 +202,7 @@ const Navbar = () => {
               onMouseLeave={closeMenu}
               onMouseEnter={() => { if (leaveTimer.current) clearTimeout(leaveTimer.current); }}
             >
-              {navItems.map((item) => {
+              {localizedNavItems.map((item) => {
                 const hasDropdown = !!item.dropdown;
                 const isActive    = activeMenu === item.label;
                 const btnCls =
@@ -226,6 +244,10 @@ const Navbar = () => {
 
             {/* Desktop right actions */}
             <div className="hidden md:flex items-center gap-2">
+              <div className="flex items-center rounded-lg border border-slate-200/80 bg-white/50 p-0.5 text-[11px] font-bold dark:border-white/10 dark:bg-white/[0.04]" aria-label="Language selector">
+                <button type="button" onClick={() => setLanguage("en")} className={`rounded-md px-2 py-1 transition-colors ${!isHindi ? "bg-primary text-white" : "text-slate-500 hover:text-primary"}`} aria-pressed={!isHindi}>EN</button>
+                <button type="button" onClick={() => setLanguage("hi")} className={`rounded-md px-2 py-1 transition-colors ${isHindi ? "bg-primary text-white" : "text-slate-500 hover:text-primary"}`} aria-pressed={isHindi}>हिं</button>
+              </div>
               <button
                 onClick={toggleTheme}
                 aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
@@ -241,20 +263,21 @@ const Navbar = () => {
                 onClick={() => trackNavEvent("Sign in", "desktop_nav")}
                 className="px-3.5 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 rounded-lg hover:bg-slate-100/80 dark:hover:bg-white/[0.06]"
               >
-                Sign in
+                {isHindi ? "साइन इन" : "Sign in"}
               </a>
               <Link
-                to="/book-demo/"
+                to={localizePath("/book-demo/")}
                 onClick={() => trackNavEvent("Book Demo", "desktop_nav")}
                 className="group flex items-center gap-1.5 px-4 py-1.5 rounded-xl text-sm font-semibold text-white bg-primary transition-all duration-200 hover:opacity-90 hover:shadow-glow"
               >
-                Book Demo
+                {isHindi ? "डेमो बुक करें" : "Book Demo"}
                 <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
               </Link>
             </div>
 
             {/* Mobile controls */}
             <div className="md:hidden flex items-center gap-1">
+              <button type="button" onClick={() => setLanguage(isHindi ? "en" : "hi")} className="h-8 rounded-lg px-2 text-[11px] font-bold text-primary hover:bg-primary/10" aria-label={isHindi ? "Switch to English" : "हिंदी में देखें"}>{isHindi ? "EN" : "हिं"}</button>
               <button
                 onClick={toggleTheme}
                 aria-label="Toggle theme"
@@ -283,7 +306,7 @@ const Navbar = () => {
                 boxShadow: "0 12px 40px rgba(0,0,0,0.18)",
               }}
             >
-              {navItems.map((item) => (
+              {localizedNavItems.map((item) => (
                 <div key={item.label}>
                   {item.dropdown ? (
                     <>
@@ -342,14 +365,14 @@ const Navbar = () => {
                 onClick={() => { trackNavEvent("Sign in", "mobile_nav"); setMobileOpen(false); }}
                 className="px-4 py-2.5 text-sm font-medium rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-all"
               >
-                Sign in
+                {isHindi ? "साइन इन" : "Sign in"}
               </a>
               <Link
-                to="/book-demo/"
+                to={localizePath("/book-demo/")}
                 onClick={() => { trackNavEvent("Book Demo", "mobile_nav"); setMobileOpen(false); }}
                 className="flex items-center justify-center gap-2 mt-1 px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-primary transition-all"
               >
-                Book Demo <ArrowRight className="w-4 h-4" />
+                {isHindi ? "डेमो बुक करें" : "Book Demo"} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           )}
@@ -362,7 +385,7 @@ const Navbar = () => {
           panel width = nav width → perfect edge-to-edge alignment with navbar.
       ─────────────────────────────────────────────────────────────────────────── */}
       {activeMenu && dropPos && (() => {
-        const activeItem = navItems.find(i => i.label === activeMenu);
+        const activeItem = localizedNavItems.find(i => i.label === activeMenu);
         return activeItem?.dropdown ? createPortal(
           <div
             className="hidden md:block animate-fade-in-up"

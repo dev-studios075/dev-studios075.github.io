@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { trackEvent } from "@/lib/analytics";
 import { APP_DOWNLOAD_QR_SRC, APP_DOWNLOAD_URL, LINKEDIN_URL } from "@/lib/site";
 import { openCookiePreferences } from "@/lib/cookieConsent";
+import { useLanguage } from "@/hooks/use-language";
 
 const cols = [
   {
@@ -41,6 +42,7 @@ const socials = [
 
 // ─── Component ────────────────────────────────────────────────────────────────
 const Footer = () => {
+  const { isHindi, localizePath } = useLanguage();
   const [email, setEmail]         = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const [loading, setLoading]       = useState(false);
@@ -77,6 +79,9 @@ const Footer = () => {
     setEmail("");
   };
 
+  const footerTranslations: Record<string, string> = { Product: "प्रोडक्ट", Company: "कंपनी", Resources: "संसाधन", Features: "फीचर्स", "How it works": "यह कैसे काम करता है", Compare: "तुलना", "Savings Estimator": "बचत कैलकुलेटर", Outcomes: "परिणाम", About: "हमारे बारे में", Careers: "करियर", "Book a Demo": "डेमो बुक करें", Blog: "ब्लॉग" };
+  const localizedCols = cols.map((col) => ({ ...col, title: isHindi ? footerTranslations[col.title] || col.title : col.title, links: col.links.map((link) => ({ ...link, label: isHindi ? footerTranslations[link.label] || link.label : link.label, href: localizePath(link.href) })) }));
+
   return (
     <footer id="footer" className="relative overflow-hidden" style={{ background: "#0a0d14" }}>
       {/* Ambient glow */}
@@ -88,13 +93,13 @@ const Footer = () => {
         <div className="container-tight py-8 sm:py-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           <div className="max-w-xl">
             <p className="text-xs font-mono uppercase tracking-[0.18em] mb-1.5" style={{ color: "#7c3aed" }}>
-              NEWSLETTER
+              {isHindi ? "न्यूज़लेटर" : "NEWSLETTER"}
             </p>
             <h3 className="font-display font-semibold text-lg text-white mb-1">
-              Stay ahead of logistics
+              {isHindi ? "लॉजिस्टिक्स में आगे रहें" : "Stay ahead of logistics"}
             </h3>
             <p className="text-sm" style={{ color: "#64748b" }}>
-              Product updates, industry insights, and automation tips — weekly.
+              {isHindi ? "हर सप्ताह प्रोडक्ट अपडेट, उद्योग की जानकारी और ऑटोमेशन टिप्स।" : "Product updates, industry insights, and automation tips — weekly."}
             </p>
           </div>
           {!subscribed ? (
@@ -103,7 +108,7 @@ const Footer = () => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your work email"
+                placeholder={isHindi ? "अपना कार्य ईमेल दर्ज करें" : "Enter your work email"}
                 required
                 className="min-w-0 flex-1 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-500 transition-all focus:outline-none sm:min-w-64 lg:w-64"
                 style={{
@@ -118,7 +123,7 @@ const Footer = () => {
                 disabled={loading}
                 className="flex items-center justify-center gap-1.5 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
               >
-                {loading ? "Subscribing…" : <>{"Subscribe"} <ArrowRight className="w-3.5 h-3.5" /></>}
+                {loading ? (isHindi ? "जुड़ रहे हैं…" : "Subscribing…") : <>{isHindi ? "सदस्य बनें" : "Subscribe"} <ArrowRight className="w-3.5 h-3.5" /></>}
               </button>
             </form>
           ) : (
@@ -127,7 +132,7 @@ const Footer = () => {
               style={{ background: "rgba(52,211,153,0.08)", border: "1px solid rgba(52,211,153,0.2)", color: "#34d399" }}
             >
               <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              You're subscribed — welcome aboard! 🎉
+              {isHindi ? "आप सफलतापूर्वक जुड़ गए हैं! 🎉" : "You're subscribed — welcome aboard! 🎉"}
             </div>
           )}
         </div>
@@ -139,7 +144,7 @@ const Footer = () => {
 
           {/* Brand column */}
           <div className="space-y-5 sm:col-span-2 lg:col-span-1">
-            <Link to="/" className="flex w-fit items-center gap-3" aria-label="Fleetcodes home">
+            <Link to={localizePath("/")} className="flex w-fit items-center gap-3" aria-label="Fleetcodes home">
               <img src="/assets/brand/logo-with-bg.png" alt="" className="h-12 w-12 object-contain" />
               <span className="leading-none">
                 <span className="block font-display text-2xl font-bold tracking-tight text-white">
@@ -152,8 +157,7 @@ const Footer = () => {
             </Link>
 
             <p className="max-w-sm text-sm leading-relaxed lg:max-w-xs" style={{ color: "#64748b" }}>
-              Automation-first TMS for logistics, fleet, and supply-chain enterprises.
-              Built to think, decide, and execute — without human intervention.
+              {isHindi ? "लॉजिस्टिक्स, फ्लीट और सप्लाई-चेन व्यवसायों के लिए ऑटोमेशन-फर्स्ट TMS—जो ऑपरेशंस को समझने, निर्णय लेने और कार्य पूरा करने में मदद करता है।" : "Automation-first TMS for logistics, fleet, and supply-chain enterprises. Built to think, decide, and execute — without human intervention."}
             </p>
 
             {/* Status badge */}
@@ -162,7 +166,7 @@ const Footer = () => {
               style={{ background: "rgba(52,211,153,0.08)", border: "1px solid rgba(52,211,153,0.2)", color: "#34d399" }}
             >
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              All systems operational · 99.99% uptime
+              {isHindi ? "सभी सिस्टम सामान्य रूप से चालू" : "All systems operational · 99.99% uptime"}
             </div>
 
             {/* Social icons */}
@@ -184,7 +188,7 @@ const Footer = () => {
           </div>
 
           {/* Nav columns */}
-          {cols.map((c) => (
+          {localizedCols.map((c) => (
             <div key={c.title}>
               <h4
                 className="mb-5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em]"
@@ -224,7 +228,7 @@ const Footer = () => {
               className="mb-5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em]"
               style={{ color: "#64748b" }}
             >
-              Download App
+              {isHindi ? "ऐप डाउनलोड करें" : "Download App"}
             </h4>
             <div
               className="flex w-full max-w-[300px] items-center gap-3 rounded-2xl p-3 sm:max-w-[330px] lg:max-w-[300px]"
@@ -247,9 +251,9 @@ const Footer = () => {
               </a>
 
               <div className="min-w-0">
-                <p className="text-sm font-semibold text-white">Fleetcodes App</p>
+                <p className="text-sm font-semibold text-white">{isHindi ? "Fleetcodes ऐप" : "Fleetcodes App"}</p>
                 <p className="mt-1 text-xs leading-relaxed" style={{ color: "#64748b" }}>
-                  Scan QR or install Android APK directly.
+                  {isHindi ? "QR स्कैन करें या Android APK सीधे इंस्टॉल करें।" : "Scan QR or install Android APK directly."}
                 </p>
                 <a
                   href={APP_DOWNLOAD_URL}
@@ -259,7 +263,7 @@ const Footer = () => {
                   className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline underline-offset-4"
                 >
                   <ArrowDownToLine className="h-3.5 w-3.5" />
-                  Download APK
+                  {isHindi ? "APK डाउनलोड करें" : "Download APK"}
                 </a>
               </div>
             </div>
@@ -292,10 +296,10 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs" style={{ color: "#4b5563" }}>
-            <Link to="/privacy/" className="hover:text-white transition-colors">Privacy</Link>
-            <Link to="/terms/" className="hover:text-white transition-colors">Terms</Link>
-            <Link to="/security/" className="hover:text-white transition-colors">Security</Link>
-            <button type="button" onClick={openCookiePreferences} className="hover:text-white transition-colors">Cookie Preferences</button>
+            <Link to={localizePath("/privacy/")} className="hover:text-white transition-colors">{isHindi ? "गोपनीयता" : "Privacy"}</Link>
+            <Link to={localizePath("/terms/")} className="hover:text-white transition-colors">{isHindi ? "शर्तें" : "Terms"}</Link>
+            <Link to={localizePath("/security/")} className="hover:text-white transition-colors">{isHindi ? "सुरक्षा" : "Security"}</Link>
+            <button type="button" onClick={openCookiePreferences} className="hover:text-white transition-colors">{isHindi ? "कुकी प्राथमिकताएँ" : "Cookie Preferences"}</button>
           </div>
         </div>
       </div>

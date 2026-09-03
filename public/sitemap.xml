@@ -1224,4 +1224,180 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://www.fleetcodes.com/hi/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/hi/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/hi/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleetcodes - Automation-First TMS for Logistics</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/hi/about/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/hi/about/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/hi/about/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>About Us | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/hi/careers/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/hi/careers/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/hi/careers/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Careers at Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/hi/book-demo/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/hi/book-demo/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/hi/book-demo/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Book a Demo | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/hi/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/hi/privacy/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/hi/privacy/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Privacy Policy | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/hi/terms/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/hi/terms/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/hi/terms/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Terms of Service | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/hi/security/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/hi/security/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/hi/security/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Security at Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/hi/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/hi/blog/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/hi/blog/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/hi/blog/page/2/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/hi/blog/page/2/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/hi/blog/page/2/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog - Page 2 | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/hi/blog/page/3/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/hi/blog/page/3/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/hi/blog/page/3/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog - Page 3 | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/hi/blog/page/4/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/hi/blog/page/4/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/hi/blog/page/4/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog - Page 4 | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/hi/blog/page/5/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/hi/blog/page/5/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/hi/blog/page/5/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog - Page 5 | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/hi/blog/page/6/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/hi/blog/page/6/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/hi/blog/page/6/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog - Page 6 | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/hi/blog/page/7/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/hi/blog/page/7/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/hi/blog/page/7/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog - Page 7 | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/hi/blog/page/8/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/hi/blog/page/8/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/hi/blog/page/8/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog - Page 8 | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.fleetcodes.com/hi/blog/page/9/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/hi/blog/page/9/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/hi/blog/page/9/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/new-og-image.png</image:loc>
+      <image:title>Fleet Management Blog - Page 9 | Fleetcodes</image:title>
+    </image:image>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>

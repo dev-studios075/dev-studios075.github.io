@@ -3,12 +3,13 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { useEffect } from "react";
 import GoogleAnalytics from "./components/analytics/GoogleAnalytics";
 import BackToTop from "./components/BackToTop";
 import CookieConsent from "./components/CookieConsent";
+import { getPreferredLanguage, isLocalizablePath } from "@/hooks/use-language";
 
 // Lazy loaded pages
 const Index = lazy(() => import("./pages/Index"));
@@ -43,6 +44,19 @@ const ScrollToTop = () => {
   return null;
 };
 
+const RestoreLanguagePreference = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (getPreferredLanguage() !== "hi" || location.pathname.startsWith("/hi") || !isLocalizablePath(location.pathname)) return;
+    const target = location.pathname === "/" ? "/hi/" : `/hi${location.pathname}`;
+    navigate(`${target}${location.search}${location.hash}`, { replace: true });
+  }, [location.hash, location.pathname, location.search, navigate]);
+
+  return null;
+};
+
 const AppRoutes = () => {
   return (
     <Routes>
@@ -56,6 +70,16 @@ const AppRoutes = () => {
       <Route path="/privacy" element={<Privacy />} />
       <Route path="/terms" element={<Terms />} />
       <Route path="/security" element={<Security />} />
+      <Route path="/hi" element={<Index />} />
+      <Route path="/hi/blog" element={<Blog />} />
+      <Route path="/hi/blog/page/:page" element={<Blog />} />
+      <Route path="/hi/blog/:slug" element={<BlogPost />} />
+      <Route path="/hi/about" element={<About />} />
+      <Route path="/hi/careers" element={<Careers />} />
+      <Route path="/hi/book-demo" element={<BookDemo />} />
+      <Route path="/hi/privacy" element={<Privacy />} />
+      <Route path="/hi/terms" element={<Terms />} />
+      <Route path="/hi/security" element={<Security />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
@@ -69,6 +93,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
+          <RestoreLanguagePreference />
           <GoogleAnalytics />
           <CookieConsent />
           {/* <FloatingWhatsApp /> */}

@@ -178,6 +178,12 @@ const urls = [
   ...blogUrls,
 ];
 
+const hindiUrls = urls
+  .filter(({ loc }) => ["/", "/about", "/careers", "/book-demo", "/privacy", "/terms", "/security", "/blog"].includes(loc) || /^\/blog\/page\/\d+$/.test(loc))
+  .map((url) => ({ ...url, loc: url.loc === "/" ? "/hi" : `/hi${url.loc}`, priority: url.loc === "/" ? "0.9" : url.priority }));
+
+urls.push(...hindiUrls);
+
 // Search, filter, tracking, and fragment variants must never enter the sitemap.
 const sitemapUrls = urls.filter(({ loc }) => !/[?#]/.test(loc));
 

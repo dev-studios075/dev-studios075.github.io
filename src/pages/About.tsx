@@ -7,76 +7,30 @@ import {
   Heart,
 } from "lucide-react";
 import Seo from "@/components/seo/Seo";
-import { SITE_NAME } from "@/lib/site";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import { useTranslation } from "@/hooks/useTranslation";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
-const stats = [
-  { value: "500+",  label: "Fleets managed",         icon: TrendingUp },
-  { value: "12k+",  label: "Vehicles tracked daily", icon: MapPin     },
-  { value: "38%",   label: "Avg cost reduction",     icon: BarChart3  },
-  { value: "14d",   label: "Deploy guarantee",       icon: Clock      },
-];
+const statIcons = [TrendingUp, MapPin, BarChart3, Clock];
 
-const values = [
-  {
-    icon: Target,
-    title: "Operator-First",
-    desc: "Every feature starts with a real pain point from a fleet operator, not a product brainstorm session.",
-  },
-  {
-    icon: Zap,
-    title: "Automation Over Headcount",
-    desc: "We believe the best logistics companies of the next decade will run 10x the volume with the same team — through software.",
-  },
-  {
-    icon: Shield,
-    title: "Trust Through Reliability",
-    desc: "A TMS that's down costs real money. We obsess over uptime, data accuracy, and response times.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Simplicity at Scale",
-    desc: "Complex operations shouldn't mean complex software. We hide the complexity so your team can focus on moving goods.",
-  },
-  {
-    icon: Heart,
-    title: "Long-Term Partnerships",
-    desc: "We don't do pilots that go nowhere. Our 14-day deployment SLA and dedicated CSM model is built for real adoption.",
-  },
-  {
-    icon: Globe,
-    title: "India-Built, India-First",
-    desc: "Designed ground-up for Indian logistics — Fastag, e-way bills, regional languages, and India-specific compliance.",
-  },
-];
-
-const milestones = [
-  {
-    year: "2024",
-    title: "Founding & Launch",
-    desc: "Founded with a mission to eliminate manual dispatch. Launched our core platform to early fleet operators in Pune.",
-  },
-  {
-    year: "2025",
-    title: "100+ Active Fleets",
-    desc: "Crossed 100+ active fleets. Shipped our automated billing engine, driver app, and real-time Fastag integration.",
-  },
-  {
-    year: "2026",
-    title: "AI-Powered Dispatch",
-    desc: "Expanded to 500+ fleets across India. Launched AI dispatch planning, automated route optimization, and instant e-way bills.",
-  },
-];
+const valueIcons = [Target, Zap, Shield, Lightbulb, Heart, Globe];
+type StatCopy = { value: string; label: string };
+type ValueCopy = { title: string; desc: string };
+type MilestoneCopy = { year: string; title: string; desc: string };
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 const About = () => {
+  const { t, tObject, localizePath } = useTranslation();
+  const stats = tObject<StatCopy[]>("pages.about.stats").map((item, index) => ({ ...item, icon: statIcons[index] }));
+  const values = tObject<ValueCopy[]>("pages.about.values").map((item, index) => ({ ...item, icon: valueIcons[index] }));
+  const milestones = tObject<MilestoneCopy[]>("pages.about.milestones");
+  const consoleStats = tObject<StatCopy[]>("pages.about.consoleStats");
   return (
     <div className="min-h-screen bg-background text-foreground relative flex flex-col">
       <Seo
-        title={`About Us | ${SITE_NAME}`}
-        description="Learn how Fleetcodes was built by logistics operators for logistics operators — and why we're obsessed with automating fleet management across India."
+        title={t("pages.about.seoTitle")}
+        description={t("pages.about.seoDescription")}
         path="/about"
       />
 
@@ -94,32 +48,31 @@ const About = () => {
         <div className="container-tight">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3.5 py-1.5 text-xs font-semibold text-primary">
             <Sparkles className="w-3.5 h-3.5" />
-            Our story
+            {t("pages.about.heroBadge")}
           </div>
 
           <h1 className="font-display font-bold text-5xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.05] text-slate-900 dark:text-white max-w-4xl mx-auto mb-6">
-            Built by operators,{" "}
-            <span className="text-gradient-primary">for operators.</span>
+            {t("pages.about.heroTitle")}{" "}
+            <span className="text-gradient-primary">{t("pages.about.heroAccent")}</span>
           </h1>
 
           <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-slate-500 dark:text-slate-400 sm:text-xl">
-            We started Fleetcodes because we lived the chaos of running fleet operations manually.
-            WhatsApp dispatch. Paper chalans. Excel billing. We knew there was a better way.
+            {t("pages.about.heroDescription")}
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
-              to="/book-demo/"
+              to={localizePath("/book-demo/")}
               className="group flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-primary hover:opacity-90 hover:shadow-glow transition-all"
             >
-              See the Platform
+              {t("pages.about.seePlatform")}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
             <Link
-              to="/careers/"
+              to={localizePath("/careers/")}
               className="flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-300 border border-border hover:border-primary/40 hover:text-primary transition-all"
             >
-              Join Our Team
+              {t("pages.about.joinTeam")}
             </Link>
           </div>
         </div>
@@ -156,19 +109,16 @@ const About = () => {
         <div className="container-tight">
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
             <div>
-              <p className="text-xs font-mono uppercase tracking-[0.2em] mb-4 text-primary">Mission</p>
+              <p className="text-xs font-mono uppercase tracking-[0.2em] mb-4 text-primary">{t("pages.about.missionLabel")}</p>
               <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white mb-6 leading-tight">
-                Make Indian logistics run on{" "}
-                <span className="text-gradient-primary">software, not instinct.</span>
+                {t("pages.about.missionTitle")}{" "}
+                <span className="text-gradient-primary">{t("pages.about.missionAccent")}</span>
               </h2>
               <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-5 text-base">
-                India moves ₹140 lakh crore of goods every year, yet most of it is managed with
-                phone calls, paper receipts, and tribal knowledge locked in a dispatcher's head.
+                {t("pages.about.missionP1")}
               </p>
               <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-base">
-                Fleetcodes is building the operating system for Indian logistics — a platform that gives
-                every fleet manager the same digital leverage that a Fortune 500 company has, at a price
-                that makes sense for a 50-truck operation.
+                {t("pages.about.missionP2")}
               </p>
             </div>
 
@@ -183,7 +133,7 @@ const About = () => {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                   </span>
-                  <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Live Network Console</span>
+                  <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest">{t("pages.about.console")}</span>
                 </div>
                 <div className="flex gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-red-500/20 dark:bg-red-500/25" />
@@ -194,12 +144,7 @@ const About = () => {
 
               {/* Grid of Key Stats */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
-                {[
-                  { value: "90%",   label: "Dispatch Auto" },
-                  { value: "99.9%", label: "GPS Telemetry" },
-                  { value: "97%",   label: "Billing Match" },
-                  { value: "94%",   label: "TMS Retention" },
-                ].map((s) => (
+                {consoleStats.map((s) => (
                   <div key={s.label} className="p-3 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/60 dark:border-white/[0.04] text-center hover:border-primary/20 hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-all duration-300">
                     <div className="text-[10px] text-slate-500 dark:text-slate-400 mb-1 font-medium truncate">{s.label}</div>
                     <div className="text-xl font-bold font-display text-gradient-primary">{s.value}</div>
@@ -235,9 +180,9 @@ const About = () => {
       <section className="border-t border-slate-200 py-14 dark:border-white/[0.05] sm:py-16">
         <div className="container-tight">
           <div className="mb-10 text-center">
-            <p className="text-xs font-mono uppercase tracking-[0.2em] mb-3 text-primary">Our Journey</p>
+            <p className="text-xs font-mono uppercase tracking-[0.2em] mb-3 text-primary">{t("pages.about.journeyLabel")}</p>
             <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white">
-              How we got here
+              {t("pages.about.journeyTitle")}
             </h2>
           </div>
 
@@ -275,9 +220,9 @@ const About = () => {
       <section className="border-t border-slate-200 py-14 dark:border-white/[0.05] sm:py-16">
         <div className="container-tight">
           <div className="mb-10 text-center">
-            <p className="text-xs font-mono uppercase tracking-[0.2em] mb-3 text-primary">Principles</p>
+            <p className="text-xs font-mono uppercase tracking-[0.2em] mb-3 text-primary">{t("pages.about.principlesLabel")}</p>
             <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white">
-              What we believe in
+              {t("pages.about.principlesTitle")}
             </h2>
           </div>
 
@@ -321,21 +266,20 @@ const About = () => {
             <div className="relative">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold text-primary border border-primary/20 bg-primary/5 mb-6">
                 <Users className="w-3.5 h-3.5" />
-                500+ fleets trust Fleetcodes
+                {t("pages.about.ctaBadge")}
               </div>
               <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white mb-4">
-                Ready to see it in action?
+                {t("pages.about.ctaTitle")}
               </h2>
               <p className="text-slate-600 dark:text-slate-400 text-base max-w-lg mx-auto mb-8 leading-relaxed">
-                Book a 30-minute live walkthrough. We'll show you how your fleet can cut operational
-                costs by 38% and run on autopilot.
+                {t("pages.about.ctaDescription")}
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4">
                 <Link
-                  to="/book-demo/"
+                  to={localizePath("/book-demo/")}
                   className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-primary hover:opacity-90 hover:shadow-glow transition-all"
                 >
-                  Book a Live Demo
+                  {t("pages.about.ctaButton")}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </Link>
                 <a

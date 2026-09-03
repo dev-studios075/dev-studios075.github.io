@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Quote, Star } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const testimonials = [
   {
@@ -30,6 +31,7 @@ const testimonials = [
 ];
 
 const SocialProof = () => {
+  const { t } = useTranslation();
   return (
     <section className="pt-10 pb-8 lg:pt-12 lg:pb-10 relative overflow-hidden">
       {/* Background ambient light */}
@@ -37,9 +39,9 @@ const SocialProof = () => {
 
       <div className="container-tight relative">
         <div className="max-w-2xl mb-10">
-          <p className="text-xs uppercase tracking-[0.2em] text-primary mb-3 font-semibold">Operators talking</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-primary mb-3 font-semibold">{t("home.proof.eyebrow")}</p>
           <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-tight text-slate-900 dark:text-white">
-            Loved by <span className="text-gradient">operations leaders.</span>
+            {t("home.proof.titlePrefix")} <span className="text-gradient">{t("home.proof.accent")}</span>
           </h2>
         </div>
 

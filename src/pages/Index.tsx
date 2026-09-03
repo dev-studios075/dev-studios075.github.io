@@ -12,14 +12,18 @@ import CTA from "@/components/landing/CTA";
 import Footer from "@/components/landing/Footer";
 import Seo from "@/components/seo/Seo";
 import { APP_DOWNLOAD_URL, DEFAULT_DESCRIPTION, DEFAULT_TITLE, LINKEDIN_URL, SITE_NAME, absolutePageUrl, absoluteUrl } from "@/lib/site";
+import { useLanguage } from "@/hooks/use-language";
 
 const Index = () => {
+  const { isHindi } = useLanguage();
+  const pageTitle = isHindi ? "Fleetcodes — AI-पावर्ड ट्रांसपोर्ट मैनेजमेंट सिस्टम" : DEFAULT_TITLE;
+  const pageDescription = isHindi ? "AI-पावर्ड TMS से डिस्पैच, ट्रैकिंग, बिलिंग और फ्लीट ऑपरेशंस को ऑटोमेट करें तथा कम टीम के साथ व्यवसाय बढ़ाएँ।" : DEFAULT_DESCRIPTION;
   return (
     <main className="min-h-screen bg-background text-foreground">
       <Seo
-        title={DEFAULT_TITLE}
-        description={DEFAULT_DESCRIPTION}
-        path="/"
+        title={pageTitle}
+        description={pageDescription}
+        path={isHindi ? "/hi" : "/"}
         jsonLd={[
           {
             "@context": "https://schema.org",

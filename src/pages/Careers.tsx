@@ -7,15 +7,15 @@ import {
   ChevronDown, ChevronUp, Sparkles, Star, Check,
 } from "lucide-react";
 import Seo from "@/components/seo/Seo";
-import { SITE_NAME } from "@/lib/site";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { useTranslation } from "@/hooks/useTranslation";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
-const values = [
+const valueDefaults = [
   {
     icon: Rocket,
     title: "Move Fast",
@@ -38,7 +38,7 @@ const values = [
   },
 ];
 
-const perks = [
+const perkDefaults = [
   { icon: Laptop,      label: "Remote-first",          desc: "Work from anywhere in India" },
   { icon: Heart,       label: "Health Insurance",       desc: "Full family coverage included" },
   { icon: ShieldCheck, label: "ESOP",                   desc: "Equity stake in Fleetcodes" },
@@ -60,7 +60,7 @@ type Job = {
   requirements: string[];
 };
 
-const jobs: Job[] = [
+const jobDefaults: Job[] = [
   {
     id: "swe-backend",
     title: "Senior Backend Engineer",
@@ -174,6 +174,7 @@ const jobs: Job[] = [
 ];
 
 const JobCard = ({ job }: { job: Job }) => {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const Icon = job.icon;
 
@@ -190,13 +191,13 @@ const JobCard = ({ job }: { job: Job }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email || !resume) {
-      setError("Name, email, and resume link are required.");
+      setError(t("pages.careers.form.required"));
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      setError("Please enter a valid email address.");
+      setError(t("pages.careers.form.invalidEmail"));
       return;
     }
 
@@ -300,7 +301,7 @@ ${message || "N/A"}`;
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <p className="text-xs font-mono uppercase tracking-[0.15em] mb-3 text-primary">
-                Responsibilities
+                {t("pages.careers.responsibilities")}
               </p>
               <ul className="space-y-2">
                 {job.responsibilities.map((r) => (
@@ -313,7 +314,7 @@ ${message || "N/A"}`;
             </div>
             <div>
               <p className="text-xs font-mono uppercase tracking-[0.15em] mb-3 text-primary">
-                Requirements
+                {t("pages.careers.requirements")}
               </p>
               <ul className="space-y-2">
                 {job.requirements.map((r) => (
@@ -332,23 +333,23 @@ ${message || "N/A"}`;
                 onClick={() => setFormOpen(true)}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-primary hover:opacity-90 hover:shadow-glow transition-all cursor-pointer"
               >
-                Apply for this role <ArrowRight className="w-4 h-4" />
+                {t("pages.careers.apply")} <ArrowRight className="w-4 h-4" />
               </button>
             ) : (
               <div className="pt-6 border-t border-slate-100 dark:border-white/[0.06] animate-fade-in">
                 <h4 className="font-display font-semibold text-sm text-slate-800 dark:text-white mb-4">
-                  Apply for {job.title}
+                  {t("pages.careers.applyFor", { role: job.title })}
                 </h4>
                 
                 {submitted ? (
                   <div className="p-4 rounded-xl bg-success/15 border border-success/30 text-success text-sm font-medium leading-relaxed animate-scale-in">
-                    <p className="font-semibold mb-1">Application Submitted Successfully!</p>
-                    <p className="text-xs opacity-90">Thank you for applying. Our hiring team will review your details and get back to you shortly.</p>
+                    <p className="font-semibold mb-1">{t("pages.careers.form.success")}</p>
+                    <p className="text-xs opacity-90">{t("pages.careers.form.successText")}</p>
                     <button 
                       onClick={() => { setFormOpen(false); setSubmitted(false); }}
                       className="mt-3 text-xs underline font-semibold cursor-pointer"
                     >
-                      Close Form
+                      {t("pages.careers.form.close")}
                     </button>
                   </div>
                 ) : (
@@ -356,20 +357,20 @@ ${message || "N/A"}`;
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-1.5">
                         <Label htmlFor={`name-${job.id}`} className="text-xs font-semibold text-slate-600 dark:text-slate-400">
-                          Full Name *
+                          {t("pages.careers.form.name")}
                         </Label>
                         <Input
                           id={`name-${job.id}`}
                           type="text"
                           required
-                          placeholder="John Doe"
+                          placeholder={t("pages.careers.form.namePlaceholder")}
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                         />
                       </div>
                       <div className="space-y-1.5">
                         <Label htmlFor={`email-${job.id}`} className="text-xs font-semibold text-slate-600 dark:text-slate-400">
-                          Email Address *
+                          {t("pages.careers.form.email")}
                         </Label>
                         <Input
                           id={`email-${job.id}`}
@@ -385,7 +386,7 @@ ${message || "N/A"}`;
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-1.5">
                         <Label htmlFor={`linkedin-${job.id}`} className="text-xs font-semibold text-slate-600 dark:text-slate-400">
-                          LinkedIn Profile URL
+                          {t("pages.careers.form.linkedin")}
                         </Label>
                         <Input
                           id={`linkedin-${job.id}`}
@@ -397,13 +398,13 @@ ${message || "N/A"}`;
                       </div>
                       <div className="space-y-1.5">
                         <Label htmlFor={`resume-${job.id}`} className="text-xs font-semibold text-slate-600 dark:text-slate-400">
-                          Resume/Portfolio Link *
+                          {t("pages.careers.form.resume")}
                         </Label>
                         <Input
                           id={`resume-${job.id}`}
                           type="url"
                           required
-                          placeholder="Google Drive, Dropbox, or PDF URL"
+                          placeholder={t("pages.careers.form.resumePlaceholder")}
                           value={resume}
                           onChange={(e) => setResume(e.target.value)}
                         />
@@ -412,12 +413,12 @@ ${message || "N/A"}`;
 
                     <div className="space-y-1.5">
                       <Label htmlFor={`message-${job.id}`} className="text-xs font-semibold text-slate-600 dark:text-slate-400">
-                        Why Fleetcodes? (Optional)
+                        {t("pages.careers.form.why")}
                       </Label>
                       <Textarea
                         id={`message-${job.id}`}
                         rows={3}
-                        placeholder="Tell us why you want to join our team..."
+                        placeholder={t("pages.careers.form.whyPlaceholder")}
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         className="resize-none"
@@ -436,7 +437,7 @@ ${message || "N/A"}`;
                         disabled={submitting}
                         className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-primary hover:opacity-90 hover:shadow-glow transition-all cursor-pointer disabled:opacity-50"
                       >
-                        {submitting ? "Submitting..." : "Submit Application"}
+                        {submitting ? t("pages.careers.form.submitting") : t("pages.careers.form.submit")}
                         <ArrowRight className="w-4 h-4" />
                       </button>
                       <button
@@ -444,7 +445,7 @@ ${message || "N/A"}`;
                         onClick={() => { setFormOpen(false); setError(""); }}
                         className="text-sm font-semibold px-5 py-2.5 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-all cursor-pointer"
                       >
-                        Cancel
+                        {t("pages.careers.form.cancel")}
                       </button>
                     </div>
                   </form>
@@ -460,11 +461,17 @@ ${message || "N/A"}`;
 
 // ─── Page Component ────────────────────────────────────────────────────────────
 const Careers = () => {
+  const { t, tObject } = useTranslation();
+  const values = tObject<Array<{ title: string; desc: string }>>("pages.careers.values").map((item, index) => ({ ...item, icon: valueDefaults[index].icon }));
+  const perks = tObject<Array<{ label: string; desc: string }>>("pages.careers.perks").map((item, index) => ({ ...item, icon: perkDefaults[index].icon }));
+  const translatedJobs = tObject<Array<Omit<Job, "icon">>>("pages.careers.jobs");
+  const jobs = translatedJobs.map((item, index) => ({ ...item, icon: jobDefaults[index].icon }));
+  const stats = tObject<Array<{ value: string; label: string }>>("pages.careers.stats");
   return (
     <div className="min-h-screen bg-background text-foreground relative flex flex-col">
       <Seo
-        title={`Careers | ${SITE_NAME}`}
-        description="Join the Fleetcodes team and help build the automation-first TMS transforming Indian logistics. View open roles in engineering, product, and sales."
+        title={t("pages.careers.seoTitle")}
+        description={t("pages.careers.seoDescription")}
         path="/careers"
       />
 
@@ -483,17 +490,16 @@ const Careers = () => {
           {/* Badge */}
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3.5 py-1.5 text-xs font-semibold text-primary">
             <Sparkles className="w-3.5 h-3.5" />
-            We're hiring across 5 roles
+            {t("pages.careers.heroBadge")}
           </div>
 
           <h1 className="font-display font-bold text-5xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.05] text-slate-900 dark:text-white max-w-4xl mx-auto mb-6">
-            Build the Future of{" "}
-            <span className="text-gradient-primary">Logistics</span>
+            {t("pages.careers.heroTitle")}{" "}
+            <span className="text-gradient-primary">{t("pages.careers.heroAccent")}</span>
           </h1>
 
           <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-slate-500 dark:text-slate-400 sm:text-xl">
-            Join a small, high-ownership team solving one of India's biggest operational challenges —
-            moving goods efficiently at scale.
+            {t("pages.careers.heroDescription")}
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
@@ -501,24 +507,20 @@ const Careers = () => {
               href="#open-roles"
               className="group flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-primary hover:opacity-90 hover:shadow-glow transition-all"
             >
-              View Open Roles
+              {t("pages.careers.viewRoles")}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </a>
             <a
               href="mailto:careers@fleetcodes.com"
               className="flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-slate-700 dark:text-slate-300 border border-border hover:border-primary/40 hover:text-primary transition-all"
             >
-              Send Open Application
+              {t("pages.careers.openApplication")}
             </a>
           </div>
 
           {/* Quick stats */}
           <div className="mt-10 flex flex-wrap items-center justify-center gap-8">
-            {[
-              { value: "15+", label: "Team size" },
-              { value: "100%", label: "Remote-friendly" },
-              { value: "5", label: "Open roles" },
-            ].map((s) => (
+            {stats.map((s) => (
               <div key={s.label} className="text-center">
                 <div className="font-display font-bold text-3xl text-gradient-primary mb-0.5">{s.value}</div>
                 <div className="text-xs text-slate-500 dark:text-slate-400">{s.label}</div>
@@ -533,10 +535,10 @@ const Careers = () => {
         <div className="container-tight">
           <div className="mb-10 text-center">
             <p className="text-xs font-mono uppercase tracking-[0.2em] mb-3" style={{ color: "#7c3aed" }}>
-              Culture
+              {t("pages.careers.cultureLabel")}
             </p>
             <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white">
-              How we work
+              {t("pages.careers.cultureTitle")}
             </h2>
           </div>
 
@@ -570,13 +572,13 @@ const Careers = () => {
         <div className="container-tight">
           <div className="mb-10 text-center">
             <p className="text-xs font-mono uppercase tracking-[0.2em] mb-3" style={{ color: "#7c3aed" }}>
-              Open Positions
+              {t("pages.careers.rolesLabel")}
             </p>
             <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white mb-3">
-              Find your role
+              {t("pages.careers.rolesTitle")}
             </h2>
             <p className="text-slate-500 dark:text-slate-400 text-base max-w-xl mx-auto">
-              Click any role to expand — see responsibilities, requirements, and apply directly.
+              {t("pages.careers.rolesDescription")}
             </p>
           </div>
 
@@ -593,10 +595,10 @@ const Careers = () => {
         <div className="container-tight">
           <div className="mb-10 text-center">
             <p className="text-xs font-mono uppercase tracking-[0.2em] mb-3" style={{ color: "#7c3aed" }}>
-              Benefits
+              {t("pages.careers.benefitsLabel")}
             </p>
             <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white">
-              What you get
+              {t("pages.careers.benefitsTitle")}
             </h2>
           </div>
 
@@ -640,20 +642,19 @@ const Careers = () => {
 
             <div className="relative">
               <p className="text-xs font-mono uppercase tracking-[0.2em] mb-4" style={{ color: "#7c3aed" }}>
-                Don't see a fit?
+                {t("pages.careers.ctaLabel")}
               </p>
               <h2 className="font-display font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white mb-4">
-                Send us your CV anyway
+                {t("pages.careers.ctaTitle")}
               </h2>
               <p className="text-slate-600 dark:text-slate-400 text-base max-w-lg mx-auto mb-8 leading-relaxed">
-                We hire for talent, not just headcount. If you're exceptional at what you do and care about
-                logistics, we want to hear from you.
+                {t("pages.careers.ctaDescription")}
               </p>
               <a
                 href="mailto:careers@fleetcodes.com"
                 className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-primary hover:opacity-90 hover:shadow-glow transition-all"
               >
-                Email careers@fleetcodes.com
+                {t("pages.careers.ctaButton")}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </a>
             </div>

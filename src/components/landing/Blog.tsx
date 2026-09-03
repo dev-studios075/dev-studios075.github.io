@@ -7,6 +7,7 @@ import { getAllPosts } from "@/lib/blog";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const fallbackImages = [blog1, blog2, blog3];
 
@@ -27,6 +28,7 @@ const getReadTime = (title: string) => {
 };
 
 const Blog = () => {
+  const { t } = useTranslation();
   const posts = getAllPosts();
   const featuredPosts = posts.slice(0, 3);
   const morePosts = posts.slice(3, 9);
@@ -46,16 +48,15 @@ const Blog = () => {
         >
           <div className="max-w-2xl">
             <p className="text-xs uppercase tracking-[0.2em] text-primary mb-3 font-semibold">
-              From the blog
+              {t("home.blog.eyebrow")}
             </p>
             <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-tight text-slate-900 dark:text-white">
-              Insights for the{" "}
-              <span className="text-gradient">autonomous era</span> of logistics.
+              {t("home.blog.titlePrefix")} <span className="text-gradient">{t("home.blog.accent")}</span> {t("home.blog.titleSuffix")}
             </h2>
           </div>
           <Button asChild variant="glass" size="lg" className="self-start lg:self-auto group">
             <Link to="/blog/">
-              View all articles
+              {t("home.blog.viewAll")}
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
           </Button>

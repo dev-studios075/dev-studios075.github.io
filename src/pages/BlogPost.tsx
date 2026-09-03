@@ -7,6 +7,7 @@ import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import Seo from "@/components/seo/Seo";
 import { DEFAULT_IMAGE, SITE_NAME, SITE_URL, absolutePageUrl, absoluteUrl, seoDescription, seoTitle } from "@/lib/site";
+import { useTranslation } from "@/hooks/useTranslation";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
@@ -169,6 +170,7 @@ const getRelatedPosts = (currentSlug: string, currentCategory: string) =>
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
+  const { t, isHindi, localizePath } = useTranslation();
   const post = slug ? getPostBySlug(slug) : undefined;
   const [content, setContent] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -276,9 +278,9 @@ const BlogPost = () => {
         />
         <Navbar />
         <main className="pt-36 pb-16 text-center container-tight">
-          <h1 className="font-display text-3xl font-bold mb-4">Post not found</h1>
-          <Link to="/blog/" className="text-primary hover:underline inline-flex items-center gap-2">
-            <ArrowLeft className="w-4 h-4" /> Back to blog
+          <h1 className="font-display text-3xl font-bold mb-4">{t("pages.blogPost.postNotFound")}</h1>
+          <Link to={localizePath("/blog/")} className="text-primary hover:underline inline-flex items-center gap-2">
+            <ArrowLeft className="w-4 h-4" /> {t("pages.blogPost.back")}
           </Link>
         </main>
         <Footer />
@@ -289,7 +291,9 @@ const BlogPost = () => {
   const title    = cleanTitle(post.title);
   const mins     = post.readingTime || readingTime(content);
   const category = getCategory(title);
+  const categoryLabel = t(`pages.blogPost.categories.${category}`);
   const relatedPosts = getRelatedPosts(post.slug, category);
+  const dateLocale = isHindi ? "hi-IN" : "en-US";
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-clip">
@@ -359,11 +363,11 @@ const BlogPost = () => {
         <div className="container-tight pt-28 pb-10">
           {/* Back link */}
           <Link
-            to="/blog/"
+            to={localizePath("/blog/")}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-10 font-medium group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
-            Back to blog
+            {t("pages.blogPost.back")}
           </Link>
 
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
@@ -385,11 +389,11 @@ const BlogPost = () => {
               <div className="flex flex-wrap items-center gap-2.5 mb-5">
                 <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary">
                   <Tag className="w-3 h-3" />
-                  {category}
+                  {categoryLabel}
                 </span>
                 <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest px-3 py-1.5 rounded-full glass border border-border/50 text-muted-foreground">
                   <Clock className="w-3 h-3" />
-                  {mins} min read
+                  {t("pages.blogPost.minuteRead", { minutes: mins })}
                 </span>
               </div>
 
@@ -418,7 +422,7 @@ const BlogPost = () => {
                 {post.date && (
                   <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
                     <Calendar className="w-3.5 h-3.5" />
-                    {new Date(post.date).toLocaleDateString("en-US", {
+                    {new Date(post.date).toLocaleDateString(dateLocale, {
                       year: "numeric",
                       month: "long",
                       day: "numeric",
@@ -432,7 +436,7 @@ const BlogPost = () => {
                 <div className="lg:hidden mt-6 pt-4 border-t border-border/40 flex items-center justify-between gap-4">
                   <div className="flex items-center gap-1.5 text-muted-foreground">
                     <Share2 className="w-3.5 h-3.5 text-primary" />
-                    <span className="text-[11px] font-bold uppercase tracking-wider font-sans">Share Article:</span>
+                    <span className="text-[11px] font-bold uppercase tracking-wider font-sans">{t("pages.blogPost.shareArticle")}</span>
                   </div>
                   <div className="flex items-center gap-2 overflow-x-auto scrollbar-none pb-0.5">
                     <a
@@ -505,7 +509,7 @@ const BlogPost = () => {
           {isLoading ? (
             <nav className="lg:hidden mb-8 rounded-2xl glass p-5 shadow-elegant animate-pulse">
               <p className="text-[11px] font-bold uppercase tracking-widest text-primary mb-3 font-sans">
-                On this page
+                {t("pages.blogPost.onPage")}
               </p>
               <div className="space-y-3">
                 <div className="h-3.5 bg-slate-200 dark:bg-slate-800 rounded w-2/3" />
@@ -519,7 +523,7 @@ const BlogPost = () => {
                 className="lg:hidden mb-8 rounded-2xl glass p-5 shadow-elegant animate-in fade-in duration-300"
               >
                 <p className="text-[11px] font-bold uppercase tracking-widest text-primary mb-3 font-sans">
-                  On this page
+                  {t("pages.blogPost.onPage")}
                 </p>
                 <ol className="space-y-2.5">
                   {tocItems.map((item) => {
@@ -553,7 +557,7 @@ const BlogPost = () => {
               <aside className="hidden lg:block sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-none pr-2">
                 <nav aria-label="Table of contents" className="border-l border-border/70 pl-4">
                   <p className="text-[11px] font-bold uppercase tracking-widest text-primary mb-4 font-sans">
-                    On this page
+                    {t("pages.blogPost.onPage")}
                   </p>
                   <ol className="space-y-3">
                     {isLoading ? (
@@ -602,7 +606,7 @@ const BlogPost = () => {
                     <div className="mt-8 pt-6 border-t border-border/60">
                       <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3 font-sans flex items-center gap-1.5">
                         <Share2 className="w-3 h-3 text-primary" />
-                        Share article
+                        {t("pages.blogPost.share")}
                       </p>
                       <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none pb-0.5">
                         <a
@@ -728,7 +732,7 @@ const BlogPost = () => {
                 </div>
               </div>
             ) : loadError ? (
-              <p className="text-destructive font-medium">Failed to load article content. Please refresh the page.</p>
+              <p className="text-destructive font-medium">{t("pages.blogPost.loadError")}</p>
             ) : (
               <ReactMarkdown
                 components={{
@@ -780,14 +784,14 @@ const BlogPost = () => {
               {/* CTA bar */}
               <div className="mt-16 glass rounded-2xl border border-primary/20 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <p className="text-sm font-semibold text-foreground mb-1">Ready to automate your fleet operations?</p>
-              <p className="text-xs text-muted-foreground">See how Fleetcodes can cut costs and replace manual work.</p>
+              <p className="text-sm font-semibold text-foreground mb-1">{t("pages.blogPost.ctaTitle")}</p>
+              <p className="text-xs text-muted-foreground">{t("pages.blogPost.ctaDesc")}</p>
             </div>
             <Link
-              to="/book-demo/"
+              to={localizePath("/book-demo/")}
               className="shrink-0 inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-xl bg-primary text-white hover:bg-primary/90 transition-colors"
             >
-              Book a Demo
+              {t("pages.blogPost.bookDemo")}
             </Link>
               </div>
 
@@ -796,17 +800,17 @@ const BlogPost = () => {
                   <div className="flex items-end justify-between gap-4 mb-8">
                     <div>
                       <p className="text-xs uppercase tracking-[0.2em] text-primary mb-3 font-semibold">
-                        Keep reading
+                        {t("pages.blogPost.keepReading")}
                       </p>
                       <h2 id="related-articles" className="font-display text-2xl font-bold tracking-tight text-foreground">
-                        Related fleet guides
+                        {t("pages.blogPost.related")}
                       </h2>
                     </div>
                     <Link
-                      to="/blog/"
+                      to={localizePath("/blog/")}
                       className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-primary group"
                     >
-                      All articles
+                      {t("pages.blogPost.allArticles")}
                       <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </Link>
                   </div>
@@ -818,7 +822,7 @@ const BlogPost = () => {
                       >
                         {/* Thumbnail */}
                         <Link
-                          to={`/blog/${related.slug}/`}
+                          to={localizePath(`/blog/${related.slug}/`)}
                           className="relative overflow-hidden aspect-[16/10] block shrink-0"
                         >
                           <img
@@ -829,7 +833,7 @@ const BlogPost = () => {
                           />
                           {/* Category badge over image */}
                           <span className="absolute bottom-3 left-3 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/15 text-white shadow-lg">
-                            {getCategory(related.title)}
+                            {t(`pages.blogPost.categories.${getCategory(related.title)}`)}
                           </span>
                         </Link>
 
@@ -840,19 +844,19 @@ const BlogPost = () => {
                             {related.date && (
                               <span className="inline-flex items-center gap-1">
                                 <Calendar className="w-3 h-3" />
-                                {new Date(related.date).toLocaleDateString("en-US", {
+                                {new Date(related.date).toLocaleDateString(dateLocale, {
                                   month: "short", day: "numeric", year: "numeric",
                                 })}
                               </span>
                             )}
                             <span className="inline-flex items-center gap-1">
                               <Clock className="w-3 h-3" />
-                              {related.readingTime ? `${related.readingTime} min` : "1 min"}
+                              {related.readingTime ? t("pages.blogPost.minuteRead", { minutes: related.readingTime }) : t("pages.blogPost.minuteRead", { minutes: 1 })}
                             </span>
                           </div>
 
                           <h3 className="font-display font-semibold text-sm leading-snug mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                            <Link to={`/blog/${related.slug}/`}>
+                            <Link to={localizePath(`/blog/${related.slug}/`)}>
                               {cleanTitle(related.title)}
                             </Link>
                           </h3>
@@ -862,10 +866,10 @@ const BlogPost = () => {
                           </p>
 
                           <Link
-                            to={`/blog/${related.slug}/`}
+                            to={localizePath(`/blog/${related.slug}/`)}
                             className="inline-flex items-center gap-1 text-xs font-semibold text-primary group/link"
                           >
-                            Read article
+                            {t("pages.blogPost.readArticle")}
                             <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
                           </Link>
                         </div>
@@ -878,11 +882,11 @@ const BlogPost = () => {
               {/* Bottom nav */}
               <div className="mt-10 pt-8 border-t border-border/40">
             <Link
-              to="/blog/"
+              to={localizePath("/blog/")}
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors font-medium group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
-              Back to all articles
+              {t("pages.blogPost.backAll")}
             </Link>
               </div>
             </article>

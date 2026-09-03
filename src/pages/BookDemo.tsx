@@ -18,23 +18,23 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
 import Seo         from "@/components/seo/Seo";
-import { SITE_NAME } from "@/lib/site";
 import { trackEvent } from "@/lib/analytics";
 import { openCookiePreferences } from "@/lib/cookieConsent";
 import { useTheme }   from "@/hooks/use-theme";
 import { toast }      from "sonner";
+import { useTranslation } from "@/hooks/useTranslation";
 
 // ─── Validation schema ─────────────────────────────────────────────────────────
-const formSchema = z.object({
-  name:      z.string().min(2, "Name must be at least 2 characters"),
-  email:     z.string().email("Please enter a valid work email"),
-  phone:     z.string().min(10, "Please enter a valid phone number (minimum 10 digits)"),
-  company:   z.string().min(2, "Company name must be at least 2 characters"),
-  fleetSize: z.string({ required_error: "Please select your fleet size" }),
+const createFormSchema = (t: (key: string) => string) => z.object({
+  name:      z.string().min(2, t("pages.demo.validation.name")),
+  email:     z.string().email(t("pages.demo.validation.email")),
+  phone:     z.string().min(10, t("pages.demo.validation.phone")),
+  company:   z.string().min(2, t("pages.demo.validation.company")),
+  fleetSize: z.string({ required_error: t("pages.demo.validation.fleet") }),
   message:   z.string().optional(),
 });
 
-type FormData = z.infer<typeof formSchema>;
+type FormData = z.infer<ReturnType<typeof createFormSchema>>;
 
 // ─── Field wrapper ─────────────────────────────────────────────────────────────
 const Field = ({
@@ -53,29 +53,7 @@ const Field = ({
 );
 
 // ─── Left panel stats ──────────────────────────────────────────────────────────
-const stats = [
-  { value: "−38%", label: "Operational cost" },
-  { value: "10×",  label: "Scale per ops head" },
-  { value: "14d",  label: "Deploy guarantee" },
-];
-
-const checkpoints = [
-  {
-    icon: Zap,
-    title: "Custom SOP Mapping",
-    desc: "We'll map one of your core dispatch SOPs live during the demo.",
-  },
-  {
-    icon: BarChart3,
-    title: "Real-time Cost Audit",
-    desc: "See how our AI identifies leakages and empty miles instantly.",
-  },
-  {
-    icon: Globe,
-    title: "Integration Consultation",
-    desc: "Learn how we connect with your existing GPS providers and ERPs.",
-  },
-];
+const checkpointIcons = [Zap, BarChart3, Globe];
 
 // ─── Weekdays helper ───────────────────────────────────────────────────────────
 const getNextFiveWeekdays = () => {
@@ -91,12 +69,17 @@ const getNextFiveWeekdays = () => {
   return days;
 };
 
-const formatDate = (date: Date) => {
-  return date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+const formatDate = (date: Date, locale: string) => {
+  return date.toLocaleDateString(locale, { weekday: "short", month: "short", day: "numeric" });
 };
 
 // ─── Component ─────────────────────────────────────────────────────────────────
 const BookDemo = () => {
+  const { t, tObject, language, isHindi, localizePath, setLanguage } = useTranslation();
+  const locale = language === "hi" ? "hi-IN" : "en-US";
+  const stats = tObject<Array<{ value: string; label: string }>>("pages.demo.stats");
+  const checkpoints = tObject<Array<{ title: string; desc: string }>>("pages.demo.checkpoints").map((item, index) => ({ ...item, icon: checkpointIcons[index] }));
+  const formSchema = createFormSchema(t);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess,    setIsSuccess]    = useState(false);
   const [email,        setEmail]        = useState("");
@@ -125,7 +108,7 @@ const BookDemo = () => {
           body: params.toString(),
         });
       } catch {
-        toast.error("Subscription could not be submitted. Please try again.");
+        toast.error(t("pages.demo.newsletter.error"));
       }
     }
 
@@ -166,7 +149,7 @@ const BookDemo = () => {
       });
       setIsSubmitting(false);
       setIsSuccess(true);
-      toast.success("Demo request submitted (Dev Mode)!");
+      toast.success(t("pages.demo.toastSuccess"));
       return;
     }
 
@@ -193,10 +176,10 @@ const BookDemo = () => {
       });
       setIsSubmitting(false);
       setIsSuccess(true);
-      toast.success("Demo request submitted successfully!");
+      toast.success(t("pages.demo.toastSuccess"));
     } catch {
       setIsSubmitting(false);
-      toast.error("Demo request could not be submitted. Please check your connection and try again.");
+      toast.error(t("pages.demo.toastError"));
     }
   };
 
@@ -208,8 +191,8 @@ const BookDemo = () => {
   return (
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden flex flex-col">
       <Seo
-        title={`Book a Free Live Demo | ${SITE_NAME}`}
-        description="Schedule a 30-minute personalized walkthrough with our logistics automation experts. Learn how Fleetcodes TMS can digitize and automate your operations."
+        title={t("pages.demo.seoTitle")}
+        description={t("pages.demo.seoDescription")}
         path="/book-demo"
       />
 
@@ -236,7 +219,7 @@ const BookDemo = () => {
             }}
           >
             {/* Logo */}
-            <Link to="/" className="flex shrink-0 items-center gap-2" aria-label="Fleetcodes home">
+            <Link to={localizePath("/")} className="flex shrink-0 items-center gap-2" aria-label="Fleetcodes home">
               <img src="/assets/brand/logo-with-bg.png" alt="" className="h-9 w-9 object-contain" />
               <span className="leading-none">
                 <span className="block font-display text-lg font-bold tracking-tight text-slate-950 dark:text-white">
@@ -250,6 +233,27 @@ const BookDemo = () => {
 
             {/* Right actions */}
             <div className="flex items-center gap-2">
+              <div
+                className="flex items-center rounded-lg border border-slate-200/80 bg-white/50 p-0.5 text-[11px] font-bold dark:border-white/10 dark:bg-white/[0.04]"
+                aria-label="Language selector"
+              >
+                <button
+                  type="button"
+                  onClick={() => setLanguage("en")}
+                  className={`rounded-md px-2 py-1 transition-colors ${!isHindi ? "bg-primary text-white" : "text-slate-500 hover:text-primary"}`}
+                  aria-pressed={!isHindi}
+                >
+                  EN
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLanguage("hi")}
+                  className={`rounded-md px-2 py-1 transition-colors ${isHindi ? "bg-primary text-white" : "text-slate-500 hover:text-primary"}`}
+                  aria-pressed={isHindi}
+                >
+                  हिं
+                </button>
+              </div>
               <button
                 onClick={toggleTheme}
                 aria-label="Toggle theme"
@@ -259,12 +263,12 @@ const BookDemo = () => {
               </button>
               <div className="w-px h-5 bg-border/60 hidden sm:block" />
               <Link
-                to="/"
+                to={localizePath("/")}
                 className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-foreground dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-all"
               >
                 <ArrowLeft className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Back to home</span>
-                <span className="sm:hidden">Back</span>
+                <span className="hidden sm:inline">{t("pages.demo.back")}</span>
+                <span className="sm:hidden">{t("pages.demo.backShort")}</span>
               </Link>
             </div>
           </nav>
@@ -281,18 +285,17 @@ const BookDemo = () => {
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold text-primary border border-primary/20 bg-primary/5">
                 <Sparkles className="w-3.5 h-3.5" />
-                30-Minute Live Walkthrough
+                {t("pages.demo.badge")}
               </div>
 
               {/* Headline */}
               <div className="space-y-4">
                 <h1 className="font-display font-bold text-4xl sm:text-5xl tracking-tight leading-[1.1] text-slate-900 dark:text-white">
-                  See Fleetcodes in{" "}
-                  <span className="text-gradient-primary">Autopilot Mode.</span>
+                  {t("pages.demo.heroTitle")}{" "}
+                  <span className="text-gradient-primary">{t("pages.demo.heroAccent")}</span>
                 </h1>
                 <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-base">
-                  Discover how our automation-first TMS connects operations, billing,
-                  Fastag tracking, and driver management into a single, self-running engine.
+                  {t("pages.demo.heroDescription")}
                 </p>
               </div>
 
@@ -328,15 +331,15 @@ const BookDemo = () => {
               <div className="flex flex-wrap items-center gap-5 pt-4 border-t border-slate-200 dark:border-white/[0.07]">
                 <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
                   <Clock className="w-4 h-4 text-primary" />
-                  <span className="text-xs font-medium">Schedule in 60s</span>
+                  <span className="text-xs font-medium">{t("pages.demo.trust.schedule")}</span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
                   <ShieldCheck className="w-4 h-4 text-primary" />
-                  <span className="text-xs font-medium">SOC 2 compliant</span>
+                  <span className="text-xs font-medium">{t("pages.demo.trust.soc")}</span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
                   <CheckCircle2 className="w-4 h-4 text-primary" />
-                  <span className="text-xs font-medium">No credit card</span>
+                  <span className="text-xs font-medium">{t("pages.demo.trust.card")}</span>
                 </div>
               </div>
             </div>
@@ -362,10 +365,10 @@ const BookDemo = () => {
                       {/* Form header */}
                       <div className="mb-7">
                         <h3 className="font-display font-bold text-2xl text-slate-900 dark:text-white mb-1.5">
-                          Schedule your live demo
+                          {t("pages.demo.formTitle")}
                         </h3>
                         <p className="text-sm text-slate-500 dark:text-slate-400">
-                          Fill in your details — we'll set up a screen share at your convenience.
+                          {t("pages.demo.formDescription")}
                         </p>
                       </div>
 
@@ -373,30 +376,30 @@ const BookDemo = () => {
 
                         {/* Name & Company */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                          <Field id="name" label="Full Name" icon={User} error={errors.name?.message}>
-                            <Input id="name" type="text" placeholder="John Doe"
+                          <Field id="name" label={t("pages.demo.name")} icon={User} error={errors.name?.message}>
+                            <Input id="name" type="text" placeholder={t("pages.demo.namePlaceholder")}
                               className={inputCls(!!errors.name)} {...register("name")} />
                           </Field>
-                          <Field id="company" label="Company Name" icon={Building} error={errors.company?.message}>
-                            <Input id="company" type="text" placeholder="Acme Transportation"
+                          <Field id="company" label={t("pages.demo.company")} icon={Building} error={errors.company?.message}>
+                            <Input id="company" type="text" placeholder={t("pages.demo.companyPlaceholder")}
                               className={inputCls(!!errors.company)} {...register("company")} />
                           </Field>
                         </div>
 
                         {/* Email & Phone */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                          <Field id="email" label="Work Email" icon={Mail} error={errors.email?.message}>
+                          <Field id="email" label={t("pages.demo.email")} icon={Mail} error={errors.email?.message}>
                             <Input id="email" type="email" placeholder="john@acme.com"
                               className={inputCls(!!errors.email)} {...register("email")} />
                           </Field>
-                          <Field id="phone" label="Phone Number" icon={Phone} error={errors.phone?.message}>
+                          <Field id="phone" label={t("pages.demo.phone")} icon={Phone} error={errors.phone?.message}>
                             <Input id="phone" type="tel" placeholder="+91 98000 00000"
                               className={inputCls(!!errors.phone)} {...register("phone")} />
                           </Field>
                         </div>
 
                         {/* Fleet Size */}
-                        <Field id="fleetSize" label="Fleet Size (No. of Vehicles)" icon={BarChart3} error={errors.fleetSize?.message}>
+                        <Field id="fleetSize" label={t("pages.demo.fleet")} icon={BarChart3} error={errors.fleetSize?.message}>
                           <Select
                             value={fleetSizeValue}
                             onValueChange={(v) => setValue("fleetSize", v, { shouldValidate: true })}
@@ -405,22 +408,22 @@ const BookDemo = () => {
                               id="fleetSize"
                               className={`h-11 bg-white dark:bg-[#0d1117] border-slate-200 dark:border-white/[0.08] ${errors.fleetSize ? "border-destructive" : ""}`}
                             >
-                              <SelectValue placeholder="Select fleet size" />
+                              <SelectValue placeholder={t("pages.demo.fleetPlaceholder")} />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="1-10">1 – 10 vehicles</SelectItem>
-                              <SelectItem value="11-50">11 – 50 vehicles</SelectItem>
-                              <SelectItem value="51-200">51 – 200 vehicles</SelectItem>
-                              <SelectItem value="200+">200+ vehicles</SelectItem>
+                              <SelectItem value="1-10">1 – 10 {t("pages.demo.vehicles")}</SelectItem>
+                              <SelectItem value="11-50">11 – 50 {t("pages.demo.vehicles")}</SelectItem>
+                              <SelectItem value="51-200">51 – 200 {t("pages.demo.vehicles")}</SelectItem>
+                              <SelectItem value="200+">200+ {t("pages.demo.vehicles")}</SelectItem>
                             </SelectContent>
                           </Select>
                         </Field>
 
                         {/* Message */}
-                        <Field id="message" label="What challenges are you looking to solve?" icon={MessageSquare}>
+                        <Field id="message" label={t("pages.demo.challenge")} icon={MessageSquare}>
                           <Textarea
                             id="message"
-                            placeholder="e.g. tracking empty miles, manual billing delays, driver shortages..."
+                            placeholder={t("pages.demo.challengePlaceholder")}
                             rows={3}
                             className="resize-none bg-white dark:bg-[#0d1117] border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-600"
                             {...register("message")}
@@ -431,13 +434,13 @@ const BookDemo = () => {
                         <div className="space-y-4 pt-2">
                           <Label className="text-xs font-medium text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
                             <Clock className="w-3.5 h-3.5 text-primary/70" />
-                            Select a Preferred Demo Slot (Optional)
+                            {t("pages.demo.slot")}
                           </Label>
                           
                           {/* Date Picker */}
                           <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
                             {getNextFiveWeekdays().map((d) => {
-                              const dateStr = formatDate(d);
+                              const dateStr = formatDate(d, locale);
                               const isSelected = selectedDate === dateStr;
                               return (
                                 <button
@@ -454,10 +457,10 @@ const BookDemo = () => {
                                   }`}
                                 >
                                   <span className="text-[10px] uppercase font-bold tracking-wider opacity-60">
-                                    {d.toLocaleDateString("en-US", { weekday: "short" })}
+                                    {d.toLocaleDateString(locale, { weekday: "short" })}
                                   </span>
                                   <span className="text-sm font-bold mt-0.5">
-                                    {d.toLocaleDateString("en-US", { day: "numeric" })}
+                                    {d.toLocaleDateString(locale, { day: "numeric" })}
                                   </span>
                                 </button>
                               );
@@ -497,18 +500,18 @@ const BookDemo = () => {
                           {isSubmitting ? (
                             <>
                               <Loader2 className="w-4 h-4 animate-spin" />
-                              Scheduling Demo…
+                              {t("pages.demo.scheduling")}
                             </>
                           ) : (
                             <>
-                              Request Live Demo
+                              {t("pages.demo.submit")}
                               <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                             </>
                           )}
                         </button>
 
                         <p className="text-center text-[11px] text-slate-400 dark:text-slate-500">
-                          No credit card required · Our team responds within 2 hours
+                          {t("pages.demo.response")}
                         </p>
                       </form>
                     </motion.div>
@@ -528,11 +531,10 @@ const BookDemo = () => {
 
                       <div className="space-y-2">
                         <h3 className="font-display font-bold text-2xl text-slate-900 dark:text-white">
-                          Demo Slot Reserved!
+                          {t("pages.demo.successTitle")}
                         </h3>
                         <p className="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed">
-                          We've logged your request. Our team will review your fleet profile
-                          and reach out within <strong className="text-slate-700 dark:text-slate-200">2 hours</strong> to confirm your calendar slot.
+                          {t("pages.demo.successText")}
                         </p>
                       </div>
 
@@ -540,29 +542,29 @@ const BookDemo = () => {
                         <div className="p-5 rounded-2xl text-left max-w-sm mx-auto space-y-2 mt-4"
                           style={{ background: "rgba(16,185,129,0.06)", border: "1px solid rgba(16,185,129,0.15)" }}>
                           <h4 className="font-display font-semibold text-xs uppercase tracking-wider text-emerald-500 flex items-center gap-1.5">
-                            <Clock className="w-3.5 h-3.5" /> Booked Slot Details
+                            <Clock className="w-3.5 h-3.5" /> {t("pages.demo.slotDetails")}
                           </h4>
                           <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                            Preferred Time: <strong className="text-slate-800 dark:text-slate-200">{selectedDate}</strong> at <strong className="text-slate-800 dark:text-slate-200">{selectedTime}</strong>. We'll send the calendar invite shortly.
+                            {t("pages.demo.preferred", { date: selectedDate, time: selectedTime })}
                           </p>
                         </div>
                       ) : (
                         <div className="p-5 rounded-2xl text-left max-w-sm mx-auto space-y-2 mt-4"
                           style={{ background: "rgba(124,58,237,0.06)", border: "1px solid rgba(124,58,237,0.15)" }}>
                           <h4 className="font-display font-semibold text-xs uppercase tracking-wider text-primary flex items-center gap-1.5">
-                            <Clock className="w-3.5 h-3.5" /> What happens next?
+                            <Clock className="w-3.5 h-3.5" /> {t("pages.demo.next")}
                           </h4>
                           <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                            Expect an email or call with a personalized Calendly link for your 30-min walkthrough.
+                            {t("pages.demo.nextText")}
                           </p>
                         </div>
                       )}
 
                       <Link
-                        to="/"
+                        to={localizePath("/")}
                         className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white bg-primary transition-all hover:opacity-90 mt-6"
                       >
-                        Return to Homepage <ArrowRight className="w-4 h-4" />
+                        {t("pages.demo.returnHome")} <ArrowRight className="w-4 h-4" />
                       </Link>
                     </motion.div>
                   )}
@@ -581,9 +583,9 @@ const BookDemo = () => {
         <div style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
           <div className="container-tight py-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             <div>
-              <p className="text-xs font-mono uppercase tracking-[0.18em] mb-1.5" style={{ color: "#7c3aed" }}>NEWSLETTER</p>
-              <h3 className="font-display font-semibold text-lg text-white mb-1">Stay ahead of logistics</h3>
-              <p className="text-sm" style={{ color: "#64748b" }}>Product updates, industry insights, and automation tips — weekly.</p>
+              <p className="text-xs font-mono uppercase tracking-[0.18em] mb-1.5" style={{ color: "#7c3aed" }}>{t("pages.demo.newsletter.label")}</p>
+              <h3 className="font-display font-semibold text-lg text-white mb-1">{t("pages.demo.newsletter.title")}</h3>
+              <p className="text-sm" style={{ color: "#64748b" }}>{t("pages.demo.newsletter.description")}</p>
             </div>
             {!subscribed ? (
               <form onSubmit={handleSubscribe} className="flex gap-2 w-full lg:w-auto">
@@ -591,7 +593,7 @@ const BookDemo = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your work email"
+                  placeholder={t("pages.demo.newsletter.placeholder")}
                   required
                   className="flex-1 lg:w-60 px-4 py-2.5 rounded-xl text-sm text-white placeholder:text-slate-500 focus:outline-none transition-all"
                   style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.10)" }}
@@ -603,7 +605,7 @@ const BookDemo = () => {
                   disabled={nlLoading}
                   className="flex items-center gap-1.5 px-4 py-2.5 bg-primary rounded-xl text-sm font-semibold text-white hover:opacity-90 transition-opacity whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  {nlLoading ? "Subscribing…" : <>Subscribe <ArrowRight className="w-3.5 h-3.5" /></>}
+                  {nlLoading ? t("pages.demo.newsletter.subscribing") : <>{t("pages.demo.newsletter.subscribe")} <ArrowRight className="w-3.5 h-3.5" /></>}
                 </button>
               </form>
             ) : (
@@ -612,7 +614,7 @@ const BookDemo = () => {
                 style={{ background: "rgba(52,211,153,0.08)", border: "1px solid rgba(52,211,153,0.2)", color: "#34d399" }}
               >
                 <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                You're subscribed — welcome aboard! 🎉
+                {t("pages.demo.newsletter.success")} 🎉
               </div>
             )}
           </div>
@@ -622,7 +624,7 @@ const BookDemo = () => {
         <div className="container-tight py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <p className="text-xs" style={{ color: "#4b5563" }}>
-              © {new Date().getFullYear()} Fleetcodes · All rights reserved.
+              © {new Date().getFullYear()} Fleetcodes · {t("pages.demo.newsletter.rights")}
             </p>
             <div className="hidden sm:flex items-center gap-2">
               <span
@@ -635,15 +637,15 @@ const BookDemo = () => {
                 className="flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded"
                 style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)", color: "#64748b" }}
               >
-                <Zap className="w-2.5 h-2.5" /> 14-day deploy
+                <Zap className="w-2.5 h-2.5" /> {t("pages.demo.newsletter.deploy")}
               </span>
             </div>
           </div>
           <div className="flex items-center gap-5 text-xs" style={{ color: "#4b5563" }}>
-            <Link to="/privacy/" className="hover:text-white transition-colors">Privacy</Link>
-            <Link to="/terms/" className="hover:text-white transition-colors">Terms</Link>
-            <Link to="/security/" className="hover:text-white transition-colors">Security</Link>
-            <button type="button" onClick={openCookiePreferences} className="hover:text-white transition-colors">Cookie Preferences</button>
+            <Link to={localizePath("/privacy/")} className="hover:text-white transition-colors">{t("common.privacy")}</Link>
+            <Link to={localizePath("/terms/")} className="hover:text-white transition-colors">{t("common.terms")}</Link>
+            <Link to={localizePath("/security/")} className="hover:text-white transition-colors">{t("common.security")}</Link>
+            <button type="button" onClick={openCookiePreferences} className="hover:text-white transition-colors">{t("common.cookiePreferences")}</button>
           </div>
         </div>
       </footer>
