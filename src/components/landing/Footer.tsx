@@ -3,6 +3,8 @@ import { Linkedin, Twitter, Github, Shield, Zap, ArrowRight, ArrowDownToLine } f
 import { Link } from "react-router-dom";
 import { trackEvent } from "@/lib/analytics";
 import { APP_DOWNLOAD_QR_SRC, APP_DOWNLOAD_URL, LINKEDIN_URL } from "@/lib/site";
+import { openCookiePreferences } from "@/lib/cookieConsent";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const cols = [
   {
@@ -40,6 +42,7 @@ const socials = [
 
 // ─── Component ────────────────────────────────────────────────────────────────
 const Footer = () => {
+  const { localizePath, t } = useTranslation();
   const [email, setEmail]         = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const [loading, setLoading]       = useState(false);
@@ -75,6 +78,7 @@ const Footer = () => {
     setSubscribed(true);
     setEmail("");
   };
+  const localizedCols = cols.map((col) => ({ ...col, title: t(`navbarMenu.${col.title}`) as string || col.title, links: col.links.map((link) => ({ ...link, label: t(`navbarMenu.${link.label}`) as string || link.label, href: localizePath(link.href) })) }));
 
   return (
     <footer id="footer" className="relative overflow-hidden" style={{ background: "#0a0d14" }}>
@@ -87,13 +91,13 @@ const Footer = () => {
         <div className="container-tight py-8 sm:py-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           <div className="max-w-xl">
             <p className="text-xs font-mono uppercase tracking-[0.18em] mb-1.5" style={{ color: "#7c3aed" }}>
-              NEWSLETTER
+              {t("footer.newsletter")}
             </p>
             <h3 className="font-display font-semibold text-lg text-white mb-1">
-              Stay ahead of logistics
+              {t("footer.newsletterTitle")}
             </h3>
             <p className="text-sm" style={{ color: "#64748b" }}>
-              Product updates, industry insights, and automation tips — weekly.
+              {t("footer.newsletterDesc")}
             </p>
           </div>
           {!subscribed ? (
@@ -102,7 +106,7 @@ const Footer = () => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your work email"
+                placeholder={t("footer.emailPlaceholder") as string}
                 required
                 className="min-w-0 flex-1 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-500 transition-all focus:outline-none sm:min-w-64 lg:w-64"
                 style={{
@@ -117,7 +121,7 @@ const Footer = () => {
                 disabled={loading}
                 className="flex items-center justify-center gap-1.5 rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
               >
-                {loading ? "Subscribing…" : <>{"Subscribe"} <ArrowRight className="w-3.5 h-3.5" /></>}
+                {loading ? t("footer.subscribing") : <>{t("footer.subscribe")} <ArrowRight className="w-3.5 h-3.5" /></>}
               </button>
             </form>
           ) : (
@@ -126,7 +130,7 @@ const Footer = () => {
               style={{ background: "rgba(52,211,153,0.08)", border: "1px solid rgba(52,211,153,0.2)", color: "#34d399" }}
             >
               <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              You're subscribed — welcome aboard! 🎉
+              {t("footer.subscribedMsg")}
             </div>
           )}
         </div>
@@ -138,7 +142,7 @@ const Footer = () => {
 
           {/* Brand column */}
           <div className="space-y-5 sm:col-span-2 lg:col-span-1">
-            <Link to="/" className="flex w-fit items-center gap-3" aria-label="Fleetcodes home">
+            <Link to={localizePath("/")} className="flex w-fit items-center gap-3" aria-label="Fleetcodes home">
               <img src="/assets/brand/logo-with-bg.png" alt="" className="h-12 w-12 object-contain" />
               <span className="leading-none">
                 <span className="block font-display text-2xl font-bold tracking-tight text-white">
@@ -151,8 +155,7 @@ const Footer = () => {
             </Link>
 
             <p className="max-w-sm text-sm leading-relaxed lg:max-w-xs" style={{ color: "#64748b" }}>
-              Automation-first TMS for logistics, fleet, and supply-chain enterprises.
-              Built to think, decide, and execute — without human intervention.
+              {t("footer.companyDesc")}
             </p>
 
             {/* Status badge */}
@@ -161,7 +164,7 @@ const Footer = () => {
               style={{ background: "rgba(52,211,153,0.08)", border: "1px solid rgba(52,211,153,0.2)", color: "#34d399" }}
             >
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              All systems operational · 99.99% uptime
+              {t("footer.systemStatus")}
             </div>
 
             {/* Social icons */}
@@ -183,7 +186,7 @@ const Footer = () => {
           </div>
 
           {/* Nav columns */}
-          {cols.map((c) => (
+          {localizedCols.map((c) => (
             <div key={c.title}>
               <h4
                 className="mb-5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em]"
@@ -223,7 +226,7 @@ const Footer = () => {
               className="mb-5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em]"
               style={{ color: "#64748b" }}
             >
-              Download App
+              {t("footer.downloadApp")}
             </h4>
             <div
               className="flex w-full max-w-[300px] items-center gap-3 rounded-2xl p-3 sm:max-w-[330px] lg:max-w-[300px]"
@@ -246,9 +249,9 @@ const Footer = () => {
               </a>
 
               <div className="min-w-0">
-                <p className="text-sm font-semibold text-white">Fleetcodes App</p>
+                <p className="text-sm font-semibold text-white">{t("footer.appName")}</p>
                 <p className="mt-1 text-xs leading-relaxed" style={{ color: "#64748b" }}>
-                  Scan QR or install Android APK directly.
+                  {t("footer.appDesc")}
                 </p>
                 <a
                   href={APP_DOWNLOAD_URL}
@@ -258,7 +261,7 @@ const Footer = () => {
                   className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline underline-offset-4"
                 >
                   <ArrowDownToLine className="h-3.5 w-3.5" />
-                  Download APK
+                  {t("footer.downloadApk")}
                 </a>
               </div>
             </div>
@@ -291,9 +294,10 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs" style={{ color: "#4b5563" }}>
-            <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms</a>
-            <a href="#" className="hover:text-white transition-colors">Security</a>
+            <Link to={localizePath("/privacy/")} className="hover:text-white transition-colors">{t("footer.privacy")}</Link>
+            <Link to={localizePath("/terms/")} className="hover:text-white transition-colors">{t("footer.terms")}</Link>
+            <Link to={localizePath("/security/")} className="hover:text-white transition-colors">{t("footer.security")}</Link>
+            <button type="button" onClick={openCookiePreferences} className="hover:text-white transition-colors">{t("footer.cookiePreferences")}</button>
           </div>
         </div>
       </div>

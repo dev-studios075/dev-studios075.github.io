@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Check, X, Zap } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const rows = [
   { label: "Decision making",    trad: "Manual, by operators",       us: "Autonomous, real-time AI",       badge: "< 200ms" },
@@ -13,6 +14,7 @@ const rows = [
 ];
 
 const Compare = () => {
+  const { t } = useTranslation();
   return (
     <section id="compare" className="pt-10 pb-8 lg:pt-12 lg:pb-10 relative overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
@@ -20,10 +22,9 @@ const Compare = () => {
       <div className="container-tight relative">
         {/* Heading */}
         <div className="max-w-2xl mb-10">
-          <p className="text-xs uppercase tracking-[0.2em] text-primary mb-3 font-semibold">Why Fleetcodes</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-primary mb-3 font-semibold">{t("home.compare.eyebrow")}</p>
           <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-tight mb-4 text-slate-900 dark:text-white">
-            Traditional SaaS waits for input. <br />
-            <span className="text-gradient">Fleetcodes takes action.</span>
+            {t("home.compare.title")} <br /><span className="text-gradient">{t("home.compare.accent")}</span>
           </h2>
         </div>
 

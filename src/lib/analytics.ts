@@ -1,3 +1,5 @@
+import { hasAnalyticsConsent } from "@/lib/cookieConsent";
+
 const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID;
 
 declare global {
@@ -12,7 +14,7 @@ let isInitialized = false;
 export const hasGoogleAnalytics = Boolean(GA_MEASUREMENT_ID);
 
 export const initializeGoogleAnalytics = () => {
-  if (!GA_MEASUREMENT_ID || isInitialized || typeof window === "undefined") {
+  if (!GA_MEASUREMENT_ID || isInitialized || typeof window === "undefined" || !hasAnalyticsConsent()) {
     return;
   }
 
@@ -21,11 +23,17 @@ export const initializeGoogleAnalytics = () => {
     window.dataLayer?.push(args);
   });
 
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_MEASUREMENT_ID)}`;
+  document.head.appendChild(script);
+  window.gtag("js", new Date());
+
   isInitialized = true;
 };
 
 export const trackPageView = (path: string, title: string) => {
-  if (!GA_MEASUREMENT_ID || typeof window === "undefined") {
+  if (!GA_MEASUREMENT_ID || typeof window === "undefined" || !hasAnalyticsConsent()) {
     return;
   }
 
@@ -42,7 +50,7 @@ export const trackEvent = (
   eventName: string,
   parameters: Record<string, string | number | boolean | undefined> = {},
 ) => {
-  if (!GA_MEASUREMENT_ID || typeof window === "undefined") {
+  if (!GA_MEASUREMENT_ID || typeof window === "undefined" || !hasAnalyticsConsent()) {
     return;
   }
 

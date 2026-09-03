@@ -4,8 +4,10 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { trackEvent } from "@/lib/analytics";
+import { useTranslation } from "@/hooks/useTranslation";
 
 function CallToAction() {
+  const { t, localizePath } = useTranslation();
   const trackBottomCta = (label: string) => {
     trackEvent("generate_lead", {
       cta_label: label,
@@ -29,14 +31,14 @@ function CallToAction() {
           <div className="relative max-w-3xl mx-auto flex flex-col items-center">
             {/* Trust badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-[9px] font-bold text-primary mb-6 animate-pulse uppercase tracking-wider font-mono">
-              ⚡ 14-Day Deployment Guarantee
+              ⚡ {t("home.cta.badge")}
             </div>
 
             <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-5 text-slate-900 dark:text-white leading-[1.15]">
-              Let your logistics run on autopilot.
+              {t("home.cta.title")}
             </h2>
             <p className="text-base sm:text-lg text-muted-foreground mb-8 max-w-xl mx-auto leading-relaxed">
-              See how Fleetcodes maps your SOPs and runs a live operation in a 30-minute walkthrough.
+              {t("home.cta.description")}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-xs sm:max-w-none">
               <Button
@@ -45,14 +47,14 @@ function CallToAction() {
                 className="group/btn w-full sm:w-auto"
                 asChild
               >
-                <Link to="/book-demo/" onClick={() => trackBottomCta("Schedule a Demo")}>
-                  Schedule a Demo
+                <Link to={localizePath("/book-demo/")} onClick={() => trackBottomCta("Schedule a Demo")}>
+                  {t("home.cta.schedule")}
                   <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                 </Link>
               </Button>
               <Button variant="glass" size="lg" className="w-full sm:w-auto" asChild>
-                <Link to="/book-demo/" onClick={() => trackBottomCta("Talk to sales")}>
-                  Talk to sales
+                <Link to={localizePath("/book-demo/")} onClick={() => trackBottomCta("Talk to sales")}>
+                  {t("home.cta.sales")}
                 </Link>
               </Button>
             </div>

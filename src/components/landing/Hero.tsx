@@ -5,8 +5,10 @@ import { Link } from "react-router-dom";
 import DashboardMockup from "./DashboardMockup";
 import { trackEvent } from "@/lib/analytics";
 import CustomerLogos from "./CustomerLogos";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Hero = () => {
+  const { t, localizePath } = useTranslation();
   const trackHeroCta = (label: string) => {
     trackEvent("select_promotion", {
       cta_label: label,
@@ -31,17 +33,16 @@ const Hero = () => {
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium text-muted-foreground mb-8">
             <Sparkles className="w-3.5 h-3.5 text-primary" />
-            <span>Automation-first TMS · Powered by AI, ML & Vision</span>
+            <span>{t("home.hero.badge")}</span>
           </div>
 
           <h1 className="font-display font-bold tracking-tight text-4xl sm:text-5xl lg:text-6xl leading-[1.1] mb-6">
-            Your Transport Operations.{" "}
-            <span className="text-gradient-primary">Fully Autonomous.</span>
+            {t("home.hero.title")} {" "}
+            <span className="text-gradient-primary">{t("home.hero.accent")}</span>
           </h1>
 
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-8">
-            An AI-powered TMS that learns your SOPs, makes real-time decisions,
-            and runs your logistics with minimal human intervention.
+            {t("home.hero.description")}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -51,8 +52,8 @@ const Hero = () => {
               className="group"
               asChild
             >
-              <Link to="/book-demo/" onClick={() => trackHeroCta("Book Demo")}>
-                Book Demo
+              <Link to={localizePath("/book-demo/")} onClick={() => trackHeroCta("Book Demo")}>
+                {t("common.bookDemo")}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
@@ -60,25 +61,27 @@ const Hero = () => {
               variant="glass"
               size="lg"
               className="group"
-              onClick={() => trackHeroCta("See How It Works")}
+              asChild
             >
-              <PlayCircle className="w-4 h-4" />
-              See How It Works
+              <a href="#how" onClick={() => trackHeroCta("See How It Works")}>
+                <PlayCircle className="w-4 h-4" />
+              {t("home.hero.seeHow")}
+              </a>
             </Button>
           </div>
 
           <div className="mt-10 flex items-center justify-center gap-6 text-xs text-muted-foreground">
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              No-credit-card demo
+              {t("home.hero.noCard")}
             </div>
             <div className="hidden sm:flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-              SOC 2 ready
+              {t("home.hero.soc")}
             </div>
             <div className="hidden sm:flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              Deploys in 14 days
+              {t("home.hero.deploy")}
             </div>
           </div>
         </motion.div>

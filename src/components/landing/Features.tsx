@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "@/hooks/useTranslation";
 import {
   Route, Clock, Satellite, FileBarChart2, BellRing,
   Users, Wrench, Boxes, Wallet, ChevronLeft, ChevronRight,
@@ -322,6 +323,7 @@ const features = [
 
 // ─── Main Features section ────────────────────────────────────────────────────
 const Features = () => {
+  const { t } = useTranslation();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollLeft = () => {
@@ -346,13 +348,12 @@ const Features = () => {
         {/* ── Section heading strip + Navigation Buttons ── */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="max-w-2xl">
-            <p className="text-xs uppercase tracking-[0.2em] text-primary mb-2.5 font-bold">Capabilities</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-primary mb-2.5 font-bold">{t("home.features.eyebrow")}</p>
             <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-tight mb-3 text-slate-900 dark:text-white leading-tight">
-              One platform. <span className="text-gradient">Nine autonomous systems.</span>
+              {t("home.features.title")} <span className="text-gradient">{t("home.features.accent")}</span>
             </h2>
             <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-              Replace fragmented tools and manual coordination with a single,
-              self-operating engine built for modern logistics.
+              {t("home.features.description")}
             </p>
           </div>
           

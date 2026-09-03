@@ -11,6 +11,7 @@ import {
   absolutePageUrl,
   absoluteUrl,
 } from "@/lib/site";
+import { isLocalizablePath } from "@/hooks/useTranslation";
 
 type JsonLd = Record<string, unknown>;
 
@@ -56,6 +57,17 @@ const setLink = (rel: string, href: string) => {
   element.href = href;
 };
 
+const setAlternate = (hreflang: string, href: string) => {
+  let element = document.head.querySelector<HTMLLinkElement>(`link[rel="alternate"][hreflang="${hreflang}"]`);
+  if (!element) {
+    element = document.createElement("link");
+    element.rel = "alternate";
+    element.hreflang = hreflang;
+    document.head.appendChild(element);
+  }
+  element.href = href;
+};
+
 const removeMeta = (selector: string) => document.head.querySelector(selector)?.remove();
 
 const setJsonLd = (jsonLd?: JsonLd | JsonLd[]) => {
@@ -96,11 +108,18 @@ const Seo = ({
   const location = useLocation();
 
   useEffect(() => {
-    const canonicalUrl = absolutePageUrl(path || location.pathname);
+    const onHindiRoute = location.pathname === "/hi" || location.pathname.startsWith("/hi/");
+    const routePath = onHindiRoute ? location.pathname : (path || location.pathname);
+    const canonicalUrl = absolutePageUrl(routePath);
     const imageUrl = absoluteUrl(image);
+    const englishPath = location.pathname.replace(/^\/hi(?=\/|$)/, "") || "/";
+    const hasHindiVersion = isLocalizablePath(location.pathname);
 
     document.title = title;
     setLink("canonical", canonicalUrl);
+    setAlternate("x-default", absolutePageUrl(englishPath));
+    setAlternate("en", absolutePageUrl(englishPath));
+    if (hasHindiVersion) setAlternate("hi", absolutePageUrl(englishPath === "/" ? "/hi" : `/hi${englishPath}`));
 
     setMeta('meta[name="description"]', { name: "description", content: description });
     setMeta('meta[name="keywords"]', { name: "keywords", content: keywords });
@@ -115,7 +134,7 @@ const Seo = ({
 
     setMeta('meta[property="og:site_name"]', { property: "og:site_name", content: SITE_NAME });
     setMeta('meta[property="og:type"]', { property: "og:type", content: type });
-    setMeta('meta[property="og:locale"]', { property: "og:locale", content: locale });
+    setMeta('meta[property="og:locale"]', { property: "og:locale", content: onHindiRoute ? "hi_IN" : locale });
     setMeta('meta[property="og:title"]', { property: "og:title", content: title });
     setMeta('meta[property="og:description"]', { property: "og:description", content: description });
     setMeta('meta[property="og:url"]', { property: "og:url", content: canonicalUrl });

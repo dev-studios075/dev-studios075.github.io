@@ -10,6 +10,7 @@ import { trackEvent } from "@/lib/analytics";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const fallbackImages = [blog1, blog2, blog3];
 const POSTS_PER_PAGE = 10;
@@ -36,7 +37,7 @@ const essentialGuideSlugs = [
 /** Strip YAML-encoded wrapping quotes */
 const cleanTitle = (t = "") => t.replace(/^["'""]|["'""]$/g, "").trim();
 
-const formatReadingTime = (minutes?: number) => `${minutes || 1} min`;
+const formatReadingTime = (minutes?: number) => minutes || 1;
 
 /** Category from title */
 const getCategory = (title: string) => {
@@ -116,6 +117,10 @@ const FeaturedCardSkeleton = () => (
 );
 
 const Blog = () => {
+  const { t, language, localizePath } = useTranslation();
+  const locale = language === "hi" ? "hi-IN" : "en-US";
+  const blogBasePath = language === "hi" ? "/hi/blog/" : "/blog/";
+  const categoryLabel = (category: string) => t(`pages.blog.categories.${category}`);
   const posts = getAllPosts();
   const navigate = useNavigate();
   const { page: pageParam } = useParams<{ page?: string }>();
@@ -166,14 +171,14 @@ const Blog = () => {
       }
 
       if (pageParam && nextParams.toString()) {
-        navigate(`/blog/?${nextParams.toString()}`, { replace: true });
+        navigate(`${blogBasePath}?${nextParams.toString()}`, { replace: true });
       } else if (nextParams.toString() !== searchParams.toString()) {
         setSearchParams(nextParams, { replace: true });
       }
     }, 300);
 
     return () => window.clearTimeout(timer);
-  }, [activeCategory, filterPage, navigate, pageParam, searchParams, searchTerm, setSearchParams]);
+  }, [activeCategory, blogBasePath, filterPage, navigate, pageParam, searchParams, searchTerm, setSearchParams]);
 
   // Compute matched categories and posts for suggestions
   const categories = BLOG_CATEGORIES;
@@ -191,7 +196,7 @@ const Blog = () => {
     | { type: "category"; id: string; title: string; categoryName: string }
     | { type: "post"; id: string; title: string; slug: string; category: string }
   > = [
-    ...matchedCategories.map(cat => ({ type: "category" as const, id: cat, title: `Filter by Category: ${cat}`, categoryName: cat })),
+    ...matchedCategories.map(cat => ({ type: "category" as const, id: cat, title: t("pages.blog.filterCategory", { category: categoryLabel(cat) }), categoryName: cat })),
     ...matchedPosts.map(post => ({ type: "post" as const, id: post.slug, title: post.title, slug: post.slug, category: getCategory(post.title) }))
   ];
 
@@ -222,7 +227,7 @@ const Blog = () => {
         const selected = suggestions[focusedIndex];
         if (selected.type === "post") {
           trackArticleClick(selected.title, selected.slug);
-          navigate(`/blog/${selected.slug}/`);
+          navigate(localizePath(`/blog/${selected.slug}/`));
         } else {
           setActiveCategory(selected.categoryName);
           setSearchTerm("");
@@ -290,11 +295,11 @@ const Blog = () => {
     .filter((post): post is (typeof posts)[number] => Boolean(post));
   const seoPage = isFiltering ? 1 : currentPage;
   const pageTitle = seoPage > 1
-    ? `Fleet Management Blog - Page ${seoPage} | ${SITE_NAME}`
-    : `Fleet Management Blog | ${SITE_NAME}`;
-  const pagePath = seoPage > 1 ? `/blog/page/${seoPage}` : "/blog";
-  const description =
-    "Fleet management, AI dispatch, TMS automation, compliance, and logistics operations insights for Indian transporters and shippers.";
+    ? `${t("pages.blog.seoTitle")} - ${t("pages.blog.page", { page: seoPage })} | ${SITE_NAME}`
+    : `${t("pages.blog.seoTitle")} | ${SITE_NAME}`;
+  const basePagePath = seoPage > 1 ? `/blog/page/${seoPage}` : "/blog";
+  const pagePath = localizePath(basePagePath);
+  const description = t("pages.blog.seoDescription");
 
   const trackArticleClick = (postTitle: string, postSlug: string) => {
     trackEvent("select_content", {
@@ -344,15 +349,15 @@ const Blog = () => {
           {/* ── Page heading ────────────────────────────────── */}
           <div className="max-w-3xl mb-12">
             <p className="text-xs uppercase tracking-[0.2em] text-primary mb-4 font-semibold">
-              From the blog
+              {t("pages.blog.eyebrow")}
             </p>
             <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl tracking-tight mb-5">
-              Insights for the{" "}
-              <span className="text-gradient-primary">autonomous era</span>{" "}
-              of logistics.
+              {t("pages.blog.titlePrefix")}{" "}
+              <span className="text-gradient-primary">{t("pages.blog.titleAccent")}</span>{" "}
+              {t("pages.blog.titleSuffix")}
             </h1>
             <p className="text-lg text-muted-foreground">
-              Deep dives on AI-powered TMS, fleet intelligence, and the operational future of logistics.
+              {t("pages.blog.description")}
             </p>
           </div>
 
@@ -363,15 +368,15 @@ const Blog = () => {
                 <BookOpen className="w-4 h-4" />
               </span>
               <div>
-                <h2 id="essential-guides-heading" className="font-display text-xl font-bold tracking-tight">Essential fleet and transport guides</h2>
-                <p className="text-sm text-muted-foreground mt-1">Start with these practical guides for running compliant, efficient fleet operations in India.</p>
+                <h2 id="essential-guides-heading" className="font-display text-xl font-bold tracking-tight">{t("pages.blog.guidesTitle")}</h2>
+                <p className="text-sm text-muted-foreground mt-1">{t("pages.blog.guidesDescription")}</p>
               </div>
             </div>
             <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
               {essentialGuides.map((post) => (
                 <li key={post.slug}>
                   <Link
-                    to={`/blog/${post.slug}/`}
+                    to={localizePath(`/blog/${post.slug}/`)}
                     onClick={() => trackArticleClick(post.title, post.slug)}
                     className="group flex h-full items-start justify-between gap-3 rounded-xl border border-border/60 bg-background/60 p-3.5 text-sm font-semibold leading-snug hover:border-primary/30 hover:text-primary transition-colors"
                   >
@@ -391,7 +396,7 @@ const Blog = () => {
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="text"
-                placeholder="Search articles..."
+                placeholder={t("pages.blog.search")}
                 value={searchTerm}
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
@@ -414,7 +419,7 @@ const Blog = () => {
                         onClick={() => {
                           if (item.type === "post") {
                             trackArticleClick(item.title, item.slug);
-                            navigate(`/blog/${item.slug}/`);
+                            navigate(localizePath(`/blog/${item.slug}/`));
                         } else {
                           setActiveCategory(item.categoryName);
                           setSearchTerm("");
@@ -437,7 +442,7 @@ const Blog = () => {
                             ? "bg-primary/10 text-primary border border-primary/20"
                             : "bg-slate-100 dark:bg-slate-800 text-muted-foreground"
                         }`}>
-                          {item.type === "category" ? "Category" : item.category}
+                          {item.type === "category" ? t("pages.blog.category") : categoryLabel(item.category)}
                         </span>
                       </button>
                     ))}
@@ -460,7 +465,7 @@ const Blog = () => {
                       : "bg-slate-100/80 dark:bg-slate-900/40 text-slate-600 dark:text-muted-foreground border-border/40 hover:bg-slate-200/50 dark:hover:bg-slate-900/60"
                   }`}
                 >
-                  <span>{cat}</span>
+                  <span>{cat === "All" ? t("pages.blog.all") : categoryLabel(cat)}</span>
                   <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-bold ${
                     activeCategory === cat
                       ? "bg-white/20 text-white"
@@ -481,7 +486,7 @@ const Blog = () => {
           ) : (
             featured && (
               <Link
-                to={`/blog/${featured.slug}/`}
+                to={localizePath(`/blog/${featured.slug}/`)}
                 onClick={() => trackArticleClick(featured.title, featured.slug)}
                 className="group block glass rounded-2xl overflow-hidden mb-10 hover:border-primary/20 hover:shadow-elegant transition-all duration-300 animate-in fade-in"
               >
@@ -500,15 +505,15 @@ const Blog = () => {
                     <div className="flex flex-wrap items-center gap-2 mb-4">
                       <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary">
                         <Tag className="w-3 h-3" />
-                        {getCategory(featured.title)}
+                        {categoryLabel(getCategory(featured.title))}
                       </span>
                       <span className="text-[11px] font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full glass border border-border/50 text-muted-foreground inline-flex items-center gap-1.5">
                         <Clock className="w-3 h-3" />
-                        {formatReadingTime(featured.readingTime)} read
+                        {t("pages.blogPost.minuteRead", { minutes: formatReadingTime(featured.readingTime) })}
                       </span>
                       <span className="text-[11px] text-muted-foreground inline-flex items-center gap-1.5">
                         <Calendar className="w-3 h-3" />
-                        {featured.date && new Date(featured.date).toLocaleDateString("en-US", {
+                        {featured.date && new Date(featured.date).toLocaleDateString(locale, {
                           month: "short", day: "numeric", year: "numeric",
                         })}
                       </span>
@@ -522,7 +527,7 @@ const Blog = () => {
                       </p>
                     )}
                     <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
-                      Read article
+                      {t("pages.blog.readArticle")}
                       <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </span>
                   </div>
@@ -550,7 +555,7 @@ const Blog = () => {
                   >
                     {/* Thumbnail */}
                     <Link
-                      to={`/blog/${post.slug}/`}
+                      to={localizePath(`/blog/${post.slug}/`)}
                       className="relative overflow-hidden aspect-[16/10] block shrink-0"
                       onClick={() => trackArticleClick(post.title, post.slug)}
                     >
@@ -562,7 +567,7 @@ const Blog = () => {
                       />
                       {/* Category badge over image */}
                       <span className="absolute bottom-3 left-3 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/15 text-white shadow-lg">
-                        {getCategory(post.title)}
+                        {categoryLabel(getCategory(post.title))}
                       </span>
                     </Link>
 
@@ -573,20 +578,20 @@ const Blog = () => {
                         {post.date && (
                           <span className="inline-flex items-center gap-1">
                             <Calendar className="w-3 h-3" />
-                            {new Date(post.date).toLocaleDateString("en-US", {
+                            {new Date(post.date).toLocaleDateString(locale, {
                               month: "short", day: "numeric", year: "numeric",
                             })}
                           </span>
                         )}
                         <span className="inline-flex items-center gap-1">
                           <Clock className="w-3 h-3" />
-                          {formatReadingTime(post.readingTime)}
+                          {t("pages.blogPost.minuteRead", { minutes: formatReadingTime(post.readingTime) })}
                         </span>
                       </div>
 
                       <h2 className="font-display font-semibold text-base leading-snug mb-2.5 group-hover:text-primary transition-colors line-clamp-2">
                         <Link
-                          to={`/blog/${post.slug}/`}
+                          to={localizePath(`/blog/${post.slug}/`)}
                           onClick={() => trackArticleClick(post.title, post.slug)}
                         >
                           {cleanTitle(post.title)}
@@ -598,11 +603,11 @@ const Blog = () => {
                       </p>
 
                       <Link
-                        to={`/blog/${post.slug}/`}
+                        to={localizePath(`/blog/${post.slug}/`)}
                         className="inline-flex items-center gap-1 text-xs font-semibold text-primary group/link"
                         onClick={() => trackArticleClick(post.title, post.slug)}
                       >
-                        Read article
+                        {t("pages.blog.readArticle")}
                         <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
                       </Link>
                     </div>
@@ -621,20 +626,20 @@ const Blog = () => {
                     onClick={() => changeFilterPage(currentPage - 1)}
                     className="inline-flex h-11 items-center gap-1.5 rounded-xl px-2 sm:px-3 text-xs sm:text-sm font-semibold text-muted-foreground hover:bg-primary/10 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-colors"
                   >
-                    <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" /> <span className="hidden sm:inline">Previous</span>
+                    <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" /> <span className="hidden sm:inline">{t("pages.blog.previous")}</span>
                   </button>
                 ) : (
                   <Link
-                    to={currentPage === 2 ? "/blog/" : `/blog/page/${currentPage - 1}/`}
+                    to={localizePath(currentPage === 2 ? "/blog/" : `/blog/page/${currentPage - 1}/`)}
                     rel="prev"
                     className="inline-flex h-11 items-center gap-1.5 rounded-xl px-2 sm:px-3 text-xs sm:text-sm font-semibold text-muted-foreground hover:bg-primary/10 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-colors"
                   >
-                    <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" /> <span className="hidden sm:inline">Previous</span>
+                    <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" /> <span className="hidden sm:inline">{t("pages.blog.previous")}</span>
                   </Link>
                 )
               ) : (
                 <span aria-disabled="true" className="inline-flex h-11 items-center gap-1.5 rounded-xl px-2 sm:px-3 text-xs sm:text-sm font-semibold text-muted-foreground/30 cursor-not-allowed">
-                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" /> <span className="hidden sm:inline">Previous</span>
+                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" /> <span className="hidden sm:inline">{t("pages.blog.previous")}</span>
                 </span>
               )}
               {paginationItems.map((item) => item === "ellipsis-start" || item === "ellipsis-end" ? (
@@ -646,7 +651,7 @@ const Blog = () => {
                       type="button"
                       onClick={() => changeFilterPage(item)}
                       aria-current={item === currentPage ? "page" : undefined}
-                      aria-label={`Page ${item}`}
+                      aria-label={t("pages.blog.pageLabel", { page: item })}
                       className={`grid h-11 w-9 sm:w-11 place-items-center rounded-xl text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-all ${
                         item === currentPage
                           ? "border border-primary/25 bg-primary/10 text-primary shadow-sm"
@@ -658,9 +663,9 @@ const Blog = () => {
                   ) : (
                     <Link
                       key={item}
-                      to={item === 1 ? "/blog/" : `/blog/page/${item}/`}
+                      to={localizePath(item === 1 ? "/blog/" : `/blog/page/${item}/`)}
                       aria-current={item === currentPage ? "page" : undefined}
-                      aria-label={`Page ${item}`}
+                      aria-label={t("pages.blog.pageLabel", { page: item })}
                       className={`grid h-11 w-9 sm:w-11 place-items-center rounded-xl text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-all ${
                         item === currentPage
                           ? "border border-primary/25 bg-primary/10 text-primary shadow-sm"
@@ -678,20 +683,20 @@ const Blog = () => {
                     onClick={() => changeFilterPage(currentPage + 1)}
                     className="inline-flex h-11 items-center gap-1.5 rounded-xl px-2 sm:px-3 text-xs sm:text-sm font-semibold text-muted-foreground hover:bg-primary/10 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-colors"
                   >
-                    <span className="hidden sm:inline">Next</span> <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="hidden sm:inline">{t("pages.blog.next")}</span> <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                   </button>
                 ) : (
                   <Link
-                    to={`/blog/page/${currentPage + 1}/`}
+                    to={localizePath(`/blog/page/${currentPage + 1}/`)}
                     rel="next"
                     className="inline-flex h-11 items-center gap-1.5 rounded-xl px-2 sm:px-3 text-xs sm:text-sm font-semibold text-muted-foreground hover:bg-primary/10 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 transition-colors"
                   >
-                    <span className="hidden sm:inline">Next</span> <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="hidden sm:inline">{t("pages.blog.next")}</span> <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                   </Link>
                 )
               ) : (
                 <span aria-disabled="true" className="inline-flex h-11 items-center gap-1.5 rounded-xl px-2 sm:px-3 text-xs sm:text-sm font-semibold text-muted-foreground/30 cursor-not-allowed">
-                  <span className="hidden sm:inline">Next</span> <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="hidden sm:inline">{t("pages.blog.next")}</span> <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </span>
               )}
             </nav>
@@ -700,12 +705,12 @@ const Blog = () => {
           {!isLoading && (
             posts.length === 0 ? (
               <p className="text-muted-foreground text-center py-16">
-                No blog posts yet. Check back soon!
+                {t("pages.blog.empty")}
               </p>
             ) : filteredPosts.length === 0 ? (
               <div className="text-center py-16 border border-dashed border-border/60 rounded-2xl glass">
-                <p className="text-muted-foreground font-medium mb-2">No matching articles found.</p>
-                <p className="text-xs text-muted-foreground">Try adjusting your filters or search terms.</p>
+                <p className="text-muted-foreground font-medium mb-2">{t("pages.blog.noResults")}</p>
+                <p className="text-xs text-muted-foreground">{t("pages.blog.adjust")}</p>
               </div>
             ) : null
           )}

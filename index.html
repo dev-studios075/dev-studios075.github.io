@@ -15,8 +15,6 @@
     <link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/" />
     <link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/" />
     <link rel="alternate" type="application/rss+xml" title="Fleetcodes Blog Feed" href="https://www.fleetcodes.com/feed.xml" />
-    <link rel="preconnect" href="https://www.googletagmanager.com" />
-    <link rel="preconnect" href="https://www.google-analytics.com" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Fleetcodes" />
     <meta property="og:locale" content="en_IN" />
@@ -60,24 +58,6 @@
           }
         ]
       }
-    </script>
-    <script>
-      (function (measurementId) {
-        if (!measurementId || measurementId.indexOf("%") === 0 || measurementId === "G-XXXXXXXXXX") {
-          return;
-        }
-
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
-
-        var script = document.createElement("script");
-        script.async = true;
-        script.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(measurementId);
-        document.head.appendChild(script);
-
-        window.gtag("js", new Date());
-        window.gtag("config", measurementId);
-      })("%VITE_GA_MEASUREMENT_ID%");
     </script>
   </head>
 

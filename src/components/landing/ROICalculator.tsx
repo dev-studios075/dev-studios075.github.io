@@ -11,8 +11,10 @@ import {
   ArrowRight,
   Sparkles
 } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function ROICalculator() {
+  const { t } = useTranslation();
   const [fleetSize, setFleetSize] = useState<number>(50);
   const [monthlyFuel, setMonthlyFuel] = useState<number>(120000); // Average per truck
   const [emptyMilePct, setEmptyMilePct] = useState<number>(20); // Average empty run percentage
@@ -54,13 +56,13 @@ export default function ROICalculator() {
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
           <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary mb-3 font-semibold">
-            Savings Estimator
+            {t("home.roi.eyebrow")}
           </p>
           <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-tight text-slate-900 dark:text-white mb-6">
-            Calculate How Much You Save with <span className="text-gradient-primary">Fleetcodes</span>
+            {t("home.roi.titlePrefix")} <span className="text-gradient-primary">Fleetcodes</span> {t("home.roi.titleSuffix")}
           </h2>
           <p className="text-lg text-slate-500 dark:text-slate-400 leading-relaxed">
-            Enter your current fleet metrics to visualize how automation-first fleet management directly translates into increased profitability.
+            {t("home.roi.description")}
           </p>
         </div>
 

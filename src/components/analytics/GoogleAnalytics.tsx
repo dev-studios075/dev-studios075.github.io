@@ -1,20 +1,25 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { trackEvent, trackPageView } from "@/lib/analytics";
+import { COOKIE_CONSENT_EVENT, hasAnalyticsConsent } from "@/lib/cookieConsent";
 
 const scrollMilestones = [25, 50, 75, 90];
 
 const GoogleAnalytics = () => {
   const location = useLocation();
-  const hasSeenInitialPage = useRef(false);
   const trackedScrollDepths = useRef<Set<number>>(new Set());
 
   useEffect(() => {
-    if (!hasSeenInitialPage.current) {
-      hasSeenInitialPage.current = true;
-      return;
-    }
+    const onConsentChange = () => {
+      if (hasAnalyticsConsent()) {
+        trackPageView(`${location.pathname}${location.search}`, document.title);
+      }
+    };
+    window.addEventListener(COOKIE_CONSENT_EVENT, onConsentChange);
+    return () => window.removeEventListener(COOKIE_CONSENT_EVENT, onConsentChange);
+  }, [location.pathname, location.search]);
 
+  useEffect(() => {
     const timeoutId = window.setTimeout(() => {
       trackPageView(`${location.pathname}${location.search}`, document.title);
     }, 0);

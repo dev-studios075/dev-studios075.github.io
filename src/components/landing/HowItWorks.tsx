@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import useInViewport from "@/hooks/useInViewport";
+import { useTranslation } from "@/hooks/useTranslation";
 import { 
   Brain, 
   Zap, 
@@ -36,6 +37,7 @@ const steps = [
 ];
 
 const HowItWorks = () => {
+  const { t } = useTranslation();
   const { ref: sectionRef, isInViewport } = useInViewport<HTMLElement>();
   const [activeStep, setActiveStep] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -66,19 +68,19 @@ const HowItWorks = () => {
   }, [activeStep, isAutoplayPaused, isInViewport]);
 
   return (
-    <section ref={sectionRef} id="how" className="pt-10 pb-8 lg:pt-12 lg:pb-10 relative overflow-hidden">
+    <section ref={sectionRef} id="how" className="scroll-mt-24 pt-10 pb-8 lg:pt-12 lg:pb-10 relative overflow-hidden">
       {/* Background dot grid and soft ambient light glows */}
       <div className="absolute inset-0 dot-bg opacity-30 pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full bg-primary/5 blur-[130px] pointer-events-none" />
 
       <div className="container-tight relative">
         <div className="max-w-2xl mb-12 sm:mb-16">
-          <p className="text-xs uppercase tracking-[0.2em] text-primary mb-3 font-semibold">Autonomous Workflow</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-primary mb-3 font-semibold">{t("home.how.eyebrow")}</p>
           <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-tight mb-4 text-slate-900 dark:text-white">
-            From SOP to <span className="text-gradient">self-driving operations</span> in four steps.
+            {t("home.how.titlePrefix")} <span className="text-gradient">{t("home.how.accent")}</span> {t("home.how.titleSuffix")}
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-            See how Fleetcodes parses static operational rules and automates decisions, dispatch schedules, and continuous feedback loops.
+            {t("home.how.description")}
           </p>
         </div>
 

@@ -151,6 +151,24 @@ const urls = [
     priority: "0.9",
   },
   {
+    loc: "/privacy",
+    title: "Privacy Policy | Fleetcodes",
+    image: "/new-og-image.png",
+    priority: "0.5",
+  },
+  {
+    loc: "/terms",
+    title: "Terms of Service | Fleetcodes",
+    image: "/new-og-image.png",
+    priority: "0.5",
+  },
+  {
+    loc: "/security",
+    title: "Security at Fleetcodes",
+    image: "/new-og-image.png",
+    priority: "0.5",
+  },
+  {
     loc: "/blog",
     title: "Fleet Management Blog | Fleetcodes",
     image: "/new-og-image.png",
@@ -159,6 +177,12 @@ const urls = [
   ...blogArchiveUrls,
   ...blogUrls,
 ];
+
+const hindiUrls = urls
+  .filter(({ loc }) => ["/", "/about", "/careers", "/book-demo", "/privacy", "/terms", "/security", "/blog"].includes(loc) || /^\/blog\/page\/\d+$/.test(loc))
+  .map((url) => ({ ...url, loc: url.loc === "/" ? "/hi" : `/hi${url.loc}`, priority: url.loc === "/" ? "0.9" : url.priority }));
+
+urls.push(...hindiUrls);
 
 // Search, filter, tracking, and fragment variants must never enter the sitemap.
 const sitemapUrls = urls.filter(({ loc }) => !/[?#]/.test(loc));

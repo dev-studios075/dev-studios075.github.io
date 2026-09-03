@@ -256,13 +256,20 @@ const setJsonLd = (html, jsonLd) =>
 
 const renderPage = ({ title, description, path: routePath, image, type = "website", jsonLd, bodyHtml = "" }) => {
   const canonicalUrl = absolutePageUrl(routePath);
+  const isHindiRoute = routePath === "/hi" || routePath.startsWith("/hi/");
+  const englishRoute = isHindiRoute ? (routePath.replace(/^\/hi/, "") || "/") : routePath;
+  const localizable = ["/", "/about", "/careers", "/book-demo", "/privacy", "/terms", "/security"].includes(englishRoute);
+  const englishUrl = absolutePageUrl(englishRoute);
+  const hindiUrl = absolutePageUrl(englishRoute === "/" ? "/hi" : `/hi${englishRoute}`);
   const imageUrl = absoluteUrl(image);
   let html = template;
 
+  if (isHindiRoute) html = html.replace('<html lang="en">', '<html lang="hi">');
   html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(title)}</title>`);
   html = setCanonical(html, canonicalUrl);
-  html = setAlternate(html, "x-default", canonicalUrl);
-  html = setAlternate(html, "en", canonicalUrl);
+  html = setAlternate(html, "x-default", localizable ? englishUrl : canonicalUrl);
+  html = setAlternate(html, "en", localizable ? englishUrl : canonicalUrl);
+  if (localizable) html = setAlternate(html, "hi", hindiUrl);
   html = setMetaName(html, "description", description);
   html = setMetaName(html, "keywords", defaultKeywords);
   html = setMetaProperty(html, "og:type", type);
@@ -542,4 +549,76 @@ writeRoute(
   }),
 );
 
-console.log(`Generated static HTML for /, /blog, /about, /careers, /book-demo, and ${posts.length} blog posts`);
+writeRoute(
+  "/privacy",
+  renderPage({
+    title: `Privacy Policy | ${siteName}`,
+    description:
+      "Learn how Fleetcodes collects, uses, shares, retains and protects personal data across its website and fleet management services.",
+    path: "/privacy",
+    image: defaultImage,
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: `Privacy Policy | ${siteName}`,
+      url: absolutePageUrl("/privacy"),
+      dateModified: "2026-09-03",
+    },
+    bodyHtml: renderStaticFallback({
+      eyebrow: "Privacy & data protection",
+      title: "Privacy Policy",
+      description:
+        "How Fleetcodes Technologies Pvt. Ltd. handles personal data across its website and fleet management services.",
+    }),
+  }),
+);
+
+writeRoute(
+  "/terms",
+  renderPage({
+    title: `Terms of Service | ${siteName}`,
+    description: "Review the terms governing access to and use of the Fleetcodes fleet and logistics operations platform.",
+    path: "/terms",
+    image: defaultImage,
+    jsonLd: { "@context": "https://schema.org", "@type": "WebPage", name: `Terms of Service | ${siteName}`, url: absolutePageUrl("/terms"), dateModified: "2026-09-03" },
+    bodyHtml: renderStaticFallback({ eyebrow: "Service agreement", title: "Terms of Service", description: "The rules and responsibilities that apply when a business accesses the Fleetcodes website or fleet management services." }),
+  }),
+);
+
+writeRoute(
+  "/security",
+  renderPage({
+    title: `Security at ${siteName}`,
+    description: "Learn about Fleetcodes security practices for access control, data protection, infrastructure, monitoring, development and incident response.",
+    path: "/security",
+    image: defaultImage,
+    jsonLd: { "@context": "https://schema.org", "@type": "WebPage", name: `Security at ${siteName}`, url: absolutePageUrl("/security"), dateModified: "2026-09-03" },
+    bodyHtml: renderStaticFallback({ eyebrow: "Trust & protection", title: `Security at ${siteName}`, description: "How we approach platform security and protect the operational information entrusted to our services." }),
+  }),
+);
+
+[
+  { path: "/hi", title: "Fleetcodes — AI-पावर्ड ट्रांसपोर्ट मैनेजमेंट सिस्टम", description: "AI-पावर्ड TMS से डिस्पैच, ट्रैकिंग, बिलिंग और फ्लीट ऑपरेशंस को ऑटोमेट करें तथा कम टीम के साथ व्यवसाय बढ़ाएँ।", eyebrow: "Fleetcodes" },
+  { path: "/hi/about", title: "हमारे बारे में | Fleetcodes", description: "जानें कि Fleetcodes भारतीय फ्लीट और लॉजिस्टिक्स ऑपरेशंस को ऑटोमेट करने के लिए क्यों बनाया गया।", eyebrow: "हमारी कहानी" },
+  { path: "/hi/careers", title: "Fleetcodes में करियर", description: "Fleetcodes टीम से जुड़ें और भारतीय लॉजिस्टिक्स के लिए ऑटोमेशन-फर्स्ट TMS बनाने में योगदान दें।", eyebrow: "करियर" },
+  { path: "/hi/book-demo", title: "मुफ़्त लाइव डेमो बुक करें | Fleetcodes", description: "Fleetcodes के AI-पावर्ड ट्रांसपोर्ट मैनेजमेंट प्लेटफ़ॉर्म का व्यक्तिगत लाइव डेमो बुक करें।", eyebrow: "डेमो" },
+  { path: "/hi/privacy", title: "गोपनीयता नीति | Fleetcodes", description: "जानें कि Fleetcodes व्यक्तिगत और फ्लीट ऑपरेशनल डेटा को कैसे एकत्र, उपयोग और सुरक्षित करता है।", eyebrow: "गोपनीयता" },
+  { path: "/hi/terms", title: "सेवा की शर्तें | Fleetcodes", description: "Fleetcodes वेबसाइट और फ्लीट मैनेजमेंट सेवाओं के उपयोग पर लागू शर्तें पढ़ें।", eyebrow: "सेवा समझौता" },
+  { path: "/hi/security", title: "Fleetcodes में सुरक्षा", description: "एक्सेस कंट्रोल, डेटा सुरक्षा, मॉनिटरिंग और घटना प्रतिक्रिया से जुड़ी Fleetcodes की सुरक्षा पद्धतियाँ जानें।", eyebrow: "सुरक्षा" },
+  { path: "/hi/blog", title: "फ्लीट मैनेजमेंट ब्लॉग | Fleetcodes", description: "भारतीय ट्रांसपोर्टरों और शिपर्स के लिए फ्लीट मैनेजमेंट, AI डिस्पैच, TMS ऑटोमेशन और अनुपालन से जुड़ी जानकारी।", eyebrow: "ब्लॉग से" },
+  ...Array.from({ length: Math.max(0, blogPageCount - 1) }, (_, index) => ({
+    path: `/hi/blog/page/${index + 2}`,
+    title: `फ्लीट मैनेजमेंट ब्लॉग — पेज ${index + 2} | Fleetcodes`,
+    description: "भारतीय ट्रांसपोर्टरों और शिपर्स के लिए फ्लीट मैनेजमेंट, AI डिस्पैच, TMS ऑटोमेशन और अनुपालन से जुड़ी जानकारी।",
+    eyebrow: "ब्लॉग से",
+  })),
+].forEach((page) => writeRoute(page.path, renderPage({
+  title: page.title,
+  description: page.description,
+  path: page.path,
+  image: defaultImage,
+  jsonLd: { "@context": "https://schema.org", "@type": "WebPage", name: page.title, url: absolutePageUrl(page.path), inLanguage: "hi-IN" },
+  bodyHtml: renderStaticFallback({ eyebrow: page.eyebrow, title: page.title, description: page.description }),
+})));
+
+console.log(`Generated English and Hindi core routes, blog routes, and ${posts.length} blog posts`);

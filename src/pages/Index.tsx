@@ -12,14 +12,18 @@ import CTA from "@/components/landing/CTA";
 import Footer from "@/components/landing/Footer";
 import Seo from "@/components/seo/Seo";
 import { APP_DOWNLOAD_URL, DEFAULT_DESCRIPTION, DEFAULT_TITLE, LINKEDIN_URL, SITE_NAME, absolutePageUrl, absoluteUrl } from "@/lib/site";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Index = () => {
+  const { language, t } = useTranslation();
+  const pageTitle = t("home.seo.title", { default: DEFAULT_TITLE }) as string;
+  const pageDescription = t("home.seo.description", { default: DEFAULT_DESCRIPTION }) as string;
   return (
     <main className="min-h-screen bg-background text-foreground">
       <Seo
-        title={DEFAULT_TITLE}
-        description={DEFAULT_DESCRIPTION}
-        path="/"
+        title={pageTitle}
+        description={pageDescription}
+        path={language === "hi" ? "/hi" : "/"}
         jsonLd={[
           {
             "@context": "https://schema.org",
