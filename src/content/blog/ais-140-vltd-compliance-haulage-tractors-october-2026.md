@@ -183,7 +183,7 @@ No. Fleetcodes is the fleet-operational software layer. Regulatory compliance st
 
 ## Official Sources
 
-- [Final MoRTH Gazette notification: G.S.R. 819(E), November 3, 2025](https://morth.gov.in/sites/default/files/notifications_document/GSR%20819%20dated%203rd%20November%2C%202025.pdf)
+- [MoRTH Notifications portal — search for G.S.R. 819(E), November 3, 2025](https://morth.gov.in/notification)
 - [ARAI published Automotive Industry Standards catalogue — search for AIS-140](https://www.araiindia.com/archives/ais/list-of-published-ais)
 - [ARAI Automotive Industry Standards downloads](https://www.araiindia.com/downloads/ais-downloads)
 

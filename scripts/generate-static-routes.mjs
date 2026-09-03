@@ -301,7 +301,7 @@ writeRoute(
           "@type": "Organization",
           name: siteName,
           url: absolutePageUrl("/"),
-          logo: absoluteUrl("/favicon.png"),
+          logo: absoluteUrl("/assets/brand/logo-with-bg.png"),
           sameAs: ["https://www.linkedin.com/company/fleetcodes"],
         },
         {
@@ -451,9 +451,9 @@ posts.forEach((post) => {
           name: siteName,
           logo: {
             "@type": "ImageObject",
-            url: absoluteUrl("/favicon.png"),
-            width: 32,
-            height: 32,
+            url: absoluteUrl("/assets/brand/logo-with-bg.png"),
+            width: 1254,
+            height: 1254,
           },
         },
         mainEntityOfPage: absolutePageUrl(`/blog/${post.slug}`),

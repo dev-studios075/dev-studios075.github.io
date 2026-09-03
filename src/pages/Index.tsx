@@ -26,7 +26,7 @@ const Index = () => {
             "@type": "Organization",
             name: SITE_NAME,
             url: absolutePageUrl("/"),
-            logo: absoluteUrl("/favicon.png"),
+            logo: absoluteUrl("/assets/brand/logo-with-bg.png"),
             sameAs: [LINKEDIN_URL],
           },
           {

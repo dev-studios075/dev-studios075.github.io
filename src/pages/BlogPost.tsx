@@ -327,9 +327,9 @@ const BlogPost = () => {
             name: SITE_NAME,
             logo: { 
               "@type": "ImageObject", 
-              url: absoluteUrl("/favicon.png"),
-              width: 32,
-              height: 32
+              url: absoluteUrl("/assets/brand/logo-with-bg.png"),
+              width: 1254,
+              height: 1254
             },
           },
           mainEntityOfPage: absolutePageUrl(`/blog/${post.slug}`),
