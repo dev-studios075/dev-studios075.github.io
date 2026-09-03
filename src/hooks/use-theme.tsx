@@ -31,6 +31,20 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const setTheme = (t: Theme) => setThemeState(t);
   const toggleTheme = () => setThemeState((t) => (t === "dark" ? "light" : "dark"));
 
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement)?.tagName;
+      const isEditable = (e.target as HTMLElement)?.isContentEditable;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || isEditable) return;
+      if (e.key === "t" || e.key === "T") {
+        e.preventDefault();
+        setThemeState((t) => (t === "dark" ? "light" : "dark"));
+      }
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, []);
+
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
       {children}

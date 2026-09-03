@@ -9,6 +9,12 @@ import {
 import { useTheme } from "@/hooks/use-theme";
 import { trackEvent } from "@/lib/analytics";
 import { useLanguage } from "@/hooks/use-language";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type DropItem = { label: string; desc: string; href: string; icon: React.ElementType; internal?: boolean };
@@ -248,13 +254,27 @@ const Navbar = () => {
                 <button type="button" onClick={() => setLanguage("en")} className={`rounded-md px-2 py-1 transition-colors ${!isHindi ? "bg-primary text-white" : "text-slate-500 hover:text-primary"}`} aria-pressed={!isHindi}>EN</button>
                 <button type="button" onClick={() => setLanguage("hi")} className={`rounded-md px-2 py-1 transition-colors ${isHindi ? "bg-primary text-white" : "text-slate-500 hover:text-primary"}`} aria-pressed={isHindi}>हिं</button>
               </div>
-              <button
-                onClick={toggleTheme}
-                aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-all duration-200"
-              >
-                {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-              </button>
+              <TooltipProvider>
+                <Tooltip delayDuration={0}>
+                  <TooltipTrigger asChild>
+                    <button
+                      onClick={toggleTheme}
+                      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+                      className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-all duration-200"
+                    >
+                      {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent sideOffset={8}>
+                    <div className="flex items-center gap-2">
+                      <span>{isHindi ? "थीम बदलें" : "Toggle theme"}</span>
+                      <kbd className="inline-flex h-5 items-center justify-center rounded bg-slate-100 px-1.5 font-mono text-[10px] font-medium text-slate-500 dark:bg-white/10 dark:text-slate-400">
+                        T
+                      </kbd>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
               <div className="w-px h-5 bg-border/60" />
               <a
                 href="https://app.fleetcodes.com"
@@ -278,13 +298,27 @@ const Navbar = () => {
             {/* Mobile controls */}
             <div className="md:hidden flex items-center gap-1">
               <button type="button" onClick={() => setLanguage(isHindi ? "en" : "hi")} className="h-8 rounded-lg px-2 text-[11px] font-bold text-primary hover:bg-primary/10" aria-label={isHindi ? "Switch to English" : "हिंदी में देखें"}>{isHindi ? "EN" : "हिं"}</button>
-              <button
-                onClick={toggleTheme}
-                aria-label="Toggle theme"
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-all"
-              >
-                {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-              </button>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <button
+                      onClick={toggleTheme}
+                      aria-label="Toggle theme"
+                      className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-all"
+                    >
+                      {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent sideOffset={8}>
+                    <div className="flex items-center gap-2">
+                      <span>{isHindi ? "थीम बदलें" : "Toggle theme"}</span>
+                      <kbd className="inline-flex h-5 items-center justify-center rounded bg-slate-100 px-1.5 font-mono text-[10px] font-medium text-slate-500 dark:bg-white/10 dark:text-slate-400">
+                        T
+                      </kbd>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
               <button
                 className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:text-foreground hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-all"
                 onClick={() => setMobileOpen(!mobileOpen)}
