@@ -49,8 +49,6 @@ const cleanMarkdown = (content = "") =>
     .replace(/^By[^\n]+Min Read$/im, "")
     .trim();
 
-const renderMarkdown = (content = "") => micromark(cleanMarkdown(content));
-
 const renderStaticFallback = ({ eyebrow, title, description, image, meta, contentHtml, relatedHtml }) => `
         <main data-static-fallback style="max-width: 920px; margin: 0 auto; padding: 48px 24px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #111827;">
           ${eyebrow ? `<p style="margin: 0 0 12px; color: #4f46e5; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;">${escapeHtml(eyebrow)}</p>` : ""}
@@ -94,6 +92,28 @@ const absolutePageUrl = (value = "/") => {
   const canonical = canonicalPath(value);
   return /^https?:\/\//i.test(canonical) ? canonical : absoluteUrl(canonical);
 };
+
+const canonicalArticleHref = (href = "") => {
+  if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) {
+    return href;
+  }
+
+  try {
+    const url = new URL(href, siteUrl);
+    if (url.hostname === "fleetcodes.com" || url.hostname === "www.fleetcodes.com") {
+      return `${canonicalPath(url.pathname)}${url.search}${url.hash}`;
+    }
+  } catch {
+    return href;
+  }
+
+  return href;
+};
+
+const renderMarkdown = (content = "") =>
+  micromark(cleanMarkdown(content)).replace(/\shref="([^"]+)"/g, (attribute, href) =>
+    attribute.replace(href, escapeHtml(canonicalArticleHref(href))),
+  );
 
 const parseFrontmatter = (raw) => {
   const match = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
@@ -258,7 +278,10 @@ const renderPage = ({ title, description, path: routePath, image, type = "websit
   const canonicalUrl = absolutePageUrl(routePath);
   const isHindiRoute = routePath === "/hi" || routePath.startsWith("/hi/");
   const englishRoute = isHindiRoute ? (routePath.replace(/^\/hi/, "") || "/") : routePath;
-  const localizable = ["/", "/about", "/careers", "/book-demo", "/privacy", "/terms", "/security"].includes(englishRoute);
+  const localizable =
+    ["/", "/about", "/careers", "/book-demo", "/privacy", "/terms", "/security", "/blog"].includes(englishRoute) ||
+    /^\/blog\/page\/\d+$/.test(englishRoute) ||
+    englishRoute.startsWith("/blog/");
   const englishUrl = absolutePageUrl(englishRoute);
   const hindiUrl = absolutePageUrl(englishRoute === "/" ? "/hi" : `/hi${englishRoute}`);
   const imageUrl = absoluteUrl(image);
