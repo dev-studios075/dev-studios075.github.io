@@ -362,25 +362,25 @@ const Blog = () => {
           </div>
 
           {currentPage === 1 && !isFiltering && (
-          <section aria-labelledby="essential-guides-heading" className="mb-10 rounded-2xl border border-primary/15 bg-primary/[0.035] p-6 sm:p-7">
-            <div className="flex items-start gap-3 mb-5">
-              <span className="grid place-items-center w-9 h-9 rounded-xl bg-primary/10 text-primary shrink-0">
+          <section aria-labelledby="essential-guides-heading" className="mb-8 rounded-xl border border-primary/15 bg-primary/[0.035] p-4 sm:mb-10 sm:rounded-2xl sm:p-7">
+            <div className="mb-4 flex items-start gap-3 sm:mb-5">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary sm:rounded-xl">
                 <BookOpen className="w-4 h-4" />
               </span>
-              <div>
-                <h2 id="essential-guides-heading" className="font-display text-xl font-bold tracking-tight">{t("pages.blog.guidesTitle")}</h2>
-                <p className="text-sm text-muted-foreground mt-1">{t("pages.blog.guidesDescription")}</p>
+              <div className="min-w-0">
+                <h2 id="essential-guides-heading" className="font-display text-lg font-bold tracking-tight sm:text-xl">{t("pages.blog.guidesTitle")}</h2>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{t("pages.blog.guidesDescription")}</p>
               </div>
             </div>
-            <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+            <ul className="divide-y divide-border/60 border-y border-border/60 sm:grid sm:grid-cols-2 sm:gap-2.5 sm:divide-y-0 sm:border-0 lg:grid-cols-3">
               {essentialGuides.map((post) => (
                 <li key={post.slug}>
                   <Link
                     to={localizePath(`/blog/${post.slug}/`)}
                     onClick={() => trackArticleClick(post.title, post.slug)}
-                    className="group flex h-full items-start justify-between gap-3 rounded-xl border border-border/60 bg-background/60 p-3.5 text-sm font-semibold leading-snug hover:border-primary/30 hover:text-primary transition-colors"
+                    className="group flex h-full min-h-16 items-center justify-between gap-3 px-1 py-3 text-sm font-semibold leading-snug transition-colors hover:text-primary sm:min-h-0 sm:items-start sm:rounded-xl sm:border sm:border-border/60 sm:bg-background/60 sm:p-3.5 sm:hover:border-primary/30"
                   >
-                    {cleanTitle(post.title)}
+                    <span className="line-clamp-2 sm:line-clamp-3">{cleanTitle(post.title)}</span>
                     <ArrowUpRight className="w-3.5 h-3.5 shrink-0 mt-0.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </Link>
                 </li>
@@ -390,9 +390,9 @@ const Blog = () => {
           )}
 
           {/* ── Search & Filter Controls ──────────────────────── */}
-          <div className="relative z-20 flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between mb-12 p-6 glass rounded-2xl">
+          <div className="relative z-20 mb-9 flex flex-col items-stretch gap-3 rounded-xl p-4 glass sm:mb-12 sm:gap-4 sm:rounded-2xl sm:p-6 md:flex-row md:items-center md:justify-between">
             {/* Search Bar Container */}
-            <div ref={searchContainerRef} className="relative flex-1 max-w-md">
+            <div ref={searchContainerRef} className="relative w-full md:w-64 md:shrink-0 xl:w-80">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="text"
@@ -406,7 +406,7 @@ const Blog = () => {
                 }}
                 onFocus={() => setShowSuggestions(true)}
                 onKeyDown={handleKeyDown}
-                className="w-full pl-10 pr-4 py-2 text-sm bg-slate-50/50 dark:bg-slate-950/40 border border-border/80 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 rounded-xl outline-none text-foreground placeholder:text-muted-foreground transition-all"
+                className="w-full rounded-lg border border-border/80 bg-slate-50/50 py-2.5 pl-10 pr-4 text-sm text-foreground outline-none transition-all placeholder:text-muted-foreground focus:border-primary/50 focus:ring-1 focus:ring-primary/50 dark:bg-slate-950/40 sm:rounded-xl sm:py-2"
               />
 
               {/* Auto-suggestions Dropdown */}
@@ -451,7 +451,7 @@ const Blog = () => {
               )}
             </div>
             {/* Categories */}
-            <div className="flex flex-wrap items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+            <div className="flex min-w-0 touch-pan-x items-center gap-2 overflow-x-auto pb-1 scrollbar-none md:flex-1 md:flex-wrap md:gap-1.5 md:overflow-visible md:pb-0">
               {["All", ...BLOG_CATEGORIES].map((cat) => (
                 <button
                   key={cat}
@@ -459,7 +459,7 @@ const Blog = () => {
                     setActiveCategory(cat);
                     setFilterPage(1);
                   }}
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide border transition-all whitespace-nowrap flex items-center gap-1.5 ${
+                  className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-2 text-xs font-semibold tracking-wide transition-all sm:py-1.5 ${
                     activeCategory === cat
                       ? "bg-primary text-primary-foreground border-primary"
                       : "bg-slate-100/80 dark:bg-slate-900/40 text-slate-600 dark:text-muted-foreground border-border/40 hover:bg-slate-200/50 dark:hover:bg-slate-900/60"

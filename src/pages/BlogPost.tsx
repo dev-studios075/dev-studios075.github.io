@@ -1,7 +1,8 @@
-import { useState, useEffect, useMemo, type ReactNode } from "react";
+import { useState, useEffect, useMemo, useRef, type ReactNode } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight, Calendar, Clock, User, Tag, Share2, Twitter, Link2, Check, Facebook } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Calendar, ChevronRight, Clock, User, Tag, Share2, Twitter, Link2, Check, Facebook } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { getAllPosts, getPostBySlug, getPostContent } from "@/lib/blog";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
@@ -182,6 +183,8 @@ const BlogPost = () => {
   const [activeId, setActiveId] = useState<string>("");
   const [scrollProgress, setScrollProgress] = useState<number>(0);
   const [copied, setCopied] = useState<boolean>(false);
+  const [isMobileTocOpen, setIsMobileTocOpen] = useState(false);
+  const desktopTocRef = useRef<HTMLOListElement>(null);
 
   const handleCopyLink = () => {
     const postUrl = post ? absolutePageUrl(`/blog/${post.slug}`) : "";
@@ -226,6 +229,29 @@ const BlogPost = () => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, [tocItems]);
+
+  useEffect(() => {
+    const container = desktopTocRef.current;
+    if (!container || !activeId) return;
+
+    const activeItem = container.querySelector<HTMLElement>(`[data-toc-id="${activeId}"]`);
+    if (!activeItem) return;
+
+    const padding = 16;
+    const itemTop = activeItem.offsetTop;
+    const itemBottom = itemTop + activeItem.offsetHeight;
+    const visibleTop = container.scrollTop;
+    const visibleBottom = visibleTop + container.clientHeight;
+
+    if (itemTop < visibleTop + padding) {
+      container.scrollTo({ top: Math.max(0, itemTop - padding), behavior: "smooth" });
+    } else if (itemBottom > visibleBottom - padding) {
+      container.scrollTo({
+        top: itemBottom - container.clientHeight + padding,
+        behavior: "smooth",
+      });
+    }
+  }, [activeId]);
 
   useEffect(() => {
     const handleScrollProgress = () => {
@@ -507,41 +533,60 @@ const BlogPost = () => {
         {/* ── Article body ───────────────────────────────────────── */}
         <div className="container-tight px-6 lg:px-8 pt-12">
           {isLoading ? (
-            <nav className="lg:hidden mb-8 rounded-2xl glass p-5 shadow-elegant animate-pulse">
-              <p className="text-[11px] font-bold uppercase tracking-widest text-primary mb-3 font-sans">
-                {t("pages.blogPost.onPage")}
-              </p>
-              <div className="space-y-3">
-                <div className="h-3.5 bg-slate-200 dark:bg-slate-800 rounded w-2/3" />
-                <div className="h-3.5 bg-slate-200 dark:bg-slate-800 rounded w-1/2" />
-              </div>
+            <nav className="mb-8 animate-pulse rounded-xl p-4 glass shadow-elegant lg:hidden">
+              <div className="h-3.5 w-2/3 rounded bg-slate-200 dark:bg-slate-800" />
             </nav>
           ) : (
             tocItems.length > 0 && (
               <nav
                 aria-label="Table of contents"
-                className="lg:hidden mb-8 rounded-2xl glass p-5 shadow-elegant animate-in fade-in duration-300"
+                className="mb-8 overflow-hidden rounded-xl border border-border/70 bg-card/70 shadow-sm animate-in fade-in duration-300 lg:hidden"
               >
-                <p className="text-[11px] font-bold uppercase tracking-widest text-primary mb-3 font-sans">
-                  {t("pages.blogPost.onPage")}
-                </p>
-                <ol className="space-y-2.5">
-                  {tocItems.map((item) => {
-                    const isActive = item.id === activeId;
-                    return (
-                      <li key={item.id} className={item.level === 3 ? "pl-4" : ""}>
-                        <a
-                          href={`#${item.id}`}
-                          className={`text-sm leading-snug transition-all duration-200 hover:text-primary font-sans ${
-                            isActive ? "text-primary font-semibold" : "text-muted-foreground"
-                          }`}
-                        >
-                          {item.title}
-                        </a>
-                      </li>
-                    );
-                  })}
-                </ol>
+                <button
+                  type="button"
+                  aria-expanded={isMobileTocOpen}
+                  onClick={() => setIsMobileTocOpen((open) => !open)}
+                  className="flex w-full items-center justify-between gap-4 p-4 text-left"
+                >
+                  <span className="min-w-0">
+                    <span className="mb-1 block text-[10px] font-bold uppercase tracking-widest text-primary font-sans">
+                      {t("pages.blogPost.onPage")}
+                    </span>
+                    <span className="block truncate text-sm font-semibold text-foreground">
+                      {tocItems.find((item) => item.id === activeId)?.title || tocItems[0].title}
+                    </span>
+                  </span>
+                  <ChevronRight
+                    className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 ${
+                      isMobileTocOpen ? "rotate-90" : ""
+                    }`}
+                  />
+                </button>
+
+                {isMobileTocOpen && (
+                  <ol className="space-y-1 border-t border-border/60 px-3 py-3">
+                    {tocItems.map((item) => {
+                      const isActive = item.id === activeId;
+                      return (
+                        <li key={item.id} className={item.level === 3 ? "pl-3" : ""}>
+                          <a
+                            href={`#${item.id}`}
+                            onClick={() => setIsMobileTocOpen(false)}
+                            className={`block rounded-lg px-3 py-2.5 text-sm leading-snug transition-colors font-sans ${
+                              isActive
+                                ? "bg-primary/10 text-primary font-semibold"
+                                : item.level === 3
+                                ? "text-xs text-muted-foreground hover:bg-muted/50 hover:text-primary"
+                                : "font-medium text-muted-foreground hover:bg-muted/50 hover:text-primary"
+                            }`}
+                          >
+                            {item.title}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                )}
               </nav>
             )
           )}
@@ -554,12 +599,15 @@ const BlogPost = () => {
             }`}
           >
             {showTOC && (
-              <aside className="hidden lg:block sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-none pr-2">
-                <nav aria-label="Table of contents" className="border-l border-border/70 pl-4">
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-primary mb-4 font-sans">
+              <aside className="hidden lg:block sticky top-28 h-[calc(100vh-8rem)] min-h-0 overflow-hidden pr-2">
+                <nav aria-label="Table of contents" className="flex h-full min-h-0 flex-col border-l border-border/70 pl-4">
+                  <p className="mb-4 shrink-0 text-[11px] font-bold uppercase tracking-widest text-primary font-sans">
                     {t("pages.blogPost.onPage")}
                   </p>
-                  <ol className="space-y-3">
+                  <ol
+                    ref={desktopTocRef}
+                    className="relative min-h-0 flex-1 space-y-3 overflow-y-auto overscroll-contain pr-3 pb-4 [scrollbar-color:hsl(var(--border))_transparent] [scrollbar-width:thin]"
+                  >
                     {isLoading ? (
                       <div className="space-y-3 animate-pulse">
                         <div className="h-3.5 bg-slate-200 dark:bg-slate-800 rounded w-5/6" />
@@ -572,7 +620,11 @@ const BlogPost = () => {
                       tocItems.map((item) => {
                         const isActive = item.id === activeId;
                         return (
-                          <li key={item.id} className={`${item.level === 3 ? "pl-3" : ""} relative transition-all duration-200`}>
+                          <li
+                            key={item.id}
+                            data-toc-id={item.id}
+                            className={`${item.level === 3 ? "pl-3" : ""} relative transition-all duration-200`}
+                          >
                             {isActive && (
                               <span 
                                 className="absolute w-[2px] h-3.5 bg-primary rounded-full animate-scale-in"
@@ -603,7 +655,7 @@ const BlogPost = () => {
 
                   {/* Sidebar Share buttons */}
                   {post && (
-                    <div className="mt-8 pt-6 border-t border-border/60">
+                    <div className="shrink-0 border-t border-border/60 bg-background pt-5 pb-1">
                       <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3 font-sans flex items-center gap-1.5">
                         <Share2 className="w-3 h-3 text-primary" />
                         {t("pages.blogPost.share")}
@@ -735,6 +787,7 @@ const BlogPost = () => {
               <p className="text-destructive font-medium">{t("pages.blogPost.loadError")}</p>
             ) : (
               <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
                 components={{
                   a: ({ href, children, ...props }) => {
                     const normalizedHref = normalizeArticleHref(href);
@@ -772,6 +825,47 @@ const BlogPost = () => {
                       </h3>
                     );
                   },
+                  table: ({ children, ...props }) => (
+                    <div className="my-8 max-w-full overflow-x-auto rounded-lg border border-border/70 bg-card shadow-sm">
+                      <table
+                        {...props}
+                        className="m-0 min-w-[720px] w-full border-collapse text-left text-sm lg:text-base"
+                      >
+                        {children}
+                      </table>
+                    </div>
+                  ),
+                  thead: ({ children, ...props }) => (
+                    <thead {...props} className="bg-primary/10 text-foreground">
+                      {children}
+                    </thead>
+                  ),
+                  tbody: ({ children, ...props }) => (
+                    <tbody {...props} className="divide-y divide-border/60">
+                      {children}
+                    </tbody>
+                  ),
+                  tr: ({ children, ...props }) => (
+                    <tr {...props} className="transition-colors even:bg-muted/25 hover:bg-primary/5">
+                      {children}
+                    </tr>
+                  ),
+                  th: ({ children, ...props }) => (
+                    <th
+                      {...props}
+                      className="min-w-36 border-r border-border/60 px-4 py-3 font-semibold leading-snug text-foreground last:border-r-0 lg:px-5"
+                    >
+                      {children}
+                    </th>
+                  ),
+                  td: ({ children, ...props }) => (
+                    <td
+                      {...props}
+                      className="border-r border-border/50 px-4 py-3 align-top leading-relaxed text-muted-foreground first:font-medium first:text-foreground last:border-r-0 lg:px-5"
+                    >
+                      {children}
+                    </td>
+                  ),
                 }}
               >
                 {articleContent}
