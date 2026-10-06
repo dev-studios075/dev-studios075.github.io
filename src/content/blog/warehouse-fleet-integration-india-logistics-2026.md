@@ -1,8 +1,8 @@
 ---
-title: "Warehouse and Fleet Integration: Why Indian Logistics Businesses Need Both Systems Talking in 2026"
+title: Warehouse and Fleet Integration
 date: 2026-05-21
 author: Fleetcodes Team
-excerpt:  "Warehouse and fleet integration in India 2026 — why WMS and TMS must connect, what the integration delivers for logistics businesses, and how to close the warehouse-to-delivery gap."
+excerpt: "Warehouse and fleet integration in India: why WMS and TMS must connect, what the integration delivers for logistics businesses, and how to close the gap."
 coverImage: /uploads/blog45.jpg
 ---
 

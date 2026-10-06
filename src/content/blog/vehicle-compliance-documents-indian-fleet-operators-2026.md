@@ -1,8 +1,8 @@
 ---
-title: "Vehicle Compliance for Indian Fleet Operators: Every Document Your Trucks Must Carry in 2026"
+title: Vehicle Compliance for Indian Fleet Operators
 date: 2026-05-20
 author: Fleetcodes Team
-excerpt: "Complete guide to vehicle compliance documents for Indian fleet operators in 2026 — fitness certificate, permit, insurance, PUC, driving licence and how to track expiries automatically."
+excerpt: "Complete guide to vehicle compliance documents for Indian fleet operators in 2026 — fitness certificate, permit, insurance, PUC, driving licence and how to track expiries"
 coverImage: /uploads/blog39.jpg
 ---
 

@@ -2,7 +2,7 @@
 title: "Vehicle Scrapping Policy India: What Fleet Operators Must Know in 2026"
 date: 2026-05-26
 author: Fleetcodes Team
-excerpt: "Vehicle scrapping policy India 2026 — what fleet operators need to know about fitness certificate timelines, scrapping incentives, Deposit of Certificate benefits and fleet renewal planning."
+excerpt: "What fleet operators need to know about India's vehicle scrapping policy, fitness certificate timelines, incentives, and Deposit of Certificate benefits."
 coverImage: /uploads/blog59.jpg
 ---
 

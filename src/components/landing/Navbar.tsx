@@ -185,7 +185,7 @@ const Navbar = () => {
           >
             {/* Logo */}
             <Link to={localizePath("/")} className="flex shrink-0 items-center gap-2" aria-label="Fleetcodes home">
-              <img src="/assets/brand/logo-with-bg.png" alt="" className="h-9 w-9 object-contain" />
+              <img src="/assets/brand/logo-with-bg.png" alt="Fleetcodes" className="h-9 w-9 object-contain" />
               <span className="leading-none">
                 <span className="block font-display text-lg font-bold tracking-tight text-slate-950 dark:text-white">
                   fleet<span className="text-[#5542f6]">codes</span>
@@ -334,7 +334,7 @@ const Navbar = () => {
                 {/* Header */}
                 <div className="flex items-center justify-between border-b border-slate-200/50 p-4 dark:border-white/10">
                   <div className="flex shrink-0 items-center gap-2 pl-1">
-                    <img src="/assets/brand/logo-with-bg.png" alt="" className="h-9 w-9 object-contain" />
+                    <img src="/assets/brand/logo-with-bg.png" alt="Fleetcodes" className="h-9 w-9 object-contain" />
                     <span className="leading-none">
                       <span className="block font-display text-lg font-bold tracking-tight text-slate-950 dark:text-white">
                         fleet<span className="text-[#5542f6]">codes</span>

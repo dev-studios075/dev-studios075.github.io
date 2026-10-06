@@ -1,8 +1,8 @@
 ---
-title: "Predictive Maintenance for Indian Fleets: How AI Is Ending the Breakdown Cycle in 2026"
+title: "AI Predictive Maintenance for Indian Truck Fleets"
 date: 2026-05-24
 author: Fleetcodes Team
-excerpt: "A truck breakdown on NH-48 costs the vehicle's daily revenue, a premium roadside repair, a stranded driver, and potentially a customer relationship. In 2026, AI-powered predictive maintenance is catching the warning signs 2–4 weeks before a breakdown occurs — turning the most expensive operational surprise into a routine scheduled service."
+excerpt: "A truck breakdown on NH-48 costs the vehicle's daily revenue, a premium roadside repair, a stranded driver, and potentially a customer relationship. In 2026, AI-powered"
 coverImage: /uploads/blog51.jpg
 ---
 

@@ -1,8 +1,8 @@
 ---
-title: "Fleetcodes: The Smart Transport Management System Built to Control Your Costs in 2026"
+title: "Fleetcodes: The Smart TMS Built to Control Fleet Costs"
 date: 2026-05-11
 author: Fleetcodes Team
-excerpt: "Fuel, empty miles, maintenance, driver costs — Fleetcodes actively controls every cost lever in your fleet operation. Find out how India's automation-first TMS keeps your margins intact."
+excerpt: "Fuel, empty miles, maintenance, driver costs — Fleetcodes actively controls every cost lever in your fleet operation with India's automation-first TMS."
 coverImage: /uploads/blog5.jpg
 ---
 

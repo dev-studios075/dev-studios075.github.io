@@ -16,4 +16,18 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          // React is shared by every route. Markdown stays in the BlogPost
+          // async chunk: a manual markdown chunk makes Rollup hoist the CJS
+          // interop helper into it, and the homepage then downloads that chunk.
+          if (/node_modules\/(react|react-dom|scheduler|react-router|react-router-dom|@remix-run\/router)\//.test(id)) {
+            return "react";
+          }
+        },
+      },
+    },
+  },
 }));

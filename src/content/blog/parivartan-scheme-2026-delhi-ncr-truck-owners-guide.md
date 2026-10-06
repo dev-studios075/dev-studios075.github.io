@@ -1,8 +1,8 @@
 ---
-title: "PARIVARTAN Scheme 2026: Delhi-NCR Truck Owners' Eligibility, Benefits, Subsidy & Application Guide"
+title: "PARIVARTAN Scheme 2026: Eligibility and Benefits for NCR Fleets"
 date: 2026-09-03
 author: Fleetcodes Team
-excerpt: "PARIVARTAN Scheme 2026 explained for Delhi-NCR truck owners: eligibility for BS-III and BS-IV vehicles, loan interest support, road-tax waiver, OEM discount, fuel or EV incentives, and a practical application-readiness checklist."
+excerpt: "PARIVARTAN Scheme 2026 explained for Delhi-NCR truck owners: eligibility for BS-III and BS-IV vehicles, loan interest support, road-tax waiver, OEM discount, fuel or EV"
 coverImage: /uploads/blog91.jpg
 ---
 

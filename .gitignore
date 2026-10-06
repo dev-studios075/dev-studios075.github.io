@@ -16,6 +16,13 @@ dist-ssr
 build
 *.local
 
+# Generated at npm run dev / npm run build
+src/content/blog-index.json
+public/sitemap.xml
+public/robots.txt
+public/llms.txt
+public/feed.xml
+
 # Environment / secrets
 .env
 .env.*

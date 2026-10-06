@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useRef, type ReactNode } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
 import { ArrowLeft, ArrowUpRight, Calendar, ChevronRight, Clock, User, Tag, Share2, Twitter, Link2, Check, Facebook } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -7,6 +7,10 @@ import { getAllPosts, getPostBySlug, getPostContent } from "@/lib/blog";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import Seo from "@/components/seo/Seo";
+import CoverImage from "@/components/CoverImage";
+import { resolveBlogKeywords } from "@/lib/blogKeywords.mjs";
+import { getBlogCategory } from "@/lib/blogCategory.mjs";
+import { resolveBlogSlugRedirect } from "@/lib/blogSlugRedirects.mjs";
 import { DEFAULT_IMAGE, SITE_NAME, SITE_URL, absolutePageUrl, absoluteUrl, seoDescription, seoTitle } from "@/lib/site";
 import { useTranslation } from "@/hooks/useTranslation";
 import blog1 from "@/assets/blog-1.jpg";
@@ -135,16 +139,6 @@ const normalizeArticleHref = (href?: string) => {
 };
 
 /** Derive a category tag from the title */
-const getCategory = (title: string) => {
-  const t = title.toLowerCase();
-  if (t.includes("dispatch") || t.includes("operations")) return "Operations";
-  if (t.includes("compliance") || t.includes("permit")) return "Compliance";
-  if (t.includes("analytics") || t.includes("data")) return "Analytics";
-  if (t.includes("ai") || t.includes("automation")) return "AI & Automation";
-  if (t.includes("fleet") || t.includes("vehicle")) return "Fleet Management";
-  return "Technology";
-};
-
 const getRelatedPosts = (currentSlug: string, currentCategory: string) =>
   (() => {
     const posts = getAllPosts();
@@ -155,8 +149,8 @@ const getRelatedPosts = (currentSlug: string, currentCategory: string) =>
     const semanticMatches = posts
       .filter((candidate) => candidate.slug !== currentSlug)
       .sort((a, b) => {
-      const aSameCategory = getCategory(a.title) === currentCategory ? 1 : 0;
-      const bSameCategory = getCategory(b.title) === currentCategory ? 1 : 0;
+      const aSameCategory = getBlogCategory(a.title) === currentCategory ? 1 : 0;
+      const bSameCategory = getBlogCategory(b.title) === currentCategory ? 1 : 0;
 
       if (aSameCategory !== bSameCategory) {
         return bSameCategory - aSameCategory;
@@ -170,9 +164,19 @@ const getRelatedPosts = (currentSlug: string, currentCategory: string) =>
   })();
 
 const BlogPost = () => {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug: rawSlug } = useParams<{ slug: string }>();
   const { t, language, localizePath } = useTranslation();
-  const post = slug ? getPostBySlug(slug) : undefined;
+  const slug = rawSlug
+    ? (() => {
+        try {
+          return decodeURIComponent(rawSlug);
+        } catch {
+          return rawSlug;
+        }
+      })()
+    : undefined;
+  const redirectSlug = slug ? resolveBlogSlugRedirect(slug) : undefined;
+  const post = slug && !redirectSlug ? getPostBySlug(slug) : undefined;
   const [content, setContent] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [loadError, setLoadError] = useState<boolean>(false);
@@ -271,28 +275,43 @@ const BlogPost = () => {
   }, [content]);
 
   useEffect(() => {
-    if (slug) {
-      setIsLoading(true);
-      setLoadError(false);
-      
-      const startTime = Date.now();
-      getPostContent(slug)
-        .then((text) => {
-          setContent(text);
-          const elapsed = Date.now() - startTime;
-          const remaining = Math.max(0, 450 - elapsed);
-          
-          setTimeout(() => {
-            setIsLoading(false);
-          }, remaining);
-        })
-        .catch((err) => {
-          console.error("Failed to load post content:", err);
-          setLoadError(true);
-          setIsLoading(false);
-        });
+    if (!slug || redirectSlug) {
+      return;
     }
-  }, [slug]);
+
+    let cancelled = false;
+    let revealTimer: ReturnType<typeof setTimeout> | undefined;
+    const startedAt = Date.now();
+
+    setIsLoading(true);
+    setLoadError(false);
+    setContent("");
+
+    getPostContent(slug)
+      .then((text) => {
+        if (cancelled) return;
+        setContent(text);
+        const remaining = Math.max(0, 450 - (Date.now() - startedAt));
+        revealTimer = setTimeout(() => {
+          if (!cancelled) setIsLoading(false);
+        }, remaining);
+      })
+      .catch((err) => {
+        console.error("Failed to load post content:", err);
+        if (cancelled) return;
+        setLoadError(true);
+        setIsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+      if (revealTimer) clearTimeout(revealTimer);
+    };
+  }, [slug, redirectSlug]);
+
+  if (redirectSlug) {
+    return <Navigate to={localizePath(`/blog/${redirectSlug}/`)} replace />;
+  }
 
   if (!post) {
     return (
@@ -316,7 +335,7 @@ const BlogPost = () => {
 
   const title    = cleanTitle(post.title);
   const mins     = post.readingTime || readingTime(content);
-  const category = getCategory(title);
+  const category = getBlogCategory(title);
   const categoryLabel = t(`pages.blogPost.categories.${category}`);
   const relatedPosts = getRelatedPosts(post.slug, category);
   const dateLocale = t("config.dateLocale");
@@ -331,9 +350,11 @@ const BlogPost = () => {
       <Seo
         title={seoTitle(title)}
         description={seoDescription(post.excerpt)}
+        keywords={resolveBlogKeywords(post)}
         path={`/blog/${post.slug}`}
         image={post.coverImage || DEFAULT_IMAGE}
         type="article"
+        noindex={language === "hi"}
         publishedTime={post.date}
         modifiedTime={post.date}
         author={post.author}
@@ -400,9 +421,13 @@ const BlogPost = () => {
             {/* Cover image — shows first on mobile, second on desktop */}
             {post.coverImage && (
               <div className="lg:order-last rounded-2xl overflow-hidden border border-border/50 shadow-elegant">
-                <img
+                <CoverImage
                   src={post.coverImage}
                   alt={title}
+                  width={1200}
+                  height={675}
+                  fetchPriority="high"
+                  decoding="async"
                   className="w-full object-cover"
                   style={{ maxHeight: "360px" }}
                 />
@@ -733,6 +758,7 @@ const BlogPost = () => {
             prose-strong:text-foreground
             prose-p:text-muted-foreground prose-p:leading-relaxed
             prose-li:text-muted-foreground
+            prose-li:[&>p]:my-0 prose-li:[&>p+p]:mt-1.5
             prose-hr:border-border/40
             prose-blockquote:border-l-primary/50 prose-blockquote:text-muted-foreground prose-blockquote:not-italic
             prose-code:text-primary prose-code:bg-primary/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none">
@@ -919,7 +945,7 @@ const BlogPost = () => {
                           to={localizePath(`/blog/${related.slug}/`)}
                           className="relative overflow-hidden aspect-[16/10] block shrink-0"
                         >
-                          <img
+                          <CoverImage
                             src={related.coverImage || fallbackImages[idx % fallbackImages.length]}
                             alt={cleanTitle(related.title)}
                             loading="lazy"
@@ -927,7 +953,7 @@ const BlogPost = () => {
                           />
                           {/* Category badge over image */}
                           <span className="absolute bottom-3 left-3 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/15 text-white shadow-lg">
-                            {t(`pages.blogPost.categories.${getCategory(related.title)}`)}
+                            {t(`pages.blogPost.categories.${getBlogCategory(related.title)}`)}
                           </span>
                         </Link>
 

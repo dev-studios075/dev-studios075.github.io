@@ -1,8 +1,8 @@
 ---
-title: Fleet Utilization Optimization - How to Move More Freight Without Adding More Trucks in 2026
+title: Fleet Utilization Optimization
 date: 2026-07-10
 author: Fleetcodes Team
-excerpt: 2026 is shaping up as the year logistics operators prioritize utilization over fleet expansion. Here's how to find the capacity you already own instead of buying more of it.
+excerpt: "2026 is shaping up as the year logistics operators prioritize utilization over fleet expansion. Here's how to find the capacity you already own."
 coverImage: /uploads/blog89.jpg
 ---
 

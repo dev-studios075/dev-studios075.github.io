@@ -1,8 +1,8 @@
 ---
-title: "Inside Fleetcodes: How the Live Dashboard Helps Fleet Owners Make Better Business Decisions"
+title: "Inside Fleetcodes: How the Live Dashboard Helps Fleet Owners Decide"
 date: 2026-05-28
 author: Fleetcodes Team
-excerpt: "Inside the Fleetcodes live dashboard — what fleet owners, operations managers and dispatchers see in real time, and how it replaces monthly reporting with always-on fleet intelligence."
+excerpt: "Inside the Fleetcodes live dashboard — what fleet owners, operations managers and dispatchers see in real time, and how it replaces monthly reporting with always-on fleet"
 coverImage: /uploads/blog67.jpg 
 ---
 

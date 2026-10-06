@@ -11,7 +11,7 @@ import {
   absolutePageUrl,
   absoluteUrl,
 } from "@/lib/site";
-import { isLocalizablePath } from "@/hooks/useTranslation";
+import { hasHindiAlternate, stripHindiPrefix } from "@/lib/i18nPaths.mjs";
 
 type JsonLd = Record<string, unknown>;
 
@@ -68,6 +68,10 @@ const setAlternate = (hreflang: string, href: string) => {
   element.href = href;
 };
 
+const removeAlternate = (hreflang: string) => {
+  document.head.querySelector(`link[rel="alternate"][hreflang="${hreflang}"]`)?.remove();
+};
+
 const removeMeta = (selector: string) => document.head.querySelector(selector)?.remove();
 
 const setJsonLd = (jsonLd?: JsonLd | JsonLd[]) => {
@@ -109,17 +113,26 @@ const Seo = ({
 
   useEffect(() => {
     const onHindiRoute = location.pathname === "/hi" || location.pathname.startsWith("/hi/");
-    const routePath = onHindiRoute ? location.pathname : (path || location.pathname);
+    const englishPath = stripHindiPrefix(location.pathname);
+    const isBlogArticle = /^\/blog\/[^/]+$/.test(englishPath);
+    const routePath = isBlogArticle
+      ? englishPath
+      : onHindiRoute
+        ? location.pathname
+        : (path || location.pathname);
     const canonicalUrl = absolutePageUrl(routePath);
     const imageUrl = absoluteUrl(image);
-    const englishPath = location.pathname.replace(/^\/hi(?=\/|$)/, "") || "/";
-    const hasHindiVersion = isLocalizablePath(location.pathname);
+    const hasHindiVersion = hasHindiAlternate(location.pathname);
 
     document.title = title;
     setLink("canonical", canonicalUrl);
     setAlternate("x-default", absolutePageUrl(englishPath));
     setAlternate("en", absolutePageUrl(englishPath));
-    if (hasHindiVersion) setAlternate("hi", absolutePageUrl(englishPath === "/" ? "/hi" : `/hi${englishPath}`));
+    if (hasHindiVersion) {
+      setAlternate("hi", absolutePageUrl(englishPath === "/" ? "/hi" : `/hi${englishPath}`));
+    } else {
+      removeAlternate("hi");
+    }
 
     setMeta('meta[name="description"]', { name: "description", content: description });
     setMeta('meta[name="keywords"]', { name: "keywords", content: keywords });

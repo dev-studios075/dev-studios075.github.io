@@ -2,7 +2,7 @@
 title: "Why Most Fleets Still Don't Know Their True Profit Per Trip in 2026"
 date: 2026-05-11
 author: Fleetcodes Team
-excerpt: "Do you know which routes make money and which ones lose it? Fleetcodes gives Indian fleet operators real-time profit-per-trip visibility — across every vehicle, route, and customer."
+excerpt: "Do you know which routes make money and which ones lose it? Fleetcodes gives Indian fleet operators real-time profit-per-trip visibility — across every vehicle, route"
 coverImage: /uploads/blog4.jpg
 ---
 

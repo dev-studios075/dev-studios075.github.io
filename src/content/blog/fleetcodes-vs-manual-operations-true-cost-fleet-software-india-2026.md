@@ -1,8 +1,8 @@
 ---
-title: "Fleetcodes vs Manual Operations: The True Cost of Not Using Fleet Software in India, 2026"
+title: "The True Cost of Manual Fleet Operations in India"
 date: 2026-05-15
 author: Fleetcodes Team
-excerpt: "Before asking what fleet management software costs, ask what manual operations are costing you. For most Indian logistics businesses, the real number is between ₹30 lakhs and ₹3 crores per year — in leakage, inefficiency, and missed revenue."
+excerpt: "Before asking what fleet management software costs, ask what manual operations are costing you. For most Indian logistics businesses, the real number is between ₹30 lakhs"
 coverImage: /uploads/blog23.jpg
 ---
 

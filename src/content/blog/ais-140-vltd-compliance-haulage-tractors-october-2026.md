@@ -1,8 +1,8 @@
 ---
-title: "AIS-140 VLTD Compliance 2026: How Fleet Software Can Help Haulage Operators Prepare Before October 1"
+title: AIS-140 VLTD Compliance 2026
 date: 2026-09-03
 author: Fleetcodes Team
-excerpt: "From October 1, 2026, specified N2 and N3 haulage tractors must carry AIS-140-compliant VLTDs, while T3 and T4 trailers require RFID identification. Here is a practical compliance and fleet-software readiness guide."
+excerpt: "From October 1, 2026, specified N2 and N3 haulage tractors must carry AIS-140-compliant VLTDs, while T3 and T4 trailers require RFID identification. Here is a practical"
 coverImage: /uploads/blog92.jpg
 ---
 

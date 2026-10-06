@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Linkedin, Twitter, Github, Shield, Zap, ArrowRight, ArrowDownToLine } from "lucide-react";
+import { Linkedin, Shield, Zap, ArrowRight, ArrowDownToLine } from "lucide-react";
 import { Link } from "react-router-dom";
 import { trackEvent } from "@/lib/analytics";
 import { APP_DOWNLOAD_QR_SRC, APP_DOWNLOAD_URL, LINKEDIN_URL } from "@/lib/site";
@@ -36,8 +36,6 @@ const cols = [
 
 const socials = [
   { Icon: Linkedin, href: LINKEDIN_URL, label: "Fleetcodes on LinkedIn" },
-  { Icon: Twitter,  href: "#", label: "Twitter"  },
-  { Icon: Github,   href: "#", label: "GitHub"   },
 ];
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -143,7 +141,7 @@ const Footer = () => {
           {/* Brand column */}
           <div className="space-y-5 sm:col-span-2 lg:col-span-1">
             <Link to={localizePath("/")} className="flex w-fit items-center gap-3" aria-label="Fleetcodes home">
-              <img src="/assets/brand/logo-with-bg.png" alt="" className="h-12 w-12 object-contain" />
+              <img src="/assets/brand/logo-with-bg.png" alt="Fleetcodes" className="h-12 w-12 object-contain" />
               <span className="leading-none">
                 <span className="block font-display text-2xl font-bold tracking-tight text-white">
                   fleet<span className="text-[#5b45ff]">codes</span>

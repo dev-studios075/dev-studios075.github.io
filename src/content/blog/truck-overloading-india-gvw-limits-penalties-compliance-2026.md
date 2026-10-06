@@ -1,5 +1,5 @@
 ---
-title: "Truck Overloading in India: GVW Limits, New Penalties & How to Stay Compliant in 2026"
+title: Truck Overloading in India
 date: 2026-05-20
 author: Fleetcodes Team
 excerpt: "Truck overloading rules India 2026: new 4x toll penalties, GVW limits, axle load compliance and how fleet technology prevents violations before trucks leave the yard."

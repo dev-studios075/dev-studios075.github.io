@@ -1,8 +1,8 @@
 ---
-title: "Cold Chain Logistics in India: How Fleet Technology Protects Temperature-Sensitive Cargo in 2026"
+title: Cold Chain Logistics in India
 date: 2026-05-19
 author: Fleetcodes Team
-excerpt: "India loses an estimated ₹90,000 crore worth of perishable goods annually to cold chain failures. For fleet operators carrying pharma, food, and FMCG cargo, temperature-controlled transport is both a massive opportunity and a serious operational risk. Here is how fleet technology is changing that equation."
+excerpt: "India loses an estimated ₹90,000 crore worth of perishable goods annually to cold chain failures. For fleet operators carrying pharma, food, and FMCG cargo"
 coverImage: /uploads/blog31.jpg
 ---
 

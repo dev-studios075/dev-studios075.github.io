@@ -1,8 +1,8 @@
 ---
-title: "How to Use Fleet Data to Negotiate Better Contracts with Shippers in 2026"
+title: How to Use Fleet Data to Negotiate Better Contracts with Shippers
 date: 2026-05-26
 author: Fleetcodes Team
-excerpt: "Use fleet data to negotiate better shipping contracts in India 2026. On-time delivery, fuel efficiency and billing accuracy data from Fleetcodes that win and retain shipper accounts."
+excerpt: "Use fleet data to negotiate better shipping contracts in India 2026. On-time delivery, fuel efficiency and billing accuracy data from Fleetcodes that win and retain"
 coverImage: /uploads/blog58upd.jpg
 ---
 

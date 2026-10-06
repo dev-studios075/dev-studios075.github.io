@@ -2,7 +2,6 @@ import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { useEffect } from "react";
@@ -22,8 +21,6 @@ const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Security = lazy(() => import("./pages/Security"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-
-const queryClient = new QueryClient();
 
 // Premium fallback loader supporting both light and dark modes
 const PageLoader = () => (
@@ -86,25 +83,23 @@ const AppRoutes = () => {
 };
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <RestoreLanguagePreference />
-          <GoogleAnalytics />
-          <CookieConsent />
-          {/* <FloatingWhatsApp /> */}
-          <Suspense fallback={<PageLoader />}>
-            <AppRoutes />
-          </Suspense>
-          <BackToTop />
-        </BrowserRouter>
-      </TooltipProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
+  <ThemeProvider>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <ScrollToTop />
+        <RestoreLanguagePreference />
+        <GoogleAnalytics />
+        <CookieConsent />
+        {/* <FloatingWhatsApp /> */}
+        <Suspense fallback={<PageLoader />}>
+          <AppRoutes />
+        </Suspense>
+        <BackToTop />
+      </BrowserRouter>
+    </TooltipProvider>
+  </ThemeProvider>
 );
 
 export default App;
