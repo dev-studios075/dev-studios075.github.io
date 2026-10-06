@@ -7,6 +7,7 @@ import Footer from "@/components/landing/Footer";
 import Seo from "@/components/seo/Seo";
 import { SITE_NAME, absolutePageUrl } from "@/lib/site";
 import { trackEvent } from "@/lib/analytics";
+import { BLOG_CATEGORIES, getBlogCategory, resolveBlogCategoryParam } from "@/lib/blogCategory.mjs";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
@@ -14,7 +15,6 @@ import { useTranslation } from "@/hooks/useTranslation";
 
 const fallbackImages = [blog1, blog2, blog3];
 const POSTS_PER_PAGE = 10;
-const BLOG_CATEGORIES = ["AI & Automation", "Compliance", "Fleet", "Operations", "Analytics", "Technology"];
 
 const getPaginationItems = (currentPage: number, totalPages: number): Array<number | "ellipsis-start" | "ellipsis-end"> => {
   if (totalPages <= 5) return Array.from({ length: totalPages }, (_, index) => index + 1);
@@ -38,17 +38,6 @@ const essentialGuideSlugs = [
 const cleanTitle = (t = "") => t.replace(/^["'""]|["'""]$/g, "").trim();
 
 const formatReadingTime = (minutes?: number) => minutes || 1;
-
-/** Category from title */
-const getCategory = (title: string) => {
-  const t = title.toLowerCase();
-  if (t.includes("dispatch") || t.includes("operations")) return "Operations";
-  if (t.includes("compliance") || t.includes("permit")) return "Compliance";
-  if (t.includes("analytics") || t.includes("data")) return "Analytics";
-  if (t.includes("ai") || t.includes("automation")) return "AI & Automation";
-  if (t.includes("fleet") || t.includes("vehicle")) return "Fleet";
-  return "Technology";
-};
 
 const BlogCardSkeleton = () => (
   <div className="group glass rounded-2xl overflow-hidden flex flex-col h-full bg-card/10 animate-pulse">
@@ -125,11 +114,9 @@ const Blog = () => {
   const navigate = useNavigate();
   const { page: pageParam } = useParams<{ page?: string }>();
   const [searchParams, setSearchParams] = useSearchParams();
-  const initialCategory = searchParams.get("category") || "All";
+  const initialCategory = resolveBlogCategoryParam(searchParams.get("category"));
   const [searchTerm, setSearchTerm] = useState(() => searchParams.get("q") || "");
-  const [activeCategory, setActiveCategory] = useState(() =>
-    BLOG_CATEGORIES.includes(initialCategory) ? initialCategory : "All",
-  );
+  const [activeCategory, setActiveCategory] = useState(() => initialCategory);
   const [filterPage, setFilterPage] = useState(() => {
     const page = Number.parseInt(searchParams.get("page") || "1", 10);
     return Number.isFinite(page) && page > 0 ? page : 1;
@@ -150,8 +137,7 @@ const Blog = () => {
 
   useEffect(() => {
     const query = searchParams.get("q") || "";
-    const categoryParam = searchParams.get("category") || "All";
-    const category = BLOG_CATEGORIES.includes(categoryParam) ? categoryParam : "All";
+    const category = resolveBlogCategoryParam(searchParams.get("category"));
     const pageParamValue = Number.parseInt(searchParams.get("page") || "1", 10);
     const page = Number.isFinite(pageParamValue) && pageParamValue > 0 ? pageParamValue : 1;
 
@@ -197,7 +183,7 @@ const Blog = () => {
     | { type: "post"; id: string; title: string; slug: string; category: string }
   > = [
     ...matchedCategories.map(cat => ({ type: "category" as const, id: cat, title: t("pages.blog.filterCategory", { category: categoryLabel(cat) }), categoryName: cat })),
-    ...matchedPosts.map(post => ({ type: "post" as const, id: post.slug, title: post.title, slug: post.slug, category: getCategory(post.title) }))
+    ...matchedPosts.map(post => ({ type: "post" as const, id: post.slug, title: post.title, slug: post.slug, category: getBlogCategory(post.title) }))
   ];
 
   // Dismiss dropdown on outside clicks
@@ -269,13 +255,13 @@ const Blog = () => {
   const getCategoryCount = (cat: string) => {
     const searchMatches = posts.filter(matchesSearch);
     if (cat === "All") return searchMatches.length;
-    return searchMatches.filter(post => getCategory(post.title) === cat).length;
+    return searchMatches.filter(post => getBlogCategory(post.title) === cat).length;
   };
 
   const filteredPosts = posts.filter(post => {
     const matchesCategory = 
       activeCategory === "All" || 
-      getCategory(post.title) === activeCategory;
+      getBlogCategory(post.title) === activeCategory;
       
     return matchesSearch(post) && matchesCategory;
   });
@@ -505,7 +491,7 @@ const Blog = () => {
                     <div className="flex flex-wrap items-center gap-2 mb-4">
                       <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary">
                         <Tag className="w-3 h-3" />
-                        {categoryLabel(getCategory(featured.title))}
+                        {categoryLabel(getBlogCategory(featured.title))}
                       </span>
                       <span className="text-[11px] font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full glass border border-border/50 text-muted-foreground inline-flex items-center gap-1.5">
                         <Clock className="w-3 h-3" />
@@ -567,7 +553,7 @@ const Blog = () => {
                       />
                       {/* Category badge over image */}
                       <span className="absolute bottom-3 left-3 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/15 text-white shadow-lg">
-                        {categoryLabel(getCategory(post.title))}
+                        {categoryLabel(getBlogCategory(post.title))}
                       </span>
                     </Link>
 

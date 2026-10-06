@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { VALID_BLOG_SLUG } from "../src/lib/blogSlugRedirects.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const blogDir = path.join(rootDir, "src", "content", "blog");
@@ -50,7 +51,7 @@ const posts = files.map((file) => {
   for (const field of ["title", "date", "author", "excerpt", "coverImage"]) {
     if (!parsed.meta[field]) errors.push(`${file}: missing ${field}`);
   }
-  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) warnings.push(`${file}: slug should be lowercase kebab-case`);
+  if (!VALID_BLOG_SLUG.test(slug)) errors.push(`${file}: slug must be lowercase kebab-case`);
   if (parsed.meta.title && (parsed.meta.title.length < 25 || parsed.meta.title.length > 70)) {
     warnings.push(`${file}: title length is ${parsed.meta.title.length} (target 25-70)`);
   }

@@ -4,20 +4,13 @@ import { ArrowUpRight, Calendar, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { getAllPosts } from "@/lib/blog";
+import { getBlogCategory } from "@/lib/blogCategory.mjs";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const fallbackImages = [blog1, blog2, blog3];
-
-const getCategory = (title: string) => {
-  const t = title.toLowerCase();
-  if (t.includes("trip") || t.includes("dispatch")) return "Operations";
-  if (t.includes("fleet") || t.includes("compliance") || t.includes("state")) return "Compliance";
-  if (t.includes("analytics") || t.includes("data") || t.includes("report")) return "Analytics";
-  return "Technology";
-};
 
 const getReadTime = (title: string) => {
   const t = title.toLowerCase();
@@ -86,7 +79,7 @@ const Blog = () => {
                 />
                 {/* Floating category badge inside image */}
                 <div className="absolute bottom-3 left-3 bg-slate-950/80 backdrop-blur-md border border-white/15 text-white px-2.5 py-1 rounded-full text-[9px] uppercase tracking-widest font-bold font-mono shadow-lg">
-                  {getCategory(post.title)}
+                  {t(`pages.blog.categories.${getBlogCategory(post.title)}`)}
                 </div>
               </Link>
 

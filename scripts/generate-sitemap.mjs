@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { hasHindiAlternate } from "../src/lib/i18nPaths.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
@@ -179,7 +180,7 @@ const urls = [
 ];
 
 const hindiUrls = urls
-  .filter(({ loc }) => ["/", "/about", "/careers", "/book-demo", "/privacy", "/terms", "/security", "/blog"].includes(loc) || /^\/blog\/page\/\d+$/.test(loc) || loc.startsWith("/blog/"))
+  .filter(({ loc }) => hasHindiAlternate(loc))
   .map((url) => ({ ...url, loc: url.loc === "/" ? "/hi" : `/hi${url.loc}`, priority: url.loc === "/" ? "0.9" : url.priority }));
 
 urls.push(...hindiUrls);
@@ -193,7 +194,7 @@ const alternateLinks = (loc) => {
   const enHref = absolutePageUrl(englishPath);
   const hiHref = absolutePageUrl(hindiPath);
 
-  const hasHindiVersion = ["/", "/about", "/careers", "/book-demo", "/privacy", "/terms", "/security", "/blog"].includes(englishPath) || /^\/blog\/page\/\d+$/.test(englishPath) || englishPath.startsWith("/blog/");
+  const hasHindiVersion = hasHindiAlternate(englishPath);
 
   let links = `
     <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(enHref)}" />

@@ -2,26 +2,17 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import english from "@/locales/en.json";
 import hindi from "@/locales/hi.json";
+import { isLocalizablePath, stripHindiPrefix } from "@/lib/i18nPaths.mjs";
 
 export type Language = "en" | "hi";
 const LANGUAGE_KEY = "fleetcodes-language";
+
+export { hasHindiAlternate, isLocalizablePath, stripHindiPrefix } from "@/lib/i18nPaths.mjs";
 
 export const getPreferredLanguage = (): Language | null => {
   if (typeof window === "undefined") return null;
   const saved = window.localStorage.getItem(LANGUAGE_KEY);
   return saved === "hi" || saved === "en" ? saved : null;
-};
-
-const corePaths = ["/", "/about", "/careers", "/book-demo", "/privacy", "/terms", "/security", "/blog"];
-
-const stripHindiPrefix = (pathname: string) => {
-  const stripped = pathname.replace(/^\/hi(?=\/|$)/, "") || "/";
-  return stripped.length > 1 ? stripped.replace(/\/$/, "") : stripped;
-};
-
-export const isLocalizablePath = (pathname: string) => {
-  const path = stripHindiPrefix(pathname);
-  return corePaths.includes(path) || /^\/blog\/page\/\d+$/.test(path) || /^\/blog\/[^/]+$/.test(path);
 };
 
 type Variables = Record<string, string | number>;

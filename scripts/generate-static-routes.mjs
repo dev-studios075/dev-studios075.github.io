@@ -3,6 +3,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { micromark } from "micromark";
 import { resolveBlogKeywords } from "../src/lib/blogKeywords.mjs";
+import { getBlogCategory } from "../src/lib/blogCategory.mjs";
+import { BLOG_SLUG_REDIRECTS } from "../src/lib/blogSlugRedirects.mjs";
+import { hasHindiAlternate } from "../src/lib/i18nPaths.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
@@ -56,7 +59,7 @@ const renderStaticFallback = ({ eyebrow, title, description, image, meta, conten
           <h1 style="margin: 0 0 16px; font-size: clamp(32px, 6vw, 56px); line-height: 1.05; letter-spacing: -0.02em;">${escapeHtml(title)}</h1>
           ${description ? `<p style="margin: 0 0 20px; color: #4b5563; font-size: 18px; line-height: 1.65;">${escapeHtml(description)}</p>` : ""}
           ${meta ? `<p style="margin: 0 0 28px; color: #6b7280; font-size: 14px;">${escapeHtml(meta)}</p>` : ""}
-          ${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(title)}" style="display: block; width: 100%; max-height: 420px; object-fit: cover; border-radius: 18px; margin: 0 0 36px;" />` : ""}
+          ${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(title)}" width="1200" height="675" fetchpriority="high" decoding="async" style="display: block; width: 100%; max-height: 420px; object-fit: cover; border-radius: 18px; margin: 0 0 36px;" />` : ""}
           ${contentHtml ? `<article style="font-size: 17px; line-height: 1.78;">${contentHtml}</article>` : ""}
           ${relatedHtml || ""}
         </main>`;
@@ -177,15 +180,7 @@ const posts = fs.existsSync(blogDir)
       .sort((a, b) => (b.date > a.date ? 1 : -1))
   : [];
 
-const getCategory = (title = "") => {
-  const normalized = title.toLowerCase();
-  if (normalized.includes("dispatch") || normalized.includes("operations")) return "Operations";
-  if (normalized.includes("compliance") || normalized.includes("permit")) return "Compliance";
-  if (normalized.includes("analytics") || normalized.includes("data")) return "Analytics";
-  if (normalized.includes("ai") || normalized.includes("automation")) return "AI & Automation";
-  if (normalized.includes("fleet") || normalized.includes("vehicle")) return "Fleet Management";
-  return "Technology";
-};
+const getCategory = getBlogCategory;
 
 const getRelatedPosts = (currentPost) =>
   (() => {
@@ -284,10 +279,7 @@ const renderPage = ({ title, description, path: routePath, image, type = "websit
   const canonicalUrl = absolutePageUrl(routePath);
   const isHindiRoute = routePath === "/hi" || routePath.startsWith("/hi/");
   const englishRoute = isHindiRoute ? (routePath.replace(/^\/hi/, "") || "/") : routePath;
-  const localizable =
-    ["/", "/about", "/careers", "/book-demo", "/privacy", "/terms", "/security", "/blog"].includes(englishRoute) ||
-    /^\/blog\/page\/\d+$/.test(englishRoute) ||
-    englishRoute.startsWith("/blog/");
+  const localizable = hasHindiAlternate(englishRoute);
   const englishUrl = absolutePageUrl(englishRoute);
   const hindiUrl = absolutePageUrl(englishRoute === "/" ? "/hi" : `/hi${englishRoute}`);
   const imageUrl = absoluteUrl(image);
@@ -651,4 +643,25 @@ writeRoute(
   bodyHtml: renderStaticFallback({ eyebrow: page.eyebrow, title: page.title, description: page.description }),
 })));
 
-console.log(`Generated English and Hindi core routes, blog routes, and ${posts.length} blog posts`);
+const renderRedirect = (dest) => `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0;url=${escapeHtml(dest)}">
+  <link rel="canonical" href="${escapeHtml(dest)}">
+  <title>Redirecting…</title>
+  <script>location.replace(${JSON.stringify(dest)});</script>
+</head>
+<body>
+  <p>This article has moved to <a href="${escapeHtml(dest)}">${escapeHtml(dest)}</a>.</p>
+</body>
+</html>`;
+
+Object.entries(BLOG_SLUG_REDIRECTS).forEach(([from, to]) => {
+  const dest = absolutePageUrl(`/blog/${to}`);
+  const html = renderRedirect(dest);
+  writeRoute(`/blog/${from}`, html);
+  writeRoute(`/hi/blog/${from}`, html);
+});
+
+console.log(`Generated English and Hindi core routes, blog routes, ${posts.length} blog posts, and ${Object.keys(BLOG_SLUG_REDIRECTS).length} slug redirects`);
