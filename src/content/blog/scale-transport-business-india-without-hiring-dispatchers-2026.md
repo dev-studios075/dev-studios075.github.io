@@ -1,5 +1,5 @@
 ---
-title: "How to Scale a Transport Business in India Without Hiring More Dispatchers in 2026"
+title: "How to Scale a Transport Business Without Hiring Dispatchers"
 date: 2026-05-18
 author: Fleetcodes Team
 excerpt: "Learn how to scale your transport business in India without proportionally increasing dispatch headcount. AI dispatch tools, fleet automation and TMS for growth in 2026."

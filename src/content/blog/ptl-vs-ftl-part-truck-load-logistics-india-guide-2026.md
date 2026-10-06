@@ -1,8 +1,8 @@
 ---
-title: "PTL vs FTL: A Complete Guide to Part Truck Load Logistics in India for 2026"
+title: "PTL vs FTL: A Complete Guide to Part Truck Load Logistics in India"
 date: 2026-05-20
 author: Fleetcodes Team
-excerpt: "PTL (Part Truck Load) logistics is growing at 9.89% CAGR — outpacing FTL — as Indian shippers move smaller, more frequent consignments. For fleet operators and shippers alike, understanding when PTL makes sense, how it works, and how to manage it efficiently is increasingly essential business knowledge."
+excerpt: "PTL (Part Truck Load) logistics is growing at 9.89% CAGR — outpacing FTL — as Indian shippers move smaller, more frequent consignments. For fleet operators and shippers"
 coverImage: /uploads/blog38.jpg
 ---
 

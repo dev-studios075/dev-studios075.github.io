@@ -1,8 +1,8 @@
 ---
-title: "Trip Sheet Management in Indian Logistics: Why Going Digital Saves Time and Money in 2026"
+title: Trip Sheet Management in Indian Logistics
 date: 2026-05-30
 author: Fleetcodes Team
-excerpt: "Trip sheet management India 2026 — why digital trip sheets replace paper, how Fleetcodes automates the trip sheet workflow, and what it saves in time, billing accuracy, and driver disputes."
+excerpt: "Trip sheet management India 2026 — why digital trip sheets replace paper, how Fleetcodes automates the trip sheet workflow, and what it saves in time, billing accuracy"
 coverImage: /uploads/blog71.jpg
 ---
 

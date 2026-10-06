@@ -142,9 +142,9 @@ const Blog = () => {
     const pageParamValue = Number.parseInt(searchParams.get("page") || "1", 10);
     const page = Number.isFinite(pageParamValue) && pageParamValue > 0 ? pageParamValue : 1;
 
-    setSearchTerm((current) => current === query ? current : query);
-    setActiveCategory((current) => current === category ? current : category);
-    setFilterPage((current) => current === page ? current : page);
+    setSearchTerm((current: string) => current === query ? current : query);
+    setActiveCategory((current: string) => current === category ? current : category);
+    setFilterPage((current: number) => current === page ? current : page);
   }, [searchParams]);
 
   useEffect(() => {
@@ -170,7 +170,7 @@ const Blog = () => {
   // Compute matched categories and posts for suggestions
   const categories = BLOG_CATEGORIES;
   const matchedCategories = searchTerm.trim() !== "" 
-    ? categories.filter(cat => cat.toLowerCase().includes(searchTerm.toLowerCase()))
+    ? categories.filter((cat: string) => cat.toLowerCase().includes(searchTerm.toLowerCase()))
     : [];
   const matchedPosts = searchTerm.trim() !== ""
     ? posts.filter(post => 
@@ -183,7 +183,7 @@ const Blog = () => {
     | { type: "category"; id: string; title: string; categoryName: string }
     | { type: "post"; id: string; title: string; slug: string; category: string }
   > = [
-    ...matchedCategories.map(cat => ({ type: "category" as const, id: cat, title: t("pages.blog.filterCategory", { category: categoryLabel(cat) }), categoryName: cat })),
+    ...matchedCategories.map((cat: string) => ({ type: "category" as const, id: cat, title: t("pages.blog.filterCategory", { category: categoryLabel(cat) }), categoryName: cat })),
     ...matchedPosts.map(post => ({ type: "post" as const, id: post.slug, title: post.title, slug: post.slug, category: getBlogCategory(post.title) }))
   ];
 

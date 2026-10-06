@@ -1,8 +1,8 @@
 ---
-title: "Construction Logistics in India: How to Manage Project-Site Fleet Operations in 2026"
+title: Construction Logistics in India
 date: 2026-05-28
 author: Fleetcodes Team
-excerpt: "Construction logistics India 2026 — fleet management for cement, steel and aggregate transport. Site delivery windows, GVW compliance, remote operations and how Fleetcodes manages project-site fleets."
+excerpt: "Construction logistics in India covers cement, steel and aggregate transport, plus site delivery windows, GVW compliance, and remote operations."
 coverImage: /uploads/blog66.jpg
 ---
 

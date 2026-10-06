@@ -1,8 +1,8 @@
 ---
-title: "Logistics Cost Benchmarking: How Indian Fleet Operators Can Measure Performance Against the Market in 2026"
+title: Logistics Cost Benchmarking
 date: 2026-05-26
 author: Fleetcodes Team
-excerpt: "Logistics cost benchmarking India 2026 — key cost per km, fuel efficiency, utilisation and delivery performance benchmarks for Indian fleet operators and how to measure against them."
+excerpt: "Logistics cost benchmarking India 2026 — key cost per km, fuel efficiency, utilisation and delivery performance benchmarks for Indian fleet operators and how to measure"
 coverImage: /uploads/blog62.jpg
 ---
 

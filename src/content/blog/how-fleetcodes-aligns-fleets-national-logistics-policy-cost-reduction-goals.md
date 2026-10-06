@@ -1,8 +1,8 @@
 ---
-title: How Fleetcodes Helps Fleets Align with India's National Logistics Policy Cost-Reduction Goals
+title: "How Fleetcodes Aligns Fleets with the National Logistics Policy"
 date: 2026-07-10
 author: Fleetcodes Team
-excerpt: India's National Logistics Policy targets bringing logistics costs down from around 13-14% of GDP toward 8% by 2030. Here's what that shift actually means at the fleet level - and how automation gets you there faster.
+excerpt: "India's National Logistics Policy targets bringing logistics costs down from around 13-14% of GDP toward 8% by 2030. Here's what that shift actually means at the fleet"
 coverImage: /uploads/blog87.jpg
 ---
 

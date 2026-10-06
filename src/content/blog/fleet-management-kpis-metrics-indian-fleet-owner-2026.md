@@ -1,5 +1,5 @@
 ---
-title: "Fleet Management KPIs: The 10 Metrics Every Indian Fleet Owner Must Track in 2026"
+title: "Fleet Management KPIs: 10 Metrics Indian Fleet Owners Must Track"
 date: 2026-05-19
 author: Fleetcodes Team
 excerpt: "The 10 fleet management KPIs every Indian fleet owner must track in 2026 — from cost per km to on-time delivery rate. Learn how to measure and improve each metric."

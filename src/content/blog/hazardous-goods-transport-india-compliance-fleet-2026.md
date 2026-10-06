@@ -1,8 +1,8 @@
 ---
-title: "Hazardous Goods Transport in India: Compliance, Safety & Fleet Requirements in 2026"
+title: Hazardous Goods Transport in India
 date: 2026-05-21
 author: Fleetcodes Team
-excerpt: "Hazardous goods transport India 2026: complete compliance guide covering CMVR requirements, vehicle standards, driver training, documentation and fleet management for dangerous goods."
+excerpt: "Hazardous goods transport in India: a compliance guide covering CMVR requirements, vehicle standards, driver training, documentation, and fleet management."
 coverImage: /uploads/blog47.jpg
 ---
 

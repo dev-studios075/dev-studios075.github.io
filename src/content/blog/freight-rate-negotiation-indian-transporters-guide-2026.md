@@ -1,8 +1,8 @@
 ---
-title: "How to Win Freight Rate Negotiations: A Practical Guide for Indian Transporters in 2026"
+title: How to Win Freight Rate Negotiations
 date: 2026-05-19
 author: Fleetcodes Team
-excerpt: "Most Indian transporters walk into freight rate negotiations knowing their revenue target but not their actual cost per trip. That information gap is why shippers consistently win. This guide gives you the data, strategy, and tactics to negotiate from a position of knowledge."
+excerpt: Most Indian transporters walk into freight rate negotiations knowing their revenue target but not their actual cost per trip. That information gap is why shippers
 coverImage: /uploads/blog32.jpg
 ---
 

@@ -1,8 +1,8 @@
 ---
-title: "How to Onboard New Drivers Faster and Better with Fleet Technology in 2026"
+title: How to Onboard New Drivers Faster and Better with Fleet Technology
 date: 2026-05-26
 author: Fleetcodes Team
-excerpt: "Driver onboarding with fleet technology India 2026 — how to use TMS and driver apps to onboard new truck drivers faster, reduce early attrition, and build performance clarity from day one."
+excerpt: "Driver onboarding with fleet technology India 2026 — how to use TMS and driver apps to onboard new truck drivers faster, reduce early attrition, and build performance"
 coverImage: /uploads/blog63.jpg
 ---
 

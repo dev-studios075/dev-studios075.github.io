@@ -1,8 +1,8 @@
 ---
-title: How Fleetcodes Replaces WhatsApp and Spreadsheets in Your Transport Business
+title: "How Fleetcodes Replaces WhatsApp and Spreadsheets"
 date: 2026-07-09
 author: Fleetcodes Team
-excerpt: WhatsApp groups and Excel sheets run most Indian transport businesses today. Here's why that breaks down past 20 vehicles — and what a connected platform replaces it with.
+excerpt: "WhatsApp groups and Excel sheets run most Indian transport businesses today. Here's why that breaks down past 20 vehicles — and what a connected platform replaces it"
 coverImage: /uploads/blog81.jpg
 ---
 Walk into almost any mid-sized transport office in India and you'll find the same setup: a dispatcher with three or four WhatsApp groups open, and an Excel sheet somewhere tracking vehicles, trips, or billing that only one person really understands.

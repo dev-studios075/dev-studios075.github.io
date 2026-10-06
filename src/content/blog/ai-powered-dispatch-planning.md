@@ -2,7 +2,7 @@
 title: How AI-Powered Dispatch Planning is Revolutionizing Fleet Operations
 date: 2026-04-01
 author: Fleetcodes Team
-excerpt: Discover how artificial intelligence is transforming dispatch planning — from manual spreadsheets to intelligent, real-time optimization that cuts costs and speeds up deliveries.
+excerpt: "Discover how artificial intelligence is transforming dispatch planning — from manual spreadsheets to intelligent, real-time optimization that cuts costs and speeds up"
 coverImage: /uploads/blog01.jpg
 ---
 

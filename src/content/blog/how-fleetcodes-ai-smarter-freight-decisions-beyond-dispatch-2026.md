@@ -1,5 +1,5 @@
 ---
-title: "How Fleetcodes Uses AI to Make Smarter Freight Decisions — Beyond Just Dispatch"
+title: How Fleetcodes Uses AI to Make Smarter Freight Decisions
 date: 2026-05-28
 author: Fleetcodes Team
 excerpt: "See how Fleetcodes uses AI beyond dispatch for revenue intelligence, predictive maintenance, cost detection, driver analytics, and freight profitability."

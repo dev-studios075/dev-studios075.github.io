@@ -1,8 +1,8 @@
 ---
-title: How Fleetcodes Automates GST Compliance for Transport Businesses in 2026
+title: How Fleetcodes Automates GST Compliance for Transport Businesses
 date: 2026-07-09
 author: Fleetcodes Team
-excerpt: GST compliance is one of the most complex parts of running a transport business in India. Here's how automated e-way bills, GST-compliant invoicing, and audit-ready records remove the risk.
+excerpt: "GST compliance is one of the most complex parts of running a transport business in India. Here's how automated e-way bills, GST-compliant invoicing, and audit-ready"
 coverImage: /uploads/blog79.jpg
 ---
 If you run a transport business in India, GST compliance is probably one of three things: a monthly headache, a job you've outsourced to an accountant who's always a week behind, or a risk you're quietly hoping doesn't catch up with you. For most fleet owners, it's all three.

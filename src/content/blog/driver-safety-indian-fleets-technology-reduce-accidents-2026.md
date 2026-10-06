@@ -1,5 +1,5 @@
 ---
-title: "Driver Safety in Indian Fleets: How Technology Is Reducing Road Accidents and Liability in 2026"
+title: Driver Safety in Indian Fleets
 date: 2026-05-26
 author: Fleetcodes Team
 excerpt: "Driver safety in Indian fleets 2026 — how fleet technology reduces road accidents, lowers insurance costs, and builds a safety culture through data and coaching."

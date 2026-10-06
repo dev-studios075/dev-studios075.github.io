@@ -1,5 +1,5 @@
 ---
-title: "India Freight Market 2026: What Rate Trends, Crisil Data & Market Conditions Mean for Fleet Operators"
+title: India Freight Market 2026
 date: 2026-05-20
 author: Fleetcodes Team
 excerpt: "India freight market 2026: Crisil Freight Index data, rate trends, fleet oversupply conditions, and how fleet operators can protect margins in a softening market."

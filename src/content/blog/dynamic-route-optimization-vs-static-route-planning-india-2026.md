@@ -1,8 +1,8 @@
 ---
-title: "Dynamic Route Optimization vs Static Route Planning: What Indian Fleets Need to Know in 2026"
+title: Dynamic Route Optimization vs Static Route Planning
 date: 2026-05-28
 author: Fleetcodes Team
-excerpt: "Dynamic route optimization vs static route planning for Indian fleets 2026 — what the difference means for fuel costs, delivery performance, and how Fleetcodes delivers real-time route intelligence."
+excerpt: "Dynamic route optimization vs static route planning for Indian fleets 2026 — what the difference means for fuel costs, delivery performance, and how Fleetcodes delivers"
 coverImage: /uploads/blog64.jpg
 ---
 

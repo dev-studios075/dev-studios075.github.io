@@ -1,8 +1,8 @@
 ---
-title: "Bilty & Lorry Receipt (LR) Digitisation: Why Indian Transporters Are Going Paperless in 2026"
+title: "Bilty & Lorry Receipt (LR) Digitisation"
 date: 2026-05-15
 author: Fleetcodes Team
-excerpt: "The bilty — India's backbone freight document — is going digital. This complete guide explains what a bilty is, why paper-based lorry receipts are costing transporters money, and how digital LR transforms operations from dispatch to settlement."
+excerpt: "The bilty — India's backbone freight document — is going digital. This complete guide explains what a bilty is, why paper-based lorry receipts are costing transporters"
 coverImage: /uploads/blog22.jpg
 ---
 

@@ -1,8 +1,8 @@
 ---
-title: Night Driving and Long-Haul Safety - How Fleet Technology Protects Drivers and Cargo After Dark in 2026
+title: Night Driving and Long-Haul Safety
 date: 2026-07-09
 author: Fleetcodes Team
-excerpt: A significant majority of fatal truck accidents in India happen at night. Here's how real-time tracking, geofencing, and fuel monitoring turn night driving from a blind spot into a visible, manageable risk.
+excerpt: "A significant majority of fatal truck accidents in India happen at night. Here's how real-time tracking, geofencing, and fuel monitoring turn night driving from a blind"
 coverImage: /uploads/blog82.jpg
 ---
 Most conversations about fleet management focus on cost — cost per km, billing cycles, fuel efficiency. But there's a quieter, more urgent conversation every fleet owner running long-haul routes needs to have: what happens to your drivers and your cargo between 10 PM and 6 AM.

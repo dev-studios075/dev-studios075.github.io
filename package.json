@@ -4,8 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node scripts/generate-blog-index.mjs && vite",
-    "build": "node scripts/generate-blog-index.mjs && node scripts/audit-seo.mjs && node scripts/audit-images.mjs && node scripts/generate-sitemap.mjs && vite build && node scripts/generate-static-routes.mjs && cp dist/index.html dist/404.html",
+    "dev": "node scripts/generate-blog-index.mjs && node scripts/generate-sitemap.mjs && vite",
+    "postinstall": "node scripts/generate-blog-index.mjs && node scripts/generate-sitemap.mjs",
+    "typecheck": "tsc -p tsconfig.app.json --noEmit",
+    "build": "node scripts/generate-blog-index.mjs && node scripts/audit-seo.mjs && node scripts/audit-images.mjs && node scripts/generate-sitemap.mjs && npm run typecheck && vite build && node scripts/generate-static-routes.mjs && cp dist/index.html dist/404.html",
     "build:dev": "node scripts/generate-blog-index.mjs && node scripts/audit-images.mjs && vite build --mode development",
     "audit:images": "node scripts/audit-images.mjs",
     "audit:seo": "node scripts/audit-seo.mjs",

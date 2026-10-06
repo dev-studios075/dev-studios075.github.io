@@ -1,8 +1,8 @@
 ---
-title: Predictive Maintenance for Indian Fleets - How Fleetcodes Cuts Breakdown Costs Before They Happen
+title: "How Fleet Software Cuts Breakdown Costs in India"
 date: 2026-07-09
 author: Fleetcodes Team
-excerpt: Most Indian fleets still run maintenance reactively or on fixed calendar schedules. Here's how usage-based scheduling and fuel anomaly detection catch problems before they become breakdowns.
+excerpt: "Most Indian fleets still run maintenance reactively or on fixed calendar schedules. Here's how usage-based scheduling and fuel anomaly detection catch problems before"
 coverImage: /uploads/blog84.jpg
 ---
 Ask any fleet owner what keeps them up at night, and "unexpected breakdown" is near the top of the list — not just for the repair cost, but for everything that comes with it: a missed delivery, a stranded driver, a customer relationship strained by a delay that was entirely avoidable.

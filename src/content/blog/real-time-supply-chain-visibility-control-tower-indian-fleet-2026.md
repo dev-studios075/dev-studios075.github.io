@@ -1,8 +1,8 @@
 ---
-title: Real-Time Supply Chain Visibility - Why Every Indian Fleet Needs a Control Tower in 2026
+title: "Why Indian Fleets Need a Supply Chain Control Tower"
 date: 2026-07-10
 author: Fleetcodes Team
-excerpt: 2026 industry outlooks agree on one thing - visibility is moving beyond basic GPS tracking toward real-time, predictive insight across the entire fleet. Here's what that actually looks like for an Indian transport business.
+excerpt: "Industry outlooks agree that visibility is moving beyond basic GPS tracking toward real-time, predictive insight across the entire fleet."
 coverImage: /uploads/blog88.jpg
 ---
 

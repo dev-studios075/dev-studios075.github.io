@@ -1,5 +1,5 @@
 ---
-title: Fleetcodes vs Manual Operations - A Side-by-Side Day in the Life of an Indian Fleet in 2026
+title: "A Day With Fleet Software Versus Manual Ops"
 date: 2026-07-09
 author: Fleetcodes Team
 excerpt: It's one thing to talk about automation in the abstract. Here's what a working day looks like, hour by hour, with and without a connected TMS running underneath it.

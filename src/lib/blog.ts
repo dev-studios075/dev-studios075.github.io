@@ -1,5 +1,5 @@
 import blogIndex from "../content/blog-index.json";
-import { parseFrontmatter } from "./parseFrontmatter.mjs";
+import { parseFrontmatter } from "@/lib/parseFrontmatter.mjs";
 
 export interface BlogPost {
   slug: string;
@@ -13,7 +13,7 @@ export interface BlogPost {
   readingTime?: number;
 }
 
-export { parseFrontmatter } from "./parseFrontmatter.mjs";
+export { parseFrontmatter } from "@/lib/parseFrontmatter.mjs";
 
 // Dynamic lazy-loading glob of raw markdown content
 const contentModules = import.meta.glob('/src/content/blog/*.md', { query: '?raw', eager: false, import: 'default' });

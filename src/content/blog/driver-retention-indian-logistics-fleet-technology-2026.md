@@ -1,8 +1,8 @@
 ---
-title: "Driver Retention in Indian Logistics: How Fleet Technology Reduces Attrition in 2026"
+title: Driver Retention in Indian Logistics
 date: 2026-05-15
 author: Fleetcodes Team
-excerpt: "India's trucking sector needs 2.2 million more drivers by 2030 — and the shortage is already being felt. This guide explains why drivers leave, what fleet technology does to keep them, and how Fleetcodes addresses the retention problem directly."
+excerpt: "India's trucking sector needs 2.2 million more drivers by 2030 — and the shortage is already being felt. This guide explains why drivers leave, what fleet technology does"
 coverImage: /uploads/blog21.jpg
 ---
 

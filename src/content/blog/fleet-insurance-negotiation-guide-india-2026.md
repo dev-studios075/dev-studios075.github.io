@@ -1,8 +1,8 @@
 ---
-title: "How to Negotiate a Fleet Insurance Policy That Actually Protects Your Business in 2026"
+title: "How to Negotiate a Fleet Insurance Policy That Protects You"
 date: 2026-05-25
 author: Fleetcodes Team
-excerpt: "Fleet insurance India 2026 — how transporters negotiate commercial vehicle insurance, reduce premiums, improve claim protection, and use telematics for fleet insurance optimization."
+excerpt: "Fleet insurance India 2026 — how transporters negotiate commercial vehicle insurance, reduce premiums, improve claim protection, and use telematics for fleet insurance"
 coverImage: /uploads/blog56.jpg
 ---
 

@@ -1,8 +1,8 @@
 ---
-title: "How Fleetcodes Uses AI to Automate Dispatch and Transform Fleet Operations in 2026"
+title: "How Fleetcodes Uses AI to Automate Dispatch and Transform Fleets"
 date: 2026-05-11
 author: Fleetcodes Team
-excerpt: "AI-powered dispatch isn't just faster — it's smarter. Learn how Fleetcodes uses artificial intelligence to optimise load matching, reduce empty miles, and improve delivery performance."
+excerpt: "AI-powered dispatch isn't just faster — it's smarter. Learn how Fleetcodes uses artificial intelligence to optimise load matching, reduce empty miles, and improve"
 coverImage: /uploads/blog6.jpg
 ---
 

@@ -1,8 +1,8 @@
 ---
-title: "What Is a Fleet Management System? A Plain-Language Guide for Indian Business Owners in 2026"
+title: "What Is a Fleet Management System? A Plain-Language Guide"
 date: 2026-05-26
 author: Fleetcodes Team
-excerpt: "What is a fleet management system in India? Plain-language guide covering what FMS does, who needs it, what it costs, and how Fleetcodes works for Indian businesses in 2026."
+excerpt: "What is a fleet management system in India? A plain-language guide covering what FMS does, who needs it, what it costs, and how Fleetcodes works."
 coverImage: /uploads/blog60.jpg
 ---
 

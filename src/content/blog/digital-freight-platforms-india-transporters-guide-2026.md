@@ -1,8 +1,8 @@
 ---
-title: "Digital Freight Platforms in India: What Transporters Need to Know in 2026"
+title: "Digital Freight Platforms in India: What Transporters Need to Know"
 date: 2026-05-21
 author: Fleetcodes Team
-excerpt: "Guide to digital freight platforms in India for transporters in 2026 — how they work, commission structures, quality requirements, and when to use them vs direct contracts."
+excerpt: "Guide to digital freight platforms in India for transporters in 2026 — how they work, commission structures, quality requirements, and when to use them vs direct"
 coverImage: /uploads/blog46.jpg
 ---
 
