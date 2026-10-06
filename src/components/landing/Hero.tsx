@@ -1,11 +1,48 @@
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, PlayCircle, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import DashboardMockup from "./DashboardMockup";
 import { trackEvent } from "@/lib/analytics";
 import CustomerLogos from "./CustomerLogos";
 import { useTranslation } from "@/hooks/useTranslation";
+
+const DashboardMockup = lazy(() => import("./DashboardMockup"));
+
+const mockupFrameClass = "w-full h-[460px] sm:h-[510px] md:h-[550px] rounded-xl bg-[#f4f5f8] dark:bg-[#0e111a]";
+
+const MockupFrame = () => <div className={mockupFrameClass} aria-hidden="true" />;
+
+const DeferredDashboardMockup = () => {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    let idleId = 0;
+    let timeoutId = 0;
+    const start = () => setReady(true);
+    const frame = window.requestAnimationFrame(() => {
+      if (typeof window.requestIdleCallback === "function") {
+        idleId = window.requestIdleCallback(start, { timeout: 1500 });
+      } else {
+        timeoutId = window.setTimeout(start, 200);
+      }
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      if (idleId) window.cancelIdleCallback(idleId);
+      if (timeoutId) window.clearTimeout(timeoutId);
+    };
+  }, []);
+
+  if (!ready) return <MockupFrame />;
+
+  return (
+    <Suspense fallback={<MockupFrame />}>
+      <DashboardMockup />
+    </Suspense>
+  );
+};
 
 const Hero = () => {
   const { t, localizePath } = useTranslation();
@@ -94,18 +131,18 @@ const Hero = () => {
           className="mt-12 lg:mt-16 max-w-4xl mx-auto relative"
         >
           <div className="relative rounded-2xl glass-strong p-1.5 shadow-elegant glow-border overflow-hidden">
-            <DashboardMockup />
+            <DeferredDashboardMockup />
           </div>
           {/* Floating cards */}
           <div className="hidden lg:block absolute -left-20 xl:-left-28 top-1/4 glass rounded-xl p-4 animate-float shadow-card">
-            <div className="text-xs text-muted-foreground">Fleet utilization</div>
+            <div className="text-xs text-muted-foreground">{t("home.hero.utilization")}</div>
             <div className="text-2xl font-display font-semibold text-gradient-primary">94.2%</div>
-            <div className="text-xs text-primary mt-1">↑ 12.4% this week</div>
+            <div className="text-xs text-primary mt-1">{t("home.hero.utilizationDelta")}</div>
           </div>
           <div className="hidden lg:block absolute -right-20 xl:-right-28 bottom-1/4 glass rounded-xl p-4 animate-float shadow-card" style={{ animationDelay: "1.5s" }}>
-            <div className="text-xs text-muted-foreground">Auto-resolved alerts</div>
+            <div className="text-xs text-muted-foreground">{t("home.hero.alerts")}</div>
             <div className="text-2xl font-display font-semibold text-gradient-primary">1,284</div>
-            <div className="text-xs text-primary mt-1">Today</div>
+            <div className="text-xs text-primary mt-1">{t("home.hero.alertsWhen")}</div>
           </div>
         </motion.div>
 

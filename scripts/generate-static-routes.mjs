@@ -252,8 +252,8 @@ const setJsonLd = (html, jsonLd) =>
     `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`,
   );
 
-const renderPage = ({ title, description, path: routePath, image, type = "website", keywords, jsonLd, bodyHtml = "" }) => {
-  const canonicalUrl = absolutePageUrl(routePath);
+const renderPage = ({ title, description, path: routePath, image, type = "website", keywords, jsonLd, bodyHtml = "", noindex = false, canonical }) => {
+  const canonicalUrl = absolutePageUrl(canonical || routePath);
   const isHindiRoute = routePath === "/hi" || routePath.startsWith("/hi/");
   const englishRoute = isHindiRoute ? (routePath.replace(/^\/hi/, "") || "/") : routePath;
   const localizable = hasHindiAlternate(englishRoute);
@@ -268,6 +268,10 @@ const renderPage = ({ title, description, path: routePath, image, type = "websit
   html = setAlternate(html, "x-default", localizable ? englishUrl : canonicalUrl);
   html = setAlternate(html, "en", localizable ? englishUrl : canonicalUrl);
   if (localizable) html = setAlternate(html, "hi", hindiUrl);
+  if (noindex) {
+    html = setMetaName(html, "robots", "noindex, follow");
+    html = setMetaName(html, "googlebot", "noindex, follow");
+  }
   html = setMetaName(html, "description", description);
   html = setMetaName(html, "keywords", keywords || defaultKeywords);
   html = setMetaProperty(html, "og:type", type);
@@ -489,6 +493,38 @@ posts.forEach((post) => {
       }),
     }),
   );
+
+  const englishArticlePath = `/blog/${post.slug}`;
+  writeRoute(
+    `/hi/blog/${post.slug}`,
+    renderPage({
+      title: seoTitle(post.title),
+      description: seoDescription(post.description),
+      path: `/hi/blog/${post.slug}`,
+      canonical: englishArticlePath,
+      noindex: true,
+      image: post.image,
+      type: "article",
+      keywords: post.keywords || undefined,
+      jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: post.title,
+        url: canonicalUrl,
+        inLanguage: "hi-IN",
+        isBasedOn: canonicalUrl,
+      },
+      bodyHtml: renderStaticFallback({
+        eyebrow: "Fleetcodes ब्लॉग",
+        title: post.title,
+        description: post.description,
+        image: post.image,
+        meta: [post.author, post.date].filter(Boolean).join(" | "),
+        contentHtml: `<p>यह लेख अंग्रेज़ी में है। <a href="${escapeHtml(canonicalPath(englishArticlePath))}">पूरा लेख पढ़ें</a>.</p>`,
+        relatedHtml: renderRelatedLinks(post),
+      }),
+    }),
+  );
 });
 
 writeRoute(
@@ -641,4 +677,4 @@ Object.entries(BLOG_SLUG_REDIRECTS).forEach(([from, to]) => {
   writeRoute(`/hi/blog/${from}`, html);
 });
 
-console.log(`Generated English and Hindi core routes, blog routes, ${posts.length} blog posts, and ${Object.keys(BLOG_SLUG_REDIRECTS).length} slug redirects`);
+console.log(`Generated English and Hindi core routes, blog routes, ${posts.length} blog posts, ${posts.length} Hindi article chrome pages, and ${Object.keys(BLOG_SLUG_REDIRECTS).length} slug redirects`);

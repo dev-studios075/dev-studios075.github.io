@@ -354,6 +354,7 @@ const BlogPost = () => {
         path={`/blog/${post.slug}`}
         image={post.coverImage || DEFAULT_IMAGE}
         type="article"
+        noindex={language === "hi"}
         publishedTime={post.date}
         modifiedTime={post.date}
         author={post.author}
