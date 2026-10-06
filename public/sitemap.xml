@@ -197,6 +197,19 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.fleetcodes.com/blog/fleet-management-software-3pl/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleet-management-software-3pl/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleet-management-software-3pl/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.fleetcodes.com/hi/blog/fleet-management-software-3pl/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/uploads/blog95.jpg</image:loc>
+      <image:title>Fleet Management Software for 3PL Transporters</image:title>
+    </image:image>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://www.fleetcodes.com/blog/fleet-operations-software/</loc>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleet-operations-software/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleet-operations-software/" />
@@ -233,7 +246,7 @@
     </image:image>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.fleetcodes.com/blog/parivartan-scheme-2026-delhi-ncr-truck-owners-guide/</loc>
@@ -246,7 +259,7 @@
     </image:image>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.fleetcodes.com/blog/ev-fleet-management-india-2026-how-fleetcodes-prepares-transport-businesses-electrification/</loc>
@@ -1546,6 +1559,19 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.fleetcodes.com/hi/blog/fleet-management-software-3pl/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleet-management-software-3pl/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleet-management-software-3pl/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.fleetcodes.com/hi/blog/fleet-management-software-3pl/" />
+    <image:image>
+      <image:loc>https://www.fleetcodes.com/uploads/blog95.jpg</image:loc>
+      <image:title>Fleet Management Software for 3PL Transporters</image:title>
+    </image:image>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://www.fleetcodes.com/hi/blog/fleet-operations-software/</loc>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.fleetcodes.com/blog/fleet-operations-software/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.fleetcodes.com/blog/fleet-operations-software/" />
@@ -1582,7 +1608,7 @@
     </image:image>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.fleetcodes.com/hi/blog/parivartan-scheme-2026-delhi-ncr-truck-owners-guide/</loc>
@@ -1595,7 +1621,7 @@
     </image:image>
     <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.fleetcodes.com/hi/blog/ev-fleet-management-india-2026-how-fleetcodes-prepares-transport-businesses-electrification/</loc>

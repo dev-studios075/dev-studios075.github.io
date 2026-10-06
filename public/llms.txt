@@ -23,6 +23,7 @@ Fleetcodes is an automation-first transport management system for logistics team
 
 ## Blog Articles
 
+- Fleet Management Software for 3PL Transporters: https://www.fleetcodes.com/blog/fleet-management-software-3pl/
 - Fleet Operations Software for Transport Companies: https://www.fleetcodes.com/blog/fleet-operations-software/
 - Transport Management Software for Fleet Owners: https://www.fleetcodes.com/blog/transport-management-software-fleet-owners/
 - AIS-140 VLTD Compliance 2026: How Fleet Software Can Help Haulage Operators Prepare Before October 1: https://www.fleetcodes.com/blog/ais-140-vltd-compliance-haulage-tractors-october-2026/
