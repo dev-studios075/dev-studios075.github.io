@@ -1,5 +1,5 @@
 ---
-title: Last-Mile Delivery Optimization in India
+title: "How a TMS Cuts City Delivery Costs and Delays"
 date: 2026-07-10
 author: Fleetcodes Team
 excerpt: "Last-mile delivery is the most expensive, most visible part of the logistics chain, and the hardest to get right in Indian cities."

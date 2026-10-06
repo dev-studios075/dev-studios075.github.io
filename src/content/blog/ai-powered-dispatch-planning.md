@@ -2,7 +2,7 @@
 title: How AI-Powered Dispatch Planning is Revolutionizing Fleet Operations
 date: 2026-04-01
 author: Fleetcodes Team
-excerpt: "Discover how artificial intelligence is transforming dispatch planning — from manual spreadsheets to intelligent, real-time optimization that cuts costs and speeds up"
+excerpt: "Discover how artificial intelligence is transforming dispatch planning — from manual spreadsheets to real-time optimization that cuts empty miles and delay."
 coverImage: /uploads/blog01.jpg
 ---
 
@@ -72,6 +72,18 @@ The best results come from combining AI optimization with human oversight. The A
 If your fleet still relies on manual dispatch planning, the competitive gap is widening every day. Companies that adopt AI-powered planning now are building advantages that compound over time — lower costs, happier customers, and more efficient operations.
 
 The question isn't whether to adopt AI dispatch planning. It's how soon you can start.
+
+## What the AI Needs on Day One
+
+AI dispatch is only as good as the constraints you feed it. Indian fleets usually under-specify three things:
+
+- **Vehicle fit.** Body type, GVW, and whether the unit can enter a particular market or industrial estate. A heavy assignment to a congested inner-city pickup is not "optimized."
+- **Compliance clocks.** E-way bill validity, document expiry, and state permit coverage have to sit on the vehicle record, or the plan will send a truck that cannot legally complete the trip.
+- **Human limits.** Driver hours, preferred lanes, and night-ban windows. If those live only in the dispatcher's head, the model will keep proposing plans people immediately undo.
+
+Start with one lane or one customer, not the whole network. Compare the AI plan with last week's actuals on empty kilometres, on-time arrivals, and overtime. Keep the dispatcher in the loop for exceptions — the win is fewer hours spent building the first plan, not removing judgment.
+
+For how this sits inside daily operations, see [AI dispatch automation](/blog/fleetcodes-ai-dispatch-automation-fleet-operations-2026/).
 
 ---
 

@@ -2,7 +2,7 @@
 title: "How Fleetcodes Aligns Fleets with the National Logistics Policy"
 date: 2026-07-10
 author: Fleetcodes Team
-excerpt: "India's National Logistics Policy targets bringing logistics costs down from around 13-14% of GDP toward 8% by 2030. Here's what that shift actually means at the fleet"
+excerpt: "India's National Logistics Policy targets bringing logistics costs down from around 13-14% of GDP toward 8% by 2030. Here's what that shift means at fleet level."
 coverImage: /uploads/blog87.jpg
 ---
 
@@ -48,6 +48,20 @@ Automated fuel anomaly detection against per-vehicle baselines directly targets 
 For an individual fleet owner, aligning with National Logistics Policy goals isn't primarily about policy compliance - it's about the same operational efficiencies that directly improve margins. Lower logistics cost as a share of GDP nationally is, at the fleet level, simply the sum of thousands of individual operators running tighter dispatch, faster billing, and fewer compliance penalties.
 
 The infrastructure investments - freight corridors, port modernization, digitized customs - create the conditions for lower-cost logistics. Whether an individual fleet actually captures that lower cost depends on whether its own operations are digitized enough to take advantage of it.
+
+## A Fleet Scorecard Against the Policy Target
+
+You cannot manage "13% to 8% of GDP." You can manage five numbers every week:
+
+- Empty-kilometre share on return legs
+- Average billing lag from POD to invoice
+- E-way bills generated after the vehicle has already moved
+- Fuel litres per tonne-km versus last quarter
+- Vehicles idle more than 24 hours with no assigned load
+
+If those five move in the right direction, you are doing the operator-level work the National Logistics Policy is counting on. If they do not, a new corridor or a digitized customs window will not fix your P&L.
+
+Put the scorecard on the same live dashboard as dispatch. Policy alignment then stops being a slide for a tender and becomes the operating rhythm.
 
 ---
 

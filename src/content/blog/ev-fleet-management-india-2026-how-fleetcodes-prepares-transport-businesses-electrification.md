@@ -1,5 +1,5 @@
 ---
-title: EV Fleet Management in India 2026
+title: "Preparing Transport Businesses for Electric Trucks"
 date: 2026-07-10
 author: Fleetcodes Team
 excerpt: "Electric truck registrations have surged in 2026 as diesel costs climb and total cost of ownership improves. Here's what fleet owners need before adding EVs."

@@ -2,7 +2,7 @@
 title: How Fleetcodes Automates GST Compliance for Transport Businesses
 date: 2026-07-09
 author: Fleetcodes Team
-excerpt: "GST compliance is one of the most complex parts of running a transport business in India. Here's how automated e-way bills, GST-compliant invoicing, and audit-ready"
+excerpt: "GST compliance is one of the most complex parts of running a transport business in India. Here's how automated e-way bills and GST-compliant invoicing close the gap."
 coverImage: /uploads/blog79.jpg
 ---
 If you run a transport business in India, GST compliance is probably one of three things: a monthly headache, a job you've outsourced to an accountant who's always a week behind, or a risk you're quietly hoping doesn't catch up with you. For most fleet owners, it's all three.
@@ -45,6 +45,16 @@ Every invoice, e-way bill, and POD is stored against the trip record, timestampe
 Fleetcodes isn't a generic logistics platform with GST bolted on. E-way bill generation, GST invoicing, FASTag toll integration, and multi-state permit tracking are native — not adapted from a global product built for another market.
 
 For a fleet owner, the outcome is simple: trips get billed the day they're completed, e-way bills are generated without a separate process, and audit season stops being a fire drill.
+
+## RCM Versus Forward Charge, Without the Guesswork
+
+GTA billing goes wrong when the charge type is a habit, not a customer setting. Some shippers insist on reverse charge; others need the transporter to charge GST forward and share a clean tax invoice. Mixing the two on the same rate card is how ITC gets blocked.
+
+Store the treatment on the customer, not in the accountant's memory. Then every POD-driven invoice inherits it. The pre-dispatch check is equally boring and equally necessary: GSTIN of consignor and consignee active, invoice date inside 180 days, HSN/SAC matching the goods, e-way bill Part B complete with the actual vehicle number.
+
+If that check is a checklist on paper, it will be skipped on a busy morning. If it is a hard stop in the trip record, the vehicle does not leave until the bill can be generated.
+
+For the portal-side rules behind that stop, see [E-Way Bill 2.0](/blog/e-way-bill-2-india-transporter-compliance-guide-2026/).
 
 ---
 

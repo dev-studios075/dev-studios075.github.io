@@ -2,7 +2,7 @@
 title: Night Driving and Long-Haul Safety
 date: 2026-07-09
 author: Fleetcodes Team
-excerpt: "A significant majority of fatal truck accidents in India happen at night. Here's how real-time tracking, geofencing, and fuel monitoring turn night driving from a blind"
+excerpt: "A significant majority of fatal truck accidents in India happen at night. Here's how real-time tracking, geofencing, and fuel monitoring change overnight runs."
 coverImage: /uploads/blog82.jpg
 ---
 Most conversations about fleet management focus on cost — cost per km, billing cycles, fuel efficiency. But there's a quieter, more urgent conversation every fleet owner running long-haul routes needs to have: what happens to your drivers and your cargo between 10 PM and 6 AM.
@@ -39,6 +39,19 @@ The same infrastructure that improves dispatch efficiency and billing speed — 
 ## What This Means for Your Fleet
 
 If your current operation loses visibility into a vehicle the moment it leaves for an overnight route — no live tracking, no automated alerts, no way to distinguish a planned stop from a dangerous one — that's a gap worth closing before it becomes an incident, not after.
+
+## A Night-Run SOP You Can Enforce
+
+Policy documents do not keep drivers safe. Alerts that fire when a rule is broken do.
+
+For overnight and long-haul work, set the rules in the system before the vehicle leaves:
+
+- **Hard windows.** No dispatch onto restricted city corridors after the local night-ban hour. Reroute or hold rather than hoping the driver "manages."
+- **Named rest points.** Geofence the dhabas and parking yards you actually trust. An unplanned stop outside those zones is an exception, not a surprise.
+- **Hours, not heroics.** If planned driving time already sits near the legal limit, the system should refuse a same-day extra load instead of leaving it to the driver to decline.
+- **Two-way check after midnight.** A vehicle stopped more than 20 minutes off a rest geofence gets an automated ping to the duty dispatcher — not a missed call in the morning.
+
+Insurance and customer SLAs both get easier when you can show the route, the stops, and the timestamps. Night safety is then part of the same [accident-reduction programme](/blog/driver-safety-indian-fleets-technology-reduce-accidents-2026/) you already owe the board, not a separate product.
 
 ---
 
