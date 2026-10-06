@@ -9,7 +9,7 @@ interface ThemeContextValue {
 }
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
-const STORAGE_KEY = "clairtrack-theme";
+const STORAGE_KEY = "fleetcodes-theme";
 
 const getInitialTheme = (): Theme => {
   if (typeof window === "undefined") return "light";

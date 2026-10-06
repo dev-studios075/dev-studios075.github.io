@@ -19,7 +19,9 @@ export const initializeGoogleAnalytics = () => {
   }
 
   window.dataLayer = window.dataLayer || [];
+  // gtag.js ignores a plain array. It accepts a rest-parameter array once that array owns `callee`, which is how it recognizes an Arguments object.
   window.gtag = window.gtag || ((...args: unknown[]) => {
+    Object.defineProperty(args, "callee", { value: window.gtag });
     window.dataLayer?.push(args);
   });
 
