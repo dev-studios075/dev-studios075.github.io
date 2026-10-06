@@ -7,6 +7,7 @@ import { getAllPosts, getPostBySlug, getPostContent } from "@/lib/blog";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import Seo from "@/components/seo/Seo";
+import { resolveBlogKeywords } from "@/lib/blogKeywords.mjs";
 import { DEFAULT_IMAGE, SITE_NAME, SITE_URL, absolutePageUrl, absoluteUrl, seoDescription, seoTitle } from "@/lib/site";
 import { useTranslation } from "@/hooks/useTranslation";
 import blog1 from "@/assets/blog-1.jpg";
@@ -331,6 +332,7 @@ const BlogPost = () => {
       <Seo
         title={seoTitle(title)}
         description={seoDescription(post.excerpt)}
+        keywords={resolveBlogKeywords(post)}
         path={`/blog/${post.slug}`}
         image={post.coverImage || DEFAULT_IMAGE}
         type="article"
@@ -733,6 +735,7 @@ const BlogPost = () => {
             prose-strong:text-foreground
             prose-p:text-muted-foreground prose-p:leading-relaxed
             prose-li:text-muted-foreground
+            prose-li:[&>p]:my-0 prose-li:[&>p+p]:mt-1.5
             prose-hr:border-border/40
             prose-blockquote:border-l-primary/50 prose-blockquote:text-muted-foreground prose-blockquote:not-italic
             prose-code:text-primary prose-code:bg-primary/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none">

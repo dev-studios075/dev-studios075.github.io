@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { micromark } from "micromark";
+import { resolveBlogKeywords } from "../src/lib/blogKeywords.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
@@ -164,6 +165,11 @@ const posts = fs.existsSync(blogDir)
           date: meta.date || "",
           author: meta.author || siteName,
           image: meta.coverImage || defaultImage,
+          keywords: resolveBlogKeywords({
+            title: meta.title || slug,
+            excerpt: meta.excerpt || "",
+            keywords: meta.keywords || "",
+          }),
           content,
           wordCount,
         };
@@ -274,7 +280,7 @@ const setJsonLd = (html, jsonLd) =>
     `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`,
   );
 
-const renderPage = ({ title, description, path: routePath, image, type = "website", jsonLd, bodyHtml = "" }) => {
+const renderPage = ({ title, description, path: routePath, image, type = "website", keywords, jsonLd, bodyHtml = "" }) => {
   const canonicalUrl = absolutePageUrl(routePath);
   const isHindiRoute = routePath === "/hi" || routePath.startsWith("/hi/");
   const englishRoute = isHindiRoute ? (routePath.replace(/^\/hi/, "") || "/") : routePath;
@@ -294,7 +300,7 @@ const renderPage = ({ title, description, path: routePath, image, type = "websit
   html = setAlternate(html, "en", localizable ? englishUrl : canonicalUrl);
   if (localizable) html = setAlternate(html, "hi", hindiUrl);
   html = setMetaName(html, "description", description);
-  html = setMetaName(html, "keywords", defaultKeywords);
+  html = setMetaName(html, "keywords", keywords || defaultKeywords);
   html = setMetaProperty(html, "og:type", type);
   html = setMetaProperty(html, "og:title", title);
   html = setMetaProperty(html, "og:description", description);
@@ -461,6 +467,7 @@ posts.forEach((post) => {
       path: `/blog/${post.slug}`,
       image: post.image,
       type: "article",
+      keywords: post.keywords || undefined,
       jsonLd: {
         "@context": "https://schema.org",
         "@graph": [{

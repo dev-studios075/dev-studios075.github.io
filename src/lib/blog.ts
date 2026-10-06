@@ -7,6 +7,7 @@ export interface BlogPost {
   author: string;
   excerpt: string;
   coverImage?: string;
+  keywords?: string;
   content: string;
   readingTime?: number;
 }

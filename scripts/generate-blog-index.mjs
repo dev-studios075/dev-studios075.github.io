@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { resolveBlogKeywords } from "../src/lib/blogKeywords.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
@@ -46,6 +47,11 @@ const posts = fs.existsSync(blogDir)
           author: meta.author || "",
           excerpt: meta.excerpt || "",
           coverImage: meta.coverImage || "",
+          keywords: resolveBlogKeywords({
+            title: meta.title || slug,
+            excerpt: meta.excerpt || "",
+            keywords: meta.keywords || "",
+          }),
           readingTime,
         };
       })
