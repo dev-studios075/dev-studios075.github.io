@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { VALID_BLOG_SLUG } from "../src/lib/blogSlugRedirects.mjs";
+import { parseFrontmatter } from "../src/lib/parseFrontmatter.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const blogDir = path.join(rootDir, "src", "content", "blog");
@@ -9,24 +10,6 @@ const publicDir = path.join(rootDir, "public");
 const today = new Date();
 const warnings = [];
 const errors = [];
-
-const parseFrontmatter = (raw) => {
-  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
-  if (!match) return { meta: {}, content: raw, valid: false };
-
-  const meta = {};
-  for (const line of match[1].split(/\r?\n/)) {
-    const separator = line.indexOf(":");
-    if (separator < 1) continue;
-    const key = line.slice(0, separator).trim();
-    let value = line.slice(separator + 1).trim();
-    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
-      value = value.slice(1, -1);
-    }
-    meta[key] = value.trim();
-  }
-  return { meta, content: match[2].trim(), valid: true };
-};
 
 const tokens = (value = "") => new Set(
   value.toLowerCase().replace(/[^a-z0-9\s]/g, " ").split(/\s+/).filter((token) => token.length > 2),

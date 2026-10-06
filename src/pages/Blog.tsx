@@ -5,6 +5,7 @@ import { getAllPosts } from "@/lib/blog";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import Seo from "@/components/seo/Seo";
+import CoverImage from "@/components/CoverImage";
 import { SITE_NAME, absolutePageUrl } from "@/lib/site";
 import { trackEvent } from "@/lib/analytics";
 import { BLOG_CATEGORIES, getBlogCategory, resolveBlogCategoryParam } from "@/lib/blogCategory.mjs";
@@ -479,7 +480,7 @@ const Blog = () => {
                 <div className="grid lg:grid-cols-2 gap-0">
                   {/* Image */}
                   <div className="relative overflow-hidden aspect-[16/10] lg:aspect-auto lg:min-h-[320px]">
-                    <img
+                    <CoverImage
                       src={featured.coverImage || fallbackImages[0]}
                       alt={cleanTitle(featured.title)}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -545,7 +546,7 @@ const Blog = () => {
                       className="relative overflow-hidden aspect-[16/10] block shrink-0"
                       onClick={() => trackArticleClick(post.title, post.slug)}
                     >
-                      <img
+                      <CoverImage
                         src={post.coverImage || fallbackImages[i % fallbackImages.length]}
                         alt={cleanTitle(post.title)}
                         loading="lazy"

@@ -6,6 +6,8 @@ import { resolveBlogKeywords } from "../src/lib/blogKeywords.mjs";
 import { getBlogCategory } from "../src/lib/blogCategory.mjs";
 import { BLOG_SLUG_REDIRECTS } from "../src/lib/blogSlugRedirects.mjs";
 import { hasHindiAlternate } from "../src/lib/i18nPaths.mjs";
+import { parseFrontmatter } from "../src/lib/parseFrontmatter.mjs";
+import { coverPicture } from "../src/lib/coverImage.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
@@ -53,13 +55,20 @@ const cleanMarkdown = (content = "") =>
     .replace(/^By[^\n]+Min Read$/im, "")
     .trim();
 
+const coverImageHtml = (src, alt) => {
+  const img = `<img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" width="1200" height="675" fetchpriority="high" decoding="async" style="display: block; width: 100%; max-height: 420px; object-fit: cover; border-radius: 18px; margin: 0 0 36px;" />`;
+  const picture = coverPicture(src);
+  if (!picture.webpSrcSet) return img;
+  return `<picture><source type="image/webp" srcset="${escapeHtml(picture.webpSrcSet)}" sizes="${escapeHtml(picture.sizes)}" />${img}</picture>`;
+};
+
 const renderStaticFallback = ({ eyebrow, title, description, image, meta, contentHtml, relatedHtml }) => `
         <main data-static-fallback style="max-width: 920px; margin: 0 auto; padding: 48px 24px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #111827;">
           ${eyebrow ? `<p style="margin: 0 0 12px; color: #4f46e5; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;">${escapeHtml(eyebrow)}</p>` : ""}
           <h1 style="margin: 0 0 16px; font-size: clamp(32px, 6vw, 56px); line-height: 1.05; letter-spacing: -0.02em;">${escapeHtml(title)}</h1>
           ${description ? `<p style="margin: 0 0 20px; color: #4b5563; font-size: 18px; line-height: 1.65;">${escapeHtml(description)}</p>` : ""}
           ${meta ? `<p style="margin: 0 0 28px; color: #6b7280; font-size: 14px;">${escapeHtml(meta)}</p>` : ""}
-          ${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(title)}" width="1200" height="675" fetchpriority="high" decoding="async" style="display: block; width: 100%; max-height: 420px; object-fit: cover; border-radius: 18px; margin: 0 0 36px;" />` : ""}
+          ${image ? coverImageHtml(image, title) : ""}
           ${contentHtml ? `<article style="font-size: 17px; line-height: 1.78;">${contentHtml}</article>` : ""}
           ${relatedHtml || ""}
         </main>`;
@@ -119,35 +128,6 @@ const renderMarkdown = (content = "") =>
     attribute.replace(href, escapeHtml(canonicalArticleHref(href))),
   );
 
-const parseFrontmatter = (raw) => {
-  const match = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-
-  if (!match) {
-    return {};
-  }
-
-  return match[1].split("\n").reduce((meta, line) => {
-    const separatorIndex = line.indexOf(":");
-
-    if (separatorIndex === -1) {
-      return meta;
-    }
-
-    const key = line.slice(0, separatorIndex).trim();
-    let value = line.slice(separatorIndex + 1).trim();
-
-    if (
-      (value.startsWith('"') && value.endsWith('"')) ||
-      (value.startsWith("'") && value.endsWith("'"))
-    ) {
-      value = value.slice(1, -1);
-    }
-
-    meta[key] = value.trim();
-    return meta;
-  }, {});
-};
-
 const posts = fs.existsSync(blogDir)
   ? fs
       .readdirSync(blogDir)
@@ -155,10 +135,7 @@ const posts = fs.existsSync(blogDir)
       .map((file) => {
         const slug = file.replace(/\.md$/, "");
         const raw = fs.readFileSync(path.join(blogDir, file), "utf8");
-        const meta = parseFrontmatter(raw);
-
-        const match = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-        const content = match ? match[2] : raw;
+        const { meta, content } = parseFrontmatter(raw);
         const wordCount = content ? content.trim().split(/\s+/).length : 0;
 
         return {

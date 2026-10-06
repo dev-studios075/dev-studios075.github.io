@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { getAllPosts } from "@/lib/blog";
 import { getBlogCategory } from "@/lib/blogCategory.mjs";
+import CoverImage from "@/components/CoverImage";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
@@ -69,7 +70,7 @@ const Blog = () => {
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
               <Link to={`/blog/${post.slug}/`} className="relative overflow-hidden aspect-[16/10] block">
-                <img
+                <CoverImage
                   src={post.coverImage || fallbackImages[i % fallbackImages.length]}
                   alt={post.title}
                   loading="lazy"

@@ -7,6 +7,7 @@ import { getAllPosts, getPostBySlug, getPostContent } from "@/lib/blog";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import Seo from "@/components/seo/Seo";
+import CoverImage from "@/components/CoverImage";
 import { resolveBlogKeywords } from "@/lib/blogKeywords.mjs";
 import { getBlogCategory } from "@/lib/blogCategory.mjs";
 import { resolveBlogSlugRedirect } from "@/lib/blogSlugRedirects.mjs";
@@ -419,7 +420,7 @@ const BlogPost = () => {
             {/* Cover image — shows first on mobile, second on desktop */}
             {post.coverImage && (
               <div className="lg:order-last rounded-2xl overflow-hidden border border-border/50 shadow-elegant">
-                <img
+                <CoverImage
                   src={post.coverImage}
                   alt={title}
                   width={1200}
@@ -943,7 +944,7 @@ const BlogPost = () => {
                           to={localizePath(`/blog/${related.slug}/`)}
                           className="relative overflow-hidden aspect-[16/10] block shrink-0"
                         >
-                          <img
+                          <CoverImage
                             src={related.coverImage || fallbackImages[idx % fallbackImages.length]}
                             alt={cleanTitle(related.title)}
                             loading="lazy"
