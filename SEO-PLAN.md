@@ -20,6 +20,8 @@ SEO cannot guarantee a permanent number-one position. The objective is to make e
 
 Success criteria: no sitemap URL returns a non-200 response; no accidental `noindex`; Google-selected canonical matches the declared canonical; valid BlogPosting and Breadcrumb structured data.
 
+Hindi article URLs (`/hi/blog/{slug}`) are an intentional `noindex`: they canonicalize to the English article and stay out of the sitemap.
+
 ## P1: consolidate topic clusters (weeks 1-3)
 
 Create one primary page per search intent. Merge overlapping articles and use permanent redirects from retired URLs. Start with:

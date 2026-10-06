@@ -9,6 +9,8 @@ const publicDir = path.join(rootDir, "public");
 const uploadDir = path.join(rootDir, "public", "uploads");
 const maxRecommendedBytes = 500 * 1024;
 const maxRecommendedWidth = 1200;
+const coverWidth = 1200;
+const coverHeight = 800;
 
 const formatKb = (bytes) => `${Math.round(bytes / 1024)} KB`;
 
@@ -156,6 +158,15 @@ const coverImageIssues = fs.existsSync(blogDir)
               ? `file does not exist; did you mean ${suggestion}?`
               : "file does not exist",
           );
+        } else {
+          const dimensions = getImageSize(filePath);
+          if (!dimensions) {
+            issues.push("could not read image dimensions");
+          } else if (dimensions.width !== coverWidth || dimensions.height !== coverHeight) {
+            issues.push(
+              `must be ${coverWidth}x${coverHeight} so the logo and title line up with the other covers; found ${dimensions.width}x${dimensions.height}`,
+            );
+          }
         }
 
         return issues.length > 0
@@ -171,7 +182,7 @@ const coverImageIssues = fs.existsSync(blogDir)
   : [];
 
 if (coverImageIssues.length === 0) {
-  console.log("All blog cover images point to existing public uploads.");
+  console.log("All blog cover images exist and are 1200x800.");
 } else {
   console.error(`${coverImageIssues.length} blog cover image references need attention:`);
 

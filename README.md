@@ -42,7 +42,7 @@ For GitHub Pages deployments, add these as repository variables in GitHub:
 npm run build
 ```
 
-Output goes to `dist/`. Static HTML is generated for `/blog` and each blog article, and a `404.html` is created for GitHub Pages SPA support.
+Output goes to `dist/`. Static HTML is generated for `/blog` and each English blog article. Each `/hi/blog/{slug}` page is prerendered Hindi chrome: the article body stays English, the canonical points at the English URL, and the page is `noindex`. A `404.html` is created for GitHub Pages SPA support.
 
 ## Publishing Blog Posts
 
@@ -53,11 +53,23 @@ npm run blog:prepare
 npm run build
 ```
 
-`blog:prepare` optimizes PNG blog cover images to lighter JPG files, updates the blog frontmatter, and reports any remaining oversized upload images.
+`blog:prepare` optimizes PNG blog cover images to lighter JPG files, updates the blog frontmatter, and reports any remaining oversized upload images. It also rejects a cover that is not exactly 1200×800.
+
+### Cover layout
+
+Generate every new cover to match `public/uploads/blog93.jpg`. Cards crop the image with `object-cover` at 16/10, which hides about 25px at the top and 25px at the bottom of a 1200×800 file.
+
+- Canvas: exactly 1200×800 px (3:2). A 1200×675 / 16:9 file gets cropped on the sides and clips the title.
+- Logo: Fleetcodes mark and wordmark, top left, about x=42, y=43, 246×113 px.
+- Label: `FLEETCODES INSIGHTS` directly under the logo.
+- Title: dark, left-aligned with the logo, first line near y=184, kept on the left half. The person and the yard stay on the right.
+- Keep the logo and title inside y=25 to y=775 so the card crop does not cut them.
+- Do not letterbox a shorter image onto the canvas (that pushes the logo down) and do not zoom the photo to fill 1200×800 (that enlarges the subject and cuts the scene).
+- The category pill, date, and reading time are HTML. Leave them out of the image.
 
 ## Deployment
 
-The site is deployed to GitHub Pages via a GitHub Actions workflow that triggers when a `release-main-*` tag is pushed:
+Pull requests run CI: lint, typecheck, and build. The site is deployed to GitHub Pages via a GitHub Actions workflow that triggers when a `release-main-*` tag is pushed:
 
 ```sh
 git tag release-main-2026-06-19
