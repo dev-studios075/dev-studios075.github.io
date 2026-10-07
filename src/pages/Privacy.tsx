@@ -52,7 +52,7 @@ const sections = [
     id: "cookies",
     title: "5. Cookies and analytics",
     content: (
-      <><p>We use essential browser storage to remember preferences and support core site functions. With your permission, we may use analytics technologies to understand visits and improve user experience, and optional marketing technologies where disclosed in the consent controls.</p><p>You can accept, reject or customise non-essential categories in the consent banner and change your selection later through "Cookie Preferences" in the footer. Analytics does not load until you opt in. Browser controls can also remove stored preferences, in which case we will ask for your choice again.</p></>
+      <><p>We use essential browser storage to remember preferences and support core site functions. With your permission, we may use analytics technologies to understand visits and improve user experience, and optional marketing technologies where disclosed in the consent controls.</p><p>You can accept, reject or customise non-essential categories in the consent banner and change your selection later through "Cookie Preferences" in the footer. Analytics and ad storage stay off until you opt in. Before that choice, the Google tag can send a cookieless ping. Browser controls can also remove stored preferences, in which case we will ask for your choice again.</p></>
     ),
   },
   {

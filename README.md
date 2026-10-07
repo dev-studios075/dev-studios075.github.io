@@ -29,7 +29,7 @@ VITE_SITE_URL=https://www.fleetcodes.com
 VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 
-`VITE_GA_MEASUREMENT_ID` enables Google Analytics 4 tracking. `VITE_SITE_URL` is used for canonical URLs, Open Graph URLs, `robots.txt`, and `sitemap.xml`.
+`VITE_GA_MEASUREMENT_ID` places Google's tag immediately after `<head>` on the built site. Analytics storage stays off until the visitor accepts it. `VITE_SITE_URL` is used for canonical URLs, Open Graph URLs, `robots.txt`, and `sitemap.xml`.
 
 For GitHub Pages deployments, add these as repository variables in GitHub:
 
