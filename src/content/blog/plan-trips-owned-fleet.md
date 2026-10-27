@@ -60,7 +60,7 @@ With the grouped trips defined, assign resources using a simple rule set:
 - **Balance the workload.** Do not overuse a few vehicles while others idle.
 - **Protect priority customers.** Give critical trips your most reliable vehicle and driver pairings.
 
-We cover this step in more depth in our guide to [AI-powered dispatch planning](/blog/ai-powered-dispatch-planning/).
+We cover this step in more depth in our guide to [assigning vehicles and drivers to trips](/blog/assign-vehicles-drivers-to-trips/).
 
 ## Step 5: Build In Buffers
 
@@ -75,7 +75,7 @@ A modest buffer costs little compared with a missed delivery window.
 
 ## Step 6: Check Readiness Before Departure
 
-Before a vehicle leaves, confirm the plan is actually ready: documents complete, vehicle inspected and fuelled, driver briefed, load secured and within legal weight. A short, consistent checklist here prevents most avoidable failures. See our [guide to digital trip sheets and pre-departure checks](/blog/trip-sheet-management-india-digital-logistics-2026/).
+Before a vehicle leaves, confirm the plan is actually ready: documents complete, vehicle inspected and fuelled, driver briefed, load secured and within legal weight. A short, consistent checklist here prevents most avoidable failures. See our [fleet departure management checklist](/blog/fleet-departure-management-checklist/).
 
 ## Step 7: Monitor and Re-Plan
 

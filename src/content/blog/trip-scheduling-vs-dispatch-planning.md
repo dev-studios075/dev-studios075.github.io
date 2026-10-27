@@ -63,7 +63,7 @@ The overlap is real. A schedule that ignores vehicle availability is unworkable,
 
 - **Schedules built without resource reality.** A timetable that assumes any vehicle is free at any time produces trips nobody can run. Dispatch then spends the day rescuing a plan that was never feasible.
 - **Dispatch without a schedule.** When dispatch is purely reactive, sending whichever vehicle is free to whichever order is loudest, recurring runs get missed and utilisation suffers because nobody is looking ahead.
-- **Nobody owns the gap.** If the line between "this trip should leave at 9:00" and "this vehicle is confirmed and ready" is fuzzy, departure delays hide inside it. Our guide to [digital trip sheets and pre-departure checks](/blog/trip-sheet-management-india-digital-logistics-2026/) looks at this gap in detail.
+- **Nobody owns the gap.** If the line between "this trip should leave at 9:00" and "this vehicle is confirmed and ready" is fuzzy, departure delays hide inside it. Our guide on [how to reduce delayed vehicle departures](/blog/reduce-delayed-vehicle-departures/) looks at this gap in detail.
 
 ## When Do You Need Each?
 
