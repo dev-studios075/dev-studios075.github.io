@@ -54,7 +54,7 @@ The system matches the trip to a suitable vehicle and driver using availability,
 
 ### 3. Pre-departure readiness
 
-Before gate-out, the trip is checked against its requirements: documents in place, driver and vehicle compliant, load confirmed. A gap caught here costs minutes. The same gap caught on the highway costs a day. We cover this step in detail in our [guide to digital trip sheets and pre-departure checks](/blog/trip-sheet-management-india-digital-logistics-2026/).
+Before gate-out, the trip is checked against its requirements: documents in place, driver and vehicle compliant, load confirmed. A gap caught here costs minutes. The same gap caught on the highway costs a day. We cover this step in detail in our [fleet departure management checklist](/blog/fleet-departure-management-checklist/).
 
 ### 4. In-transit tracking
 
