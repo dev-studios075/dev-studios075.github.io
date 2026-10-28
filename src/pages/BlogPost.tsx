@@ -309,8 +309,14 @@ const BlogPost = () => {
     };
   }, [slug, redirectSlug]);
 
+  // Untranslated locale URLs redirect to the English canonical (hreflang/noindex chrome is not used).
+  if (language === "hi" && slug) {
+    const target = redirectSlug || slug;
+    return <Navigate to={`/blog/${target}/`} replace />;
+  }
+
   if (redirectSlug) {
-    return <Navigate to={localizePath(`/blog/${redirectSlug}/`)} replace />;
+    return <Navigate to={`/blog/${redirectSlug}/`} replace />;
   }
 
   if (!post) {
@@ -354,7 +360,6 @@ const BlogPost = () => {
         path={`/blog/${post.slug}`}
         image={post.coverImage || DEFAULT_IMAGE}
         type="article"
-        noindex={language === "hi"}
         publishedTime={post.date}
         modifiedTime={post.date}
         author={post.author}

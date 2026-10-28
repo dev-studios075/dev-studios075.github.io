@@ -430,6 +430,20 @@ for (let pageNumber = 1; pageNumber <= blogPageCount; pageNumber += 1) {
   }));
 }
 
+const renderRedirect = (dest) => `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0;url=${escapeHtml(dest)}">
+  <link rel="canonical" href="${escapeHtml(dest)}">
+  <title>Redirecting…</title>
+  <script>location.replace(${JSON.stringify(dest)});</script>
+</head>
+<body>
+  <p>This article has moved to <a href="${escapeHtml(dest)}">${escapeHtml(dest)}</a>.</p>
+</body>
+</html>`;
+
 posts.forEach((post) => {
   const canonicalUrl = absolutePageUrl(`/blog/${post.slug}`);
   writeRoute(
@@ -494,37 +508,8 @@ posts.forEach((post) => {
     }),
   );
 
-  const englishArticlePath = `/blog/${post.slug}`;
-  writeRoute(
-    `/hi/blog/${post.slug}`,
-    renderPage({
-      title: seoTitle(post.title),
-      description: seoDescription(post.description),
-      path: `/hi/blog/${post.slug}`,
-      canonical: englishArticlePath,
-      noindex: true,
-      image: post.image,
-      type: "article",
-      keywords: post.keywords || undefined,
-      jsonLd: {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        name: post.title,
-        url: canonicalUrl,
-        inLanguage: "hi-IN",
-        isBasedOn: canonicalUrl,
-      },
-      bodyHtml: renderStaticFallback({
-        eyebrow: "Fleetcodes ब्लॉग",
-        title: post.title,
-        description: post.description,
-        image: post.image,
-        meta: [post.author, post.date].filter(Boolean).join(" | "),
-        contentHtml: `<p>यह लेख अंग्रेज़ी में है। <a href="${escapeHtml(canonicalPath(englishArticlePath))}">पूरा लेख पढ़ें</a>.</p>`,
-        relatedHtml: renderRelatedLinks(post),
-      }),
-    }),
-  );
+  // Industry standard: untranslated /hi/blog/{slug} redirects to the English canonical.
+  writeRoute(`/hi/blog/${post.slug}`, renderRedirect(canonicalUrl));
 });
 
 writeRoute(
@@ -656,20 +641,6 @@ writeRoute(
   bodyHtml: renderStaticFallback({ eyebrow: page.eyebrow, title: page.title, description: page.description }),
 })));
 
-const renderRedirect = (dest) => `<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0;url=${escapeHtml(dest)}">
-  <link rel="canonical" href="${escapeHtml(dest)}">
-  <title>Redirecting…</title>
-  <script>location.replace(${JSON.stringify(dest)});</script>
-</head>
-<body>
-  <p>This article has moved to <a href="${escapeHtml(dest)}">${escapeHtml(dest)}</a>.</p>
-</body>
-</html>`;
-
 Object.entries(BLOG_SLUG_REDIRECTS).forEach(([from, to]) => {
   const dest = absolutePageUrl(`/blog/${to}`);
   const html = renderRedirect(dest);
@@ -677,4 +648,4 @@ Object.entries(BLOG_SLUG_REDIRECTS).forEach(([from, to]) => {
   writeRoute(`/hi/blog/${from}`, html);
 });
 
-console.log(`Generated English and Hindi core routes, blog routes, ${posts.length} blog posts, ${posts.length} Hindi article chrome pages, and ${Object.keys(BLOG_SLUG_REDIRECTS).length} slug redirects`);
+console.log(`Generated English and Hindi core routes, blog routes, ${posts.length} blog posts, ${posts.length} Hindi→English article redirects, and ${Object.keys(BLOG_SLUG_REDIRECTS).length} slug redirects`);
