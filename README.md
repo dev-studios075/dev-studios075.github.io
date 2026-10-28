@@ -42,7 +42,7 @@ For GitHub Pages deployments, add these as repository variables in GitHub:
 npm run build
 ```
 
-Output goes to `dist/`. Static HTML is generated for `/blog` and each English blog article. Each `/hi/blog/{slug}` page is prerendered Hindi chrome: the article body stays English, the canonical points at the English URL, and the page is `noindex`. A `404.html` is created for GitHub Pages SPA support.
+Output goes to `dist/`. Static HTML is generated for `/blog` and each English blog article. Untranslated `/hi/blog/{slug}` URLs redirect to the English canonical `/blog/{slug}` (articles are English-only; Hindi chrome applies to core pages and the blog index). A `404.html` is created for GitHub Pages SPA support.
 
 ## Publishing Blog Posts
 

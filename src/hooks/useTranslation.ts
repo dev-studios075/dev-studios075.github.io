@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import english from "@/locales/en.json";
 import hindi from "@/locales/hi.json";
-import { isLocalizablePath, stripHindiPrefix } from "@/lib/i18nPaths.mjs";
+import { hasHindiAlternate, isBlogArticlePath, isLocalizablePath, stripHindiPrefix } from "@/lib/i18nPaths.mjs";
 
 export type Language = "en" | "hi";
 const LANGUAGE_KEY = "fleetcodes-language";
 
-export { hasHindiAlternate, isLocalizablePath, stripHindiPrefix } from "@/lib/i18nPaths.mjs";
+export { hasHindiAlternate, isBlogArticlePath, isLocalizablePath, stripHindiPrefix } from "@/lib/i18nPaths.mjs";
 
 export const getPreferredLanguage = (): Language | null => {
   if (typeof window === "undefined") return null;
@@ -40,13 +40,28 @@ export const useTranslation = () => {
   const localizePath = (path: string) => {
     if (language !== "hi" || /^https?:/i.test(path) || path.startsWith("#")) return path;
     if (path.startsWith("/#")) return `/hi/${path.slice(1)}`;
+
+    const pathnameOnly = (path.split(/[?#]/)[0] || "/").replace(/\/$/, "") || "/";
+    // Untranslated article URLs stay on the English canonical (industry standard).
+    if (!hasHindiAlternate(pathnameOnly)) return path;
+
     return path === "/" ? "/hi/" : `/hi${path.startsWith("/") ? path : `/${path}`}`;
   };
 
   const setLanguage = (next: Language) => {
     window.localStorage.setItem(LANGUAGE_KEY, next);
     const base = stripHindiPrefix(location.pathname);
-    const pathname = next === "hi" && isLocalizablePath(base) ? (base === "/" ? "/hi/" : `/hi${base}/`) : `${base}${base === "/" ? "" : "/"}`;
+    let pathname: string;
+
+    if (next === "hi" && isLocalizablePath(base)) {
+      pathname = base === "/" ? "/hi/" : `/hi${base}/`;
+    } else if (next === "hi" && isBlogArticlePath(base)) {
+      // No Hindi article body yet — land on the Hindi blog index.
+      pathname = "/hi/blog/";
+    } else {
+      pathname = `${base}${base === "/" ? "" : "/"}`;
+    }
+
     navigate(`${pathname}${location.search}${location.hash}`);
   };
 

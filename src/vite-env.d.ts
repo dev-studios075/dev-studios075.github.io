@@ -37,6 +37,7 @@ declare module "@/lib/i18nPaths.mjs" {
   export const stripHindiPrefix: (pathname?: string) => string;
   export const hasHindiAlternate: (pathname?: string) => boolean;
   export const isLocalizablePath: (pathname?: string) => boolean;
+  export const isBlogArticlePath: (pathname?: string) => boolean;
 }
 
 declare module "@/lib/blogKeywords.mjs" {

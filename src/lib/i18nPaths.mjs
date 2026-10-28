@@ -14,14 +14,20 @@ export const stripHindiPrefix = (pathname = "/") => {
   return stripped.length > 1 ? stripped.replace(/\/$/, "") : stripped;
 };
 
-/** Pages that have a real Hindi URL (hreflang, sitemap). Article bodies stay English; /hi/blog/{slug} is prerendered chrome with a canonical English URL and noindex. */
+/**
+ * Pages with a real Hindi URL (hreflang + sitemap).
+ * Individual blog articles are English-only: /hi/blog/{slug} redirects to /blog/{slug}.
+ */
 export const hasHindiAlternate = (pathname = "/") => {
   const path = stripHindiPrefix(pathname);
   return CORE_LOCALIZABLE_PATHS.includes(path) || /^\/blog\/page\/\d+$/.test(path);
 };
 
-/** Paths that may keep Hindi chrome, including English-only blog articles. */
-export const isLocalizablePath = (pathname = "/") => {
+/** Paths the language switcher may move to a /hi/… URL. Same as hasHindiAlternate. */
+export const isLocalizablePath = (pathname = "/") => hasHindiAlternate(pathname);
+
+/** True for an English blog article path (/blog/{slug}), not listing or pagination. */
+export const isBlogArticlePath = (pathname = "/") => {
   const path = stripHindiPrefix(pathname);
-  return hasHindiAlternate(path) || /^\/blog\/[^/]+$/.test(path);
+  return /^\/blog\/[^/]+$/.test(path) && !/^\/blog\/page\/\d+$/.test(path);
 };
